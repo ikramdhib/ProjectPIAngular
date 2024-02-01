@@ -1,0 +1,144 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <app-page-title title="Add Product" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+
+          <h4 class="card-title">Basic Information</h4>
+          <p class="card-title-desc">Fill all information below</p>
+
+          <form [formGroup]="productForm" (ngSubmit)="validSubmit()">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label for="productname">Product Name</label>
+                  <input id="productname" name="productname" type="text" placeholder="Product Name" class="form-control" formControlName="name" [ngClass]="{'is-invalid': submit && form.name.errors}">
+                  <div *ngIf="submit && form.name.errors" class="invalid-feedback">
+                    <span *ngIf="form.name.errors.required">Name is required.</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="manufacturername">Manufacturer Name</label>
+                  <input id="manufacturername" name="manufacturername" placeholder="Manufacturer Name" type="text" class="form-control" formControlName="manufacture_name" [ngClass]="{'is-invalid': submit && form.manufacture_name.errors}">
+                  <div *ngIf="submit && form.manufacture_name.errors" class="invalid-feedback">
+                    <span *ngIf="form.manufacture_name.errors.required">Manufacturer name is required.</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="manufacturerbrand">Manufacturer Brand</label>
+                  <input id="manufacturerbrand" name="manufacturerbrand" type="text" placeholder="Manufacturer Brand" class="form-control" formControlName="manufacture_brand" [ngClass]="{'is-invalid': submit &&
+                    form.manufacture_brand.errors}">
+                  <div *ngIf="submit && form.manufacture_brand.errors" class="invalid-feedback">
+                    <span *ngIf="form.manufacture_brand.errors.required">Manufacturer brand is required.</span>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="price">Price</label>
+                  <input id="price" name="price" type="text" class="form-control" placeholder="Price" formControlName="price" [ngClass]="{'is-invalid': submit &&
+                  form.price.errors}">
+                  <div *ngIf="submit && form.price.errors" class="invalid-feedback">
+                    <span *ngIf="form.price.errors.required">Price is required.</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label class="control-label">Category</label>
+                  <ng-select formControlName="category" [items]="['Alaska','Hawaii']"></ng-select>
+                </div>
+                <div class="mb-3">
+                  <label class="control-label">Features</label>
+                  <ng-select formControlName="features" [items]="['Alaska','Hawaii','California','Nevada','Oregon','Washington']" [multiple]="true"></ng-select>
+                </div>
+                <div class="mb-3">
+                  <label for="productdesc">Product Description</label>
+                  <textarea class="form-control" id="productdesc" placeholder="Product Description" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="submit" class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-3">Product Images</h4>
+
+          <ngx-dropzone class="dropzone dz-clickable" (change)="onSelect($event)" [accept]="'image/*'">
+            <ngx-dropzone-label class="dz-message needsclick">
+              <div class="mb-3">
+                <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+              </div>
+
+              <h5>Drop files here or click to upload.</h5>
+            </ngx-dropzone-label>
+          </ngx-dropzone>
+          <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
+            <ngx-dropzone-label>
+              <div class="d-flex p-2">
+                <div class="flex-shrink-0 me-3">
+                  <div class="avatar-sm bg-light rounded">
+                    <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
+                  </div>
+                </div>
+                <div class="flex-grow-1">
+                  <div class="pt-1">
+                    <strong class="error text-danger"></strong>
+                  </div>
+                </div>
+              </div>
+            </ngx-dropzone-label>
+          </ngx-dropzone-preview>
+          <!-- end dropzon-preview -->
+        </div>
+
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+
+          <h4 class="card-title">Meta Data</h4>
+          <p class="card-title-desc">Fill all information below</p>
+
+          <form>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label for="metatitle">Meta title</label>
+                  <input id="metatitle" placeholder="Metatitle" name="productname" type="text" class="form-control">
+                </div>
+                <div class="mb-3">
+                  <label for="metakeywords">Meta Keywords</label>
+                  <input id="metakeywords" placeholder="Meta Keywords" name="manufacturername" type="text" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+                <div class="mb-3">
+                  <label for="metadescription">Meta Description</label>
+                  <textarea class="form-control" placeholder="Meta Description" id="metadescription" rows="5"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <button type="submit" class="btn btn-primary">Save Changes</button>
+              <button type="submit" class="btn btn-secondary">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+
+</div> <!-- container-fluid -->

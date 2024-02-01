@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <app-page-title title="Rating" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="row">
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15">Default rating</h5>
+                                <div class="rating-star d-flex align-items-center justify-content-center">
+                                    <rating [(ngModel)]="hoverSelect" (leave)="hoverSelect=0" [readonly]="readonly" class="stars" [max]=5></rating>
+                                    <span class="ratingnum badge bg-info align-middle ms-2">{{hoverSelect}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15 mb-3">Disabled rating</h5>
+                                <rating [readonly]="true" class="stars" [max]=5 disabled="disabled"></rating>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15 mb-3">Readonly rating with a value</h5>
+                                <rating [(ngModel)]="readRate" [readonly]="true" class="stars" [max]=5></rating>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15 mb-3">Handle events</h5>
+                                <rating [(ngModel)]="currentRate" [readonly]="readonly" class="stars" [max]=5></rating>
+                            </div>
+                        </div>
+
+                        <!-- <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15 mb-3">Rater with Step</h5>
+                                <div class="rating-star d-flex align-items-center justify-content-center">
+                                    <ng-template #step let-fill="fill">
+                                    <span class="star" [class.full]="fill === 100">
+                                        <span class="half" [style.width.%]="fill">★</span>☆
+                                    </span>
+                                    </ng-template>
+                                    <rating class="d-inline-flex stars stars" [(ngModel)]="stepRate"
+                                        [readonly]="true" [max]="5">
+                                    </rating>
+                                    <button class="btn btn-light btn-sm ms-2" (click)="stepRate = 1.5">1.5</button>
+                                    <button class="btn btn-light btn-sm ms-2" (click)="stepRate = 4.5">4.5</button>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15 mb-3">Custom Color</h5>
+                                <rating [(ngModel)]="customColor" [customTemplate]="tt"></rating>
+                                  <ng-template #tt let-i="index" let-v="value">
+                                    <button class="btn btn-{{i < v ? 'warning' : 'default'}}">
+                                        {{i < v ? '&#9733;' : '&#9734;'}}
+                                      </button>
+                                </ng-template>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-4 col-sm-6">
+                            <div class="p-4 text-center">
+                                <h5 class="font-size-15 mb-3">Clear/Reset Rater</h5>
+                                <div class="rating-star d-flex align-items-center justify-content-center">
+                                    <rating [(ngModel)]="clearRate" [readonly]="readonly" class="stars align-middle star-rating" [max]=5></rating>
+                                    <button id="raterreset-button" class="btn btn-light btn-sm ms-2" (click)="clearRate = 0">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+</div>

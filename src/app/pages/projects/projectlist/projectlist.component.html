@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <app-page-title title="Projects List" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-2">
+            <div class="col-sm">
+              <div class="search-box me-2 d-inline-block">
+                <div class="position-relative">
+                  <input type="text" class="form-control" autocomplete="off" id="searchTableList" placeholder="Search...">
+                  <i class="bx bx-search-alt search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <!-- end col -->
+            <div class="col-sm-auto">
+              <div class="text-sm-end">
+                <a routerLink="/projects/create" class="btn btn-success btn-rounded" id="addProject-btn"><i class="mdi mdi-plus me-1"></i> Add New Project</a>
+              </div>
+            </div>
+            <!-- end col -->
+          </div>
+          <!-- end row -->
+          <div class>
+            <div class="table-responsive">
+              <table class="table project-list-table align-middle table-nowrap dt-responsive nowrap w-100 table-borderless" id="projectList-table">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" style="width: 100px">#</th>
+                    <th scope="col">Projects</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let project of projectData">
+                    <td>
+                      <img src="{{project.image}}" alt class="avatar-sm" />
+                    </td>
+                    <td>
+                      <h5 class="text-truncate font-size-14">
+                        <a href="javascript: void(0);" class="text-dark">{{project.text}}</a>
+                      </h5>
+                      <p class="text-muted mb-0">{{project.subtext}}</p>
+                    </td>
+                    <td>{{project.date}}</td>
+                    <td>
+                      <span class="badge" [ngClass]="{ 'bg-success': project.status === 'Completed',
+                    'bg-warning': project.status === 'Pending',
+                    'bg-danger': project.status === 'Delay' }">{{project.status}}</span>
+                    </td>
+                    <td>
+                      <div class="avatar-group">
+                        <div class="avatar-group-item">
+                          <a href="javascript: void(0);" class="d-inline-block">
+                            <img src="{{project.users[0]}}" class="rounded-circle avatar-xs" alt />
+                          </a>
+                        </div>
+                        <div class="avatar-group-item" *ngIf="project.users[1]">
+                          <a href="javascript: void(0);" class="d-inline-block">
+                            <img src="{{project.users[1]}}" class="rounded-circle avatar-xs" alt />
+                          </a>
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="dropdown" dropdown placement="bottom-right">
+                        <a href="javascript: void(0);" class="dropdown-toggle card-drop" dropdownToggle>
+                          <i class="mdi mdi-dots-horizontal font-size-18"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+                          <a class="dropdown-item" href="javascript: void(0);">Action</a>
+                          <a class="dropdown-item" href="javascript: void(0);">Another action</a>
+                          <a class="dropdown-item" href="javascript: void(0);">Something else here</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end row -->
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="pagination pagination-rounded justify-content-center mt-2 mb-5">
+            <pagination [totalItems]="12" [(ngModel)]="page" [itemsPerPage]="7" previousText="&lsaquo;" nextText="&rsaquo;">
+            </pagination>
+          </ul>
+        </div>
+      </div>
+      <!-- end row -->
+
+    </div>

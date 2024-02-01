@@ -1,0 +1,200 @@
+<div class="container-fluid">
+    <app-page-title title="KYC Application" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="row justify-content-center mt-lg-5">
+        <div class="col-xl-5 col-sm-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10">
+                                <h4 class="mt-4 fw-semibold">KYC Verification</h4>
+                                <p class="text-muted mt-3">Itaque earum rerum hic tenetur a sapiente delectus ut aut
+                                    reiciendis perferendis asperiores repellat.</p>
+
+                                <div class="mt-4">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#verificationModal" (click)="verificationModal(content)">
+                                        Click here for Verification
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-5 mb-2">
+                            <div class="col-sm-6 col-8">
+                                <div>
+                                    <img src="assets/images/verification-img.png" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Extra Large Modal -->
+                    <ng-template #content let-modal>
+                        <div class="modal-header">
+                            <h5 class="modal-title mt-0">Verify your Account</h5>
+                            <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()">
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <ng-stepper #cdkStepper [linear]="true" class="wizard">
+
+                                <cdk-step [optional]="false">
+                                    <ng-template cdkStepLabel>
+                                        <span class="number">1.</span>
+                                        <span>Personal Info</span>
+                                    </ng-template>
+                                    <section *ngIf="cdkStepper.selectedIndex === 0">
+                                        <div class="kyc-tab-content">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="kycfirstname-input">First name</label>
+                                                            <input type="text" class="form-control" id="kycfirstname-input" placeholder="Enter First name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="kyclastname-input">Last name</label>
+                                                            <input type="text" class="form-control" id="kyclastname-input" placeholder="Enter Last name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="kycphoneno-input">Phone</label>
+                                                            <input type="text" class="form-control" id="kycphoneno-input" placeholder="Enter Phone number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="kycbirthdate-input">Date of birth</label>
+                                                            <input type="text" class="form-control" id="kycbirthdate-input" placeholder="Enter Date of birth" bsDatepicker>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-3">
+                                                            <label for="kycselectcity-input">City</label>
+                                                            <select class="form-select" id="kycselectcity-input">
+                                                                <option value="SF" selected="">San Francisco</option>
+                                                                <option value="LA">Los Angeles</option>
+                                                                <option value="SD">San Diego</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <ul class="list-inline wizard mb-0">
+                                            <li class="next list-inline-item float-end"><button class="btn btn-primary" cdkStepperNext>Next</button>
+                                            </li>
+                                        </ul>
+                                    </section>
+                                </cdk-step>
+
+                                <cdk-step [optional]="true">
+                                    <ng-template cdkStepLabel>
+                                        <span class="number">2.</span>
+                                        <span>Confirm email</span>
+                                    </ng-template>
+                                    <div class="kyc-tab-content">
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="kycemail-input">Email</label>
+                                                        <input type="email" class="form-control" id="kycemail-input" placeholder="Enter Email Address">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="kycconfirmcode-input">Confirm code</label>
+                                                        <input type="email" class="form-control" id="kycconfirmcode-input" placeholder="Enter Confirm code">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        Didn't recieve code ?
+                                                        <button type="button" class="btn btn-link">Resend Code</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <ul class="list-inline wizard mb-0">
+                                        <li class="previous list-inline-item"><button class="btn btn-primary" cdkStepperPrevious>Previous</button>
+                                        </li>
+                                        <li class="next list-inline-item float-end"><button class="btn btn-primary" cdkStepperNext>Next</button>
+                                        </li>
+                                    </ul>
+                                </cdk-step>
+
+                                <cdk-step [optional]="true">
+                                    <ng-template cdkStepLabel>
+                                        <span class="number">3.</span>
+                                        <span>Document Verification</span>
+                                    </ng-template>
+                                    <div class="kyc-tab-content">
+                                        <h5 class="font-size-14 mb-3">Upload document file for a verification</h5>
+                                        <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'image/*'">
+                                            <ngx-dropzone-label class="dz-message needsclick">
+                                                <div class="mb-3">
+                                                    <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                                </div>
+                            
+                                                <h5>Drop files here or click to upload.</h5>
+                                            </ngx-dropzone-label>
+                                        </ngx-dropzone>
+                                        <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
+                                            <ngx-dropzone-label>
+                                                <div class="d-flex p-2">
+                                                    <div class="flex-shrink-0 me-3">
+                                                        <div class="avatar-sm bg-light rounded">
+                                                            <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
+                                                        </div>
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <div class="pt-1">
+                                                            <strong class="error text-danger"></strong>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ngx-dropzone-label>
+                                        </ngx-dropzone-preview>
+                                        <!-- end dropzon-preview -->
+                                    </div>
+                                    <ul class="list-inline wizard mt-2 mb-0">
+                                        <li class="previous list-inline-item"><button class="btn btn-primary" awPreviousStep>Previous</button>
+                                        </li>
+                                    </ul>
+                                </cdk-step>
+
+                            </ng-stepper>
+                            <!-- <aw-wizard [navBarLayout]="'large-empty-symbols'" class="kycwizard">
+                                <aw-wizard-step [stepTitle]="'Personal Info'" [navigationSymbol]="{ symbol: '01' }">
+                                    <div class="kyc-tab-content">
+
+                                    </div>
+
+                                </aw-wizard-step>
+
+                                <aw-wizard-step [stepTitle]="'Confirm email'" [navigationSymbol]="{ symbol: '02' }">
+                                    
+                                </aw-wizard-step>
+
+                                <aw-wizard-step [stepTitle]="'Document Verification'" [navigationSymbol]="{ symbol: '03' }">
+                                   
+                                </aw-wizard-step>
+                            </aw-wizard> -->
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>

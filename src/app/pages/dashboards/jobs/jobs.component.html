@@ -1,0 +1,425 @@
+<app-loader></app-loader>
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col-lg-12">
+            <div class="d-flex align-items-center">
+                <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-sm rounded">
+                <div class="ms-3 flex-grow-1">
+                    <h5 class="mb-2 card-title">Hello, Henry Franklin</h5>
+                    <p class="text-muted mb-0">Ready to jump back in?</p>
+                </div>
+                <div>
+                    <a href="javascript:void(0);" class="btn btn-primary"><i class="bx bx-plus align-middle"></i> Add
+                        New Jobs</a>
+                </div>
+            </div>
+        </div><!--end col-->
+    </div><!--end row-->
+
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">Job View</p>
+                            <h4 class="mb-0">14,487</h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center">
+                            <apx-chart class="apex-charts" dir="ltr" [series]="jobViewChart.series"
+                                [chart]="jobViewChart.chart" [stroke]="jobViewChart.stroke"
+                                [colors]="jobViewChart.colors" [fill]="jobViewChart.fill"
+                                [tooltip]="jobViewChart.tooltip"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top py-3">
+                    <p class="mb-0"> <span class="badge badge-soft-success me-1"><i
+                                class="bx bx-trending-up align-bottom me-1"></i> 18.89%</span> Increase last month</p>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="col-lg-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">New Application</p>
+                            <h4 class="mb-0">7,402</h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center">
+                            <apx-chart class="apex-charts" dir="ltr" [series]="ApplicationChart.series"
+                                [chart]="ApplicationChart.chart" [stroke]="ApplicationChart.stroke"
+                                [colors]="ApplicationChart.colors" [fill]="ApplicationChart.fill"
+                                [tooltip]="ApplicationChart.tooltip"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top py-3">
+                    <p class="mb-0"> <span class="badge badge-soft-success me-1"><i
+                                class="bx bx-trending-up align-bottom me-1"></i> 24.07%</span> Increase last month</p>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="col-lg-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">Total Approved</p>
+                            <h4 class="mb-0">12,487</h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center">
+                            <apx-chart class="apex-charts" dir="ltr" [series]="jobViewChart.series"
+                                [chart]="jobViewChart.chart" [stroke]="jobViewChart.stroke"
+                                [colors]="jobViewChart.colors" [fill]="jobViewChart.fill"
+                                [tooltip]="jobViewChart.tooltip"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top py-3">
+                    <p class="mb-0"> <span class="badge badge-soft-success me-1"><i
+                                class="bx bx-trending-up align-bottom me-1"></i> 8.41%</span> Increase last month</p>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="col-lg-3">
+            <div class="card mini-stats-wid">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="flex-grow-1">
+                            <p class="text-muted fw-medium">Total Rejected</p>
+                            <h4 class="mb-0">12,487</h4>
+                        </div>
+
+                        <div class="flex-shrink-0 align-self-center">
+                            <apx-chart class="apex-charts" dir="ltr" [series]="RejectedChart.series"
+                                [chart]="RejectedChart.chart" [stroke]="RejectedChart.stroke"
+                                [colors]="RejectedChart.colors" [fill]="RejectedChart.fill"
+                                [tooltip]="RejectedChart.tooltip"></apx-chart>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top py-3">
+                    <p class="mb-0"> <span class="badge badge-soft-danger me-1"><i
+                                class="bx bx-trending-down align-bottom me-1"></i> 20.63%</span> Decrease last month</p>
+                </div>
+            </div>
+        </div><!--end col-->
+    </div><!--end row-->
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-sm-flex flex-wrap">
+                        <h4 class="card-title mb-4">Statistics Applications</h4>
+                        <div class="ms-auto">
+                            <ul class="nav nav-pills">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0);">Week</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="javascript:void(0);">Month</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="javascript:void(0);">Year</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <apx-chart dir="ltr" class="apex-charts" [series]="emailSentBarChart.series"
+                        [chart]="emailSentBarChart.chart" [legend]="emailSentBarChart.legend"
+                        [stroke]="emailSentBarChart.stroke" [plotOptions]="emailSentBarChart.plotOptions"
+                        [fill]="emailSentBarChart.fill" [labels]="emailSentBarChart.labels"
+                        [dataLabels]="emailSentBarChart.dataLabels" [colors]="emailSentBarChart.colors"
+                        [markers]="emailSentBarChart.markers" [tooltip]="emailSentBarChart.tooltip">
+                    </apx-chart>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div>
+                            <h4 class="card-title mb-3">Invite your friends to Skote</h4>
+                            <p class="text-muted">Nor again is there anyone who loves or pursues or desires to obtain
+                                pain of itself, because it is pain, but because occasionally.</p>
+                            <div>
+                                <a href="javascript:void(0);" class="btn btn-primary btn-sm"><i
+                                        class='bx bx-user-plus align-middle'></i> Invite Friends</a>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="assets/images/jobs.png" alt="" height="130">
+                        </div>
+                    </div>
+                </div>
+            </div><!--end card-->
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Popular Candidate</h4>
+                    <carousel>
+                        <slide>
+                            <div class="bg-light p-3 d-flex mb-3 rounded">
+                                <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-sm rounded me-3">
+                                <div class="flex-grow-1">
+                                    <h5 class="font-size-15 mb-2"><a routerLink="/jobs/candidate-overview"
+                                            class="text-body">Stephen Hadley</a> <span
+                                            class="badge badge-soft-info">Freelance</span></h5>
+                                    <p class="mb-0 text-muted"><i class="bx bx-map text-body align-middle"></i> Germany
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="dropdown" dropdown>
+                                        <button class="btn btn-soft-primary" type="button" id="*dropdownMenuButton11"
+                                            data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle>
+                                            <i class='bx bx-dots-vertical-rounded'></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end"
+                                            aria-labelledby="*dropdownMenuButton11" *dropdownMenu>
+                                            <li><a class="dropdown-item" routerLink="/jobs/candidate-overview">View
+                                                    Details</a></li>
+                                            <li><a class="dropdown-item" href="javascript:void(0);">Download CV</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-light p-3 d-flex">
+                                <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-sm rounded me-3">
+                                <div class="flex-grow-1">
+                                    <h5 class="font-size-15 mb-2"><a routerLink="/jobs/candidate-overview"
+                                            class="text-body">Charles Brown</a> <span
+                                            class="badge badge-soft-success">Full Time</span></h5>
+                                    <p class="mb-0 text-muted"><i class="bx bx-map text-body align-middle"></i> Cambodia
+                                    </p>
+                                </div>
+                                <div>
+                                    <div class="dropdown" [dropup]="isDropup" dropdown>
+                                        <button class="btn btn-soft-primary" type="button" id="*dropdownMenuButton12"
+                                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" dropdownToggle>
+                                            <i class='bx bx-dots-vertical-rounded'></i>
+                                        </button>
+                                        <ul class="dropdown-menu"
+                                            aria-labelledby="*dropdownMenuButton12" *dropdownMenu>
+                                            <li role="menuitem"><a class="dropdown-item" routerLink="/jobs/candidate-overview">View
+                                                    Details</a></li>
+                                            <li role="menuitem"><a class="dropdown-item" href="javascript:void(0);">Download CV</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </slide>
+                    </carousel>
+                </div>
+            </div><!--end card-->
+        </div><!--end col-->
+    </div><!--end row-->
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="d-flex">
+                <h4 class="card-title mb-4 flex-grow-1">New Job Vacancy</h4>
+                <div>
+                    <a routerLink="/jobs/list" class="btn btn-primary btn-sm">View All <i
+                            class="bx bx-right-arrow-alt"></i></a>
+                </div>
+            </div>
+        </div><!--end col-->
+        <div class="col-lg-2" *ngFor="let data of vacancyData">
+            <div class="card">
+                <div class="card-body p-4">
+                    <div class="text-center mb-3">
+                        <img src="{{data.image}}" alt="" class="avatar-sm">
+                        <a routerLink="/jobs/details" class="text-body">
+                            <h5 class="mt-4 mb-2 font-size-15">{{data.title}}</h5>
+                        </a>
+                        <p class="mb-0 text-muted">{{data.brand}}</p>
+                    </div>
+
+                    <div class="d-flex">
+                        <p class="mb-0 flex-grow-1 text-muted"><i class="bx bx-map text-body"></i> {{data.location}}</p>
+                        <p class="mb-0 text-muted"><b>{{data.vacancy}}</b> Vacancy</p>
+                    </div>
+                </div>
+            </div><!--end card-->
+        </div><!--end col-->
+
+    </div><!--end row-->
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex">
+                        <h4 class="card-title">Applications Received Time</h4>
+                        <div class="dropdown ms-auto" dropdown>
+                            <a class="text-muted font-size-16" role="button" data-bs-toggle="dropdown"
+                                aria-haspopup="true" dropdownToggle>
+                                <i class="mdi mdi-dots-horizontal"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-end" *dropdownMenu>
+                                <a class="dropdown-item" href="javascript:void(0);">Action</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Another action</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="javascript:void(0);">Separated link</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <apx-chart class="apex-charts" dir="ltr" [series]="receivedTimeChart.series"
+                        [chart]="receivedTimeChart.chart" [stroke]="receivedTimeChart.stroke"
+                        [colors]="receivedTimeChart.colors" [fill]="receivedTimeChart.fill"
+                        [tooltip]="receivedTimeChart.tooltip"></apx-chart>
+                </div>
+            </div><!--end card-->
+        </div><!--end col-->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Activity Feed</h4>
+                    <ngx-simplebar style="max-height: 376px;">
+                        <ul class="verti-timeline list-unstyled">
+                            <li class="event-list">
+                                <div class="event-timeline-dot">
+                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <img src="assets/images/users/avatar-5.jpg" alt=""
+                                            class="avatar-xs rounded-circle">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            <b>Charles Brown</b> applied for the job <b>Sr.frontend Developer</b>
+                                            <p class="mb-0 text-muted">3 min ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event-list">
+                                <div class="event-timeline-dot">
+                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <div class="avatar-xs">
+                                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
+                                                <i class='bx bx-revision font-size-14'></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            Your subscription expires today <a href="javascript: void(0);">Renew Now</a>
+                                            <p class="text-muted mb-0">53 min ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event-list">
+                                <div class="event-timeline-dot">
+                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <div class="avatar-xs">
+                                            <div class="avatar-title bg-primary-subtle text-primary t rounded-circle">
+                                                JA
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            <b>Jennifer Alexandar</b> created a new account as a <b>Freelance</b>.
+                                            <p class="text-muted mb-0">1 hrs ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event-list">
+                                <div class="event-timeline-dot">
+                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <img src="assets/images/users/avatar-2.jpg" alt=""
+                                            class="avatar-xs rounded-circle">
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            <b>Mark Ellison</b> applied for the job <b>Project Manager</b>
+                                            <p class="mb-0 text-muted">3 hrs ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="event-list">
+                                <div class="event-timeline-dot">
+                                    <i class="bx bx-right-arrow-circle font-size-18"></i>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0 me-3">
+                                        <div class="avatar-xs">
+                                            <div class="avatar-title bg-primary-subtle text-primary rounded-circle">
+                                                AZ
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div>
+                                            <b>Acolin Zelton</b> created a new account as a <b>Freelance</b>.
+                                            <p class="text-muted mb-0">1 hrs ago</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="text-center mt-4"><a href="javascript: void(0);"
+                                class="btn btn-primary waves-effect waves-light btn-sm">View More <i
+                                    class="mdi mdi-arrow-right ms-1"></i></a></div>
+                    </ngx-simplebar>
+                </div>
+            </div><!--end card-->
+        </div><!--end col-->
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">Recent Added Jobs</h4>
+                    <ngx-simplebar style="max-height: 376px;">
+                        <div class="vstack gap-4">
+                            <div class="d-flex" *ngFor="let data of recentJobsData">
+                                <img src="{{data.image}}" alt="" height="40" class="rounded">
+                                <div class="ms-2 flex-grow-1">
+                                    <h6 class="mb-1 font-size-15"><a routerLink="/jobs/details"
+                                            class="text-body">{{data.title}}</a></h6>
+                                    <p class="text-muted mb-0">{{data.brand}}, {{data.location}} - <b>{{data.time}}</b>
+                                        sec ago</p>
+                                </div>
+                                <div class="dropdown" dropdown>
+                                    <button class="btn btn-light" type="button" id="*dropdownMenuButton1"
+                                        data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle>
+                                        <i class="bx bx-dots-vertical-rounded"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="*dropdownMenuButton1"
+                                        *dropdownMenu>
+                                        <li><a class="dropdown-item" routerLink="/jobs/details">View Details</a></li>
+                                        <li><a class="dropdown-item" href="javascript:void(0);">Apply Now</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </ngx-simplebar>
+                </div>
+            </div><!--end card-->
+        </div><!--end col-->
+    </div><!--end row-->
+
+</div> <!-- container-fluid -->

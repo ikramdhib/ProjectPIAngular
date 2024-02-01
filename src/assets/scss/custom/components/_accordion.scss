@@ -1,0 +1,114 @@
+//
+// accordion.scss
+//
+
+.custom-accordion {
+    .accordion-list {
+
+        .accor-plus-icon {
+            display: inline-block;
+            font-size: 16px;
+            height: 24px;
+            width: 24px;
+            line-height: 22px;
+            background-color: var(--#{$prefix}secondary-bg);
+            text-align: center;
+            border-radius: 50%;
+        }
+    }
+
+    .card {
+        box-shadow: none;
+        margin-bottom: 10px;
+
+        .card-header {
+            display: flex;
+            border-radius: 7px;
+            background-color: var(--#{$prefix}tertiary-bg);
+            padding: 12px 20px;
+            color: var(--#{$prefix}body-color);
+            font-weight: $font-weight-semibold;
+            align-items: center;
+            justify-content: space-between;
+
+            .panel-title {
+                width: 100%;
+                .btn-link {
+                    padding: 0;
+                    font-weight: $font-weight-semibold;
+                    text-decoration: none;
+                    color: var(--#{$prefix}body-color);
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            &.collapsed {
+                i.accor-plus-icon {
+                    &:before {
+                        content: "\F0415";
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    a {
+
+        &.collapsed {
+            i.accor-down-icon {
+                &:before {
+                    content: "\F0140";
+                }
+            }
+        }
+    }
+
+
+    .card-body {
+        color: var(--#{prefix}secondary-color);
+    }
+}
+
+
+.panel-group {
+    .card {
+        box-shadow: none;
+        margin-bottom: 0;
+
+        .card-header {
+            display: flex;
+            border-radius: 7px;
+            background-color: var(--#{$prefix}tertiary-bg);
+            padding: 12px 20px;
+            color: var(--#{$prefix}body-color);
+            font-weight: $font-weight-semibold;
+            align-items: center;
+            justify-content: space-between;
+
+            .panel-title {
+                width: 100%;
+                .btn-link {
+                    padding: 0;
+                    font-weight: $font-weight-semibold;
+                    text-decoration: none;
+                    color: var(--#{$prefix}body-color);
+                    &:focus {
+                        box-shadow: none;
+                    }
+                }
+            }
+
+            &.collapsed {
+                i.accor-plus-icon {
+                    &:before {
+                        content: "\F0415";
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,410 @@
+<div class="container-fluid">
+  <app-page-title title="Tabs & Accordions" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Default Tabs</h4>
+          <p class="card-title-desc">Use the tab JavaScript plugin—include
+            it individually or through the compiled <code class="highlighter-rouge">bootstrap.js</code>
+            file—to extend our navigational tabs and pills to create tabbable panes
+            of local content, even via dropdown menus.</p>
+          <tabset [justified]="true" class="nav-tabs">
+            <tab heading="Home">
+              <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </tab>
+            <tab heading="Profile">
+              <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+            </tab>
+            <tab heading="Messages">
+              <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </tab>
+            <tab heading="Settings">
+              <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div><!-- End Default Tabs -->
+
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Justify Tabs</h4>
+          <p class="card-title-desc">Use the tab JavaScript plugin—include
+            it individually or through the compiled <code class="highlighter-rouge">bootstrap.js</code>
+            file—to extend our navigational tabs and pills to create tabbable panes
+            of local content, even via dropdown menus.</p>
+          <tabset [justified]="true" class="nav-pills nav-justified">
+            <tab heading="Home">
+              <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </tab>
+            <tab heading="Profile">
+              <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+            </tab>
+            <tab heading="Messages">
+              <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </tab>
+            <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+          </tabset>
+        </div>
+      </div>
+    </div><!-- End Justified Tabs -->
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body overflow-hidden">
+          <h4 class="card-title">Vertical Nav Tabs</h4>
+          <p class="card-title-desc">Example of custom tabs</p>
+          <div class="row">
+            <div class="col-md-12">
+              <tabset [justified]="true" [vertical]="true" class="nav-pills  custom-vertical-tabs 
+                ">
+                <tab>
+                  <ng-template tabHeading class="mb-2">
+                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
+                    <span class="d-none d-sm-block">Home</span>
+                  </ng-template>
+                  <div class="tab-page-content">
+                    <p>
+                      Raw denim you probably haven't heard of them jean shorts Austin.
+                      Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
+                      cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
+                      butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
+                      qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+                      iphone. Seitan aliquip quis cardigan.
+                    </p>
+                    <p>Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
+                      qui irure terry richardson ex squid.</p>
+                  </div>
+                </tab>
+                <tab>
+                  <ng-template tabHeading class="mb-2">
+                    <span class="d-block d-sm-none"><i class="far fa-user"></i></span>
+                    <span class="d-none d-sm-block">Profile</span>
+                  </ng-template>
+                  <div class="tab-page-content">
+                    <p>
+                      Food truck fixie locavore, accusamus mcsweeney's marfa nulla
+                      single-origin coffee squid. Exercitation +1 labore velit, blog
+                      sartorial PBR leggings next level wes anderson artisan four loko
+                      farm-to-table craft beer twee. Qui photo booth letterpress,
+                      commodo enim craft beer mlkshk.
+                    </p>
+                    <p class="mb-0"> Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
+                      ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna 8-bit</p>
+                  </div>
+
+                </tab>
+                <tab>
+                  <ng-template tabHeading class="mb-2">
+                    <span class="d-block d-sm-none"><i class="far fa-envelope"></i></span>
+                    <span class="d-none d-sm-block">Messages</span>
+                  </ng-template>
+                  <div class="tab-page-content">
+                    <p>
+                      Etsy mixtape wayfarers, ethical wes anderson tofu before they
+                      sold out mcsweeney's organic lomo retro fanny pack lo-fi
+                      farm-to-table readymade. Messenger bag gentrify pitchfork
+                      tattooed craft beer, iphone skateboard locavore carles etsy
+                      salvia banksy hoodie helvetica. DIY synth PBR banksy irony.
+                      Leggings gentrify squid 8-bit cred.
+                    </p>
+                    <p class="mb-0">DIY synth PBR banksy irony.
+                      Leggings gentrify squid 8-bit cred pitchfork. Williamsburg banh
+                      mi whatever gluten-free.</p>
+                  </div>
+
+
+                </tab>
+                <tab>
+                  <ng-template tabHeading class="mb-2">
+                    <span class="d-block d-sm-none"><i class="fas fa-cog"></i></span>
+                    <span class="d-none d-sm-block">Settings</span>
+                  </ng-template>
+                  <div class="tab-page-content">
+                    <p>
+                      Trust fund seitan letterpress, keytar raw denim keffiyeh etsy
+                      art party before they sold out master cleanse gluten-free squid
+                      scenester freegan cosby sweater. Fanny pack portland seitan DIY,
+                      art party locavore wolf cliche high life echo park Austin. Cred
+                      vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
+                      farm-to-table.
+                    </p>
+                    <p class="mb-0">Fanny pack portland seitan DIY,
+                      art party locavore wolf cliche high life echo park Austin. Cred
+                      vinyl keffiyeh DIY salvia PBR, banh mi before they sold out
+                      farm-to-table.
+                    </p>
+                  </div>
+                </tab>
+              </tabset>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End vertical nav tab -->
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Custom Tabs</h4>
+          <p class="card-title-desc">Example of custom tabs</p>
+          <tabset [justified]="true" class="nav-tabs nav-tabs-custom nav-justified">
+            <tab heading="Home">
+              <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </tab>
+            <tab heading="Profile">
+              <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+            </tab>
+            <tab heading="Messages">
+              <ng-template [ngTemplateOutlet]="TabContent"></ng-template>
+            </tab>
+            <tab heading="Settings">
+              <ng-template [ngTemplateOutlet]="TabContent1"></ng-template>
+            </tab>
+          </tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-0">Accordion</h4>
+
+          <div class="row">
+            <div class="col-xl-6">
+              <div class="mt-4">
+                <h5 class="font-size-14">Example</h5>
+                <p class="card-title-desc">Click the accordions below to expand/collapse the accordion content.</p>
+
+                <accordion [closeOthers]="true" class="accordion" [isAnimated]="true">
+                  <accordion-group [isOpen]="isFirstOpen" heading="Accordion Item #1" class="accordion-item" #group>
+                    <span accordion-heading class="float-end fs-5">
+                      <i class="mdi"
+                        [ngClass]="!group?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                    </span>
+                    <div class="text-muted">
+                      <strong class="text-body-emphasis">This is the first item's accordion body.</strong> It is hidden by
+                      default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                      These classes control the overall appearance, as well as the showing and hiding via CSS
+                      transitions. You can modify any of this with custom CSS or overriding our default variables. It's
+                      also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
+                      the transition does limit overflow.
+                    </div>
+                  </accordion-group>
+                  <accordion-group heading="Accordion Item #2" class="accordion-item" #md>
+                    <span accordion-heading class="float-end fs-5">
+                      <i class="mdi"
+                        [ngClass]="!md?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                    </span>
+                    <div class="text-muted">
+                      <strong class="text-body-emphasis">This is the second item's accordion body.</strong> It is hidden by
+                      default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                      These classes control the overall appearance, as well as the showing and hiding via CSS
+                      transitions. You can modify any of this with custom CSS or overriding our default variables. It's
+                      also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
+                      the transition does limit overflow.
+                    </div>
+                  </accordion-group>
+                  <accordion-group heading="Accordion Item #3" class="accordion-item" #item3>
+                    <span accordion-heading class="float-end fs-5">
+                      <i class="mdi"
+                        [ngClass]="!item3?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                    </span>
+                    <div class="text-muted">
+                      <strong class="text-body-emphasis">This is the third item's accordion body.</strong> It is hidden by
+                      default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                      These classes control the overall appearance, as well as the showing and hiding via CSS
+                      transitions. You can modify any of this with custom CSS or overriding our default variables. It's
+                      also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
+                      the transition does limit overflow.
+                    </div>
+                  </accordion-group>
+                </accordion>
+                <!-- end accordion -->
+              </div>
+            </div>
+            <!-- end col -->
+
+            <div class="col-xl-6">
+              <div class="mt-4">
+                <h5 class="font-size-14">Flush</h5>
+                <p class="card-title-desc">Add <code>.accordion-flush</code> to remove the default
+                  <code>background-color</code>, some borders, and some rounded corners to render accordions
+                  edge-to-edge with their parent container.
+                </p>
+
+                <accordion [isAnimated]="true" class="accordion custom-accordion" [closeOthers]="true">
+                  <accordion-group [isOpen]="isFirstOpen" heading="Accordion Item #1"  class="accordion-item" #flush1>
+                    <span accordion-heading class="float-end fs-5">
+                      <i class="mdi"
+                        [ngClass]="!flush1?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                    </span>
+                    <div class="text-muted">
+                      <strong class="text-dark">This is the first item's accordion body.</strong> It is hidden by
+                      default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                      These classes control the overall appearance, as well as the showing and hiding via CSS
+                      transitions. You can modify any of this with custom CSS or overriding our default variables. It's
+                      also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
+                      the transition does limit overflow.
+                    </div>
+                  </accordion-group>
+                  <accordion-group heading="Accordion Item #2" class="accordion-item" #flush2>
+                    <span accordion-heading class="float-end fs-5">
+                      <i class="mdi"
+                        [ngClass]="!flush2?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                    </span>
+                    <div class="text-muted">
+                      <strong class="text-dark">This is the second item's accordion body.</strong> It is hidden by
+                      default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                      These classes control the overall appearance, as well as the showing and hiding via CSS
+                      transitions. You can modify any of this with custom CSS or overriding our default variables. It's
+                      also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
+                      the transition does limit overflow.
+                    </div>
+                  </accordion-group>
+                  <accordion-group heading="Accordion Item #3" class="accordion-item" #flush3>
+                    <span accordion-heading class="float-end fs-5">
+                      <i class="mdi"
+                        [ngClass]="!flush3?.isOpen ? 'mdi mdi-chevron-down accor-plus-icon': 'mdi mdi-chevron-up accor-plus-icon'"></i>
+                    </span>
+                    <div class="text-muted">
+                      <strong class="text-dark">This is the third item's accordion body.</strong> It is hidden by
+                      default, until the collapse plugin adds the appropriate classes that we use to style each element.
+                      These classes control the overall appearance, as well as the showing and hiding via CSS
+                      transitions. You can modify any of this with custom CSS or overriding our default variables. It's
+                      also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though
+                      the transition does limit overflow.
+                    </div>
+                  </accordion-group>
+                </accordion>
+                <!-- end accordion -->
+              </div>
+            </div>
+            <!-- end col -->
+          </div>
+          <!-- end row -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end row -->
+
+  <!-- Collapse -->
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-0">Collapse</h4>
+
+          <div class="row">
+            <div class="col-xl-6">
+              <div class="mt-4">
+                <h5 class="font-size-14">Example</h5>
+                <p class="card-title-desc">
+                  You can use a link with the <code>href</code> attribute, or a button with the
+                  <code>data-bs-target</code> attribute. In both cases, the <code>data-bs-toggle="collapse"</code> is
+                  required.
+                </p>
+
+                <div class="d-flex gap-2 flex-wrap mb-3">
+                  <a class="btn btn-primary mo-mb-2" data-toggle="collapse" (click)="isCollapsed = !isCollapsed"
+                    href="javascript:void(0)">
+                    Link with href
+                  </a>
+                  <button class="btn btn-primary mo-mb-2 ms-1" type="button" (click)="isCollapsed = !isCollapsed">
+                    Button with data-target
+                  </button>
+                </div>
+                <div class="collapse show" id="collapseExample" [collapse]="isCollapsed">
+                  <div class="card border shadow-none card-body text-muted mb-0">
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                    squid.
+                    Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                    proident.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6">
+              <div class="mt-4">
+                <h5 class="font-size-14">Multiple targets</h5>
+                <p class="card-title-desc">
+                  A <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code> can show and hide multiple elements by
+                  referencing them with a selector in its <code>href</code> or <code>data-bs-target</code> attribute.
+                </p>
+
+                <div class="d-flex gap-2 flex-wrap mb-3">
+                  <a class="btn btn-primary" data-bs-toggle="collapse" href="javascript:void(0);" role="button"
+                    aria-expanded="false" aria-controls="multiCollapseExample1"
+                    (click)="firstColleaps = !firstColleaps">Toggle first element</a>
+                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2"
+                    (click)="secondColleaps = !secondColleaps">Toggle second element</button>
+                  <button class="btn btn-primary" type="button" data-bs-toggle="collapse"
+                    data-bs-target=".multi-collapse" aria-expanded="false"
+                    aria-controls="multiCollapseExample1 multiCollapseExample2"
+                    (click)="bothColleaps = !bothColleaps">Toggle both elements</button>
+                </div>
+                <div class="row" [collapse]="bothColleaps">
+                  <div class="col">
+                    <div class="collapse multi-collapse show" id="multiCollapseExample1" [collapse]="firstColleaps">
+                      <div class="card border shadow-none card-body text-muted mb-0">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                        proident.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="collapse multi-collapse show" id="multiCollapseExample2" [collapse]="secondColleaps">
+                      <div class="card border shadow-none card-body text-muted mb-0">
+                        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                        Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea
+                        proident.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!-- end row -->
+
+  <!-- Tab Content -->
+  <ng-template #TabContent>
+    <p class="p-3 mb-0">
+      Raw denim you probably haven't heard of them jean shorts Austin.
+      Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache
+      cliche tempor, williamsburg carles vegan helvetica. Reprehenderit
+      butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi,
+      qui irure terry richardson ex squid. Aliquip placeat salvia cillum
+      iphone. Seitan aliquip quis cardigan american apparel, butcher
+      voluptate nisi qui.
+    </p>
+  </ng-template>
+
+  <!-- Tab Content -->
+  <ng-template #TabContent1>
+    <p class="p-3 mb-0">
+      Food truck fixie locavore, accusamus mcsweeney's marfa nulla
+      single-origin coffee squid. Exercitation +1 labore velit, blog
+      sartorial PBR leggings next level wes anderson artisan four loko
+      farm-to-table craft beer twee. Qui photo booth letterpress,
+      commodo enim craft beer mlkshk aliquip jean shorts ullamco ad
+      vinyl cillum PBR. Homo nostrud organic, assumenda labore
+      aesthetic magna delectus.
+    </p>
+  </ng-template>

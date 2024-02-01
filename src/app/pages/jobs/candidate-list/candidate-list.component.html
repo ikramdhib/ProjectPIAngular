@@ -1,0 +1,156 @@
+<div class="container-fluid">
+    <app-page-title title="Candidate List" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card job-filter">
+                <div class="card-body p-3">
+                    <form action="javascript:void(0);">
+                        <div class="row g-3">
+                            <div class="col-xxl-4 col-lg-4">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" id="searchList" autocomplete="off" placeholder="Search your candidate">
+                                </div>
+                            </div>
+                            <!--end col-->
+                            <div class="col-xxl-2 col-lg-4">
+                                <div class="position-relative">
+                                    <input type="text" class="form-control" id="locationInput" autocomplete="off" placeholder="San Francisco, LA">
+                                </div>
+                            </div>
+                            <!--end col-->
+                            <div class="col-xxl-2 col-lg-4">
+                                <div class="position-relative">
+                                    <select class="form-select" id="idType" aria-label="Default select example">
+                                        <option value="all">Select for</option>
+                                        <option value="Freelance">Freelance</option>
+                                        <option value="Full Time">Full Time</option>
+                                        <option value="Part Time">Part Time</option>
+                                        <option value="Internship">Internship</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--end col-->
+                            <div class="col-xxl-2 col-lg-6">
+                                <div class="position-relative">
+                                    <div id="datepicker1">
+                                        <input type="text"
+                                        placeholder="Datepicker"
+                                        class="form-control"
+                                        bsDatepicker [bsConfig]="{ showWeekNumbers: false }">
+                                    </div><!-- input-group -->
+                                </div>
+                            </div>
+                            <!--end col-->
+    
+                            <div class="col-xxl-2 col-lg-6">
+                                <div class="position-relative h-100 hstack gap-3">
+                                    <button type="submit" class="btn btn-primary h-100 w-100"><i class="bx bx-search-alt align-middle"></i> Find Jobs</button>
+                                    <a href="javascript:void(0);" data-bs-toggle="collapse" class="btn btn-secondary h-100 w-100" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+                                    aria-controls="collapseExample"><i class="bx bx-filter-alt align-middle"></i> Advance</a>
+                                </div>
+                            </div>
+                            <!--end col-->
+                            <div class="collapse" id="collapseExample" [collapse]="isCollapsed">
+                                <div>
+                                    <div class="row g-3">
+                                        <div class="col-xxl-4 col-lg-6">
+                                            <div>
+                                                <label for="experience" class="form-label">Experience</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox1">All</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option1">
+                                                <label class="form-check-label" for="inlineCheckbox2">Fresher</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox3">1-2</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option2">
+                                                <label class="form-check-label" for="inlineCheckbox4">2-3</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option3">
+                                                <label class="form-check-label" for="inlineCheckbox5">4+</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-4 col-lg-6">
+                                            <div>
+                                                <label for="jobType" class="form-label">Job Type</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="option3">
+                                                <label class="form-check-label" for="inlineCheckbox6">Full Time</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="option3">
+                                                <label class="form-check-label" for="inlineCheckbox7">Part Time</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox8" value="option3">
+                                                <label class="form-check-label" for="inlineCheckbox8">Freelance</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="inlineCheckbox9" value="option3">
+                                                <label class="form-check-label" for="inlineCheckbox9">Internship</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xxl-4 col-lg-4">
+                                            <div class="position-relative">
+                                                <label for="qualificationInput" class="form-label">Qualification</label>
+                                                <input type="text" class="form-control" id="qualificationInput" autocomplete="off" placeholder="Qualification">
+                                                <i class="ri-government-line filter-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end row-->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--end col-->
+    </div>
+    <!--end row-->
+
+    <div class="row" id="candidate-list">
+        <div class="col-xl-3 col-md-6" *ngFor="let data of CandidateList">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-start mb-3">
+                        <div class="flex-grow-1">
+                            <span class="badge" [ngClass]="{'badge-soft-success': data.type === 'Full Time','badge-soft-danger': data.type === 'Part Time','badge-soft-info': data.type === 'Freelance','badge-soft-warning': data.type === 'Internship'}">{{data.type}}</span>
+                        </div>
+                        <button type="button" class="btn btn-light btn-sm like-btn active_{{data.id}}" data-bs-toggle="button" [ngClass]="{'active': data.active == true}" (click)="activeMenu(data.id)"><i class="bx bx-heart"></i></button>
+                    </div>
+                    <div class="text-center mb-3">
+                        <img src="{{data.profile}}" alt="" class="avatar-sm rounded-circle" />
+                        <h6 class="font-size-15 mt-3 mb-1">{{data.name}}</h6>
+                        <p class="mb-0 text-muted">{{data.position}}</p>
+                    </div>
+                    <div class="d-flex mb-3 justify-content-center gap-2 text-muted">
+                        <div>
+                            <i class='bx bx-map align-middle text-primary'></i> {{data.location}}
+                        </div>
+                        <p class="mb-0 text-center"><i class='bx bx-money align-middle text-primary'></i> ${{data.price}} / hrs</p>
+                    </div>
+                    <div class="hstack gap-2 justify-content-center">
+                        <span class="badge badge-soft-secondary" *ngFor="let tag of data.tags">{{tag}}</span>
+                    </div>
+
+                    <div class="mt-4 pt-1">
+                        <a routerLink="/jobs/candidate-overview" class="btn btn-soft-primary d-block">View Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

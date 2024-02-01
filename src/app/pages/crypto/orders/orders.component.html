@@ -1,0 +1,151 @@
+<div class="container-fluid">
+    <app-page-title title="Orders" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Orders</h4>
+                    <tabset class="nav-tabs nav-tabs-custom">
+                        <tab heading="All Orders" class="mt-4">
+                            <!-- <a ngbNavLink>All Orders</a> -->
+                            <!-- <ng-template ngbNavContent> -->
+                            <div class="row">
+                                <div class="col-xl col-sm-6">
+                                    <div class="mb-3">
+                                        <label>Date :</label>
+                                        <input class="form-control" placeholder="yyyy-mm-dd" name="dp" bsDatepicker
+                                            autocomplete="off">
+                                    </div>
+                                </div>
+
+                                <div class="col-xl col-sm-6">
+                                    <div class="mb-3">
+                                        <label>Coin</label>
+                                        <select class="form-control select2-search-disable" [(ngModel)]="service.coin">
+                                            <option value="" selected>Select Coin</option>
+                                            <option value="Bitcoin">Bitcoin</option>
+                                            <option value="Ethereum">Ethereum</option>
+                                            <option value="Litecoin">Litecoin</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl col-sm-6">
+                                    <div class="mb-3">
+                                        <label>Type</label>
+                                        <select class="form-control select2-search-disable" [(ngModel)]="service.type">
+                                            <option value="" selected>Select Type</option>
+                                            <option value="Buy" selected>Buy</option>
+                                            <option value="Sell">Sell</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl col-sm-6">
+                                    <div class="mb-3">
+                                        <label>Status</label>
+                                        <select class="form-control select2-search-disable"
+                                            [(ngModel)]="service.status">
+                                            <option value="" selected>Select Status</option>
+                                            <option value="Completed">Completed</option>
+                                            <option value="Pending">Pending</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl col-sm-6 align-self-end">
+                                    <div class="mb-3">
+                                        <button type="button" class="btn btn-primary w-md">Add Order</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <ng-template [ngTemplateOutlet]="TaskContent"></ng-template>
+                            <!-- </ng-template> -->
+                        </tab>
+                        <tab heading="Processing" class="mt-4">
+                            <!-- <a ngbNavLink>Processing</a>
+                            <ng-template ngbNavContent> -->
+                            <ng-template [ngTemplateOutlet]="TaskContent"></ng-template>
+                            <!-- </ng-template> -->
+                        </tab>
+                    </tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #TaskContent>
+    <div class="row mb-md-2 mt-1">
+        <div class="col-sm-12 col-md-6">
+            <div class="dataTables_length" id="tickets-table_length"><label
+                    class="d-inline-flex align-items-center">Show
+                    <select name="tickets-table_length" aria-controls="tickets-table" name="pageSize"
+                        [(ngModel)]="service.pageSize"
+                        class="custom-select custom-select-sm form-control form-control-sm mx-2">
+                        <option [ngValue]="10">10</option>
+                        <option [ngValue]="25">25</option>
+                        <option [ngValue]="50">50</option>
+                        <option [ngValue]="100">100</option>
+                    </select> entries</label></div>
+        </div>
+        <!-- Search -->
+        <div class="col-sm-12 col-md-6">
+            <div id="tickets-table_filter" class="dataTables_filter text-md-end"><label
+                    class="d-inline-flex align-items-center">Search:
+                    <input type="text" name="searchTerm" class="form-control form-control-sm ms-2"
+                        aria-controls="tickets-table" [(ngModel)]="service.searchTerm"></label>
+            </div>
+        </div>
+        <!-- End search -->
+    </div>
+    <!-- Table -->
+    <table id="basic-datatable" class="table datatables dt-responsive nowrap">
+        <thead>
+            <tr>
+                <th sortable="date" (sort)="onSort($event)">Date</th>
+                <th sortable="type" (sort)="onSort($event)">Type</th>
+                <th sortable="coin" (sort)="onSort($event)">Coin</th>
+                <th sortable="value" (sort)="onSort($event)">Value</th>
+                <th sortable="usd" (sort)="onSort($event)">Value in USD</th>
+                <th sortable="status" (sort)="onSort($event)">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of orders$ | async">
+                <td>{{data.date}}</td>
+                <td>{{data.type}}</td>
+                <td>{{data.coin}}</td>
+                <td>{{data.value}}</td>
+                <td>{{data.usd}}</td>
+                <td>
+                    <span class="badge font-size-10" [ngClass]="{'bg-success': data.status === 'Completed','bg-warning': data.status === 'Pending',
+                        'bg-danger': data.status === 'Failed'}">{{data.status}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- End table -->
+    <div class="row justify-content-md-between align-items-md-center mt-2">
+        <div class="col-sm-12 col-md-5">
+            <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                Showing
+                {{service.startIndex + 1}} to
+                {{service.endIndex}} of {{service.totalRecords}}
+                entries
+            </div>
+        </div>
+        <!-- Pagination -->
+
+        <div class="col-sm-12 col-md-5">
+            <div class="text-md-right float-md-end">
+                <ul class="pagination justify-content-end mb-2">
+                    <pagination [totalItems]="(total | async)!" [(ngModel)]="service.page"
+                        [itemsPerPage]="service.pageSize"></pagination>
+                </ul>
+            </div>
+        </div>
+        <!-- End Pagination -->
+    </div>
+</ng-template>

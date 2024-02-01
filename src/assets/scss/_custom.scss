@@ -1,0 +1,423 @@
+// Lightbox
+@import "~ngx-lightbox/lightbox.css";
+
+// Select 2 
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+// Date Picker
+@import '~flatpickr/dist/flatpickr.css';
+
+// LeafLet Chart
+@import 'leaflet/dist/leaflet.css';
+
+// Emoji Picker
+// @import '~@ctrl/ngx-emoji-mart/picker';
+.emoji-mart {
+    position: absolute;
+    bottom: 20px;
+    left: -80px;
+}
+
+.emoji-mart-preview {
+    display: none;
+}
+
+
+
+// dropdown
+.dropdown-toggle {
+    &:after {
+        display: none;
+    }
+}
+
+.modal-backdrop {
+    z-index: 1002 !important;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dropzone .dz-message {
+    font-size: 24px;
+    min-height: 150px !important;
+    border: none !important;
+    background: #fff !important;
+    color: #495057 !important;
+}
+
+// ----- Advance Ui --------//
+// Rating
+.stars {
+    font-size: 30px;
+    color: var(--bs-gray-600);
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+}
+
+.star_fill {
+    color: $gray-500;
+}
+
+.full {
+    color: #b0c4de;
+}
+
+.half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: var(--bs-gray-600);
+}
+
+.filled {
+    color: #1e90ff;
+}
+
+.bad {
+    color: #deb0b0;
+}
+
+.filled.bad {
+    color: #ff1e1e;
+}
+
+.halfHeart {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: red;
+}
+
+// Calendar
+.flatpickr-calendar.open {
+    z-index: 1061;
+}
+
+// Swich Btn
+.switch.switch-small.checked>.switch-pane>span {
+    color: #fff;
+}
+
+.switch.switch-small>.switch-pane>span {
+    font-size: 14px;
+}
+
+// Ck Editer
+.ck-editor__editable {
+    min-height: 245px !important;
+}
+
+.custom-accordion {
+    .accordion-list {
+        padding: 0px;
+        background-color: transparent;
+    }
+}
+
+// select2 Css
+.ng-select {
+    .ng-select-container {
+        background-color: $input-bg;
+        border-color: $input-border-color;
+        color: $input-color;
+
+        .ng-value-container .ng-input>input {
+            color: $input-color;
+        }
+    }
+
+    &.ng-select-opened>.ng-select-container {
+        background-color: $input-bg;
+        border-color: $input-border-color;
+    }
+}
+
+.ng-dropdown-panel {
+    border-color: $input-border-color;
+    background-color: var(--#{$prefix}custom-white);
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option {
+    background-color: var(--#{$prefix}custom-white);
+    color: var(--#{$prefix}body-color);
+}
+
+.ng-dropdown-panel.ng-select-bottom {
+    border-top-color: $input-border-color;
+}
+
+.ng-dropdown-panel.ng-select-top {
+    border-bottom-color: $input-border-color;
+}
+
+//dropzone
+
+.dropzone>.dropzone.dz-wrapper .dz-message {
+    background: var(--#{$prefix}custom-white) !important;
+    color: var(--#{$prefix}body-color) !important;
+}
+
+// ck editor
+.ck.ck-toolbar {
+    background-color: var(--#{$prefix}light) !important;
+    border: 1px solid $input-border-color !important;
+}
+
+.ck-reset_all :not(.ck-reset_all-excluded *),
+.ck.ck-reset_all {
+    color: var(--#{$prefix}body-color) !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+    background-color: var(--#{$prefix}custom-white) !important;
+    color: var(--#{$prefix}body-color) !important;
+}
+
+.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+    border-color: $input-border-color !important;
+}
+
+.ck.ck-button:not(.ck-disabled):hover,
+a.ck.ck-button:not(.ck-disabled):hover,
+.ck.ck-button.ck-on,
+a.ck.ck-button.ck-on {
+    background-color: var(--#{$prefix}light) !important;
+}
+
+.ck.ck-toolbar .ck.ck-toolbar__separator {
+    background: $input-border-color !important;
+}
+
+
+// Dark Mode Css
+[data-bs-theme="dark"] {
+    .bs-datepicker {
+        box-shadow: none !important;
+    }
+
+    .bs-datepicker-container {
+        background-color: #2a3042 !important;
+
+    }
+
+    .bs-datepicker-head button {
+        color: #c3cbe4 !important;
+    }
+
+    .bs-datepicker-body {
+        border: 1px solid transparent;
+    }
+
+    .auth-logo .auth-logo-light {
+        display: block;
+    }
+
+    .auth-logo .auth-logo-dark {
+        display: none;
+    }
+
+    // Accordion
+    .accordion {
+        --bs-accordion-color: #fff;
+        --bs-accordion-bg: transparent;
+    }
+
+    .accordion-button {
+        color: var(--bs-body-color);
+    }
+}
+
+.page-link {
+    display: inline-table;
+}
+
+
+//   vertical tab
+
+.vertical-tab {
+    ul {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+        border: 0;
+
+        @media (max-width: 1024px) {
+            display: block;
+        }
+
+        li {
+            a {
+                padding: 8px 50px;
+
+                @media (max-width: 1440px) {
+                    padding: 8px 30px;
+                }
+            }
+        }
+    }
+
+    .tab-content {
+        position: absolute;
+        top: 0;
+
+        @media (max-width: 1024px) {
+            position: inherit;
+        }
+
+    }
+}
+
+
+.ecommerce-checkout-tab {
+    ul {
+        display: inline-block;
+        float: left;
+        margin-right: 20px;
+        border: 0;
+
+        @media (max-width: 600px) {
+            display: block;
+            float: inherit;
+        }
+    }
+
+    li {
+        a {
+            padding: 1px 80px;
+        }
+    }
+}
+
+.product-detai-imgs {
+    ul {
+        border: 0;
+
+        a {
+            border: 0 !important;
+            width: 130px;
+
+            @media (max-width: 425px) {
+                width: 50px;
+            }
+        }
+    }
+}
+
+.tooltip,
+.tooltip-arrow {
+    position: absolute;
+}
+
+[data-layout-size="boxed"] {
+    .vertical-tab {
+        ul {
+            display: inline-block;
+            position: relative;
+            z-index: 1;
+            border: 0;
+
+            @media (max-width: 1024px) {
+                display: block;
+            }
+
+            li {
+                a {
+                    padding: 8px 50px;
+                }
+            }
+        }
+    }
+
+}
+
+.bs-datepicker-head {
+    background-color: transparent !important;
+
+}
+
+.bs-datepicker-head button {
+    color: black !important;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+    width: 30px;
+    height: 30px;
+    line-height: 28px !important;
+    font-size: 20px !important;
+    border-radius: 50% !important;
+    background-color: rgba(85, 110, 230, .25) !important;
+    color: #556ee6 !important;
+    justify-content: center !important;
+    margin: 4px 8px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.tab-bg {
+    .nav-tabs {
+        background-color: var(--#{$prefix}light);;
+    }
+
+}
+
+
+// popover
+.bs-popover-top,
+.bs-popover-bottom {
+    margin-left: -8px !important;
+}
+
+.bs-popover-left .arrow,
+.bs-popover-right .arrow {
+    margin-top: -8px !important;
+}
+
+.custom-widget-nav {
+    .nav-tabs {
+        justify-content: flex-end;
+        margin-top: -1.5rem;
+    }
+}
+
+.custom-vertical-tabs {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+
+    .nav-tabs {
+        flex-direction: column;
+
+        @media (min-width: 992px) {
+            flex-shrink: 0;
+        }
+    }
+
+    .tab-content {
+        @media (min-width: 992px) {
+            flex-grow: 1;
+        }
+    }
+
+    @media (max-width: 991px) {
+        flex-direction: column;
+        gap: 16px;
+
+        .nav-tabs, .tab-content{
+            width: 100%;
+        }
+    }
+}
+
+
+// nav-justify-center
+
+.nav-justify-center {
+    .nav-tabs {
+        justify-content: center;
+    }
+}

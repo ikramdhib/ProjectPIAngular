@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <app-page-title title="Job Apply" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body border-bottom">
+                    <div class="d-flex align-items-center">
+                        <h5 class="mb-0 card-title flex-grow-1">Applied Jobs</h5>
+                        <div class="flex-shrink-0">
+                            <select class="form-select" aria-label="Default select example">
+                                <option value="Today" selected>Today</option>
+                                <option value="1 Monthly">1 Month</option>
+                                <option value="6 Month">6 Month</option>
+                                <option value="1 Years">1 Year</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered align-middle nowrap">
+                            <thead>
+                                <tr>
+                                    <th scope="col">No</th>
+                                    <th scope="col">Job Title</th>
+                                    <th scope="col">Company Name</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Apply Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let data of applies">
+                                    <th scope="row">{{data.id}}</th>
+                                    <td>{{data.title}}</td>
+                                    <td>{{data.company}}</td>
+                                    <td><span class="badge" [ngClass]="{'badge-soft-success': data.type === 'Full Time','badge-soft-danger': data.type === 'Part Time','badge-soft-info': data.type === 'Freelance','badge-soft-warning': data.type === 'Internship'}">{{data.type}}</span></td>
+                                    <td>{{data.date}}</td>
+                                    <td><span class="badge" [ngClass]="{ 'bg-success': data.status === 'Active', 'bg-info': data.status === 'New', 'bg-danger': data.status === 'Close'}">{{data.status}}</span></td>
+                                    <td>
+                                        <ul class="list-unstyled hstack gap-1 mb-0">
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                                <a routerLink="/jobs/details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
+                                            </li>
+                                            <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                                <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="delete($event)"><i class="mdi mdi-delete-outline"></i></a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-auto me-auto">
+                            <p class="text-muted mb-0">Showing <b>{{service.startIndex}}</b> to <b>{{service.endIndex}}</b> of <b>{{service.totalRecords}}</b> entries</p>
+                        </div>
+                        <div class="col-auto">
+                            <div class="card d-inline-block ms-auto mb-0">
+                                <div class="card-body p-2">
+                                    <nav aria-label="Page navigation example" class="mb-0">
+                                        <ul class="pagination mb-0">
+                                            <pagination [totalItems]="(total | async)!" [(ngModel)]="service.page" previousText="&laquo;" nextText="&raquo;"></pagination>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
