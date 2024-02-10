@@ -1,0 +1,37 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+  
+    <app-page-title title="All Questions" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+    <!-- end page title -->
+  
+    <div class="row" *ngFor="let question of questions">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="invoice-title">
+              <h4 class="float-end font-size-16">Order # 12345</h4>
+              <div class="auth-logo mb-4">
+                <h2><strong>{{question.titre}}</strong></h2><br>
+            </div>
+            </div>
+            <hr>
+            <div class="row" >
+              <div class="col-10" style="overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical;">
+                  {{question.content}}<br>  
+              </div>
+              <div class="d-print-none">
+                <div class="float-end">
+                  <a href="javascript: void(0);" class="btn btn-primary w-md ms-1">detail</a>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  
+  </div> <!-- container-fluid -->
