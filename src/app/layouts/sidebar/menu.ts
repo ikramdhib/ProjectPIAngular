@@ -318,7 +318,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 52,
                 label: 'MENUITEMS.CONTACTS.LIST.PROFILE',
-                link: '/contacts/profile',
+                link: '/user/profile',
                 parentId: 49
             }
         ]

@@ -7,7 +7,7 @@ import { AuthfakeauthenticationService } from '../services/authfake.service';
 import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard  {
+export class AuthGuard {
     constructor(
         private router: Router,
         private authenticationService: AuthenticationService,

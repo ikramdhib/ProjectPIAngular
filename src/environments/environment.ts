@@ -13,8 +13,10 @@ export const environment = {
     storageBucket: '',
     messagingSenderId: '',
     appId: '',
-    measurementId: ''
-  }
+    measurementId: '',
+    
+  },
+  API_URL:'http://localhost:8081/'
 };
 
 
