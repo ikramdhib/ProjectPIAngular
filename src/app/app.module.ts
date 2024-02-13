@@ -29,6 +29,9 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
+import { OffreComponent } from './offrestage/offrestage.component';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -45,10 +48,17 @@ export function createTranslateLoader(http: HttpClient): any {
   declarations: [
     AppComponent,
     CyptolandingComponent,
+    OffreComponent,
+    ListeoffreetudiantComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+
+
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

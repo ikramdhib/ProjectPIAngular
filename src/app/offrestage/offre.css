@@ -1,0 +1,24 @@
+/* Couleur rouge principale */
+.red-primary {
+  color: #FF0000;
+}
+
+/* Fond rouge principal */
+.bg-red-primary {
+  background-color: #FF0000;
+}
+
+/* Texte gris foncé */
+.text-dark-gray {
+  color: #333333;
+}
+
+/* Fond gris clair */
+.bg-light-gray {
+  background-color: #CCCCCC;
+}
+
+/* Texte blanc */
+.text-white {
+  color: #FFFFFF;
+}

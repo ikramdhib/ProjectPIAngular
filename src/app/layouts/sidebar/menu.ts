@@ -6,6 +6,34 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.MENU.TEXT',
         isTitle: true
     },
+{
+    id: 200,
+    label: 'liste des Offre de Stage',
+    icon: 'bx-briefcase-alt',
+    link:'/listedesoffre'
+},
+
+    { //offreListe
+        
+        id: 149,
+        label: 'Offre de Stage',
+        icon: 'bx-briefcase-alt',
+        subItems: [
+            {
+        id: 148,
+        label: 'Ajouter Offre de Stage',
+        icon: 'bx-briefcase-alt',
+        link:'/offre',
+        parentId: 149
+    },
+    {
+       
+
+
+
+    },
+        ]},
+
     {
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',

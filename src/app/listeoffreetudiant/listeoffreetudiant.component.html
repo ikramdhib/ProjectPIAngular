@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="entreprise">
+      <div class="entreprise-header" style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 10px;">
+        <h3 style="color: #333;">{{ entreprise.key }}</h3>
+        <div class="entreprise-details">
+          <img [src]="entreprise.value[0]?.logoUrl" alt="Logo entreprise" style="max-width: 100px; border-radius: 5px;">
+          <span style="margin-left: 10px; color: #666;">{{ entreprise.value.length }} offres disponibles</span>
+        </div>
+      </div>
+      <ul class="offre-list">
+        <li *ngFor="let offre of entreprise.value" class="offre" style="background-color: #fff; border: 1px solid #ccc; border-radius: 5px; padding: 10px; margin-bottom: 10px;">
+          <div class="offre-details">
+            <div>
+              <strong>Nom de l'entreprise:</strong> {{ offre.nomEntreprise }}
+            </div>
+            <div>
+              <strong>Description:</strong> {{ offre.description }}
+            </div>
+            <div>
+              <strong>Nom de l'encadrant:</strong> {{ offre.nomEncadrant }}
+            </div>
+            <div>
+              <strong>Prénom de l'encadrant:</strong> {{ offre.prenomEncadrant }}
+            </div>
+            <div>
+              <strong>Email:</strong> {{ offre.email }}
+            </div>
+            <div>
+              <strong>Date début stage:</strong> {{ offre.datedebut_stage | date: 'dd/MM/yyyy' }}
+            </div>
+            <div>
+              <strong>Date fin stage:</strong> {{ offre.datefin_stage | date: 'dd/MM/yyyy' }}
+              <button (click)="postuler(offre)" style="background-color: #007bff; color: #fff; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-top: 10px;">Postuler</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
