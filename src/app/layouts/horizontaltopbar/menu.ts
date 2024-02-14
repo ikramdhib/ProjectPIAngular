@@ -1,6 +1,7 @@
 import { MenuItem } from './menu.model';
 
 export const MENU: MenuItem[] = [
+ 
     {
         id: 1,
         label: 'MENUITEMS.DASHBOARDS.TEXT',
@@ -419,12 +420,7 @@ export const MENU: MenuItem[] = [
                         link: '/contacts/list',
                         parentId: 67
                     },
-                    {
-                        id: 70,
-                        label: 'MENUITEMS.CONTACTS.LIST.PROFILE',
-                        link: '/user/profile',
-                        parentId: 67
-                    }
+                    
                 ]
             },
             {

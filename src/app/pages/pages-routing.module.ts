@@ -12,6 +12,7 @@ const routes: Routes = [
     path: "",
     component: DefaultComponent
   },
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m=>m.UserModule) },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'chat', component: ChatComponent },

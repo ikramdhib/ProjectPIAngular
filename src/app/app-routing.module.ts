@@ -5,10 +5,11 @@ import { LayoutComponent } from './layouts/layout.component';
 import { CyptolandingComponent } from './cyptolanding/cyptolanding.component';
 import { Page404Component } from './extrapages/page404/page404.component';
 import { AuthenticationGuardsService } from './UserServices/authentication-guards.service';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 
 const routes: Routes = [
-  { path: 'user', loadChildren: () => import('./user/user.module').then(m=>m.UserModule) },
+  { path: 'authentication', component:AuthenticationComponent},
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) ,canActivate: [AuthenticationGuardsService] },
   // tslint:disable-next-line: max-line-length
   { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthenticationGuardsService ]

@@ -28,12 +28,8 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       });
 
     }
+    console.log(request.headers.get(TOKEN_HEADER_KEY)+"aaaaaaaaaaaaaaaaaaaaaaaaa")
     return next.handle(request);
   }
 }
 
-export const authInterceptorProvoders =[
-  {
-    provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true
-  }
-];

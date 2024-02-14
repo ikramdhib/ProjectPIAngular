@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Authenticationrequest } from 'src/app/UserServices/AuthenticationRequest';
 
-import { AuthenticationService } from '../../UserServices/authentication.service';
+import { AuthenticationService } from '../UserServices/authenticationUser.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',

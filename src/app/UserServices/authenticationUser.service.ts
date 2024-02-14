@@ -55,4 +55,12 @@ export class AuthenticationService {
     return this.isUserLogIn;
   }
 
+  public logout(){
+    this.http.get(`${this.API_RL}api/v1/auth/logout`,this.httpOptions);
+    this.router.navigate(['/authentication']);
+    localStorage.removeItem("token");
+    localStorage.removeItem("reresh-Token");
+   
+  }
+
 }

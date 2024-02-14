@@ -30,9 +30,8 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UserModule } from './user/user.module';
 import { JwtModule } from '@auth0/angular-jwt';
-import { authInterceptorProvoders } from './helpers_User/authentication.interceptor';
+import { AuthenticationInterceptor } from './helpers_User/authentication.interceptor';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -73,7 +72,6 @@ export function createTranslateLoader(http: HttpClient): any {
     ScrollToModule.forRoot(),
     ToastrModule.forRoot(),
     ReactiveFormsModule,
-    UserModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -87,8 +85,9 @@ export function createTranslateLoader(http: HttpClient): any {
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: FakeBackendInterceptor, multi: true },
-    authInterceptorProvoders
-    
+    {
+      provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true
+    }
     // LoaderService,
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],
