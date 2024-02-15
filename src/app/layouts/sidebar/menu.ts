@@ -7,6 +7,12 @@ export const MENU: MenuItem[] = [
         isTitle: true
     },
     {
+        id: 148,
+        label: 'Liste Encadrant et Etudiant',
+        icon: 'bx-home-circle',
+        link: '/stageList',
+    },
+    {
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',
         icon: 'bx-home-circle',

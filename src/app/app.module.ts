@@ -30,6 +30,11 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
 
+import { StageListComponent } from './stage-list/stage-list.component';
+import { NourComponent } from './nour/nour.component';
+import { StageListtComponent } from './stage-listt/stage-listt.component';
+
+
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
 } else {
@@ -45,6 +50,11 @@ export function createTranslateLoader(http: HttpClient): any {
   declarations: [
     AppComponent,
     CyptolandingComponent,
+  
+    StageListComponent,
+        NourComponent,
+        StageListtComponent,
+    
   ],
   imports: [
     BrowserModule,
