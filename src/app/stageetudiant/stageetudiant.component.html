@@ -1,0 +1,143 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Ajouter les détails</h4>
+
+          <form (ngSubmit)="onSubmit($event)">
+            <div class="mb-3">
+              <label for="formrow-firstname-input">Nom de société</label>
+              <input
+                type="text"
+                class="form-control"
+                id="formrow-firstname-input"
+                name="nomSociete"
+                [(ngModel)]="nomSociete"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="formrow-tel-input">Numéro de tel</label>
+              <input
+                type="text"
+                class="form-control"
+                id="formrow-tel-input"
+                name="numSociete"
+                [(ngModel)]="numSociete"
+              />
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="formrow-email-input">Email de société</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="formrow-email-input"
+                    name="emailSociete"
+                    [(ngModel)]="emailSociete"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="formrow-nom-encadrant-input"
+                >Nom de l'encadrant</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="formrow-nom-encadrant-input"
+                name="nomCoach"
+                [(ngModel)]="nomCoach"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="formrow-prenom-encadrant-input"
+                >Prénom de l'encadrant</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="formrow-prenom-encadrant-input"
+                name="prenomCoach"
+                [(ngModel)]="prenomCoach"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="formrow-tel-input2">Numéro tel encadrant</label>
+              <input
+                type="text"
+                class="form-control"
+                id="formrow-tel-input2"
+                name="numCoach"
+                [(ngModel)]="numCoach"
+              />
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="formrow-email-input2">Email de l'encadrant</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="formrow-email-input2"
+                    name="emailCoach"
+                    [(ngModel)]="emailCoach"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="example-date-input" class="col-md-2 col-form-label"
+                >Date début</label
+              >
+              <div class="col-md-10">
+                <input
+                  class="form-control"
+                  type="date"
+                  id="example-date-input"
+                  name="startAt"
+                  [(ngModel)]="startAt"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label for="example-date-input2" class="col-md-2 col-form-label"
+                >Date fin</label
+              >
+              <div class="col-md-10">
+                <input
+                  class="form-control"
+                  type="date"
+                  id="example-date-input2"
+                  name="endAt"
+                  [(ngModel)]="endAt"
+                />
+              </div>
+            </div>
+
+            <div class="mb-3 row">
+              <label class="col-md-2 col-form-label">Select</label>
+              <div class="col-md-10">
+                <select class="form-select" [(ngModel)]="type" name="type">
+                  <option>FORMATION_HUMAINE_SOCIALE</option>
+                  <option>IMMERSION_ENTREPRISE</option>
+                  <option>INGENIEUR</option>
+                  <option>NON_OBLIGATOIRE</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <button type="submit" class="btn btn-primary w-md">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
