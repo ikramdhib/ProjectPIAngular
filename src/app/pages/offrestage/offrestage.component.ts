@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Type } from './offremodel';
 
 @Component({
   selector: 'app-offre',
@@ -18,11 +19,16 @@ export class OffreComponent {
     email: '',
     description: '',
     datedebut_stage: this.formatDate(new Date()),
-    datefin_stage: this.formatDate(new Date())
+    datefin_stage: this.formatDate(new Date()),
+    type: 'FORMATION_HUMAINE_SOCIALE,IMMERSION_ENTREPRISE,INGENIEUR', // Add this line
+    // Ajoutez cette ligne
+
+
   };
 
   currentOffreID = '';
   imgURL: any; // Déclaration de la propriété imgURL
+  types = Type; // Assigning the enum to a variable accessible in the template
 
   constructor(private http: HttpClient, private toastr: ToastrService) {
     this.getAllOffres();
@@ -36,7 +42,23 @@ export class OffreComponent {
     formData.append('prenomEncadrant', this.nouvelleOffre.prenomEncadrant);
     formData.append('email', this.nouvelleOffre.email);
     formData.append('description', this.nouvelleOffre.description);
-    formData.append('userId', '65ca06b75d87620dc7f512a8'); // Remplacez 'your_user_id' par l'ID de l'utilisateur
+    formData.append('userId', '65cbd3246188fc097c303ae0'); // Remplacez 'your_user_id' par l'ID de l'utilisateur
+    formData.append('datedebut_stage', this.nouvelleOffre.datedebut_stage);
+    formData.append('datefin_stage', this.nouvelleOffre.datefin_stage);
+    formData.append('type', this.nouvelleOffre.type);
+    formData.append('duree',this.nouvelleOffre.duree);
+ // Calcul de la durée du stage
+    const startDate = new Date(this.nouvelleOffre.datedebut_stage);
+    const endDate = new Date(this.nouvelleOffre.datefin_stage);
+    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    this.nouvelleOffre.duree = diffDays;
+    
+
+    this.calculateDuration();
+
+    
+
   
     this.http.post<any>('http://localhost:8081/api/offres/add', formData).subscribe(
       response => {
@@ -120,6 +142,24 @@ export class OffreComponent {
     return `${year}-${month}-${day}`;
   }
 
+  // Méthode pour calculer la durée entre les dates de début et de fin
+  calculateDuration(): void {
+    const startDate = new Date(this.nouvelleOffre.datedebut_stage);
+    const endDate = new Date(this.nouvelleOffre.datefin_stage);
+    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    this.nouvelleOffre.duree = diffDays;
+  }
+
+  // Méthode appelée lorsque la date de début est modifiée
+  onStartDateChange(): void {
+    this.calculateDuration();
+  }
+
+  // Méthode appelée lorsque la date de fin est modifiée
+  onEndDateChange(): void {
+    this.calculateDuration();
+  }
   clearForm(): void {
     this.nouvelleOffre = {
       nomEntreprise: '',
@@ -129,7 +169,9 @@ export class OffreComponent {
       email: '',
       description: '',
       datedebut_stage: this.formatDate(new Date()),
-      datefin_stage: this.formatDate(new Date())
+      datefin_stage: this.formatDate(new Date()),
+      type: '',
+      duree: ''
     };
     this.imgURL = null; // Réinitialiser l'image prévisualisée
   }

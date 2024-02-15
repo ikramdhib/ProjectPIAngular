@@ -48,6 +48,7 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
   imports: [
     CommonModule,
     FormsModule,
+    
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     PagesRoutingModule,

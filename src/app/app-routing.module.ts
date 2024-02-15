@@ -5,7 +5,6 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './layouts/layout.component';
 import { CyptolandingComponent } from './cyptolanding/cyptolanding.component';
 import { Page404Component } from './extrapages/page404/page404.component';
-import { OffreComponent } from './offrestage/offrestage.component';
 import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
 
 const routes: Routes = [
@@ -16,7 +15,6 @@ const routes: Routes = [
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
   { path: 'listedesoffre', component: ListeoffreetudiantComponent },
 
-  { path: 'offre', component: OffreComponent },
 
 
 

@@ -10,5 +10,15 @@ export interface Offre {
     description: string;
     datedebut_stage: Date;
     datefin_stage: Date;
+    duree:Number;
+    type:Type;
+    
   }
+
+  export enum Type {
+    FORMATION_HUMAINE_SOCIALE = 'Formation Humaine Sociale',
+    IMMERSION_ENTREPRISE = 'Immersion Entreprise',
+    INGENIEUR = 'Ingénieur',
+  }
+  
 
