@@ -1,0 +1,78 @@
+<!-- demande-form.component.html -->
+
+<div class="container mt-4">
+    <h1>Create Demande</h1>
+    <div class="card">
+      <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()">
+        
+        <!-- Titre -->
+        <div class="form-group">
+          <label for="titre">Titre:</label>
+          <input type="text" id="titre" formControlName="titre" class="form-control" required>
+        </div>
+  
+        <!-- Description -->
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" formControlName="description" class="form-control" required></textarea>
+        </div>
+  
+        <!-- Etat -->
+        <div class="form-group">
+          <label for="etat">Etat:</label>
+          <input type="text" id="etat" formControlName="etat" class="form-control">
+        </div>
+  
+        <!-- Student Name -->
+        <div class="form-group">
+          <label for="studentName">Student Name:</label>
+          <input type="text" id="studentName" formControlName="studentName" class="form-control">
+        </div>
+  
+        <!-- Student Email -->
+        <div class="form-group">
+          <label for="studentEmail">Student Email:</label>
+          <input type="text" id="studentEmail" formControlName="studentEmail" class="form-control">
+        </div>
+  
+        <!-- CV Path -->
+        <div class="form-group">
+          <label for="cvPath">CV Path:</label>
+          <input type="text" id="cvPath" formControlName="cvPath" class="form-control">
+        </div>
+  
+        <!-- Lettre Motivation -->
+        <div class="form-group">
+          <label for="lettreMotivation">Lettre Motivation:</label>
+          <input type="text" id="lettreMotivation" formControlName="lettreMotivation" class="form-control">
+        </div>
+  
+        <!-- Offre -->
+        <div class="form-group">
+          <label for="offre">Offre:</label>
+          <input type="text" id="offre" formControlName="offre" class="form-control">
+        </div>
+  
+        <!-- Add more form controls as needed -->
+  
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+      </form>
+    </div>
+  
+    <!-- Display the created demande if available -->
+    <div *ngIf="submitDemande" class="mt-4">
+      <h3>Created Demande</h3>
+      <p>ID: {{ createdDemande.id }}</p>
+      <p>Titre: {{ createdDemande.titre }}</p>
+      <p>Description: {{ createdDemande.description }}</p>
+      <p>Etat: {{ createdDemande.etat }}</p>
+      <p>Student Name: {{ createdDemande.studentName }}</p>
+      <p>Student Email: {{ createdDemande.studentEmail }}</p>
+      <p>CV Path: {{ createdDemande.cvPath }}</p>
+      <p>Lettre Motivation: {{ createdDemande.lettreMotivation }}</p>
+      <p>Offre: {{ createdDemande.offre }}</p>
+      <!-- Add more properties as needed -->
+    </div>
+  </div>
+  
