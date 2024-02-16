@@ -5,7 +5,15 @@ export const MENU: MenuItem[] = [
         id: 1,
         label: 'MENUITEMS.MENU.TEXT',
         isTitle: true
+
     },
+    {
+        id: 3,
+        label: 'Demande De Stage',
+        link: '/create-demande',
+        
+    },
+    
     {
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',

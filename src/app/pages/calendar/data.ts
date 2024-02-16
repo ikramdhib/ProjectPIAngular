@@ -7,29 +7,22 @@ export function createEventId() {
 
 const category = [
     {
-        name: 'Danger',
-        value: 'bg-danger'
+        name: 'Online Meeting',
+        value: 'bg-meeting'
     },
     {
-        name: 'Success',
-        value: 'bg-success'
+        name: 'Technique Meeting',
+        value: 'bg-technique'
     },
     {
-        name: 'Primary',
-        value: 'bg-primary'
+        name: 'RH Meeting',
+        value: 'bg-rh'
     },
     {
-        name: 'Info',
-        value: 'bg-info'
+        name: 'Job Opportunity',
+        value: 'bg-job'
     },
-    {
-        name: 'Dark',
-        value: 'bg-dark'
-    },
-    {
-        name: 'Warning',
-        value: 'bg-warning'
-    },
+    
 ];
 
 const calendarEvents: EventInput[] = [
