@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ForumService } from '../forum.service';
+import Swal from 'sweetalert2';
+import { MyUploadAdapter } from '../UploadAdapter';
+
 
 
 @Component({
@@ -13,13 +16,21 @@ import { ForumService } from '../forum.service';
 export class AddquestionComponent implements OnInit {
  // bread crumb items
  breadCrumbItems: Array<{}>;
-
  public Editor = ClassicEditor;
- 
- constructor(private forumService: ForumService) { }
+ success = false;
+
+
+ constructor(private forumService: ForumService) {}
+
  ngOnInit(): void {
-  this.breadCrumbItems = [{ label: 'Forum' }, { label: 'List Forum', active: true }];
+  this.breadCrumbItems = [{ label: 'Forum' }, { label: 'AddForum', active: true }];
 }
+
+onReady(editor:ClassicEditor): void {
+  editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+      return new MyUploadAdapter( loader );
+  };}
+
  formQuestion : FormGroup = new FormGroup({
     titre: new FormControl('',[Validators.required,Validators.minLength(15)]),
     content: new FormControl('',[Validators.required,Validators.minLength(150)])
@@ -28,15 +39,19 @@ export class AddquestionComponent implements OnInit {
   onSubmit() {
     if (this.formQuestion.valid) {
       const questionData = this.formQuestion.value;
+     
       this.forumService.createQuestion(questionData).subscribe((response) => {
         console.log('Question créée avec succès !', response);
-        // Rediriger vers la page principale du forum ou effectuer d'autres actions si nécessaire
+        this.success = true;
+        this.successmsg();
       }, (error) => {
         console.error('Erreur lors de la création de la question : ', error);
       });
     }
   }
   
-
-
+  successmsg() {
+    Swal.fire('Good job!', 'Ajout avec succès!', 'success');
+  }
+ 
 }

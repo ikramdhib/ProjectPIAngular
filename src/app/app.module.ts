@@ -29,8 +29,6 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
-import { AddquestionComponent } from './pages/forum/addquestion/addquestion.component';
-import { ListforumComponent } from './pages/forum/listforum/listforum.component';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);

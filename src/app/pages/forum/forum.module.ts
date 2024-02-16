@@ -15,11 +15,13 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { FlatpickrModule } from 'angularx-flatpickr';
+import { DetailComponent } from './detail/detail.component';
+import { ReponseComponent } from './reponse/reponse.component';
 
 
 
 @NgModule({
-  declarations: [AddquestionComponent, ListforumComponent],
+  declarations: [AddquestionComponent, ListforumComponent, DetailComponent, ReponseComponent],
   imports: [
     CommonModule,
     ForumRoutingModule,

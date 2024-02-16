@@ -11,8 +11,12 @@
         <div class="card">
           <div class="card-body">
             <div class="invoice-title">
-              <h4 class="float-end font-size-16">Order # 12345</h4>
-              <div class="auth-logo mb-4">
+              <div class="float-end">
+                <a class="btn btn-sm btn-link font-size-25 text-center" href="javascript:void(0)">
+                   <i class="bx bx-heart" style=" font-size: large; font-weight: bold; "></i>{{translate}}
+                </a>  
+              </div>
+              <div class="auth-logo mb-4 col-10">
                 <h2><strong>{{question.titre}}</strong></h2><br>
             </div>
             </div>
@@ -22,8 +26,14 @@
                   {{question.content}}<br>  
               </div>
               <div class="d-print-none">
-                <div class="float-end">
-                  <a href="javascript: void(0);" class="btn btn-primary w-md ms-1">detail</a>
+                <div class="float-end list-inline wizard d-flex justify-content-end mb-0">
+                  <div class="btn btn-sm btn-link font-size-20 text-center" href="javascript:void(0)">
+                    <i class="bx bxs-like" ></i>
+                </div>
+                <div class="btn btn-sm btn-link font-size-20 text-center">
+                  <a [routerLink]="['/detail', question.id]" >detail</a>
+                </div>
+                  
                 </div>
               </div>
             </div>

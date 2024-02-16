@@ -13,7 +13,7 @@ export class ListforumComponent implements OnInit {
   constructor(private forumService:ForumService) { }
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Invoices' }, { label: 'Detail', active: true }];
+    this.breadCrumbItems = [{ label: 'Question' }, { label: 'All', active: true }];
     console.log('On init .....')
     this.forumService.getQuestions().subscribe((datas)=>{
     this.questions = datas;

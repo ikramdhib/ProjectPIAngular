@@ -4,8 +4,8 @@
       <app-page-title title="Review your question" [breadcrumbItems]="breadCrumbItems"></app-page-title>
       <!-- end page title -->
     
-      <div class="row">
-        <div class="col-12">
+     
+        <div class="col-xl-12">
           <div class="card">
               <div class="card-body">
                   <label class="card-title mb-3">What are the details of your problem?</label>
@@ -23,7 +23,7 @@
           <div class="card">
             <div class="card-body">
                 <label class="card-title mb-3">What did you try and what were you expecting?</label>
-                <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>" formControlName="content"></ckeditor>
+                <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>" formControlName="content" (ready)="onReady($event)"></ckeditor>
                 <div style="color: #f46a6a;" *ngIf="formQuestion.get('content').invalid && (formQuestion.get('content').dirty || formQuestion.get('content').touched)">
                   <div *ngIf="formQuestion.get('content').errors?.required">
                     Body is required!
@@ -35,8 +35,9 @@
             </div>
             <button type="submit" class="btn btn-danger mb-3 col-1 " style="margin-left: 20px;" [disabled]="formQuestion.invalid" (click)="onSubmit()">Submit</button>
           </div>
+          
         </div>
       </div>
-    </div>
+    
   </form>
     
