@@ -10,7 +10,13 @@ export const MENU: MenuItem[] = [
     id: 148,
     label: "Détails stage",
     icon: "bx-calendar",
-    link: "/stage-etudiant",
+    link: "/addstage",
+  },
+  {
+    id: 149,
+    label: "Processus stage",
+    icon: "bx-calendar",
+    link: "/processusStage",
   },
   {
     id: 2,

@@ -1,13 +1,16 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-8">
       <div class="card">
         <div class="card-body">
           <h4 class="card-title mb-4">Ajouter les détails</h4>
 
           <form (ngSubmit)="onSubmit($event)">
-            <div class="mb-3">
-              <label for="formrow-firstname-input">Nom de société</label>
+            <div class="mb-3 row">
+              <label for="formrow-firstname-input" class="col-md-2 col-form-label"
+                >Nom de société</label
+              >
+              <div class="col-md-10">
               <input
                 type="text"
                 class="form-control"
@@ -15,9 +18,14 @@
                 name="nomSociete"
                 [(ngModel)]="nomSociete"
               />
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="formrow-tel-input">Numéro de tel</label>
+
+            <div class="mb-3 row">
+              <label for="formrow-tel-input" class="col-md-2 col-form-label"
+                >Numéro de tel</label
+              >
+              <div class="col-md-10">
               <input
                 type="text"
                 class="form-control"
@@ -25,26 +33,28 @@
                 name="numSociete"
                 [(ngModel)]="numSociete"
               />
-            </div>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="formrow-email-input">Email de société</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="formrow-email-input"
-                    name="emailSociete"
-                    [(ngModel)]="emailSociete"
-                  />
-                </div>
               </div>
             </div>
-            <div class="mb-3">
-              <label for="formrow-nom-encadrant-input"
+
+            <div class="mb-3 row">
+              <label for="formrow-email-input" class="col-md-2 col-form-label"
+                >Email de société</label
+                  >
+              <div class="col-md-10">
+              <input
+                type="email"
+                class="form-control"
+                id="formrow-email-input"
+                name="emailSociete"
+                [(ngModel)]="emailSociete"
+              />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="formrow-nom-encadrant-input" class="col-md-2 col-form-label"
                 >Nom de l'encadrant</label
               >
+              <div class="col-md-10">
               <input
                 type="text"
                 class="form-control"
@@ -52,11 +62,13 @@
                 name="nomCoach"
                 [(ngModel)]="nomCoach"
               />
+              </div>
             </div>
-            <div class="mb-3">
-              <label for="formrow-prenom-encadrant-input"
+            <div class="mb-3 row">
+              <label for="formrow-prenom-encadrant-input" class="col-md-2 col-form-label"
                 >Prénom de l'encadrant</label
               >
+              <div class="col-md-10">
               <input
                 type="text"
                 class="form-control"
@@ -64,10 +76,14 @@
                 name="prenomCoach"
                 [(ngModel)]="prenomCoach"
               />
+              </div>
             </div>
 
-            <div class="mb-3">
-              <label for="formrow-tel-input2">Numéro tel encadrant</label>
+            <div class="mb-3 row">
+              <label for="formrow-tel-input2" class="col-md-2 col-form-label"
+                >Numéro tel encadrant</label
+              >
+              <div class="col-md-10">
               <input
                 type="text"
                 class="form-control"
@@ -75,19 +91,20 @@
                 name="numCoach"
                 [(ngModel)]="numCoach"
               />
+              </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="mb-3">
-                  <label for="formrow-email-input2">Email de l'encadrant</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="formrow-email-input2"
-                    name="emailCoach"
-                    [(ngModel)]="emailCoach"
-                  />
-                </div>
+            <div class="mb-3 row">
+              <label for="formrow-email-input2" class="col-md-2 col-form-label"
+                >Email de l'encadrant</label
+              >
+              <div class="col-md-10">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="formrow-email-input2"
+                  name="emailCoach"
+                  [(ngModel)]="emailCoach"
+                />
               </div>
             </div>
             <div class="mb-3 row">
