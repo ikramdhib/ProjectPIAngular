@@ -32,7 +32,9 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { StageListComponent } from './stage-list/stage-list.component';
 import { NourComponent } from './nour/nour.component';
-import { StageListtComponent } from './stage-listt/stage-listt.component';
+import { StageListtComponent } from './pages/stage-listt/stage-listt.component';
+import { FormModule } from './pages/form/form.module';
+import { FormsModule } from '@angular/forms';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -57,6 +59,9 @@ export function createTranslateLoader(http: HttpClient): any {
     
   ],
   imports: [
+    FormsModule,
+    ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
+
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
