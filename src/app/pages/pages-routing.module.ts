@@ -7,6 +7,8 @@ import { DefaultComponent } from './dashboards/default/default.component';
 import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { OffreComponent } from './offrestage/offrestage.component';
 import { FormsModule } from '@angular/forms';
+import { ListeoffreencadrantComponent } from './listeoffreencadrant/listeoffreencadrant.component';
+import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -19,6 +21,11 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'filemanager', component: FilemanagerComponent },
   {path:'offre',component:OffreComponent},
+  {path:'listeencadrant',component:ListeoffreencadrantComponent},
+  {path:'listedesoffre',component:ListeoffreetudiantComponent},
+
+
+
   { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
   { path: 'crypto', loadChildren: () => import('./crypto/crypto.module').then(m => m.CryptoModule) },

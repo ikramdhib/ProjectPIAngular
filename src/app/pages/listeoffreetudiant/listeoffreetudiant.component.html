@@ -10,8 +10,7 @@
       Filtrer par type de stage
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" (click)="applyTypeFilter('Tous les types')">Tous les types</a>
-      <a class="dropdown-item" *ngFor="let type of types" (click)="applyTypeFilter(type)">{{ type }}</a>
+      <a class="dropdown-item" (click)="applyFilter('Tous les types')">Tous les types</a>
     </div>
   </div>
   
@@ -20,7 +19,8 @@
     <div class="entreprise-header bg-light p-3 mb-3 rounded">
       <h3 class="text-dark">{{ entreprise.key }}</h3>
       <div class="entreprise-details">
-        <img [src]="entreprise.value[0]?.logoUrl" alt="Logo entreprise" class="max-width: 100px; border-radius: 5px;">
+        
+        <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="max-width: 100px; border-radius: 5px;">
         <span class="text-muted">{{ entreprise.value.length }} offres disponibles</span>
       </div>
     </div>

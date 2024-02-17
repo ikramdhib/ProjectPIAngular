@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Type } from './offremodel';
+import { Type } from '../listeoffreencadrant/offremodel';
+import { MyUploadAdapter } from './my-upload-adapter';
+
 
 @Component({
   selector: 'app-offre',
@@ -13,7 +15,7 @@ export class OffreComponent {
   offres: any[] = [];
   nouvelleOffre: any = {
     nomEntreprise: '',
-    logoentreprise: '',
+    image: '',
     nomEncadrant: '',
     prenomEncadrant: '',
     email: '',
@@ -29,24 +31,34 @@ export class OffreComponent {
   currentOffreID = '';
   imgURL: any; // Déclaration de la propriété imgURL
   types = Type; // Assigning the enum to a variable accessible in the template
+  uploadAdapter: any;
+
 
   constructor(private http: HttpClient, private toastr: ToastrService) {
+    this.uploadAdapter = new MyUploadAdapter(http);
+
     this.getAllOffres();
   }
-
   onSubmit() {
     const formData = new FormData();
     formData.append('nomEntreprise', this.nouvelleOffre.nomEntreprise);
-    formData.append('file', this.nouvelleOffre.logoentreprise);
+    formData.append('image', this.nouvelleOffre.image); // Utilisez le fichier ajouté à FormData
     formData.append('nomEncadrant', this.nouvelleOffre.nomEncadrant);
     formData.append('prenomEncadrant', this.nouvelleOffre.prenomEncadrant);
     formData.append('email', this.nouvelleOffre.email);
     formData.append('description', this.nouvelleOffre.description);
-    formData.append('userId', '65cbd3246188fc097c303ae0'); // Remplacez 'your_user_id' par l'ID de l'utilisateur
+    formData.append('userId', '65cbd3246188fc097c303ae0');
     formData.append('datedebut_stage', this.nouvelleOffre.datedebut_stage);
     formData.append('datefin_stage', this.nouvelleOffre.datefin_stage);
     formData.append('type', this.nouvelleOffre.type);
-    formData.append('duree',this.nouvelleOffre.duree);
+    formData.append('duree', this.nouvelleOffre.duree);
+    //formData.append('image', file); // Ajoutez le fichier à FormData
+
+    // Enregistrez le FormData mis à jour pour l'envoi avec la requête
+  
+    // Le reste du code reste inchangé
+  
+  
  // Calcul de la durée du stage
     const startDate = new Date(this.nouvelleOffre.datedebut_stage);
     const endDate = new Date(this.nouvelleOffre.datefin_stage);
@@ -92,30 +104,18 @@ export class OffreComponent {
     this.currentOffreID = data._id;
   }
 
-  onLogoChange(event: any) {
-    const file = event?.target?.files[0];
-    if (!file) {
-      return;
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.nouvelleOffre.image = file; // Assurez-vous que la propriété image est définie sur le fichier sélectionné
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imgURL = reader.result; // L'URL de l'image est disponible dans reader.result
+      };
+      reader.readAsDataURL(file);}
     }
-
-    if (!file.type.startsWith('image/')) {
-      console.error('Le fichier sélectionné n\'est pas une image.');
-      return;
-    }
-
-    const maxSizeInBytes = 10 * 1024 * 1024; // 10 Mo (modifiable selon vos besoins)
-    if (file.size > maxSizeInBytes) {
-      console.error('La taille du fichier est trop importante.');
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.nouvelleOffre.logoentreprise = file;
-      this.imgURL = reader.result;
-    };
-    reader.readAsDataURL(file);
-  }
+  
+  
 
   deleteOffre(data: any) {
     this.http.delete(`http://localhost:8081/api/offres/delete/${data._id}`, { responseType: 'text' }).subscribe(
@@ -163,7 +163,7 @@ export class OffreComponent {
   clearForm(): void {
     this.nouvelleOffre = {
       nomEntreprise: '',
-      logoentreprise: '',
+      image: '',
       nomEncadrant: '',
       prenomEncadrant: '',
       email: '',
@@ -175,4 +175,10 @@ export class OffreComponent {
     };
     this.imgURL = null; // Réinitialiser l'image prévisualisée
   }
+
+  getImageUrl(imageName: string): string {
+    // Cette URL pointe maintenant vers le serveur Spring Boot
+    return 'http://localhost:8081/api/offres/images/${imageName}' ;
 }
+}
+

@@ -7,10 +7,9 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./listeoffreetudiant.component.scss']
 })
 export class ListeoffreetudiantComponent implements OnInit {
-  offresByEntreprise: any; // Votre liste d'offres initiale
-  filteredOffresByEntreprise: any; // Liste d'offres filtrée
-  types: string[] = ['Stage technique', 'Stage professionnel', 'Stage de recherche']; // Exemple de types de stage disponibles
-  filteredValue: string = ''; // Valeur de recherche
+  offresByEntreprise: any; // Liste d'offres par entreprise
+  filteredOffresByEntreprise: any; // Liste d'offres filtrée par entreprise
+  filteredValue: string = '';
 
   constructor(private http: HttpClient) { }
 
@@ -23,7 +22,6 @@ export class ListeoffreetudiantComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.offresByEntreprise = data;
-          // Assurez-vous de copier les données récupérées dans filteredOffresByEntreprise également
           this.filteredOffresByEntreprise = this.offresByEntreprise;
         },
         (error: any) => {
@@ -35,14 +33,6 @@ export class ListeoffreetudiantComponent implements OnInit {
   applyFilter(value: string) {
     this.filteredValue = value.trim().toLowerCase();
     this.filterOffres();
-  }
-
-  applyTypeFilter(type: string) {
-    if (type === 'Tous les types') {
-      this.filteredOffresByEntreprise = this.offresByEntreprise;
-    } else {
-      this.filteredOffresByEntreprise = this.offresByEntreprise.filter((offre: any) => offre.type === type);
-    }
   }
 
   filterOffres() {

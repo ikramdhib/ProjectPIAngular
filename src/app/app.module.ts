@@ -30,8 +30,9 @@ import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
 import { OffreComponent } from './pages/offrestage/offrestage.component';
+import { ListeoffreencadrantComponent } from './pages/listeoffreencadrant/listeoffreencadrant.component';
+import { ListeoffreetudiantComponent } from './pages/listeoffreetudiant/listeoffreetudiant.component';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -49,7 +50,9 @@ export function createTranslateLoader(http: HttpClient): any {
     AppComponent,
     CyptolandingComponent,
     ListeoffreetudiantComponent,
-    OffreComponent
+    OffreComponent,
+    ListeoffreencadrantComponent
+    
   ],
   imports: [
     BrowserModule,

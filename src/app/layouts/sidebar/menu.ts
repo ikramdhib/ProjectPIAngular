@@ -7,11 +7,18 @@ export const MENU: MenuItem[] = [
         isTitle: true
     },
 {
+    //listeencadrant
     id: 200,
     label: 'liste des Offre de Stage',
     icon: 'bx-briefcase-alt',
     link:'/listedesoffre'
 },
+
+{
+    //listeencadrant
+    
+},
+
 
     { //offreListe
         
@@ -25,7 +32,15 @@ export const MENU: MenuItem[] = [
         icon: 'bx-briefcase-alt',
         link:'/offre',
         parentId: 149
+            },{
+        id: 270,
+        label: 'liste des Offre de Stage encadrant',
+        icon: 'bx-briefcase-alt',
+        link:'/listeencadrant'
+
+
     },
+    
     {
        
 

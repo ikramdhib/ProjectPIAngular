@@ -22,7 +22,11 @@
 .text-white {
   color: #FFFFFF;
 
-
+  .logo-image {
+    max-width: 150px; /* Réglez cette valeur selon vos besoins */
+    height: auto;
+  }
+  
 
 
   

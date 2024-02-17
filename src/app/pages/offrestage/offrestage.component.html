@@ -1,99 +1,60 @@
 <div class="container mt-4">
     <h1>Ajouter une offre</h1>
     <div class="card">
-        <form (ngSubmit)="onSubmit()" #offreForm="ngForm" enctype="multipart/form-data">
+      <form (ngSubmit)="onSubmit()" #offreForm="ngForm" enctype="multipart/form-data">
+        <div class="row">
+          <div class="col-md-6">
             <div class="form-group">
-                <label for="nomEntreprise">Nom de l'entreprise</label>
-                <input type="text" [(ngModel)]="nouvelleOffre.nomEntreprise" class="form-control" id="nomEntreprise" name="nomEntreprise" required>
+              <label for="nomEntreprise">Nom de l'entreprise</label>
+              <input type="text" [(ngModel)]="nouvelleOffre.nomEntreprise" class="form-control" id="nomEntreprise" name="nomEntreprise" required>
             </div>
-            
             <div class="form-group">
-                <label for="logoInput">Logo de l'entreprise</label>
-                <input type="file" #logoInput (change)="onLogoChange($event)" class="form-control-file" accept="image/*" name="file" required>
-                <div *ngIf="imgURL" class="mt-2">
-                    <img [src]="imgURL" class="img-thumbnail" alt="Logo de l'entreprise">
-                </div>
+              <label for="nomEncadrant">Nom de l'encadrant</label>
+              <input type="text" [(ngModel)]="nouvelleOffre.nomEncadrant" class="form-control" id="nomEncadrant" name="nomEncadrant" required>
             </div>
-      
             <div class="form-group">
-                <label for="nomEncadrant">Nom de l'encadrant</label>
-                <input type="text" [(ngModel)]="nouvelleOffre.nomEncadrant" class="form-control" id="nomEncadrant" name="nomEncadrant" required>
-            </div>
-      
-            <div class="form-group">
-                <label for="prenomEncadrant">Prénom de l'encadrant</label>
-                <input type="text" [(ngModel)]="nouvelleOffre.prenomEncadrant" class="form-control" id="prenomEncadrant" name="prenomEncadrant" required>
-            </div>
-      
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" [(ngModel)]="nouvelleOffre.email" class="form-control" id="email" name="email" required>
-            
-            
+              <label for="email">Email</label>
+              <input type="email" [(ngModel)]="nouvelleOffre.email" class="form-control" id="email" name="email" required>
             </div>
             <label for="type">Type de stage</label>
             <select class="form-control" id="type" [(ngModel)]="nouvelleOffre.type" name="type">
-            <option *ngFor="let type of types | keyvalue" [value]="type.key">{{ type.value }}</option>
-              </select>
-              
-      
+              <option *ngFor="let type of types | keyvalue" [value]="type.key">{{ type.value }}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea [(ngModel)]="nouvelleOffre.description" class="form-control" id="description" name="description" required></textarea>
+              <label for="prenomEncadrant">Prénom de l'encadrant</label>
+              <input type="text" [(ngModel)]="nouvelleOffre.prenomEncadrant" class="form-control" id="prenomEncadrant" name="prenomEncadrant" required>
             </div>
-      
             <div class="form-group">
-                <label for="datedebut_stage">Date début stage</label>
-                <input type="date" [ngModel]="nouvelleOffre.datedebut_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datedebut_stage = $event" class="form-control" id="datedebut_stage" name="datedebut_stage" required>
+                <label for="logoInput">Logo de l'entreprise</label>
+                <input type="file" (change)="onFileSelected($event)" name="image" accept="image/*">
+                <div *ngIf="imgURL" class="mt-2">
+                    <img [src]="imgURL" class="img-thumbnail logo-image" alt="Logo de l'entreprise">
+                </div>
             </div>
             
             <div class="form-group">
-                <label for="datefin_stage">Date fin stage</label>
-                <input type="date" [ngModel]="nouvelleOffre.datefin_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datefin_stage = $event" class="form-control" id="datefin_stage" name="datefin_stage" required>
+              <label for="description">Description</label>
+              <textarea [(ngModel)]="nouvelleOffre.description" class="form-control" id="description" name="description" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="datedebut_stage">Date début stage</label>
+              <input type="date" [ngModel]="nouvelleOffre.datedebut_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datedebut_stage = $event" class="form-control" id="datedebut_stage" name="datedebut_stage" required>
+            </div>
+            <div class="form-group">
+              <label for="datefin_stage">Date fin stage</label>
+              <input type="date" [ngModel]="nouvelleOffre.datefin_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datefin_stage = $event" class="form-control" id="datefin_stage" name="datefin_stage" required>
             </div>
             <div class="form-group">
                 <label for="duree">Durée du stage (jours)</label>
                 <input type="text" class="form-control" id="duree" name="duree" [(ngModel)]="nouvelleOffre.duree" readonly>
               </div>
-              
-            
-            <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
-        </form>
+
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+      </form>
     </div>
-</div>
-<div class="container mt-4">
-    <h1>Offres Table</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nom Entreprise</th>
-                <th scope="col">Nom Encadrant</th>
-                <th scope="col">Prénom Encadrant</th>
-                <th scope="col">Email</th>
-                <th scope="col">Description</th>
-                <th scope="col">Date Début Stage</th>
-                <th scope="col">Date Fin Stage</th>
-                <th scope="col">Durée (jours)</th>
-                <th scope="col">Type</th>
-                <th scope="col">Option</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let offre of offres">
-                <td>{{ offre.nomEntreprise }}</td>
-                <td>{{ offre.nomEncadrant }}</td>
-                <td>{{ offre.prenomEncadrant }}</td>
-                <td>{{ offre.email }}</td>
-                <td>{{ offre.description }}</td>
-                <td>{{ offre.datedebut_stage | date: 'shortDate' }}</td>
-                <td>{{ offre.datefin_stage | date: 'shortDate' }}</td>
-                <td>{{ offre.duree }}</td>
-                <td>{{ types[offre.type] }}</td>
-                <td>
-                    <button type="button" class="btn btn-success" (click)="setUpdate(offre)">Edit</button>
-                    <button type="button" class="btn btn-danger" (click)="deleteOffre(offre)">Delete</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+  </div>
+  
