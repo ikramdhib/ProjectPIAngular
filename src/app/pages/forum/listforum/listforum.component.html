@@ -23,7 +23,7 @@
             <hr>
             <div class="row" >
               <div class="col-10" style="overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical;">
-                  {{question.content}}<br>  
+                  <div [innerHTML]="question.content" ></div>  
               </div>
               <div class="d-print-none">
                 <div class="float-end list-inline wizard d-flex justify-content-end mb-0">

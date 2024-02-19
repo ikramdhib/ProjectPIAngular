@@ -22,7 +22,7 @@
               "ev-emitter/ev-emitter","can-use-dom","lodash.debounce","lodash.memoize","lodash.throttle","metismenujs/dist/metismenujs","sweetalert2",
               "@ckeditor/ckeditor5-build-classic"
             ],
-            "outputPath": "dist/skote",
+            "outputPath": "dist/project-name/assets",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",

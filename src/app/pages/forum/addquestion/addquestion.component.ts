@@ -19,7 +19,6 @@ export class AddquestionComponent implements OnInit {
  public Editor = ClassicEditor;
  success = false;
 
-
  constructor(private forumService: ForumService) {}
 
  ngOnInit(): void {
@@ -38,9 +37,11 @@ onReady(editor:ClassicEditor): void {
 
   onSubmit() {
     if (this.formQuestion.valid) {
-      const questionData = this.formQuestion.value;
-     
-      this.forumService.createQuestion(questionData).subscribe((response) => {
+      const formData = new FormData();
+      formData.append('titre', this.formQuestion.get('titre').value);
+      formData.append('content', this.formQuestion.get('content').value);
+  
+      this.forumService.createQuestion(formData).subscribe((response) => {
         console.log('Question créée avec succès !', response);
         this.success = true;
         this.successmsg();
@@ -49,9 +50,9 @@ onReady(editor:ClassicEditor): void {
       });
     }
   }
-  
   successmsg() {
     Swal.fire('Good job!', 'Ajout avec succès!', 'success');
+    
   }
  
 }

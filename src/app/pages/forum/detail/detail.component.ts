@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../forum.service';
 import { ActivatedRoute } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-detail',
@@ -13,7 +14,7 @@ export class DetailComponent implements OnInit {
   question: any;
   responses: any[];
 
-  constructor(private route: ActivatedRoute, private forumService: ForumService) { }
+  constructor(private route: ActivatedRoute, private forumService: ForumService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Invoices' }, { label: 'Detail', active: true }];

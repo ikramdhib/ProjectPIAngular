@@ -12,7 +12,7 @@
             <hr>
             <div class="row" >
               <div  style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; ">
-                  {{question.content}}<br>  
+                <div [innerHtml]="question.content"></div><br>
               </div>
           </div>
         </div>
@@ -32,7 +32,7 @@
               
               <div *ngFor="let response of responses">
                 <div class="card">
-                 <p>{{ response.content }}</p><hr style="size: 50px; "/>
+                  <div [innerHTML]="response.content" ></div><hr style="size: 50px; "/>
                 </div>
               </div>
             </div>

@@ -9,13 +9,22 @@ export class MyUploadAdapter {
         const xhr = this.xhr = new XMLHttpRequest();
         return this.loader.file
             .then( file => new Promise( ( resolve, reject ) => {
-                this._initListeners( resolve, reject, file );  
+                this._initRequest();
+                this._initListeners(resolve, reject, file);
+                this._sendRequest(file);
             } ) );
     }
     abort() {
         if ( this.xhr ) {
             this.xhr.abort();
         }
+    }
+    //UploadApadter envoie une requete POST au serveur avec l'image
+    _initRequest() {
+        const xhr = this.xhr = new XMLHttpRequest();
+
+        xhr.open('POST', 'http://localhost:8081/images', true);
+        xhr.responseType = 'json';
     }
     
     _initListeners( resolve, reject, file ) {
@@ -42,5 +51,12 @@ export class MyUploadAdapter {
             } );
         }
     }
-    
+    _sendRequest(file) {
+        // Prepare the form data.
+        const data = new FormData();
+        data.append('image', file);
+
+        // Send the request.
+        this.xhr.send(data);
+    }
 }

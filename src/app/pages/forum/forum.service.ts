@@ -12,6 +12,7 @@ export class ForumService {
   readonly ENDPOINT_QUESTION_BY_ID = "/getQuestionById";
   readonly ENDPOINT_CREATE_ANSWER = "/addCommentaire";
   readonly ENDPOINT_GET_ANSWER = "/getResponsesForQuestion"; 
+  readonly ENDPOINT_IMAGES = "/images";
   
   constructor(private httpClient:HttpClient) { 
   }
@@ -30,5 +31,10 @@ export class ForumService {
   getResponseForQuestion(questionId: string){
     return this.httpClient.get<any>(this.API_URL+this.ENDPOINT_GET_ANSWER+ `/${questionId}`);
   }
+  getImageUrl(imageName: string): string {
+    // Cette URL pointe maintenant vers le serveur Spring Boot
+    return `http://localhost:8081/images/${imageName}`;
+  }
+  
  
 }
