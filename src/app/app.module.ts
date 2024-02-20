@@ -33,6 +33,7 @@ import { DemandeListComponent } from './demande-list/demande-list.component';
 import { DemandeDetailsComponent } from './demande-details/demande-details.component';
 import { DemandeFormComponent } from './demande-form/demande-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
+import { SchedulerComponent } from './components/scheduler.component';
 
 
 
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient): any {
     DemandeListComponent,
     DemandeDetailsComponent,
     DemandeFormComponent,
+    SchedulerComponent
     
   ],
   imports: [

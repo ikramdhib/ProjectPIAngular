@@ -13,6 +13,12 @@ export const MENU: MenuItem[] = [
         link: '/create-demande',
         
     },
+    {
+        id: 999,
+        label: 'Calendrier',
+        link: '/calendrier',
+        
+    },
     
     {
         id: 2,
