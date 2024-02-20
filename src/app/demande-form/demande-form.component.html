@@ -48,10 +48,7 @@
         </div>
   
         <!-- Offre -->
-        <div class="form-group">
-          <label for="offre">Offre:</label>
-          <input type="text" id="offre" formControlName="offre" class="form-control">
-        </div>
+      
   
         <!-- Add more form controls as needed -->
   
@@ -61,7 +58,7 @@
     </div>
   
     <!-- Display the created demande if available -->
-    <div *ngIf="submitDemande" class="mt-4">
+    <div *ngIf="createdDemande" class="mt-4">
       <h3>Created Demande</h3>
       <p>ID: {{ createdDemande.id }}</p>
       <p>Titre: {{ createdDemande.titre }}</p>
@@ -71,7 +68,6 @@
       <p>Student Email: {{ createdDemande.studentEmail }}</p>
       <p>CV Path: {{ createdDemande.cvPath }}</p>
       <p>Lettre Motivation: {{ createdDemande.lettreMotivation }}</p>
-      <p>Offre: {{ createdDemande.offre }}</p>
       <!-- Add more properties as needed -->
     </div>
   </div>

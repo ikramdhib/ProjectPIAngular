@@ -8,11 +8,10 @@ import { DemandeService } from '../demande.service';
 @Component({
   selector: 'app-demande-form',
   templateUrl: './demande-form.component.html',
-  
 })
 export class DemandeFormComponent implements OnInit {
-
   demandeForm: FormGroup;
+  createdDemande: any; // Assuming you have a variable to store the created demande
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,24 +21,25 @@ export class DemandeFormComponent implements OnInit {
       titre: ['', Validators.required],
       description: ['', Validators.required],
       etat: [''],
-      studentName: [''], // Add more form controls as needed
+      studentName: [''],
       studentEmail: [''],
       cvPath: [''],
       lettreMotivation: [''],
       offre: [''],
-      // Add more form controls as needed
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submitDemande() {
     if (this.demandeForm.valid) {
       const demandeData = this.demandeForm.value;
       this.demandeService.createDemande(demandeData).subscribe(
-        data => console.log('Demande created successfully', data),
-        error => console.error('Error creating demande', error)
+        (data) => {
+          console.log('Demande created successfully', data);
+          this.createdDemande = data; // Set the created demande variable
+        },
+        (error) => console.error('Error creating demande', error)
       );
     }
   }

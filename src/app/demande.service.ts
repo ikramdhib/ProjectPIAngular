@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DemandeService {
 
-  private apiUrl = 'http://localhost:8081/api/demandes';  // Replace with your backend API URL
+  private apiUrl = 'http://localhost:8081/api/demandes';
 
   constructor(private http: HttpClient) { }
 

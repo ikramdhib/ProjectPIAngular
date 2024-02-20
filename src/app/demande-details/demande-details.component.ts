@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DemandeService } from '../demande.service';
 
 @Component({
   selector: 'app-demande-details',
   templateUrl: './demande-details.component.html',
-  styleUrls: ['./demande-details.component.css']
+
 })
 export class DemandeDetailsComponent implements OnInit {
 
