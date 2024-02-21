@@ -69,15 +69,19 @@ export class StageListtComponent {
 
   sendEmailToEncadrant(stageId: string) {
     this.stageService.sendEmailToEncadrant(stageId).subscribe(
-      () => {
-        console.log("E-mail envoyé à l'encadrant avec succès.");
-        this.toastr.success('E-mail envoyé à l\'encadrant avec succès', 'Succès'); // Affichez l'alerte Toastr
+      response => {
+        console.log('Email envoyé à l\'encadrant avec succès.', response);
+        this.deleteStageFromList(stageId); // Supprimer l'entrée de la liste
       },
-      (error) => {
-        console.error("Une erreur s'est produite lors de l'envoi de l'e-mail à l'encadrant:", error);
-        // Ajoutez ici une logique pour afficher un message d'erreur à l'utilisateur si nécessaire
+      error => {
+        console.error('Erreur lors de l\'envoi de l\'email à l\'encadrant.', error);
+        // Afficher un message d'erreur à l'utilisateur ou effectuer d'autres actions nécessaires
       }
     );
+  }
+  deleteStageFromList(stageId: string) {
+    // Filtrer la liste pour exclure l'entrée avec l'ID donné
+    this.stages = this.stages.filter(stage => stage.id !== stageId);
   }
   sendEmailToStudent(stageId: string) {
     this.stageService.sendEmailToStudent(stageId).subscribe(

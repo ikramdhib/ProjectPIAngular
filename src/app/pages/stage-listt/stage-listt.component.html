@@ -1,3 +1,6 @@
+
+
+
 <div class="container-fluid">
   
 
@@ -39,7 +42,7 @@
               <thead>
                 <tr>
                 
-                  <th scope="col">#</th>
+               
                     <th scope="col"> Etudiant</th>
                     <th scope="col">Date Debut</th>
                     <th scope="col">Date Fin</th>
@@ -60,16 +63,20 @@
                   <td>{{stage.numCoach}}</td>
                   <td>
                     <ul class="list-unstyled hstack gap-1 mb-0">
-                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                        <a routerLink="/jobs/details" class="btn btn-sm btn-soft-primary"><i class="mdi mdi-eye-outline"></i></a>
+                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Valider">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-soft-success icon-button" (click)="sendEmailToEncadrant(stage.id)">
+                          <!-- Utilisez la classe d'icône appropriée pour représenter la validation -->
+                          <i class="mdi mdi-check-outline icon"></i>
+                        </a>
                       </li>
-                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                        <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="sendEmailToEncadrant(stage.id)"><i class="mdi mdi-pencil-outline"></i></a>
-                      </li>
-                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                        <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="sendEmailToStudent(stage.id)" ><i class="mdi mdi-delete-outline"></i></a>
+                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Non valide">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger icon-button" (click)="sendEmailToStudent(stage.id)">
+                          <!-- Utilisez la classe d'icône appropriée pour représenter la non-validation -->
+                          <i class="mdi mdi-close-outline icon"></i>
+                        </a>
                       </li>
                     </ul>
+                    
                   </td>
                 </tr>
               </tbody>

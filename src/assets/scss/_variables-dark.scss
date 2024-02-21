@@ -41,14 +41,14 @@ $dark-border-subtle-dark:           $gray-800;
 // scss-docs-end theme-border-subtle-dark-variables
 
 $body-color-dark:                   #a6b0cf;
-$body-bg-dark:                      #222736;
+$body-bg-dark:                      #ef0e42;
 $body-secondary-color-dark:         #c3cbe4;
-$body-secondary-bg-dark:            #2a3042;
+$body-secondary-bg-dark:            #fa2444;
 $body-tertiary-color-dark:          #f6f6f6;
-$body-tertiary-bg-dark:             #32394e;
+$body-tertiary-bg-dark:             #ea1d38;
 $body-emphasis-color-dark:          $white;
-$border-color-dark:                 #32394e;
-$border-color-translucent-dark:     #353d55;
+$border-color-dark:                 #e81e1e;
+$border-color-translucent-dark:     #db1114;
 $headings-color-dark:               #f6f6f6;
 $link-color-dark:                   $primary;
 $link-hover-color-dark:             shift-color($link-color-dark, -$link-shade-percentage);
@@ -86,24 +86,24 @@ $accordion-button-active-icon-dark:  url("data:image/svg+xml,<svg xmlns='http://
 
 /* =============================Custom Variables========================== */
 
-$header-bg-dark:                        #262b3c;
+$header-bg-dark:                        #f7232e;
 $header-item-color-dark:                #a6b0cf;
 
 //topbra dark
 $header-dark-bg-dark:                   $primary;
 $header-dark-item-color-dark:           #e9ecef;
-$topbar-search-bg-dark:                 #2a3042;
+$topbar-search-bg-dark:                 #c50a0a;
 
 // Footer
-$footer-bg-dark:                        #262b3c;
+$footer-bg-dark:                        #b61919;
 $footer-color-dark:                     #a6b0cf;
 
 // Horizontal nav
 $topnav-bg-dark:                        #282e3f;
 $menu-item-color-dark:                  #a6b0cf;
-$menu-item-active-color-dark:           #556ee6;
+$menu-item-active-color-dark:           #f41545;
 
-$boxed-body-bg-dark:                    #32394f;
+$boxed-body-bg-dark:                    #f72229;
 
 
 // Display
