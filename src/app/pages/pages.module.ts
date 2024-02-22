@@ -43,6 +43,7 @@ import { ChatComponent } from './chat/chat.component';
 
 import { FilemanagerComponent } from './filemanager/filemanager.component';
 
+
 @NgModule({
   declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
   imports: [

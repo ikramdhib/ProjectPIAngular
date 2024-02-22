@@ -20,9 +20,10 @@ export class StageService {
     // Ajoutez des en-têtes pour gérer CORS
 
     return this.http.post(
-      `http://localhost:8081/api/stages/ajouterEtAffecterStageAUtilisateur/65c3d6f5e969ef6cc82524c0`,
+      `http://localhost:8081/api/stages/ajouterEtAffecterStageAUtilisateur/65d7b036577f851e1873aa10`,
       data,
       this.httpOptions
     );
   }
+
 }
