@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthenticationGuardsService } from '../../UserServices/authentication-guards.service';
 import { AuthorizationGuardsService } from '../../UserServices/authorization-guards.service';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AddStudentComponent } from './add-student/add-student.component';
+import { AddSupervisorComponent } from './add-supervisor/add-supervisor.component';
 
 const routes: Routes = [
 
@@ -11,6 +14,16 @@ const routes: Routes = [
     data:{
       roles:['ENCADRANT']
     } 
+  },
+
+  {
+    path:"editProfile",component:EditProfileComponent
+  },
+  {
+    path:"addStudent",component:AddStudentComponent
+  },
+  {
+    path:"addSupervisor",component:AddSupervisorComponent
   }
   
 ];

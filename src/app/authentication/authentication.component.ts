@@ -1,23 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { OwlOptions } from 'ngx-owl-carousel-o';
 import { Authenticationrequest } from 'src/app/UserServices/AuthenticationRequest';
 
 import { AuthenticationService } from '../UserServices/authenticationUser.service';
+import { Subject } from 'rxjs';
+import { AlertColor } from '../pages/ui/alerts/alerts.model';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
   styleUrls: ['./authentication.component.scss']
 })
-export class AuthenticationComponent {
+export class AuthenticationComponent  implements OnInit {
+
+
+
 
   constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router,private authServ : AuthenticationService,
   ) { }
   loginForm: UntypedFormGroup;
   submitted:any = false;
-  error:any = '';
   returnUrl: string;
+  isError :boolean=false;
+
+  changeType : boolean=true;
+
+  viewPasswor(){
+    this.changeType=!this.changeType;
+  }
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -27,6 +37,9 @@ export class AuthenticationComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
+
+   
+
   }
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
@@ -41,14 +54,25 @@ export class AuthenticationComponent {
       this.f.email.value , this.f.password.value
      )
      if(this.loginForm.valid){
-      this.authServ.userLogin(request)
-      .then(()=>{
-        this.router.navigate(['/'])
-      },
-      error => {
-        this.error = error ? error : '';
+      this.authServ.userLogin(request).subscribe({
+        next :(res :any) =>{
+          console.log("token",res?.acesstoken);
+          if(res?.acesstoken !=null && res?.refreshToken!=null ){
+            
+            localStorage.setItem('token',res?.acesstoken);
+            localStorage.setItem('reresh-Token',res?.refreshToken);
+          }
+        },
+        error:(err:any)=>{
+          this.isError = true
+         console.log(err)
+        },
+        complete:()=>{
+          this.router.navigate(['/'])
+        }
       })
      }
     }
+
   }
 

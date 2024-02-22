@@ -1,0 +1,138 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <app-page-title title="Edit Profile" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <!-- end page title -->
+  
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <form class="needs-validation" (ngSubmit)="validSubmit()" [formGroup]="validationform">
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="validationCustom03">Login</label>
+                      <input type="text" class="form-control"  formControlName="city"
+                        placeholder="City">
+                    </div>
+                  </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="validationCustom02">Full Name</label>
+                    <input type="text" class="form-control" id="validationCustom02" formControlName="lastName"
+                      placeholder="Last name" [ngClass]="{'is-valid': submit && form.lastName.errors}" >
+                    <div *ngIf="submit && form.lastName.errors" class="valid-feedback">
+                      <span *ngIf="form.lastName.errors.required">Looks good!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="validationCustom03">University ID</label>
+                    <input type="text" disabled="true" class="form-control"  formControlName="city"
+                      placeholder="City">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="validationCustom04">ID card</label>
+                    <input type="text" class="form-control" id="validationCustom04" formControlName="state"
+                      placeholder="State" [ngClass]="{'is-invalid': submit && form.state.errors}">
+                    <div *ngIf="submit && form.state.errors" class="invalid-feedback">
+                      <span *ngIf="form.state.errors.required">Please provide a valid state.</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="validationCustom04">Phone Number</label>
+                      <input type="text" class="form-control" id="validationCustom04" formControlName="state"
+                        placeholder="State" [ngClass]="{'is-invalid': submit && form.state.errors}">
+                      <div *ngIf="submit && form.state.errors" class="invalid-feedback">
+                        <span *ngIf="form.state.errors.required">Please provide a valid state.</span>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="card-title mb-3">User Image</h4>
+                              <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'image/*'">
+                                <ngx-dropzone-label class="dz-message needsclick">
+                                    <div class="mb-3">
+                                        <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                    </div>
+                
+                                    <h5>Drop tour pic here or click to upload.</h5>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone>
+                            <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
+                                <ngx-dropzone-label>
+                                    <div class="d-flex p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded">
+                                                <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                <strong class="error text-danger"></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                            <!-- end dropzon-preview -->
+                          </div>
+                    </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="card-title mb-3">User Resume</h4>
+                              <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'.pdf'">
+                                <ngx-dropzone-label class="dz-message needsclick">
+                                    <div class="mb-3">
+                                        <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                    </div>
+                
+                                    <h5>Drop your resume here or click to upload.</h5>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone>
+                            <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
+                                <ngx-dropzone-label>
+                                    <div class="d-flex p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded">
+                                                <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                <strong class="error text-danger"></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                            <!-- end dropzon-preview -->
+                          </div>
+                    </div>
+                </div>
+              </div>
+            <div>
+              <button class="btn btn-primary" type="submit">Save Changes</button>
+            </div>
+            </form>
+          </div>
+        </div>
+        <!-- end card -->
+      </div> <!-- end col -->

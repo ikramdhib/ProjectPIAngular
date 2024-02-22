@@ -19,6 +19,10 @@ export class AuthenticationService {
   httpOptions = { headers: new HttpHeaders({
     'Content-Type': 'application/json'})}
 
+    userLogin(request : Authenticationrequest){
+      return this.http.post(`${this.API_RL}api/v1/auth/authenticate`,request,this.httpOptions)
+    }
+/*
   userLogin(request : Authenticationrequest){
     return this.http.post(`${this.API_RL}api/v1/auth/authenticate`,request,this.httpOptions)
     .toPromise().then(
@@ -32,7 +36,7 @@ export class AuthenticationService {
       },
     )
   }
-
+*/
   get token(){
     let token : any = localStorage.getItem('token');
     return token;
@@ -48,9 +52,11 @@ export class AuthenticationService {
     if(this.token != null && this.jwtHelper.isTokenExpired(this.token)){
       let token:any = localStorage.getItem("reresh-Token");
       localStorage.setItem('token',token);
+
     }
     this.isUserLogIn = !this.jwtHelper.isTokenExpired(this.token);
 
+    this.getAuthenticatedUser();
     console.log("user logged :",this.isUserLogIn);
     return this.isUserLogIn;
   }
@@ -62,5 +68,12 @@ export class AuthenticationService {
     localStorage.removeItem("reresh-Token");
    
   }
+
+  public getAuthenticatedUser(){
+      this.http.get(`${this.API_RL}api/v1/auth/is-authenticated`,this.httpOptions).toPromise()
+      .then((data:any)=>{
+        localStorage.setItem("currentUser", JSON.stringify(data?.Data));
+      })
+    }
 
 }

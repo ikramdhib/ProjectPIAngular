@@ -28,7 +28,7 @@ export class AuthenticationInterceptor implements HttpInterceptor {
       });
 
     }
-    console.log(request.headers.get(TOKEN_HEADER_KEY)+"aaaaaaaaaaaaaaaaaaaaaaaaa")
+    console.log(request.headers.get(TOKEN_HEADER_KEY))
     return next.handle(request);
   }
 }

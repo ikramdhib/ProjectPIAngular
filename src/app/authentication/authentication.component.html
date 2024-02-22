@@ -33,6 +33,13 @@
                                 <p class="text-muted">Sign in to continue to Skote.</p>
                             </div>
                         </div>
+                        <div class="text-center" *ngIf="isError">
+                            <div>
+                                <alert type="danger">
+                                <p class="text-danger">Login or password are incorrect try again</p>
+                            </alert>
+                            </div>
+                        </div>
                             <div class="mt-4">
                                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 
@@ -52,8 +59,8 @@
                                         </div>
                                         <label for="userpassword">Mot de passe</label>
                                         <div class="input-group auth-pass-inputgroup">
-                                            <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Entrer votre mot de passe" aria-label="Password" aria-describedby="password-addon">
-                                            <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
+                                            <input [type]="changeType?'password':'text'" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Entrer votre mot de passe" aria-label="Password" aria-describedby="password-addon">
+                                            <button class="btn btn-light" (click)="viewPasswor()" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                                 <span *ngIf="f.password.errors.required">Mot de passe requis</span>
                                             </div>
@@ -81,6 +88,9 @@
             </div>
         </div>
         <!-- end col -->
+    </div>
+    <div>
+        
     </div>
     <!-- end row -->
 </div>

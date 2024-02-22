@@ -16,14 +16,14 @@ import { ChartType } from './profile.model';
 export class ProfileComponent implements OnInit {
   // bread crumb items
   breadCrumbItems: Array<{}>;
-
+   currentUser =null;
   revenueBarChart: ChartType;
   statData:any;
   constructor() { }
 
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Profile', active: true }];
-
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
     // fetches the data
     this._fetchData();
   }

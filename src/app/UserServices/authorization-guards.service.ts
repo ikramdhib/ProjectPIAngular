@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthenticationService } from './authenticationUser.service';
-import { Observable } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
@@ -23,9 +22,8 @@ export class AuthorizationGuardsService implements CanActivate {
       tokenPayLoad.role.forEach((claim :any) => {
         if(expceptedRoles.includes(claim.authority)){
           access="true";
-          console.log(claim.authority,"aaaaaaaaa");
+          console.log(claim.authority);
         }
-        
       });
     }
     if(access==="true"){

@@ -29,9 +29,11 @@ import { ErrorInterceptor } from './core/helpers/error.interceptor';
 import { JwtInterceptor } from './core/helpers/jwt.interceptor';
 import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthenticationInterceptor } from './helpers_User/authentication.interceptor';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { UIModule } from './shared/ui/ui.module';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -64,6 +66,7 @@ export function createTranslateLoader(http: HttpClient): any {
     LayoutsModule,
     AppRoutingModule,
     ExtrapagesModule,
+    FormsModule,
     CarouselModule,
     AccordionModule.forRoot(),
     TabsModule.forRoot(),
@@ -77,8 +80,7 @@ export function createTranslateLoader(http: HttpClient): any {
         tokenGetter: tokenGetter,
         allowedDomains: ["localhost:8081"]
       },
-    })
-    
+    }),
   ],
   bootstrap: [AppComponent],
   providers: [
