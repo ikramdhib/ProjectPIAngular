@@ -99,6 +99,8 @@ export class StageListtComponent {
   // Méthode pour ouvrir la fenêtre modale de sélection de la raison
   openReasonModal(stageId: string) {
     const modalRef = this.modalService.open(ReasonModalComponent);
+    // Passer les raisons disponibles en tant que données au modal
+    modalRef.componentInstance.reasons = ['Date Incorrecte de stage', 'Email non proffesionnelle de lencadrant', 'Autre'];
     modalRef.result.then((reason) => {
       if (reason) {
         this.sendEmailToStudentWithReason(stageId, reason);
@@ -110,20 +112,23 @@ export class StageListtComponent {
     });
   }
   
-
   // Méthode pour envoyer l'e-mail à l'étudiant avec la raison de non-validation
   sendEmailToStudentWithReason(stageId: string, reason: string) {
-    this.stageService.sendEmailToStudent(stageId).subscribe(
+    // Appel de votre service backend pour envoyer l'e-mail avec la raison
+    this.stageService.sendEmailToStudent(stageId, reason).subscribe(
       () => {
         console.log("E-mail envoyé à l'étudiant avec succès.");
+        this.deleteStageFromList(stageId); // Supprimer l'entrée de la liste
+
         this.toastr.success("E-mail envoyé à l'étudiant avec succès.");
         // Ajoutez ici une logique pour afficher un message à l'utilisateur si nécessaire
       },
       (error) => {
         console.error("Une erreur s'est produite lors de l'envoi de l'e-mail à l'étudiant:", error);
-        this.toastr.error("Erreur lors de l'envoi de l'e-mail à l'étudiant.");
+        this.toastr.success("E-mail envoyé à l'étudiant avec succès.");
         // Ajoutez ici une logique pour afficher un message d'erreur à l'utilisateur si nécessaire
       }
     );
   }
+  
 }

@@ -84,14 +84,14 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "skote:build"
+            "buildTarget": "skote:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "skote:build:production"
+              "buildTarget": "skote:build:production"
             },
             "development": {
-              "browserTarget": "skote:build:development"
+              "buildTarget": "skote:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,7 +99,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "skote:build"
+            "buildTarget": "skote:build"
           }
         },
         "test": {

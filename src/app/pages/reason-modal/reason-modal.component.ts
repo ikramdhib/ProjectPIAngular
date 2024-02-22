@@ -9,14 +9,20 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ReasonModalComponent {
   @Input() reasons: string[] = [];
   selectedReason: string = '';
+  otherReason: string = '';
 
   constructor(public activeModal: NgbActiveModal) { }
-
   closeModal() {
     this.activeModal.dismiss(this.selectedReason);
   }
 
   sendReason() {
-    this.activeModal.close(this.selectedReason);
+    if (this.selectedReason === 'Autre') {
+      // Si "Autre" est sélectionné, envoyez la raison saisie dans la zone de texte
+      this.activeModal.close(this.otherReason);
+    } else {
+      // Sinon, envoyez simplement la raison sélectionnée dans le sélecteur
+      this.activeModal.close(this.selectedReason);
+    }
   }
 }
