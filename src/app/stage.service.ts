@@ -16,7 +16,7 @@ export class StageService {
     return this.http.get<any[]>(`${this.baseUrl}/userNames`);
   }
   sendEmailToEncadrant(stageId: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/sendEmailToEncadrant/65d64c88516e982a56754071`, {});
+    return this.http.post(`${this.baseUrl}/sendEmailToEncadrant/65d64c7b516e982a5675406e`, {});
   }
   sendEmailToStudent(stageId: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/sendEmailToStudent/${stageId}`, {});

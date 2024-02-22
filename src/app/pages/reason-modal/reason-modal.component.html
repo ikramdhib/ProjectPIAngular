@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <h4 class="modal-title">Sélectionner la raison de non-validation</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="reason">Raison :</label>
+      <select class="form-control" id="reason" [(ngModel)]="selectedReason">
+        <option *ngFor="let reason of reasons" [value]="reason">{{ reason }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Annuler</button>
+    <button type="button" class="btn btn-primary" (click)="sendReason()">Envoyer</button>
+  </div>

@@ -35,6 +35,7 @@ import { NourComponent } from './nour/nour.component';
 import { StageListtComponent } from './pages/stage-listt/stage-listt.component';
 import { FormModule } from './pages/form/form.module';
 import { FormsModule } from '@angular/forms';
+import { ReasonModalComponent } from './pages/reason-modal/reason-modal.component';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient): any {
     StageListComponent,
         NourComponent,
         StageListtComponent,
+        ReasonModalComponent,
     
   ],
   imports: [
