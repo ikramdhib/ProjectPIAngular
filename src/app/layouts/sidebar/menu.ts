@@ -725,6 +725,12 @@ export const MENU: MenuItem[] = [
                 label: 'AddQuestion',
                 link: '/forum/addquestion',
                 parentId: 144
+            },
+            {
+                id: 147,
+                label: 'ListeFavoris',
+                link: '/forum/listFavoris',
+                parentId: 144
             }
         ]
     },

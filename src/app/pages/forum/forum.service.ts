@@ -10,9 +10,12 @@ export class ForumService {
   readonly ENDPOINT_QUESTIONS = "/getQuestion"
   readonly ENDPOINT_CREATE_QUESTION = "/addQuestion";
   readonly ENDPOINT_QUESTION_BY_ID = "/getQuestionById";
-  readonly ENDPOINT_CREATE_ANSWER = "/addCommentaire";
+  readonly ENDPOINT_CREATE_ANSWER = "/addReponse";
   readonly ENDPOINT_GET_ANSWER = "/getResponsesForQuestion"; 
   readonly ENDPOINT_IMAGES = "/images";
+  readonly ENDPOINT_DELETE_RESPONSE="/deleteReponse"
+  readonly ENDPOINT_Favoris = "/analyserEtMettreAJourFavoris"
+  
   
   constructor(private httpClient:HttpClient) { 
   }
@@ -35,6 +38,11 @@ export class ForumService {
     // Cette URL pointe maintenant vers le serveur Spring Boot
     return `http://localhost:8081/images/${imageName}`;
   }
-  
+  deleteResponse(id: string): Observable<any> {
+    return this.httpClient.delete(`${this.API_URL}${this.ENDPOINT_DELETE_RESPONSE}/${id}`);
+  }
+  analyserEtMettreAJourFavoris(userId: string): Observable<any> {
+    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_Favoris}/${userId}`, null);
+  }
  
 }

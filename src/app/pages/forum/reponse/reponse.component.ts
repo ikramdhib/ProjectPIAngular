@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ForumService } from '../forum.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { MyUploadAdapter } from '../UploadAdapter';
 
 @Component({
   selector: 'app-reponse',
   templateUrl: './reponse.component.html',
-  styleUrls: ['./reponse.component.scss']
+  styleUrls: ['./reponse.component.scss'],
+  providers: [ForumService]
 })
 export class ReponseComponent  {
   breadCrumbItems: Array<{}>;
@@ -15,11 +17,17 @@ export class ReponseComponent  {
   public Editor = ClassicEditor;
   @Input() questionId: string;
   @Output() responseAdded: EventEmitter<void> = new EventEmitter<void>();
+
  constructor(private forumService: ForumService) { }
 
  ngOnInit() {
    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
  }
+ onReady(editor:ClassicEditor):void{
+  editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
+    return new MyUploadAdapter( loader );
+};}
+ 
  formResponse : FormGroup = new FormGroup({
   content: new FormControl('',[Validators.required,Validators.minLength(150)])
  })

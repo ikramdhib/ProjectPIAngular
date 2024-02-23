@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AddquestionComponent } from './addquestion/addquestion.component';
 import { ListforumComponent } from './listforum/listforum.component';
 import { DetailComponent } from './detail/detail.component';
+import { ListFavorisComponent } from './list-favoris/list-favoris.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,13 @@ const routes: Routes = [
   },
   { 
     path: 'detail/:id', 
-    component: DetailComponent }
+    component: DetailComponent 
+  },
+  {
+    path: 'listFavoris',
+    component: ListFavorisComponent
+  }
+  
 ]
 
 @NgModule({

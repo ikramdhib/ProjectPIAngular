@@ -59,4 +59,5 @@ export class MyUploadAdapter {
         // Send the request.
         this.xhr.send(data);
     }
+    
 }

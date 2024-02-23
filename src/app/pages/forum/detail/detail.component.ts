@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ForumService } from '../forum.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detail',
@@ -44,4 +45,34 @@ export class DetailComponent implements OnInit {
     // Reload question and responses after adding a new response
     this.loadQuestionAndResponses(this.question.id);
   }
+  onDeleteResponse(id: string): void {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this response!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#34c38f',
+      cancelButtonColor: '#f46a6a',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.forumService.deleteResponse(id).subscribe({
+          next: () => {
+            // Logique pour gérer la suppression réussie (par exemple, mise à jour de la liste des réponses)
+            Swal.fire(
+              'Deleted!',
+              'Your response has been deleted.',
+              'success'
+            );
+            this.loadResponses(this.question.id);
+          },
+          error: (error) => {
+            // Gérer l'erreur de suppression ici
+            console.error('Error deleting response: ', error);
+          }
+        });
+      }
+    });
+  }
+  
 }
