@@ -32,8 +32,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthenticationInterceptor } from './helpers_User/authentication.interceptor';
-import { AlertModule } from 'ngx-bootstrap/alert';
-import { UIModule } from './shared/ui/ui.module';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { SendingMailComponent } from './forget-password/sending-mail/sending-mail.component';
+import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -50,6 +51,9 @@ export function createTranslateLoader(http: HttpClient): any {
   declarations: [
     AppComponent,
     CyptolandingComponent,
+    ForgetPasswordComponent,
+    SendingMailComponent,
+    ChangePasswordComponent,
     
   ],
   imports: [

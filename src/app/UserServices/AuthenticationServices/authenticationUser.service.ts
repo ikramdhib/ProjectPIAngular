@@ -66,6 +66,7 @@ export class AuthenticationService {
     this.router.navigate(['/authentication']);
     localStorage.removeItem("token");
     localStorage.removeItem("reresh-Token");
+    localStorage.removeItem("currentUser");
    
   }
 
@@ -73,7 +74,7 @@ export class AuthenticationService {
       this.http.get(`${this.API_RL}api/v1/auth/is-authenticated`,this.httpOptions).toPromise()
       .then((data:any)=>{
         localStorage.setItem("currentUser", JSON.stringify(data?.Data));
-      })
+      }) 
     }
 
 }

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { CookieService } from 'ngx-cookie-service';
 import { LanguageService } from '../../core/services/language.service';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthenticationService } from 'src/app/UserServices/authenticationUser.service';
+import { AuthenticationService } from 'src/app/UserServices/AuthenticationServices/authenticationUser.service';
 
 @Component({
   selector: 'app-topbar',

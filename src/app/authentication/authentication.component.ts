@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Authenticationrequest } from 'src/app/UserServices/AuthenticationRequest';
+import { Authenticationrequest } from 'src/app/UserServices/AuthenticationServices/AuthenticationRequest';
 
-import { AuthenticationService } from '../UserServices/authenticationUser.service';
-import { Subject } from 'rxjs';
-import { AlertColor } from '../pages/ui/alerts/alerts.model';
+import { AuthenticationService } from '../UserServices/AuthenticationServices/authenticationUser.service';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
