@@ -8,4 +8,7 @@ export interface MenuItem {
     badge?: any;
     parentId?: number;
     isLayout?: boolean;
+    data?:{
+        roles?:string
+      } 
 }

@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthenticationComponent } from '../../authentication/authentication.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './profile/EncadrantProfile/profile.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -24,11 +24,13 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { AddSupervisorComponent } from './add-supervisor/add-supervisor.component';
-
-
+import { ServiceProfileComponent } from './profile/ServiceStageProfile/service-profile/service-profile.component';
+import { StudentProfileComponent } from './profile/StudentProfile/student-profile/student-profile.component';
+import { ListSupervisorComponent } from './list-supervisor/list-supervisor.component';
+import { ListStudentsComponent } from './list-students/list-students.component';
 
 @NgModule({
-  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent  ],
+  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent, ServiceProfileComponent, StudentProfileComponent, ListSupervisorComponent, ListStudentsComponent  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

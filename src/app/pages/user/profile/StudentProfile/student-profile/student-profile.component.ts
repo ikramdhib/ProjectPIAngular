@@ -1,19 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-
-import { revenueBarChart, statData } from './data';
-
-import { ChartType } from './profile.model';
+import { Component } from '@angular/core';
+import { ChartType } from 'ng-apexcharts';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'app-student-profile',
+  templateUrl: './student-profile.component.html',
+  styleUrls: ['./student-profile.component.scss']
 })
-
-/**
- * Contacts-profile component
- */
-export class ProfileComponent implements OnInit {
+export class StudentProfileComponent {
   // bread crumb items
   breadCrumbItems: Array<{}>;
    currentUser =null;
@@ -32,7 +25,7 @@ export class ProfileComponent implements OnInit {
    * Fetches the data
    */
   private _fetchData() {
-    this.revenueBarChart = revenueBarChart;
-    this.statData = statData;
+    this.revenueBarChart = this.revenueBarChart;
+    this.statData = this.statData;
   }
 }

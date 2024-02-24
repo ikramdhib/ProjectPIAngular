@@ -73,8 +73,14 @@ export class AuthenticationService {
   public getAuthenticatedUser(){
       this.http.get(`${this.API_RL}api/v1/auth/is-authenticated`,this.httpOptions).toPromise()
       .then((data:any)=>{
+        console.log(data?.Data)
         localStorage.setItem("currentUser", JSON.stringify(data?.Data));
+        console.log(localStorage.getItem("currentUser"),"ppppppppppppppppppppppppp");
       }) 
+    }
+
+    getImage(userId:string){
+    return this.http.get(`${this.API_RL}api/v1/auth/${userId}/image`,this.httpOptions)
     }
 
 }
