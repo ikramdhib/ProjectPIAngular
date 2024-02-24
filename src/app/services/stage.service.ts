@@ -1,7 +1,7 @@
 // Exemple de service fictif (vous devez créer un service réel pour communiquer avec le backend)
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, catchError, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -24,6 +24,19 @@ export class StageService {
       data,
       this.httpOptions
     );
+  }
+
+  getStagesByUserId(userId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/${userId}`);
+  }
+  
+  updateStage(stageId: string, updatedStage: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${stageId}`, updatedStage);
+  }
+
+  deleteStage(stageId: string): Observable<any> {
+    const url = `${this.apiUrl}/${stageId}`;
+    return this.http.delete(url);
   }
 
 }
