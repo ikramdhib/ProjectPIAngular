@@ -1,122 +1,114 @@
 <div class="container-fluid">
 
-    <!-- start page title -->
-    <app-page-title title="Form Validation" [breadcrumbItems]="breadCrumbItems"></app-page-title>
-    <!-- end page title -->
-  
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">Bootstrap Validation - Normal</h4>
-            <p class="card-title-desc">Provide valuable, actionable feedback to your users with HTML5 form
-              validation–available in all our supported browsers.</p>
-            <form class="needs-validation" (ngSubmit)="validSubmit()" [formGroup]="validationform">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom01">First name</label>
-                    <input type="text" class="form-control" id="validationCustom01" formControlName="firstName"
-                      placeholder="First name" [ngClass]="{'is-valid': submit && form.firstName.errors}">
-                    <div *ngIf="submit && form.firstName.errors" class="valid-feedback">
-                      <span *ngIf="form.firstName.errors.required">Looks good!</span>
+  <!-- start page title -->
+  <app-page-title title="Form Validation" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Bootstrap Validation - Normal</h4>
+          <p class="card-title-desc">Provide valuable, actionable feedback to your users with HTML5 form
+            validation–available in all our supported browsers.</p>
+
+          <form (ngSubmit)="validSubmit()" [formGroup]="StudentForm">
+            <div class="row">
+              <div class="col-md-4">
+               <div class="mb-3">
+                   <label for="firstName">First name</label>
+                      <input type="text" class="form-control" id="firstName" formControlName="firstName" 
+                      [ngClass]="{ 'is-invalid': submit && form.firstName.errors}" placeholder="Entre votre email">
+                      <div *ngIf="submit && form.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="form.firstName.errors.required">First Name requis</div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom02">Last name</label>
-                    <input type="text" class="form-control" id="validationCustom02" formControlName="lastName"
-                      placeholder="Last name" [ngClass]="{'is-valid': submit && form.lastName.errors}">
-                    <div *ngIf="submit && form.lastName.errors" class="valid-feedback">
-                      <span *ngIf="form.lastName.errors.required">Looks good!</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                      <label for="validationCustom02">University ID</label>
-                      <input type="text" class="form-control" id="validationCustom02" formControlName="lastName"
-                        placeholder="Last name" [ngClass]="{'is-valid': submit && form.lastName.errors}">
-                      <div *ngIf="submit && form.lastName.errors" class="valid-feedback">
-                        <span *ngIf="form.lastName.errors.required">Looks good!</span>
-                      </div>
-                    </div>
-                  </div>
+                     </div>                 
+               </div>
+               <div class="col-md-4">
+              <div class="mb-3">
+                <label for="lastName">Last name</label>
+                   <input type="text" class="form-control" id="lastName" formControlName="lastName" 
+                   [ngClass]="{ 'is-invalid': submit && form.lastName.errors}" placeholder="Entre votre email">
+                   <div *ngIf="submit && form.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="form.lastName.errors.required">Last Name requis</div>
+                </div>               
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom03">Phone Number</label>
-                    <input type="text" class="form-control" id="validationCustom03" formControlName="city"
-                      placeholder="City" [ngClass]="{'is-invalid': submit && form.city.errors}">
-                    <div *ngIf="submit && form.city.errors" class="invalid-feedback">
-                      <span *ngIf="form.city.errors.required">Please provide a valid city.</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom04">Card ID</label>
-                    <input type="text" class="form-control" id="validationCustom04" formControlName="state"
-                      placeholder="State" [ngClass]="{'is-invalid': submit && form.state.errors}">
-                    <div *ngIf="submit && form.state.errors" class="invalid-feedback">
-                      <span *ngIf="form.state.errors.required">Please provide a valid state.</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom05">Login</label>
-                    <input type="text" class="form-control" id="validationCustom05" formControlName="zip"
-                      placeholder="Zip" [ngClass]="{'is-invalid': submit && form.zip.errors}">
-                    <div *ngIf="submit && form.zip.errors" class="invalid-feedback">
-                      <span *ngIf="form.zip.errors.required">Please provide a valid zip.</span>
-                    </div>
-                  </div>
-                </div>
               </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom03">Address</label>
-                    <input type="text" class="form-control" id="validationCustom03" formControlName="city"
-                      placeholder="City" [ngClass]="{'is-invalid': submit && form.city.errors}">
-                    <div *ngIf="submit && form.city.errors" class="invalid-feedback">
-                      <span *ngIf="form.city.errors.required">Please provide a valid city.</span>
-                    </div>
-                  </div>
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="phoneNumber">Phone Number</label>
+                     <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" 
+                     [ngClass]="{ 'is-invalid': submit && form.phoneNumber.errors}" placeholder="Entre votre email">
+                     <div *ngIf="submit && form.phoneNumber.errors" class="invalid-feedback">
+                      <div *ngIf="form.phoneNumber.errors.required">Phone Number requis</div>
+                  </div>             
                 </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom04">Class</label>
-                    <input type="text" class="form-control" id="validationCustom04" formControlName="state"
-                      placeholder="State" [ngClass]="{'is-invalid': submit && form.state.errors}">
-                    <div *ngIf="submit && form.state.errors" class="invalid-feedback">
-                      <span *ngIf="form.state.errors.required">Please provide a valid state.</span>
-                    </div>
-                  </div>
                 </div>
-                <div class="col-md-4">
-                  <div class="mb-3">
-                    <label for="validationCustom05">Level</label>
-                    <input type="text" class="form-control" id="validationCustom05" formControlName="zip"
-                      placeholder="Zip" [ngClass]="{'is-invalid': submit && form.zip.errors}">
-                    <div *ngIf="submit && form.zip.errors" class="invalid-feedback">
-                      <span *ngIf="form.zip.errors.required">Please provide a valid zip.</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div>
-              <button class="btn btn-primary" type="submit">Submit form</button>
             </div>
-            </form>
+            <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="cin">Card ID</label>
+                       <input type="text" class="form-control" id="cin" formControlName="cin" 
+                       [ngClass]="{ 'is-invalid': submit && form.cin.errors}" placeholder="Entre votre email">
+                       <div *ngIf="submit && form.cin.errors" class="invalid-feedback">
+                        <div *ngIf="form.cin.errors.required">Card ID requis</div>
+                    </div>             
+                  </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="emailPro">Professional email</label>
+                         <input type="email" class="form-control" id="emailPro" formControlName="emailPro" 
+                         [ngClass]="{ 'is-invalid': submit && form.emailPro.errors}" placeholder="Entre votre email">
+                         <div *ngIf="submit && form.emailPro.errors" class="invalid-feedback">
+                          <div *ngIf="form.emailPro.errors.required">University ID requis</div>
+                      </div>            
+                    </div>
+                    </div>
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="login">Login</label>
+                         <input type="email" class="form-control" id="login" formControlName="login" 
+                         [ngClass]="{ 'is-invalid': submit && form.login.errors}" placeholder="Entre votre email">
+                         <div *ngIf="submit && form.login.errors" class="invalid-feedback">
+                          <div *ngIf="form.login.errors.required">Login requis</div>
+                      </div>                
+                    </div>
+                    </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="mb-3">
+                  <label for="address">Address</label>
+                     <input type="text" class="form-control" id="address" formControlName="address" 
+                     [ngClass]="{ 'is-invalid': submit && form.address.errors}" placeholder="Entre votre email">
+                     <div *ngIf="submit && form.address.errors" class="invalid-feedback">
+                      <div *ngIf="form.address.errors.required">Address requis</div>
+                  </div>         
+                </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="company">Company</label>
+                       <input type="text" class="form-control" id="company" formControlName="company" 
+                       [ngClass]="{ 'is-invalid': submit && form.company.errors}" placeholder="Entre votre email">
+                       <div *ngIf="submit && form.company.errors" class="invalid-feedback">
+                        <div *ngIf="form.company.errors.required">Address requis</div>
+                    </div>         
+                  </div>
+                  </div>
+              
+            </div>
+          <div>
+            <button class="btn btn-primary" type="submit">Submit form</button>
           </div>
+          </form>
         </div>
-        <!-- end card -->
-      </div> <!-- end col -->
-    </div>
-    <!-- end row -->
+      </div>
+      <!-- end card -->
+    </div> <!-- end col -->
   </div>
-  
+  <!-- end row -->
+</div>
+

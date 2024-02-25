@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../edit-profile/validation.mustmatch';
+import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-supervisor',
@@ -8,137 +10,81 @@ import { MustMatch } from '../edit-profile/validation.mustmatch';
   styleUrls: ['./add-supervisor.component.scss']
 })
 export class AddSupervisorComponent {
-  validationform: UntypedFormGroup; // bootstrap validation form
-  tooltipvalidationform: UntypedFormGroup; // bootstrap tooltip validation form
-  typeValidationForm: UntypedFormGroup; // type validation form
-  rangeValidationForm: UntypedFormGroup; // range validation form
+  StudentForm: UntypedFormGroup; // bootstrap validation form
 
-  constructor(public formBuilder: UntypedFormBuilder) { }
+  constructor(public formBuilder: UntypedFormBuilder , public userService : UsersListService ,public toastr:ToastrService) { }
   // bread crumb items
   breadCrumbItems: Array<{}>;
 
   // Form submition
   submit: boolean;
-  formsubmit: boolean;
-  typesubmit: boolean;
-  rangesubmit: boolean;
 
   ngOnInit() {
 
     this.breadCrumbItems = [{ label: 'User' }, { label: 'Add Student', active: true }];
+    this.createForm();
+    
+  }
 
-    /**
-     * Bootstrap validation form data
-     */
-    this.validationform = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      city: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      state: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      zip: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
+  createForm() {
+    this.StudentForm = this.formBuilder.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      cin: ['', [Validators.required]],
+      login: ['', [Validators.required]],
+      emailPro: ['', [Validators.required]],
+      company: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
     });
-
-    /**
-     * Bootstrap tooltip validation form data
-     */
-    this.tooltipvalidationform = this.formBuilder.group({
-      firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      userName: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      city: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      state: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-    });
-
-
-    /**
-     * Type validation form
-     */
-    this.typeValidationForm = this.formBuilder.group({
-      text: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
-      url: ['', [Validators.required, Validators.pattern('https?://.+')]],
-      digits: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      number: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-      alphanum: ['', [Validators.required, Validators.pattern('[a-zA-Z0-9]+')]],
-      textarea: ['', [Validators.required]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmpwd: ['', Validators.required]
-    }, {
-        validator: MustMatch('password', 'confirmpwd'),
-      });
-
-
-    /**
-     * Range validation form
-     */
-    this.rangeValidationForm = this.formBuilder.group({
-      minlength: ['', [Validators.required, Validators.minLength(6)]],
-      maxlength: ['', [Validators.required, Validators.maxLength(6)]],
-      rangelength: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(10)]],
-      minvalue: ['', [Validators.required, Validators.min(6)]],
-      maxvalue: ['', [Validators.required, Validators.max(6)]],
-      rangevalue: ['', [Validators.required, Validators.min(6), Validators.max(100)]],
-      regularexp: ['', [Validators.required, Validators.pattern('#[A-Fa-f0-9]{6}')]],
-    });
-    this.submit = false;
-    this.formsubmit = false;
-    this.typesubmit = false;
-    this.rangesubmit = false;
   }
 
   /**
    * Returns form
    */
   get form() {
-    return this.validationform.controls;
+    return this.StudentForm.controls;
   }
 
   /**
    * Bootsrap validation form submit method
    */
   validSubmit() {
+
     this.submit = true;
+    if(this.StudentForm.valid){
+      const formData = new FormData();
+      formData.append('login', this.form.login.value);
+      formData.append('password', this.form.login.value);
+      formData.append('lastName', this.form.lastName.value);
+      formData.append('firstName', this.form.firstName.value);
+      formData.append('phoneNumber', this.form.phoneNumber.value);
+      formData.append('address', this.form.address.value);
+      formData.append('cin', this.form.cin.value);
+      formData.append('company', this.form.company.value);
+      formData.append('emailPro', this.form.emailPro.value);
+      
+    this.userService.addSupervisor(formData).subscribe({
+      next:(res:any)=>{
+        console.log(res);
+      },
+      error:(err:any)=>{
+        console.log(err);
+        this.toastr.error('Something went wrong , try again !', 'ERRORS');
+      },
+      complete:()=>{
+        console.log("sucess");
+        this.toastr.success('Supervisor added with success', 'SUCCESS');
+       this.StudentForm.reset();
+       
+      }
+    })
+
+  } else{
+    console.log(this.StudentForm.invalid,"################")
+  }
   }
 
-  /**
-   * returns tooltip validation form
-   */
-  get formData() {
-    return this.tooltipvalidationform.controls;
-  }
+ 
 
-  /**
-   * Bootstrap tooltip form validation submit method
-   */
-  formSubmit() {
-    this.formsubmit = true;
-  }
-
-  /**
-   * Returns the type validation form
-   */
-  get type() {
-    return this.typeValidationForm.controls;
-  }
-
-  /**
-   * Type validation form submit data
-   */
-  typeSubmit() {
-    this.typesubmit = true;
-  }
-
-  /**
-   * Returns the range validation form
-   */
-  get range() {
-    return this.rangeValidationForm.controls;
-  }
-
-  /**
-   * range validation submit data
-   */
-  rangeSubmit() {
-    this.rangesubmit = true;
-  }
 }
