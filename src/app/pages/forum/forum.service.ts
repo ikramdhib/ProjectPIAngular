@@ -15,11 +15,13 @@ export class ForumService {
   readonly ENDPOINT_GET_ANSWER = "/getResponsesForQuestion"; 
   readonly ENDPOINT_IMAGES = "/images";
   readonly ENDPOINT_DELETE_RESPONSE="/deleteReponse"
+
   readonly ENDPOINT_Favoris = "/findMostAnsweredQuestionByUser"
   readonly ENDPOINT_NB_REPONSE = "/nombreReponseByQuestion"
   readonly ENDPOINT_UPDATE_REPONSE = "/updateReponse"
   readonly ENDPOINT_GET_HISTORIQUE = "/getHistoriqueByUser"
   readonly ENDPOINT_DELETE_HISTORIQUE = "/deleteHistorique"
+
   
   
   constructor(private httpClient:HttpClient) { 
@@ -46,6 +48,7 @@ export class ForumService {
   deleteResponse(id: string): Observable<any> {
     return this.httpClient.delete(`${this.API_URL}${this.ENDPOINT_DELETE_RESPONSE}/${id}`);
   }
+
   getListFavoris(userId: string): Observable<any> {
     return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_Favoris}/${userId}`);
   }
@@ -62,5 +65,6 @@ export class ForumService {
   deleteHistorique(historiqueId: string): Observable<any> {
     return this.httpClient.delete(`${this.API_URL}${this.ENDPOINT_DELETE_HISTORIQUE}/${historiqueId}`);
   }
+
  
 }
