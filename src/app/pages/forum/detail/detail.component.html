@@ -37,7 +37,7 @@
                   <button type="button" class="btn btn-danger w-sm" style="width: 30px; margin-right: 8px;" (click)="onDeleteResponse(response.id)">
                     <i class="mdi mdi-trash-can font-size-16"></i> Delete
                   </button>
-                  <button type="button" class="btn btn-success w-sm">
+                  <button (click)="editResponse(response)" type="button" class="btn btn-success w-sm">
                     <i class="mdi mdi-pencil font-size-16"></i> Edit
                   </button>
                 </div>
@@ -52,8 +52,10 @@
     
   <div class="row" style="margin-left: 80px;">
     <div class="col-lg-12">
-      <app-reponse [questionId]="question.id" (responseAdded)="onAddResponse()"></app-reponse>
+      <app-reponse [questionId]="question.id" 
+                   (responseAdded)="onAddResponse()" ></app-reponse>
     </div>
+
   </div>
   
    

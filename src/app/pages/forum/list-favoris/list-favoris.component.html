@@ -1,2 +1,66 @@
+<div class="container-fluid">
+  <app-page-title title="Question Grid" [breadcrumbItems]="breadCrumbItems"></app-page-title>
 
+  <div class="row">
+      <div class="col-xl-12 col-lg-8">
+          <div class="card">            
+              <tabset  class="nav-tabs nav-tabs-custom nav-justify-center pt-2">
+                  <tab heading="Top Questions" class="mt-2">
+                      <div class="row justify-content-center">
+                          <div class="col-xl-8">
+                              <div>
+                                  <div class="row align-items-center">
+                                      <div class="col-4">
+                                          <div>
+                                              <h5 class="mb-0" style="padding-bottom: 20px;">List Favoris</h5>
+                                          </div>
+                                      </div>
+
+                            
+                                      <div class="row"  >
+                                        <div class="col-sm-12">
+                                         <div class="card p-1 border shadow-none" *ngFor="let question of favoris">
+                                            <div class="p-3">
+                                              <h2><strong>{{question.titre}}</strong></h2>
+                                           </div>
+                                           <div class="position-relative">
+                                            <div [innerHTML]="question.content"></div>
+                                           </div>
+                                           <div class="p-3">
+                                            <ul class="list-inline">
+                                                <li class="list-inline-item me-3">
+                                                    <a href="javascript: void(0);" class="text-muted">
+                                                        <i
+                                                            class="bx bx-comment-dots align-middle text-muted me-1"></i>
+                                                        {{ responseCounts[question.id] || '0'}} Comments
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                            
+                              
+                                            <div>
+                                                <a [routerLink]="['/detail', question.id]" class="text-primary">Read more <i
+                                                        class="mdi mdi-arrow-right"></i></a>
+                                            </div>
+                                           </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </tab>
+                          </tabset>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+
+          
+
+         
+      
+ 
   

@@ -4,6 +4,7 @@ import { AddquestionComponent } from './addquestion/addquestion.component';
 import { ListforumComponent } from './listforum/listforum.component';
 import { DetailComponent } from './detail/detail.component';
 import { ListFavorisComponent } from './list-favoris/list-favoris.component';
+import { HistoriqueComponent } from './historique/historique.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'listFavoris',
     component: ListFavorisComponent
+  },
+  {
+    path: 'historique',
+    component: HistoriqueComponent
   }
   
 ]

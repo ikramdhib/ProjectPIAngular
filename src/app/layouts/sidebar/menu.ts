@@ -731,6 +731,12 @@ export const MENU: MenuItem[] = [
                 label: 'ListeFavoris',
                 link: '/forum/listFavoris',
                 parentId: 144
+            },
+            {
+                id: 148,
+                label: 'Historique',
+                link: '/forum/historique',
+                parentId: 144
             }
         ]
     },

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Historique } from './Historique';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,11 @@ export class ForumService {
   readonly ENDPOINT_GET_ANSWER = "/getResponsesForQuestion"; 
   readonly ENDPOINT_IMAGES = "/images";
   readonly ENDPOINT_DELETE_RESPONSE="/deleteReponse"
-  readonly ENDPOINT_Favoris = "/analyserEtMettreAJourFavoris"
+  readonly ENDPOINT_Favoris = "/findMostAnsweredQuestionByUser"
+  readonly ENDPOINT_NB_REPONSE = "/nombreReponseByQuestion"
+  readonly ENDPOINT_UPDATE_REPONSE = "/updateReponse"
+  readonly ENDPOINT_GET_HISTORIQUE = "/getHistoriqueByUser"
+  readonly ENDPOINT_DELETE_HISTORIQUE = "/deleteHistorique"
   
   
   constructor(private httpClient:HttpClient) { 
@@ -41,8 +46,21 @@ export class ForumService {
   deleteResponse(id: string): Observable<any> {
     return this.httpClient.delete(`${this.API_URL}${this.ENDPOINT_DELETE_RESPONSE}/${id}`);
   }
-  analyserEtMettreAJourFavoris(userId: string): Observable<any> {
-    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_Favoris}/${userId}`, null);
+  getListFavoris(userId: string): Observable<any> {
+    return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_Favoris}/${userId}`);
+  }
+  getNbReponse(questionId: string): Observable<any> {
+    return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_NB_REPONSE}/${questionId}`)
+  }
+
+  updateResponse(reponseId: string, reponse: string): Observable<any> {
+    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_NB_REPONSE}/${reponseId}`, { reponse });
+  }
+  getHistoriqueByUser(userId : string): Observable<any>{
+    return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_GET_HISTORIQUE}/${userId}`)
+  }
+  deleteHistorique(historiqueId: string): Observable<any> {
+    return this.httpClient.delete(`${this.API_URL}${this.ENDPOINT_DELETE_HISTORIQUE}/${historiqueId}`);
   }
  
 }

@@ -3,10 +3,18 @@
     <!-- start page title -->
   
     <app-page-title title="All Questions" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <div class="col-sm-4">
+      <div class="search-box me-2 mb-2 d-inline-block">
+        <div class="position-relative">
+          <input type="text" class="form-control" id="searchTableList" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="filterQuestions()">
+          <i class="bx bx-search-alt search-icon"></i>
+        </div>
+      </div>
+    </div>
   
     <!-- end page title -->
   
-    <div class="row" *ngFor="let question of questions">
+    <div class="row" *ngFor="let question of filteredQuestions">
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
@@ -27,8 +35,8 @@
               </div>
               <div class="d-print-none">
                 <div class="float-end list-inline wizard d-flex justify-content-end mb-0">
-                  <div class="btn btn-sm btn-link font-size-20 text-center" href="javascript:void(0)">
-                    <i class="bx bxs-like" ></i>
+                  <div class="btn btn-sm font-size-18 text-center">
+                    {{ responseCounts[question.id] || '0'}} Answers
                 </div>
                 <div class="btn btn-sm btn-link font-size-20 text-center">
                   <a [routerLink]="['/detail', question.id]" >detail</a>

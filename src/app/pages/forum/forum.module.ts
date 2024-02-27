@@ -18,12 +18,16 @@ import { FlatpickrModule } from 'angularx-flatpickr';
 import { DetailComponent } from './detail/detail.component';
 import { ReponseComponent } from './reponse/reponse.component';
 import { ListFavorisComponent } from './list-favoris/list-favoris.component';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { FormsModule } from '@angular/forms';
+import { HistoriqueComponent } from './historique/historique.component';
 
 
 @NgModule({
-  declarations: [AddquestionComponent, ListforumComponent, DetailComponent, ReponseComponent, ListFavorisComponent],
+  declarations: [AddquestionComponent, ListforumComponent, DetailComponent, ReponseComponent, ListFavorisComponent, HistoriqueComponent],
   imports: [
+    FormsModule,
     CommonModule,
     ForumRoutingModule,
     ReactiveFormsModule,
@@ -38,7 +42,9 @@ import { ListFavorisComponent } from './list-favoris/list-favoris.component';
     ColorPickerModule,
     BsDatepickerModule.forRoot(),
     NgxDropzoneModule,
-    FlatpickrModule.forRoot()
+    FlatpickrModule.forRoot(),
+    TabsModule.forRoot(),
+    TooltipModule.forRoot()
   ],
   providers: [provideNgxMask()]
 })

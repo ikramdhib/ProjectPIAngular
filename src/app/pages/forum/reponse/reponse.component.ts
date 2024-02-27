@@ -17,11 +17,17 @@ export class ReponseComponent  {
   public Editor = ClassicEditor;
   @Input() questionId: string;
   @Output() responseAdded: EventEmitter<void> = new EventEmitter<void>();
+  @Input() editingResponse: any;
 
  constructor(private forumService: ForumService) { }
 
  ngOnInit() {
    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
+   if (this.editingResponse) {
+    this.formResponse.patchValue({
+      content: this.editingResponse.content
+    });
+  }
  }
  onReady(editor:ClassicEditor):void{
   editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
@@ -31,9 +37,24 @@ export class ReponseComponent  {
  formResponse : FormGroup = new FormGroup({
   content: new FormControl('',[Validators.required,Validators.minLength(150)])
  })
+
+ 
  onSubmit() {
   if (this.formResponse.valid) {
     this.confirm();
+  }
+  if (this.formResponse.invalid) return;
+
+  const content = this.formResponse.get('content').value;
+
+  if (this.editingResponse) {
+    // Mise à jour de la réponse
+    this.forumService.updateResponse(this.editingResponse.id, content).subscribe(() => {
+      this.responseAdded.emit(); // Notifiez le composant parent de la mise à jour
+    });
+  } else {
+    // Ajout d'une nouvelle réponse
+    // ... Votre logique existante pour ajouter une réponse
   }
 }
 confirm() {
