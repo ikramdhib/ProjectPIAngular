@@ -21,8 +21,8 @@ export class ForumService {
   readonly ENDPOINT_UPDATE_REPONSE = "/updateReponse"
   readonly ENDPOINT_GET_HISTORIQUE = "/getHistoriqueByUser"
   readonly ENDPOINT_DELETE_HISTORIQUE = "/deleteHistorique"
-
-  
+  readonly ENDPOINT_GET_TAGS = "/getAllTags"
+ 
   
   constructor(private httpClient:HttpClient) { 
   }
@@ -65,6 +65,10 @@ export class ForumService {
   deleteHistorique(historiqueId: string): Observable<any> {
     return this.httpClient.delete(`${this.API_URL}${this.ENDPOINT_DELETE_HISTORIQUE}/${historiqueId}`);
   }
+  getTags(): Observable<any> {
+    return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_GET_TAGS}`)
+  }
+ 
 
  
 }

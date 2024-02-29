@@ -22,11 +22,21 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { FormsModule } from '@angular/forms';
 import { HistoriqueComponent } from './historique/historique.component';
+import { TagInputModule } from 'ngx-chips';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+
 
 
 @NgModule({
   declarations: [AddquestionComponent, ListforumComponent, DetailComponent, ReponseComponent, ListFavorisComponent, HistoriqueComponent],
   imports: [
+    MatChipsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule,
     FormsModule,
     CommonModule,
     ForumRoutingModule,
@@ -44,7 +54,8 @@ import { HistoriqueComponent } from './historique/historique.component';
     NgxDropzoneModule,
     FlatpickrModule.forRoot(),
     TabsModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    TagInputModule
   ],
   providers: [provideNgxMask()]
 })

@@ -33,11 +33,38 @@
                   </div>
                 </div>
             </div>
+            
+            <div class="card">
+              <div class="card-body">
+                <label class="card-title mb-3">Tags</label>
+                <mat-form-field class="example-full-width" style="width: 100%;" appearance="outline">
+                  <mat-chip-listbox #chipList aria-label="Tag selection">
+                    <mat-chip *ngFor="let tag of selectedTags" [selectable]="true" [removable]="true" (removed)="remove(tag)">
+                      {{ tag }}
+                      <mat-icon matChipRemove>x</mat-icon>
+                    </mat-chip>
+                    <input placeholder="Add tag..."
+                           #tagInput
+                           [formControl]="tagCtrl"
+                           matInput
+                           [matAutocomplete]="auto"
+                           [matChipInputFor]="chipList"
+                           [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                           [matChipInputAddOnBlur]="true"
+                           (matChipInputTokenEnd)="add($event)">
+                  </mat-chip-listbox>
+                </mat-form-field>
+                <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                  <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                    {{ tag }}
+                  </mat-option>
+                </mat-autocomplete>
+              </div>
+            </div>
             <button type="submit" class="btn btn-danger mb-3 col-1 " style="margin-left: 20px;" [disabled]="formQuestion.invalid" (click)="onSubmit()">Submit</button>
           </div>
           
         </div>
       </div>
-    
   </form>
     
