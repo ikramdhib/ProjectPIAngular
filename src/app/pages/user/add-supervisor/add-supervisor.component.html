@@ -100,6 +100,25 @@
                   </div>
               
             </div>
+            <div class="text-center mb-4">
+              <div class="position-relative d-inline-block">
+                <div class="position-absolute bottom-0 end-0">
+                  <label for="member-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Member Image">
+                    <div class="avatar-xs">
+                      <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                        <i class="bx bxs-image-alt"></i>
+                      </div>
+                    </div>
+                  </label>
+                  <input class="form-control d-none" value="" id="member-image-input" type="file" accept="image/png, image/gif, image/jpeg" (change)="fileChange($event)">
+                </div>
+                <div class="avatar-lg">
+                  <div class="avatar-title bg-light rounded-circle">
+                    <img src="assets/images/users/user-dummy-img.jpg" id="member-img" class="avatar-md rounded-circle h-auto" />
+                  </div>
+                </div>
+              </div>
+              </div>
           <div>
             <button class="btn btn-primary" type="submit">Submit form</button>
           </div>

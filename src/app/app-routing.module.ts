@@ -9,6 +9,7 @@ import { AuthenticationComponent } from './authentication/authentication.compone
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SendingMailComponent } from './forget-password/sending-mail/sending-mail.component';
 import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
+import { AuthorizationGuardsService } from './UserServices/Guards/authorization-guards.service';
 
 
 const routes: Routes = [
@@ -16,12 +17,21 @@ const routes: Routes = [
   { path: 'forgetPassword', component:ForgetPasswordComponent},
   { path: 'email-verification', component:SendingMailComponent},
   { path: 'ChangePassword', component:ChangePasswordComponent},
-  { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) ,canActivate: [AuthenticationGuardsService] },
+  { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) ,canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+   data:{
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+   }  },
   // tslint:disable-next-line: max-line-length
-  { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthenticationGuardsService ]
+  { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthenticationGuardsService ,AuthorizationGuardsService],
+  data:{
+    roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+  }  ,
 
 },
-  { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule), canActivate: [AuthenticationGuardsService] },
+  { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule), canActivate: [AuthenticationGuardsService ,AuthorizationGuardsService],
+  data:{
+    roles:['SERVICE_STAGE' ,'CHEF_DEPARTEMENT']
+  }  },
   { path: 'crypto-ico-landing', component: CyptolandingComponent ,canActivate: [AuthenticationGuardsService] },
   { path: '**', component: Page404Component ,canActivate: [AuthenticationGuardsService]},
 ];

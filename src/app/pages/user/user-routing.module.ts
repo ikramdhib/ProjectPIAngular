@@ -16,7 +16,7 @@ const routes: Routes = [
     path:'profile', component:ProfileComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
     data:{
-      roles:['ENCADRANT','ETUDIANT']
+      roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
     } 
   },
 
@@ -30,18 +30,18 @@ const routes: Routes = [
 
   {
     path:'student-users', component:ListStudentsComponent , 
-    canActivate: [AuthenticationGuardsService /*, AuthorizationGuardsService*/],
-   /* data:{
-      roles:['ENCADRANT']
-    } */
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+   data:{
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+    } 
   },
 
   {
     path:'supervisor-users', component:ListSupervisorComponent , 
-    canActivate: [AuthenticationGuardsService /*, AuthorizationGuardsService*/],
-   /* data:{
-      roles:['ENCADRANT']
-    } */
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+    } 
   },
 
 

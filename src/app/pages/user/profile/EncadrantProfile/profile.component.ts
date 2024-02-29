@@ -17,18 +17,18 @@ import { AuthenticationService } from 'src/app/UserServices/AuthenticationServic
 export class ProfileComponent implements OnInit {
   // bread crumb items
   breadCrumbItems: Array<{}>;
-  currentUser =null;
+  currentUser :any;
   userImage : any ="";
   revenueBarChart: ChartType;
   statData:any;
 
-  constructor() { }
+  constructor( public authService : AuthenticationService) { }
 
   ngOnInit() {
+    this.Profile();
+    
     this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Profile', active: true }];
     
-    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
-
     
    // this.userImage= this.userService.getImage("ff16c7f6-07d4-4bbf-bdd9-da61721ca9a9.jpg");
     // fetches the data
@@ -46,7 +46,14 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  
+  public Profile(){
+    this.authService.getProfileUser().subscribe({
+      next:(res:any)=>{
+        console.log(res.Data,"ttt");
+        this.currentUser = res.Data
+      }
+    })
+  }
 
   /**
    * Fetches the data

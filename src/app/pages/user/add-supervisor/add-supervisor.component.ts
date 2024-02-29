@@ -18,13 +18,17 @@ export class AddSupervisorComponent {
 
   // Form submition
   submit: boolean;
+  defaultImageFile: File;
 
   ngOnInit() {
 
     this.breadCrumbItems = [{ label: 'User' }, { label: 'Add Student', active: true }];
     this.createForm();
+
+    this.defaultImageFile = new File(['defaultImage'], 'assets/images/users/user-dummy-img.jpg', { type: 'image/jpeg' });
     
   }
+  
 
   createForm() {
     this.StudentForm = this.formBuilder.group({
@@ -36,6 +40,7 @@ export class AddSupervisorComponent {
       emailPro: ['', [Validators.required]],
       company: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
+      img: [this.defaultImageFile],
     });
   }
 
@@ -46,6 +51,32 @@ export class AddSupervisorComponent {
     return this.StudentForm.controls;
   }
 
+  imageURL: string | undefined;
+   file:File;
+  fileChange(event: any) {
+
+    let fileList: any = (event.target as HTMLInputElement);
+    if(fileList!=null){
+    this.file= fileList.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      this.imageURL = reader.result as string;
+      document.querySelectorAll('#member-img').forEach((element: any) => {
+        element.src = this.imageURL;
+      });
+      this.StudentForm.controls['img'].setValue(this.imageURL);
+    }
+    reader.readAsDataURL(this.file)
+  }
+    else {
+      // Si aucun fichier n'a été sélectionné, afficher l'image par défaut
+      const defaultImageURL = 'assets/images/users/user-dummy-img.jpg';
+      const imgElement = document.getElementById('member-img') as HTMLImageElement;
+      if (imgElement) {
+          imgElement.src = defaultImageURL;
+      }
+    }
+  }
   /**
    * Bootsrap validation form submit method
    */
@@ -63,7 +94,8 @@ export class AddSupervisorComponent {
       formData.append('cin', this.form.cin.value);
       formData.append('company', this.form.company.value);
       formData.append('emailPro', this.form.emailPro.value);
-      
+      formData.append('file',this.file);
+      console.log(this.imageURL,"+++++++++++++++++++++++++++++++++++++++")
     this.userService.addSupervisor(formData).subscribe({
       next:(res:any)=>{
         console.log(res);
