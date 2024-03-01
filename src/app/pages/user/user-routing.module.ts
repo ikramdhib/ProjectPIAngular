@@ -9,6 +9,7 @@ import { AddSupervisorComponent } from './add-supervisor/add-supervisor.componen
 import { ListStudentsComponent } from './list-students/list-students.component';
 import { ListSupervisorComponent } from './list-supervisor/list-supervisor.component';
 import { EditProfileStudentComponent } from './profile/edit-profile-student/edit-profile-student.component';
+import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 
 const routes: Routes = [
 
@@ -49,7 +50,10 @@ const routes: Routes = [
   },
   {
     path:"addSupervisor",component:AddSupervisorComponent
-  }
+  },
+  {
+    path:"changePassword/:id",component:ChangePasswordComponent
+  },
   
 ];
 

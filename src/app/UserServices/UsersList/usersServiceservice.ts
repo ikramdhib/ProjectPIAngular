@@ -47,4 +47,13 @@ export class UsersListService {
     }
 
 
+    sendEmailVerification(id :string , request:any){
+      return this.http.post(`${this.API_RL}api/v1/user/requestOfChangingPass/${id}`,request,this.httpOptions);
+    }
+
+    changePassword(id: string , request:any){
+      return this.http.put(`${this.API_RL}api/v1/user/changePassword/${id}`,request);
+    }
+
+
 }

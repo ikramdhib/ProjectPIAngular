@@ -27,9 +27,13 @@ import { AddSupervisorComponent } from './add-supervisor/add-supervisor.componen
 import { ListSupervisorComponent } from './list-supervisor/list-supervisor.component';
 import { ListStudentsComponent } from './list-students/list-students.component';
 import { EditProfileStudentComponent } from './profile/edit-profile-student/edit-profile-student.component';
+import { ChangePasswordComponent } from './profile/change-password/change-password.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { ExtrapagesRoutingModule } from 'src/app/extrapages/extrapages-routing.module';
+import { NgOtpInputModule } from 'ng-otp-input';
 
 @NgModule({
-  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent  ],
+  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -46,7 +50,10 @@ import { EditProfileStudentComponent } from './profile/edit-profile-student/edit
     PaginationModule,
     TabsModule,
     CollapseModule,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    CarouselModule,
+    ExtrapagesRoutingModule,
+    NgOtpInputModule
   ]
 })
 export class UserModule {
