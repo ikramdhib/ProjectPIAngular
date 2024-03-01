@@ -21,7 +21,7 @@ export class ListSupervisorComponent {
 
 
    // Table data
-   contactsList!: Observable<userListModel[]>;
+   contactsList!: Observable<any[]>;
    total: Observable<number>;
    createContactForm!: UntypedFormGroup;
    submitted = false;
@@ -41,9 +41,7 @@ export class ListSupervisorComponent {
      public userServiseStudents : UsersListService,
      public service: userListService, private formBuilder: UntypedFormBuilder) {
      
-     this.contactsList = service.countries$;
-     this.total = service.total$;
-   }
+     }
  
    ngOnInit() {
      this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Users List', active: true }];
@@ -52,15 +50,10 @@ export class ListSupervisorComponent {
 
        this.userServiseStudents.getAllSupervisor().subscribe({
          next :(res:any)=>{
-           console.log(res,"@@@@@@@@@@@@@@@@@@@")
            this.students=res;
+           console.log(this.students.length,"tttttttttttttttttttt")
          }
        })
-
-       this.contactsList.subscribe(x => {
-         this.contacts = Object.assign([], x);
-       });
-       document.getElementById('elmLoader')?.classList.add('d-none')
      }, 1200);
  
      this.createContactForm = this.formBuilder.group({

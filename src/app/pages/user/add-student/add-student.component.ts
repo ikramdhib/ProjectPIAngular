@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
 @Component({
@@ -10,7 +11,7 @@ import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceser
 export class AddStudentComponent {
   StudentForm: UntypedFormGroup; // bootstrap validation form
 
-  constructor(public formBuilder: UntypedFormBuilder , public userService : UsersListService ,public toastr:ToastrService) { }
+  constructor(public formBuilder: UntypedFormBuilder ,private router :Router, public userService : UsersListService ,public toastr:ToastrService) { }
   // bread crumb items
   breadCrumbItems: Array<{}>;
 
@@ -75,6 +76,8 @@ export class AddStudentComponent {
         console.log("sucess");
         this.toastr.success('Student added with success','SUCCESS')
         this.StudentForm.reset();
+
+        this.router.navigate(['/user/student-users']);
       }
     })
 

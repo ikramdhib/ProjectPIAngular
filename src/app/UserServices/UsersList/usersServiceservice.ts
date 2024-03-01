@@ -3,12 +3,17 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { User } from './UserModel.model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersListService {
+  [x: string]: any;
   API_RL=environment.API_URL;
+
+  supervisors  = new BehaviorSubject<any[]>([]);
+  total = new BehaviorSubject<number>(0);
 
   constructor(private http:HttpClient , private router:Router) { }
 
@@ -32,5 +37,14 @@ export class UsersListService {
     addSupervisor(user:any){
       return this.http.post<any>(`${this.API_RL}api/v1/user/addSupervisor`,user);
     }
+
+     getUser(id : string) : Observable<User>{
+      return this.http.get<User>(`${this.API_RL}api/v1/user/getUser/${id}`);
+    }
+
+    updateUser(id : string , resquest : any){
+      return this.http.put(`${this.API_RL}api/v1/user/updateUser/${id}`,resquest);
+    }
+
 
 }

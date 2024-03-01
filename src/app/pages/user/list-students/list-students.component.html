@@ -38,10 +38,13 @@
                 <tbody>
                   <tr *ngFor="let data of students;let i = index;">
                     <td>
-                      <div class="avatar-xs" *ngIf="data.lastName">
+                      <div class="avatar-xs" *ngIf="!data.pic">
                         <span class="avatar-title rounded-circle">
-                          {{data.lastName.charAt(0)}}
+                          {{data.lastName.charAt(0) | uppercase}}
                         </span>
+                      </div>
+                      <div *ngIf="data.pic">
+                        <img class="rounded-circle avatar-xs" [src]="data.pic" alt="">
                       </div>
                      
                     </td>

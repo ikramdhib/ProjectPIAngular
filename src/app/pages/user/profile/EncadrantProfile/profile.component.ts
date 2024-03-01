@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { revenueBarChart, statData } from './data';
 
 import { ChartType } from './profile.model';
 import { AuthenticationService } from 'src/app/UserServices/AuthenticationServices/authenticationUser.service';
@@ -25,6 +24,8 @@ export class ProfileComponent implements OnInit {
   constructor( public authService : AuthenticationService) { }
 
   ngOnInit() {
+
+
     this.Profile();
     
     this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Profile', active: true }];
@@ -32,7 +33,6 @@ export class ProfileComponent implements OnInit {
     
    // this.userImage= this.userService.getImage("ff16c7f6-07d4-4bbf-bdd9-da61721ca9a9.jpg");
     // fetches the data
-    this._fetchData();
 /*
     this.userService.getImage("dhibikram00@gmail.com").subscribe({
 
@@ -55,11 +55,5 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  /**
-   * Fetches the data
-   */
-  private _fetchData() {
-    this.revenueBarChart = revenueBarChart;
-    this.statData = statData;
-  }
+ 
 }

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { MustMatch } from '../edit-profile/validation.mustmatch';
 import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-supervisor',
@@ -12,7 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class AddSupervisorComponent {
   StudentForm: UntypedFormGroup; // bootstrap validation form
 
-  constructor(public formBuilder: UntypedFormBuilder , public userService : UsersListService ,public toastr:ToastrService) { }
+  constructor(public formBuilder: UntypedFormBuilder, private router: Router , 
+    public userService : UsersListService ,public toastr:ToastrService) { }
   // bread crumb items
   breadCrumbItems: Array<{}>;
 
@@ -40,7 +41,7 @@ export class AddSupervisorComponent {
       emailPro: ['', [Validators.required]],
       company: ['', [Validators.required]],
       phoneNumber: ['', [Validators.required]],
-      img: [this.defaultImageFile],
+      img: ['',[Validators.required]],
     });
   }
 
@@ -108,6 +109,8 @@ export class AddSupervisorComponent {
         console.log("sucess");
         this.toastr.success('Supervisor added with success', 'SUCCESS');
        this.StudentForm.reset();
+
+       this.router.navigate(['/user/supervisor-users']);
        
       }
     })

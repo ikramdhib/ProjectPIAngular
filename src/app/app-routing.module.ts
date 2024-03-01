@@ -19,18 +19,18 @@ const routes: Routes = [
   { path: 'ChangePassword', component:ChangePasswordComponent},
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) ,canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
    data:{
-     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT' , 'ENCADRANT','ETUDIANT']
    }  },
   // tslint:disable-next-line: max-line-length
   { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthenticationGuardsService ,AuthorizationGuardsService],
   data:{
-    roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+    roles:['SERVICE_STAGE','CHEF_DEPARTEMENT' ,'ENCADRANT' ,'ETUDIANT']
   }  ,
 
 },
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule), canActivate: [AuthenticationGuardsService ,AuthorizationGuardsService],
   data:{
-    roles:['SERVICE_STAGE' ,'CHEF_DEPARTEMENT']
+    roles:['SERVICE_STAGE' ,'CHEF_DEPARTEMENT' , 'ENCADRANT','ETUDIANT']
   }  },
   { path: 'crypto-ico-landing', component: CyptolandingComponent ,canActivate: [AuthenticationGuardsService] },
   { path: '**', component: Page404Component ,canActivate: [AuthenticationGuardsService]},

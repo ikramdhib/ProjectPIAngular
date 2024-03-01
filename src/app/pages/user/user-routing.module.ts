@@ -3,12 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile/EncadrantProfile/profile.component';
 import { AuthenticationGuardsService } from '../../UserServices/Guards/authentication-guards.service';
 import { AuthorizationGuardsService } from '../../UserServices/Guards/authorization-guards.service';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditProfileComponent } from './profile/edit-profileEncadrant/edit-profile.component';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { AddSupervisorComponent } from './add-supervisor/add-supervisor.component';
-import { StudentProfileComponent } from './profile/StudentProfile/student-profile/student-profile.component';
 import { ListStudentsComponent } from './list-students/list-students.component';
 import { ListSupervisorComponent } from './list-supervisor/list-supervisor.component';
+import { EditProfileStudentComponent } from './profile/edit-profile-student/edit-profile-student.component';
 
 const routes: Routes = [
 
@@ -16,23 +16,16 @@ const routes: Routes = [
     path:'profile', component:ProfileComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
     data:{
-      roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+      roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT','ETUDIANT']
     } 
   },
 
-  {
-    path:'Studentprofile', component:StudentProfileComponent , 
-    canActivate: [AuthenticationGuardsService /*, AuthorizationGuardsService*/],
-   /* data:{
-      roles:['ENCADRANT']
-    } */
-  },
 
   {
     path:'student-users', component:ListStudentsComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
    data:{
-     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT']
     } 
   },
 
@@ -40,13 +33,16 @@ const routes: Routes = [
     path:'supervisor-users', component:ListSupervisorComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
     data:{
-     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT']
     } 
   },
 
 
   {
-    path:"editProfile",component:EditProfileComponent
+    path:"editProfile/:id",component:EditProfileComponent
+  },
+  {
+    path:"editStudentProfile/:id",component:EditProfileStudentComponent
   },
   {
     path:"addStudent",component:AddStudentComponent

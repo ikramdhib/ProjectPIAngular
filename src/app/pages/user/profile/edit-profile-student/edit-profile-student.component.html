@@ -1,0 +1,133 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+    <app-page-title title="Edit Profile" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <!-- end page title -->
+  
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <form class="needs-validation" (ngSubmit)="validSubmit()" [formGroup]="validationform">
+                <div class="row">
+                    <div class="text-center mb-4">
+                        <div class="position-relative d-inline-block">
+                          <div class="position-absolute bottom-0 end-0">
+                            <label for="member-image-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Member Image">
+                              <div class="avatar-xs">
+                                <div class="avatar-title bg-light border rounded-circle text-muted cursor-pointer">
+                                  <i class="bx bxs-image-alt"></i>
+                                </div>
+                              </div>
+                            </label>
+                            <input class="form-control d-none" value="" id="member-image-input" type="file" accept="image/png, image/gif, image/jpeg" (change)="fileChange($event)">
+                          </div>
+                          <div class="avatar-lg">
+                            <div class="avatar-title bg-light rounded-circle">
+                              <img [src]="userToUpdate.pic" id="member-img" class="avatar-md rounded-circle h-auto" />
+                            </div>
+                          </div>
+                        </div>
+                        </div>
+                </div>
+              <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="login">Login  </label>
+                      <input type="text" class="form-control"  formControlName="login"
+                        placeholder="login" [ngClass]="{'is-valid': submit  && form.login.errors }" [readOnly]="true">
+                    </div>
+                  </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" formControlName="fullName"
+                      placeholder="full name" [ngClass]="{'is-valid': submit   && form.fullName.errors}" [readOnly]="true">
+                  
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="mb-3">
+                    <label for="cin"  >ID card</label>
+                    <input type="text" class="form-control" id="cin" formControlName="cin"
+                      placeholder="cin" [ngClass]="{'is-invalid': submit  && form.cin.errors}">
+                      <div *ngIf="submit && form.cin.errors" class="invalid-feedback">
+                        <div *ngIf="form.cin.errors.required">First Name requis</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="phoneNumber">Phone Number</label>
+                      <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                        placeholder="phoneNumber" [ngClass]="{'is-invalid': submit  && form.phoneNumber.errors}">
+                        <div *ngIf="submit && form.phoneNumber.errors" class="invalid-feedback">
+                          <div *ngIf="form.phoneNumber.errors.required">phoneNumber requis</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="mb-3">
+                      <label for="address">Address</label>
+                      <input type="text" class="form-control" id="address" formControlName="address"
+                        placeholder="State" [ngClass]="{'is-invalid': submit && form.address.errors }">
+                        <div *ngIf="submit && form.address.errors" class="invalid-feedback">
+                          <div *ngIf="form.address.errors.required">address Name requis</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-4" >
+                    <div class="mb-3">
+                      <label for="unvId">University ID</label>
+                      <input type="text" class="form-control" id="unvId" formControlName="unvId"
+                        placeholder="State" [ngClass]="{'is-invalid': submit && form.unvId.errors }" [readOnly]="true">
+                        
+                    </div>
+                  </div>
+              </div>
+             
+            <!--  <div class="row">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-12">
+                      <h4 class="card-title mb-3">User Resume</h4>
+                              <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'.pdf'">
+                                <ngx-dropzone-label class="dz-message needsclick">
+                                    <div class="mb-3">
+                                        <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                    </div>
+                
+                                    <h5>Drop your resume here or click to upload.</h5>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone>
+                            <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
+                                <ngx-dropzone-label>
+                                    <div class="d-flex p-2">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-sm bg-light rounded">
+                                                <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <div class="pt-1">
+                                                <strong class="error text-danger"></strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </div>
+                    </div>
+                </div>
+              </div>-->
+            <div class="mt-3 d-grid col-xl-3">
+              <button class="btn btn-danger" type="submit">Save Changes</button>
+            </div>
+            </form>
+          </div>
+        </div>
+        <!-- end card -->
+      </div> <!-- end col -->
