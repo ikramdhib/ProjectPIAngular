@@ -8,6 +8,10 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { StageListtComponent } from './stage-listt/stage-listt.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
+import { UserListComponent } from './user-list/user-list.component';
+import { AttestationComponent } from './attestation/attestation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NourComponent } from './nour/nour.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -17,8 +21,12 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'attestation-stage/:studentId/:stageId', component: AttestationComponent },
+  {path:'nour',component:NourComponent},
+
   { path: 'chat', component: ChatComponent },
   {path:'stageList',component:StageListtComponent},
+  {path:'userr',component:UserListComponent},
   { path: 'filemanager', component: FilemanagerComponent },
   { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
@@ -40,8 +48,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes),FormsModule,ToastrModule.forRoot() // Ajoutez ToastrModule.forRoot() dans les imports
+  imports: [RouterModule.forChild(routes),FormsModule,ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
+
 ],
-  exports: [RouterModule]
+
+  exports: []
 })
 export class PagesRoutingModule { }

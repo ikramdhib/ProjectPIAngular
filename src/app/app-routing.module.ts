@@ -7,9 +7,10 @@ import { CyptolandingComponent } from './cyptolanding/cyptolanding.component';
 import { Page404Component } from './extrapages/page404/page404.component';
 
   import { StageListComponent } from './stage-list/stage-list.component';
-import { NourComponent } from './nour/nour.component';
 import { StageListtComponent } from './pages/stage-listt/stage-listt.component';
 import { FormModule } from './pages/form/form.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -21,7 +22,6 @@ const routes: Routes = [
   {path:'stageList',component:StageListComponent},
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
 
-{path:'nour',component:NourComponent},
   { path: '**', component: Page404Component },
 ];
 
@@ -30,4 +30,6 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+  RouterModule
+}

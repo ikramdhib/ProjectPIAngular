@@ -1,0 +1,576 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Horizontal Timeline</h4>
+         
+
+          <div class="hori-timeline">
+
+            <owl-carousel-o  class="events navs-carousel">
+
+              <ng-template carouselSlide>
+                <div *ngIf="timeline.length > 0" class="row mt-4">
+
+                <div class="item event-list">
+                  <div>
+                    <div class="event-date">
+                      <div class="text-primary mb-1">{{ timeline[0][0] }}</div>
+                      <h5 class="mb-4">Date de Lancement De Stage</h5>
+                    </div>
+                  
+
+                
+                  </div>
+                </div>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div *ngIf="timeline.length > 0" class="row mt-4">
+
+                <div class="item event-list">
+                  <div>
+                    <div class="event-date">
+                      <div class="text-primary mb-1">{{ timeline[0][1] }}</div>
+                      <h5 class="mb-4">Date de Fin De Stage</h5>
+                    </div>
+                  
+
+                  </div>
+                </div>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div *ngIf="timeline.length > 0" class="row mt-4">
+
+                <div class="item event-list active">
+                  <div>
+                    <div class="event-date">
+                      <div class="text-primary mb-1">{{ timeline[0][2] }}</div>
+                      <h5 class="mb-4">Date de Depot de Rapport</h5>
+                    </div>
+                 
+
+                  
+                  </div>
+                </div>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div *ngIf="timeline.length > 0" class="row mt-4">
+
+                <div class="item event-list">
+                  <div>
+                    <div class="event-date">
+                      <div class="text-primary mb-1">{{ timeline[0][4] }}</div>
+                      <h5 class="mb-4">Date Depot Journale</h5>
+                    </div>
+                   
+
+                   
+                  </div>
+                </div>
+                </div>
+              </ng-template>
+              
+              <ng-template carouselSlide>
+                <div *ngIf="timeline.length > 0" class="row mt-4">
+
+                <div class="item event-list">
+                  <div>
+                    <div class="event-date">
+                      <div class="text-primary mb-1">{{ timeline[0][3] }}</div>
+                      <h5 class="mb-4">Date Depot Attestation</h5>
+                    </div>
+                 
+
+                 
+                  </div>
+                </div>
+                </div>
+              </ng-template>
+              <ng-template carouselSlide>
+                <div class="item event-list">
+                  <div>
+                    <div class="event-date">
+                      <div class="text-primary mb-1">21 December</div>
+                      <h5 class="mb-4">Sixth event</h5>
+                    </div>
+                   
+
+                   
+                  </div>
+                </div>
+              </ng-template>
+
+            </owl-carousel-o>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+  </div>
+  <!-- end row -->
+
+ 
+
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Basic Wizard</h4>
+          <div id="basic-example">
+            <ng-stepper #cdkStepper [linear]="true" class="wizard">
+  
+              <cdk-step [optional]="false">
+                <ng-template cdkStepLabel>
+                  <span class="number">1.</span>
+                  <span>Liste Etudiant</span>
+                </ng-template>
+                <section *ngIf="cdkStepper.selectedIndex === 0">
+                 
+                  <div class="container-fluid">
+
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                         
+                          <div class="card-body border-bottom">
+                            <div class="row g-3">
+                             
+                           
+                             
+                           
+                            
+                            </div>
+                          </div>
+                          <div class="card-body">
+                  
+                            <div class="table-responsive">
+                              <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Nom_Etudiant</th>
+                                    <th scope="col">Prenom_Etudiant</th>
+                                    <th scope="col">Telephone</th>
+                                    <th scope="col">Email</th>
+                                 
+                                  
+                                    
+                                    <th scope="col">Action</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr  *ngFor="let student of students">
+                                    <th scope="row"  >{{ student.firstName }}</th>
+                                    <td> {{ student.lastName }} </td>
+                                    <td>{{ student.phoneNumber }} </td>
+                                    <td>{{ student.login }}</td>
+                                   
+                                   
+                                  
+                                    <td>
+                                      <ul class="list-unstyled hstack gap-1 mb-0">
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                          <a class="btn btn-sm btn-soft-primary" (click)="viewStudentDetails(student.id, student.stageId)">
+                                            <i class="mdi mdi-eye-outline"></i>
+                                          </a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                          <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" ><i class="mdi mdi-pencil-outline"></i></a>
+                                        </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                          <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" ><i class="mdi mdi-delete-outline"></i></a>
+                                        </li>
+                                      </ul>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="row justify-content-between align-items-center">
+                              <div class="col-auto me-auto">
+                              </div>
+                              <div class="col-auto">
+                                <div class="text-md-right float-md-end pagination-rounded">
+                                  <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                  </ul>
+                                </div>
+                              </div>
+                              <!--end col-->
+                            </div>
+                            <!--end row-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <!-- View Details Model -->
+                  <ng-template #ViewContent role="document" let-modal>
+                    <div class="modal-header">
+                      <h5 class="modal-title mt-0">Order Details</h5>
+                      <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="mb-2">
+                        Product id:
+                        <span class="text-primary">#SK2540</span>
+                      </p>
+                      <p class="mb-4">
+                        Billing Name:
+                        <span class="text-primary">Neal Matthews</span>
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table table-centered table-nowrap">
+                          <thead>
+                            <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col">Product Name</th>
+                              <th scope="col">Price</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <th scope="row">
+                                <div>
+                                  <img src="assets/images/product/img-7.png" alt class="avatar-sm" />
+                                </div>
+                              </th>
+                              <td>
+                                <div>
+                                  <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                                  <p class="text-muted mb-0">$ 225 x 1</p>
+                                </div>
+                              </td>
+                              <td>$ 255</td>
+                            </tr>
+                            <tr>
+                              <th scope="row">
+                                <div>
+                                  <img src="assets/images/product/img-4.png" alt class="avatar-sm" />
+                                </div>
+                              </th>
+                              <td>
+                                <div>
+                                  <h5 class="text-truncate font-size-14">Phone patterned cases</h5>
+                                  <p class="text-muted mb-0">$ 145 x 1</p>
+                                </div>
+                              </td>
+                              <td>$ 145</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <h6 class="m-0">Sub Total:</h6>
+                              </td>
+                              <td>$ 400</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <h6 class="m-0">Shipping:</h6>
+                              </td>
+                              <td>Free</td>
+                            </tr>
+                            <tr>
+                              <td colspan="2">
+                                <h6 class="m-0">Total:</h6>
+                              </td>
+                              <td>$ 400</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+                    </div>
+                  </ng-template>
+                  
+                  <!-- Order Create Model -->
+                  <ng-template #content role="document" let-modal>
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Jobs</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal" (click)="modalRef?.hide()"></button>
+                    </div>
+                    <form (ngSubmit)="saveUser()" [formGroup]="jobListForm">
+                      <div class="modal-body">
+                        <input type="hidden" name="id" value="" formControlName="ids" />
+                        <div class="mb-3">
+                          <label for="customername-field" class="form-label">Jobs Title</label>
+                          <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required formControlName="title" [ngClass]="{ 'is-invalid': submitted && form['title'].errors }" />
+                          <div *ngIf="submitted && form['title'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['title'].errors['required']">Jobs Title is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="mb-3">
+                          <label for="customername-field" class="form-label">Company Name</label>
+                          <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required formControlName="name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }" />
+                          <div *ngIf="submitted && form['name'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['name'].errors['required']">Company Name is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="mb-3">
+                          <label for="customername-field" class="form-label">Location</label>
+                          <input type="text" id="customername-field" class="form-control" placeholder="Enter Location" required formControlName="location" [ngClass]="{ 'is-invalid': submitted && form['location'].errors }" />
+                          <div *ngIf="submitted && form['location'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['location'].errors['required']">Location is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="mb-3">
+                          <label for="customername-field" class="form-label">Experience</label>
+                          <input type="text" id="customername-field" class="form-control" placeholder="Enter Experience" required formControlName="experience" [ngClass]="{ 'is-invalid': submitted && form['experience'].errors }" />
+                          <div *ngIf="submitted && form['experience'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['experience'].errors['required']">Experience is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="mb-3">
+                          <label for="customername-field" class="form-label">Position</label>
+                          <input type="text" id="customername-field" class="form-control" placeholder="Enter Position" required formControlName="position" [ngClass]="{ 'is-invalid': submitted && form['position'].errors }" />
+                          <div *ngIf="submitted && form['position'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['position'].errors['required']">Position is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="mb-3">
+                          <label for="payment-field" class="form-label">Type</label>
+                          <select class="form-control" data-trigger name="payment-method" id="payment-field" formControlName="type" [ngClass]="{ 'is-invalid': submitted && form['type'].errors }">
+                            <option value="">Type</option>
+                            <option value="Full Time">Full Time</option>
+                            <option value="Part Time">Part Time</option>
+                          </select>
+                          <div *ngIf="submitted && form['type'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['type'].errors['required']">Type is required</div>
+                          </div>
+                        </div>
+                  
+                        <div class="mb-3">
+                          <label for="payment-field" class="form-label">Status</label>
+                          <select class="form-control" data-trigger name="payment-method" id="payment-field" formControlName="status" [ngClass]="{ 'is-invalid': submitted && form['status'].errors }">
+                            <option value="">Status</option>
+                            <option value="Active">Active</option>
+                            <option value="New">New</option>
+                            <option value="Close">Close</option>
+                          </select>
+                          <div *ngIf="submitted && form['status'].errors" class="invalid-feedback" align="left">
+                            <div *ngIf="form['status'].errors['required']">Status is required</div>
+                          </div>
+                        </div>
+                  
+                      </div>
+                      <div class="modal-footer">
+                        <div class="hstack gap-2 justify-content-end">
+                          <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modal.close('Close click')">Close</button>
+                          <button type="submit" class="btn btn-success" id="add-btn">Add Order</button>
+                        </div>
+                      </div>
+                    </form>
+                  </ng-template>
+                  <!--End Modal -->
+                  
+
+
+
+
+                  <ul class="list-inline wizard d-flex justify-content-end mb-0">
+                    <li class="previous list-inline-item" aria-disabled="true"><button class="btn btn-primary" cdkStepperPrevious>Previous</button></li>
+                    <li class="next list-inline-item" aria-disabled="false"><button class="btn btn-primary" cdkStepperNext>Next</button></li>
+                  </ul>
+                </section>
+              </cdk-step>
+  
+              <cdk-step [optional]="true">
+                <ng-template cdkStepLabel>
+                  <span class="number">2.</span>
+                  <span>Journal/Tache</span>
+                </ng-template>
+                <section *ngIf="cdkStepper.selectedIndex === 1">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                        <thead>
+                          <tr>
+                          
+                            <th scope="col">Nom Entreprise</th>
+                            <th scope="col">Nom Encadrant</th>
+                            <th scope="col">Date début</th>
+                            <th scope="col">Date fin</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let stage of stages">
+                                <td>{{ stage.nomSociete }}</td>
+                                <td>{{ stage.nomCoach }}</td>
+                                <td>{{ stage.startAt }}</td>
+                                <td>{{ stage.endAt }}</td>
+                                <td>{{ stage.type}}</td>
+                                <td>
+                              <ul class="list-unstyled hstack gap-1 mb-0">
+                              
+                             
+                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher tàches">
+                                  <button  class="btn btn-sm btn-soft-info" (click)="showTaches(stage.journal.id)" >
+                                    Afficher tàches
+                                  </button>
+                                </li>                        
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    
+                  </div>
+                  <section *ngIf="taches.length > 0"
+                    >
+                    <div class="card-body">
+                      <h4>Liste des tàches :</h4>
+                      <div class="table-responsive">
+                        <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                          <thead>
+                            <tr>                            
+                              <th scope="col">Date Tàche</th>
+                              <th scope="col">Contenu Tàche</th>             
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let tache of taches">
+                                  <td>{{ tache.date }}</td>
+                                  <td>{{ tache.libelle }}</td>
+                                  <td>
+                  
+                                <ul class="list-unstyled hstack gap-1 mb-0">
+                                  
+                                  <li data-bs-toggle="tooltip" data-bs-placement="top" title="Valider">
+                                      <a href="javascript:void(0);" class="btn btn-sm btn-soft-info"  (click)="validerTache(tache.id)">
+                                        <i class="mdi mdi-pencil-outline"></i>
+                                      </a>
+                                    </li>
+                                  <li data-bs-toggle="tooltip" data-bs-placement="top" title="Refuser">
+                                    <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="rejeterTache(tache.id)"><i class="mdi mdi-delete-outline"></i></a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!--end row-->
+                    </div>
+                  </section>
+                </section>
+              </cdk-step>
+              
+  
+              <cdk-step [optional]="true">
+                <ng-template cdkStepLabel>
+                  <span class="number">3.</span>
+                  <span>Rapport</span>
+                </ng-template>
+                <section *ngIf="cdkStepper.selectedIndex === 2">
+                  <div>
+                    <form>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="basicpill-namecard-input">Name on Card</label>
+                            <input type="text" class="form-control" id="basicpill-namecard-input">
+                          </div>
+                        </div>
+  
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label>Credit Card Type</label>
+                            <select class="form-select">
+                              <option selected>Select Card Type</option>
+                              <option value="AE">American Express</option>
+                              <option value="VI">Visa</option>
+                              <option value="MC">MasterCard</option>
+                              <option value="DI">Discover</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="basicpill-cardno-input">Credit Card Number</label>
+                            <input type="text" class="form-control" id="basicpill-cardno-input">
+                          </div>
+                        </div>
+  
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="basicpill-card-verification-input">Card Verification Number</label>
+                            <input type="text" class="form-control" id="basicpill-card-verification-input">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label for="basicpill-expiration-input">Expiration Date</label>
+                            <input type="text" class="form-control" id="basicpill-expiration-input">
+                          </div>
+                        </div>
+  
+                      </div>
+                    </form>
+                  </div>
+  
+                  <ul class="list-inline wizard d-flex justify-content-end mb-0">
+                    <li class="previous list-inline-item" aria-disabled="true"><button class="btn btn-primary" cdkStepperPrevious>Previous</button></li>
+                    <li class="next list-inline-item" aria-disabled="false"><button class="btn btn-primary" cdkStepperNext>Next</button></li>
+                  </ul>
+                </section>
+              </cdk-step>
+  
+              <cdk-step [optional]="true">
+                <ng-template cdkStepLabel>
+                  <span class="number">4.</span>
+                  <span>Attestation</span>
+                </ng-template>
+                <section *ngIf="cdkStepper.selectedIndex === 3">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                      <div class="text-center">
+                        <div class="mb-4">
+                          <i class="mdi mdi-check-circle-outline text-success display-4"></i>
+                        </div>
+                        <div>
+                          <h5>Attestation De Stage</h5>
+                          <p class="text-muted">If several languages coalesce, the grammar of the resulting</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <ul class="list-inline wizard d-flex justify-content-end mb-0">
+                    <li class="previous list-inline-item" aria-disabled="true"><button class="btn btn-primary" cdkStepperPrevious>Previous</button></li>
+                    <li class="next list-inline-item" aria-disabled="false"><button class="btn btn-primary" cdkStepperNext>Finish</button></li>
+                  </ul>
+                </section>
+              </cdk-step>
+  
+            </ng-stepper>
+          </div>
+  
+        </div>
+        <!-- end card body -->
+      </div>
+      <!-- end card -->
+    </div>
+    <!-- end col -->
+  </div>

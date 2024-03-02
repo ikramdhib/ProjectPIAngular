@@ -31,11 +31,19 @@ import { FakeBackendInterceptor } from './core/helpers/fake-backend';
 import { ToastrModule } from 'ngx-toastr';
 
 import { StageListComponent } from './stage-list/stage-list.component';
-import { NourComponent } from './nour/nour.component';
+import { NourComponent } from './pages/nour/nour.component';
 import { StageListtComponent } from './pages/stage-listt/stage-listt.component';
 import { FormModule } from './pages/form/form.module';
 import { FormsModule } from '@angular/forms';
 import { ReasonModalComponent } from './pages/reason-modal/reason-modal.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import SignaturePad from 'signature_pad';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { NgStepperModule } from 'angular-ng-stepper';
+import { TimelineComponent } from './pages/utility/timeline/timeline.component';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -53,19 +61,25 @@ export function createTranslateLoader(http: HttpClient): any {
   declarations: [
     AppComponent,
     CyptolandingComponent,
-  
+  UserListComponent,
     StageListComponent,
         NourComponent,
         StageListtComponent,
-        ReasonModalComponent,
-    
+        ReasonModalComponent
+        
+
   ],
+
   imports: [
+    CdkStepperModule,
+    NgStepperModule,
     FormsModule,
     ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
-
+    MatDialogModule,
+    RouterModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -94,4 +108,6 @@ export function createTranslateLoader(http: HttpClient): any {
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],
 })
-export class AppModule { }
+export class AppModule {
+  RouterModule
+ }

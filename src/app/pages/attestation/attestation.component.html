@@ -1,0 +1,29 @@
+<div id="contentToConvert">
+
+  <div class="container">
+    <div class="content">
+      <div class="attestation">
+        
+        <input type="file" accept="image/*" (change)="onFileSelected($event)" style="float: right; margin-left: 10px;" /> <!-- Ajout de l'input pour télécharger le logo -->
+        <div style="clear:both;"></div>
+      
+        <p style="float: left; margin-left: 45px; font-size: 20px;">{{ currentDate }}</p> <!-- Augmenter la taille de la date -->
+        <br>
+        <h3 style="text-align: center;">Attestation de stage</h3>
+        <br>
+        <p style="font-size: 18px;">Nous soussignés, Nourhene Khemiri, attestons par la présente que, étudiant(e) en  à VERMEG, a effectué un stage au sein de notre entreprise du 25-01-2024 au 25-02-2024. Durant cette période, a démontré un haut niveau d'engagement, d'initiative et de professionnalisme dans l'accomplissement de ses missions. Ses compétences, sa capacité d'adaptation et son attitude positive ont grandement contribué à la réussite des projets auxquels il/elle a participé. Nous lui souhaitons plein succès dans la poursuite de ses études et dans sa carrière future.</p>
+        <img *ngIf="logoFile" [src]="getLogoUrl()" style="max-width: 100%; margin-top: 20px;" /> <!-- Affichage de l'image du logo si elle est définie -->
+        <img *ngIf="signatureImageSrc" [src]="signatureImageSrc" style="max-width: 100%; margin-top: 20px;" /> <!-- Affichage de la signature -->
+        
+      </div>
+      <canvas #signaturePad width="200" height="200" style="margin: 20px auto; display: block;"></canvas>
+      <button (click)="clearSignature()" class="btn btn-success">Effacer la signature</button>
+      <span style="margin: 0 5px;"></span> <!-- Espace entre les boutons -->
+      <button (click)="saveAttestation()" class="btn btn-primary">Enregistrer l'attestation</button>
+      <span style="margin: 0 5px;"></span> <!-- Espace entre les boutons -->
+      <button (click)="downloadAttestation()" class="btn btn-info">Télécharger l'attestation</button>
+
+    </div>
+  </div>
+  
+</div>

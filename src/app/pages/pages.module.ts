@@ -7,6 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FullCalendarModule } from '@fullcalendar/angular';
@@ -43,12 +44,14 @@ import { ChatComponent } from './chat/chat.component';
 
 import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { ToastrModule } from 'ngx-toastr';
+import SignaturePad from 'signature_pad';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
   imports: [
     ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
-
+    MatDialogModule,
     CommonModule,
     FormsModule,
     BsDropdownModule.forRoot(),
@@ -72,6 +75,7 @@ import { ToastrModule } from 'ngx-toastr';
     FormModule,
     TablesModule,
     IconsModule,
+   
     ChartModule,
     WidgetModule,
     MapsModule,
@@ -81,7 +85,9 @@ import { ToastrModule } from 'ngx-toastr';
     CollapseModule.forRoot(),
     SimplebarAngularModule,
     LightboxModule,
-    PickerModule
+    PickerModule,
   ],
 })
-export class PagesModule { }
+export class PagesModule {
+  
+ }
