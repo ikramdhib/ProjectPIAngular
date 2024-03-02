@@ -30,34 +30,34 @@
                          <div class="text-center">
                             <div>
                                 <h5 class="text-danger">Welcome Back !</h5>
-                                <p class="text-muted">Sign in to continue to Skote.</p>
+                                <p class="text-muted">Sign in to continue to <strong>ESPRIT</strong> .</p>
                             </div>
                         </div>
                             <div class="mt-4">
                                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                                    <div class="mt-4">
-                                      <alert type="danger" *ngIf="isError" [dismissible]="false">Login or password are incorrect try again</alert>
+                                    <div  *ngIf="isError" class="alert alert-danger text-center mb-4" role="alert">
+                                        Login or password are incorrect try again
                                     </div>
                                     <div class="mb-3">
                                         <label for="email">Email</label>
                                         <input type="email" class="form-control" id="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Entre votre email">
                                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                             <div *ngIf="f.email.errors.required">Email requis</div>
-                                            <div *ngIf="f.email.errors.email">Email doit etre valide
+                                            <div *ngIf="f.email.errors.email">Email is required
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="mb-3">
                                         <div class="float-end">
-                                            <a routerLink="/forgetPassword" class="text-muted">Mot de pass oublié ?</a>
+                                            <a routerLink="/forgetPassword" class="text-muted">Forget Paswword ?</a>
                                         </div>
-                                        <label for="userpassword">Mot de passe</label>
+                                        <label for="userpassword">Password</label>
                                         <div class="input-group auth-pass-inputgroup">
                                             <input [type]="changeType?'password':'text'" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" placeholder="Entrer votre mot de passe" aria-label="Password" aria-describedby="password-addon">
                                             <button class="btn btn-light" (click)="viewPasswor()" type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                                <span *ngIf="f.password.errors.required">Mot de passe requis</span>
+                                                <span *ngIf="f.password.errors.required">Password is required</span>
                                             </div>
                                         </div>
                                     </div>

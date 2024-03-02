@@ -19,28 +19,31 @@ resetPassToken="";
   constructor(private formBuilder: FormBuilder , private route: ActivatedRoute, private router: Router, private forgePassService : ForgetPasswordService ) { }
   // set the currenr year
   year: number = new Date().getFullYear();
-
+  user_reset :any;
   passChange: FormGroup;
 
 
   ngOnInit(): void { 
 
     this.passChange = this.formBuilder.group({
-      newPassword: ['', Validators.required]
+      newPassword: ['', [Validators.required ,  Validators.minLength(8) , 
+        Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@*\/])[a-zA-Z0-9@*\/]+$/)]]
     });
 
     this.resetPassToken = this.route.snapshot.queryParamMap.get('token');
 
     console.log(typeof(this.resetPassToken))
+
+    this.user_reset=JSON.parse( localStorage.getItem("passReset_user"));
   }
    unsubscribeAll : Subject<any> = new Subject()
 
   get f() { return this.passChange.controls; }
  
   onSubmit(){
+    if(this.passChange.valid){
     this.success="";
     this.submitted=true;
-  if(!this.f.invalid){
       console.log(this.f.newPassword.value)
       const request ={
         newPassword : this.f.newPassword.value

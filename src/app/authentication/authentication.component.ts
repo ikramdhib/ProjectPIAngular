@@ -61,10 +61,10 @@ export class AuthenticationComponent  implements OnInit {
             localStorage.setItem('reresh-Token',res?.refreshToken);
           }
         },
-      /*  error:(err:any)=>{
+        error:(err:any)=>{
           this.isError = true
          console.log(err)
-        },*/
+        },
         complete:()=>{
           this.router.navigate(['/'])
         }

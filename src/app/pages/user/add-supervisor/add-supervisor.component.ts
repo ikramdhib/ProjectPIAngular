@@ -26,21 +26,20 @@ export class AddSupervisorComponent {
     this.breadCrumbItems = [{ label: 'User' }, { label: 'Add Student', active: true }];
     this.createForm();
 
-    this.defaultImageFile = new File(['defaultImage'], 'assets/images/users/user-dummy-img.jpg', { type: 'image/jpeg' });
     
   }
   
 
   createForm() {
     this.StudentForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      address: ['', [Validators.required]],
-      cin: ['', [Validators.required]],
-      login: ['', [Validators.required]],
-      emailPro: ['', [Validators.required]],
-      company: ['', [Validators.required]],
-      phoneNumber: ['', [Validators.required]],
+      firstName: ['', [Validators.required ,Validators.pattern(/^[a-zA-Z]+$/)]],
+      lastName: ['', [Validators.required,Validators.pattern(/^[a-zA-Z]+$/)]],
+      address: ['', [Validators.required,Validators.pattern(/^[a-zA-Z]+$/)]],
+      cin: ['', [Validators.required , Validators.pattern(/^[0-9]+$/) ,Validators.minLength(8) ,Validators.maxLength(8) ]],
+      login: ['', [Validators.required , Validators.maxLength(25),  Validators.email]],
+      emailPro: ['', [Validators.required ,  Validators.maxLength(25),  Validators.email]],
+      company: ['', [Validators.required ,  Validators.maxLength(25)]],
+      phoneNumber: ['', [Validators.required , Validators.pattern(/^[0-9]+$/) , ,Validators.minLength(8) , Validators.maxLength(8)]],
       img: ['',[Validators.required]],
     });
   }
