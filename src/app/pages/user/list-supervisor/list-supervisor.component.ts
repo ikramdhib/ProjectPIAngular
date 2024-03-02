@@ -8,6 +8,8 @@ import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceser
 import { userListService } from '../list-students/userlist.service';
 import { userList } from '../list-students/data';
 import { DecimalPipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-supervisor',
@@ -39,7 +41,10 @@ export class ListSupervisorComponent {
  
    constructor(private modalService: BsModalService, 
      public userServiseStudents : UsersListService,
-     public service: userListService, private formBuilder: UntypedFormBuilder) {
+     public toastr:ToastrService, 
+     public service: userListService, 
+     public router : Router,
+     private formBuilder: UntypedFormBuilder) {
      
      }
  
@@ -131,8 +136,12 @@ export class ListSupervisorComponent {
  
    // Delete User
    removeUser(id: any) {
-     this.deleteId=id
-     this.removeItemModal.show();
+    this.userServiseStudents.blockUser(id).subscribe({
+      complete:()=>{
+        this.toastr.success('Student added with success','SUCCESS');
+        window.location.reload();
+      }
+    })
    }
  
    confirmDelete() {

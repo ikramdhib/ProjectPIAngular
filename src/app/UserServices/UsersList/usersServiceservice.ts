@@ -54,6 +54,9 @@ export class UsersListService {
     changePassword(id: string , request:any){
       return this.http.put(`${this.API_RL}api/v1/user/changePassword/${id}`,request);
     }
+    blockUser(id:string){
+      return this.http.put(`${this.API_RL}api/v1/user/blockUser/${id}`,null);
+    }
 
 
 }
