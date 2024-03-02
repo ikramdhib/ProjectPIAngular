@@ -21,8 +21,8 @@
             <div class="invoice-title">
               <div class="float-end">
                 <a class="btn btn-sm btn-link font-size-25 text-center" href="javascript:void(0)">
-                   <i class="bx bx-heart" style=" font-size: large; font-weight: bold; "></i>{{translate}}
-                </a>  
+                  <i class="bx bx-heart" [ngClass]="{'text-danger': isFavorite(question.id)}" style="font-size: large; font-weight: bold;"></i>{{translate}}
+                </a> 
               </div>
               <div class="auth-logo mb-4 col-10">
                 <h2><strong>{{question.titre}}</strong></h2><br>
@@ -33,9 +33,11 @@
               <div class="col-10" style="overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical;">
                   <div [innerHTML]="question.content" ></div>  
               </div>
-              <div class="auth-logo mb-4 col-10">
-                <h2><strong>{{question.tag}}</strong></h2><br>
-            </div>
+              <div class="col-10">
+                <div *ngFor="let tag of question.tags" class="badge bg-primary me-1 mb-1">
+                  {{ tag }}
+                </div>
+              </div>
               <div class="d-print-none">
                 <div class="float-end list-inline wizard d-flex justify-content-end mb-0">
                   <div class="btn btn-sm font-size-18 text-center">

@@ -15,6 +15,8 @@ export class ListforumComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   filteredQuestions: any[] = []; // Tableau pour les questions filtrées
   searchTerm: string = ''; 
+  favoris: Question[] = [];
+  userId: string = '65d5faf88ecbf72fd4d359f2'; 
 
   constructor(private forumService:ForumService,
     private sanitizer: DomSanitizer) { }
@@ -33,6 +35,14 @@ export class ListforumComponent implements OnInit {
       }, error => {
         console.error('Erreur lors de la récupération des questions : ', error);
       });
+      this.forumService.getListFavoris(this.userId).subscribe(
+        (favoris) => {
+          this.favoris = favoris;
+        },
+        (error) => {
+          console.error('Erreur lors de la récupération des favoris :', error);
+        }
+      );
       
     }
     loadResponseCounts(): void {
@@ -58,5 +68,8 @@ export class ListforumComponent implements OnInit {
          
         );
       }
+    }
+    isFavorite(questionId: string): boolean {
+      return this.favoris.some(favQuestion => favQuestion.id === questionId);
     }
   }

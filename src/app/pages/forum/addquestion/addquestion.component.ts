@@ -56,7 +56,7 @@ onReady(editor:ClassicEditor): void {
       const formData = new FormData();
       formData.append('titre', this.formQuestion.get('titre').value);
       formData.append('content', this.formQuestion.get('content').value);
-      //formData.append('tagCtrl', this.formQuestion.get('tagCtrl').value);
+      formData.append('tags', JSON.stringify(this.selectedTags));
   
       this.forumService.createQuestion(formData).subscribe((response) => {
         console.log('Question créée avec succès !', response);
