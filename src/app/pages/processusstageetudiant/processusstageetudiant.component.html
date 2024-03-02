@@ -11,7 +11,7 @@
                   <span class="number">1.</span>
                   <span>Demande de stage</span>
                 </ng-template>
-                <section *ngIf="cdkStepper.selectedIndex === 0">
+                <section *ngIf="cdkStepper.selectedIndex === 0" id="contenuPdf">
                   <div>
                     <button (click)="afficherDemandeDeStage()" class="btn btn-primary">Demande de stage</button>
                     <button *ngIf="demandeDeStageContent" (click)="telechargerPDF()" class="btn btn-success">Télécharger</button>
@@ -206,7 +206,7 @@
                         </div>
                       </div>
                       <div>
-                          <button type="submit" class="btn btn-primary w-md">Submit</button>
+                          <button type="submit" class="btn btn-primary w-md">Ajouter</button>
                         </div>
                     </form>
                     <div class="container-fluid">
@@ -246,7 +246,7 @@
                                       <th scope="col">Date début</th>
                                       <th scope="col">Date fin</th>
                                       <th scope="col">Type</th>
-                      
+                                      <th scope="col">Action</th>                  
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -423,7 +423,7 @@
                             <th scope="col">Date début</th>
                             <th scope="col">Date fin</th>
                             <th scope="col">Type</th>
-            
+                            <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -435,15 +435,93 @@
                                 <td>{{ stage.type}}</td>
                                 <td>
                               <ul class="list-unstyled hstack gap-1 mb-0">
-                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="{{ showForm ? 'Hide' : 'Add' }}">
-                                  <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="toggleForm()">
-                                    <i class="{{ showForm ? 'mdi mdi-eye-off-outline' : 'mdi mdi-plus' }}"></i>
-                                  </a>
-                                </li>
                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter journal">
-                                  <button class="btn btn-sm btn-soft-info" (click)="addJournal(stage)">
+                                  <button  class="btn btn-sm btn-soft-info" (click)="addJournal(stage)">
                                     Ajouter journal
                                   </button>
+                                </li>
+                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="{{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}">
+                                  <button class="btn btn-sm btn-soft-info" (click)="toggleTacheForm(stage.id)">
+                                    {{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}
+                                  </button>
+                                </li>
+                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher tàches">
+                                  <button  class="btn btn-sm btn-soft-info" (click)="showTaches(stage.journal.id)" >
+                                    Afficher tàches
+                                  </button>
+                                </li>                        
+                              </ul>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <!--end row-->
+                    <form *ngIf="showTacheForm" [formGroup]="tacheForm" >
+
+                      <div class="mb-3 row">
+                        <label for="date" class="col-md-2 col-form-label"
+                          >Date </label
+                        >
+                        <div class="col-md-10">
+                          <input
+                            class="form-control"
+                            type="date"
+                            id="date"
+                            formControlName="date"
+                          />
+                        </div>
+                        <div *ngIf="tacheForm.get('date').hasError('required') && tacheForm.get('date').touched">
+                          Ce champ est requis.
+                        </div>
+                      </div>
+                      <div class="mb-3 row">
+                        <label for="libelle" class="col-md-2 col-form-label"
+                          >Tache </label
+                        >
+                        <div class="col-md-10">
+                          <textarea
+                            class="form-control"
+                            type="text"
+                            id="libelle"
+                            formControlName="libelle"
+                          ></textarea>
+                        </div>
+                        <div *ngIf="tacheForm.get('libelle').hasError('required') && tacheForm.get('libelle').touched">
+                          Ce champ est requis.
+                        </div>
+                      </div>
+                      <div>
+                          <button type="submit" class="btn btn-primary w-md" (click)="onTacheFormSubmit()">Ajouter</button>
+                      </div>
+                    </form>
+                  </div>
+                  <section *ngIf="taches.length > 0">
+                  <div class="card-body">
+                    <h4>Liste des tàches :</h4>
+                    <div class="table-responsive">
+                      <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                        <thead>
+                          <tr>                            
+                            <th scope="col">Date Tàche</th>
+                            <th scope="col">Contenu Tàche</th>             
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let tache of taches">
+                                <td>{{ tache.date }}</td>
+                                <td>{{ tache.libelle }}</td>
+                                <td>
+                
+                              <ul class="list-unstyled hstack gap-1 mb-0">
+                                
+                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                    <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModalTache(tache)">
+                                      <i class="mdi mdi-pencil-outline"></i>
+                                    </a>
+                                  </li>
+                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                  <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
                                 </li>
                               </ul>
                             </td>
@@ -451,49 +529,37 @@
                         </tbody>
                       </table>
                     </div>
-                    <div class="row justify-content-between align-items-center">
-                      <div class="col-auto me-auto">
-                      
-                      </div>
-                      <div class="col-auto">
-                        <div class="text-md-right float-md-end pagination-rounded">
-                          <ul class="pagination pagination-rounded justify-content-end mb-2">
-                        
-                          </ul>
-                        </div>
-                      </div>
-                      <!--end col-->
-                    </div>
                     <!--end row-->
                   </div>
-
-                  <div *ngIf="showForm">
-                    <h4 class="card-title mb-4">Ajouter des tàches</h4>
-                      <form class="repeater" [formGroup]="form">
-                          <div formArrayName="formlist">
-                              <div *ngFor="let data1 of formData().controls; let i=index;">
-                                <div [formGroupName]="i" class="row">
-                                  <div class="mb-3 col-lg-2">
-                                    <label for="name">Date de jour</label>
-                                    <input type="text" formControlName="name" class="form-control">
-                                  </div>
-
-                                  <div class="mb-3">
-                                    <label for="formmessage">Tàche à réaliser</label>
-                                    <textarea id="formmessage" class="form-control" rows="3"></textarea>
-                                  </div>
-                
-                                  <div class="col-lg-2 align-self-center">
-                                    <div class="d-grid">
-                                      <input type="button" class="btn btn-primary" value="Supprimer cette tàche" (click)="removeField(i)">
-                                      <input type="button" class="btn btn-success mt-3 mt-lg-0" value="Ajouter autre tàche" (click)="addField()">
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                      </form>
+                </section>
+                <ng-template #updateContent2>
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="updateModalLabel">Modifier Tàche</h5>
+                      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
                   </div>
+                  <form [formGroup]="updateFormTache" (ngSubmit)="updateFormTache.valid && updateTache()">
+                      <div class="modal-body">
+                          <div class="mb-3">
+                              <label for="date" class="form-label">Date Tàche</label>
+                              <input type="date" class="form-control" id="date" formControlName="date">
+                              <div *ngIf="updateFormTache.get('date').hasError('required') && updateFormTache.get('date').touched">
+                                Ce champ est requis.
+                              </div>
+                          </div>
+                          <div class="mb-3">
+                            <label for="libelle" class="form-label">Contenu Tàche</label>
+                            <textarea type="text" class="form-control" id="libelle" formControlName="libelle"></textarea>
+                        </div>
+                        <div *ngIf="updateFormTache.get('libelle').hasError('required') && updateFormTache.get('libelle').touched">
+                          Ce champ est requis.
+                        </div> 
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" (click)="modalRef2?.hide()">Fermer</button>
+                          <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                      </div>
+                  </form>
+              </ng-template>
                 </section>
               </cdk-step>
   

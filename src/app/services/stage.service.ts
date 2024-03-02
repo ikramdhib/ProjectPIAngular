@@ -1,7 +1,7 @@
 // Exemple de service fictif (vous devez créer un service réel pour communiquer avec le backend)
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, catchError, throwError } from "rxjs";
+import { Observable, catchError, map, throwError } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -23,6 +23,8 @@ export class StageService {
       `http://localhost:8081/api/stages/ajouterEtAffecterStageAUtilisateur/65d7b036577f851e1873aa10`,
       data,
       this.httpOptions
+    ).pipe(
+      map((response: any) => response.data) // Supposez que votre API renvoie un objet avec une propriété 'data'
     );
   }
 
@@ -38,5 +40,10 @@ export class StageService {
     const url = `${this.apiUrl}/${stageId}`;
     return this.http.delete(url);
   }
+
+  isJournalAssociated(stageId: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/isJournalAssociated/${stageId}`);
+  }
+  
 
 }
