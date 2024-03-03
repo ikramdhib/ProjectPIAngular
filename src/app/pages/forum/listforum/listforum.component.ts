@@ -64,7 +64,8 @@ export class ListforumComponent implements OnInit {
         this.filteredQuestions = this.questions; 
       } else {
         this.filteredQuestions = this.questions.filter(question =>
-          question.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) 
+          question.titre.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          question.tags.some(tag => tag.name.toLowerCase().includes(this.searchTerm.toLowerCase()))
          
         );
       }

@@ -53,12 +53,16 @@ onReady(editor:ClassicEditor): void {
 
   onSubmit() {
     if (this.formQuestion.valid) {
+      // Créer des objets Tag à partir des noms des tags sélectionnés
+      const tagObjects = this.selectedTags.map(tagName => ({ name: tagName }));
       const formData = new FormData();
-      formData.append('titre', this.formQuestion.get('titre').value);
-      formData.append('content', this.formQuestion.get('content').value);
-      formData.append('tags', JSON.stringify(this.selectedTags));
+      const questionData = {
+        titre: this.formQuestion.get('titre').value,
+        content: this.formQuestion.get('content').value,
+        tags: tagObjects // Ici, on envoie un tableau d'objets
+      };
   
-      this.forumService.createQuestion(formData).subscribe((response) => {
+      this.forumService.createQuestion(questionData).subscribe((response) => {
         console.log('Question créée avec succès !', response);
         this.success = true;
         this.successmsg();
