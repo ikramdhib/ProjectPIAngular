@@ -1,6 +1,14 @@
-<h2>Demande List</h2>
-<ul>
-  <li *ngFor="let demande of demandes">
-    <a [routerLink]="['/demande-details', demande.id]">{{ demande.titre }}</a>
-  </li>
-</ul>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Demande List</h2>
+    </div>
+    <div class="card-body">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let demande of demandes">
+          <a [routerLink]="['/demande-details', demande.id]" class="text-decoration-none">{{ demande.titre }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

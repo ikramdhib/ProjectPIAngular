@@ -1,8 +1,25 @@
-<h2>Demande Details</h2>
-<div *ngIf="demande">
-  <p>ID: {{ demande.id }}</p>
-  <p>Titre: {{ demande.titre }}</p>
-  <p>Description: {{ demande.description }}</p>
-  <p>Etat: {{ demande.etat }}</p>
-  <!-- Add more details as needed -->
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h2>Demande Details</h2>
+    </div>
+    <div class="card-body">
+      <div *ngIf="demande">
+        <div class="mb-3">
+          <strong>ID:</strong> {{ demande.id }}
+        </div>
+        <div class="mb-3">
+          <strong>Titre:</strong> {{ demande.titre }}
+        </div>
+        <div class="mb-3">
+          <strong>Description:</strong> {{ demande.description }}
+        </div>
+        <div class="mb-3">
+          <strong>Etat:</strong> {{ demande.etat }}
+        </div>
+        
+        <!-- Add more details as needed -->
+      </div>
+    </div>
+  </div>
 </div>

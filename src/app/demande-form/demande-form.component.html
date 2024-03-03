@@ -1,74 +1,74 @@
 <!-- demande-form.component.html -->
 
 <div class="container mt-4">
-    <h1>Create Demande</h1>
-    <div class="card">
-      <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()">
-        
+  <div class="card border-dark">
+    <div class="card-header bg-dark text-white">
+      <h1 class="mb-0">Postuler</h1>
+    </div>
+    <div class="card-body">
+
+      <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()" enctype="multipart/form-data">
+
         <!-- Titre -->
         <div class="form-group">
           <label for="titre">Titre:</label>
           <input type="text" id="titre" formControlName="titre" class="form-control" required>
         </div>
-  
+
         <!-- Description -->
         <div class="form-group">
           <label for="description">Description:</label>
-          <textarea id="description" formControlName="description" class="form-control" required></textarea>
+          <textarea id="description" formControlName="description" class="form-control" rows="4" required></textarea>
         </div>
-  
+
         <!-- Etat -->
         <div class="form-group">
           <label for="etat">Etat:</label>
           <input type="text" id="etat" formControlName="etat" class="form-control">
         </div>
-  
-        <!-- Student Name -->
-        <div class="form-group">
-          <label for="studentName">Student Name:</label>
-          <input type="text" id="studentName" formControlName="studentName" class="form-control">
+
+        <!-- Student Name and Email -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" formControlName="studentName" class="form-control">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="studentEmail">Student Email:</label>
+            <input type="email" id="studentEmail" formControlName="studentEmail" class="form-control">
+          </div>
         </div>
-  
-        <!-- Student Email -->
-        <div class="form-group">
-          <label for="studentEmail">Student Email:</label>
-          <input type="text" id="studentEmail" formControlName="studentEmail" class="form-control">
+
+        <!-- CV and Lettre Motivation File Inputs -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="cvPath">CV:</label>
+            <input formControlName="cvPath" type="file" name="cvPath" class="form-control-file text-dark" (change)="onFileSelected($event)" />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="lettreMotivation">Lettre de Motivation:</label>
+            <input formControlName="lettreMotivation" type="file" name="lettreMotivation" class="form-control-file text-dark" (change)="onFileSelected1($event)" />
+          </div>
         </div>
-  
-        <!-- CV Path -->
-        <div class="form-group">
-          <label for="cvPath">CV Path:</label>
-          <input type="text" id="cvPath" formControlName="cvPath" class="form-control">
-        </div>
-  
-        <!-- Lettre Motivation -->
-        <div class="form-group">
-          <label for="lettreMotivation">Lettre Motivation:</label>
-          <input type="text" id="lettreMotivation" formControlName="lettreMotivation" class="form-control">
-        </div>
-  
-        <!-- Offre -->
-      
-  
-        <!-- Add more form controls as needed -->
-  
+
         <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        <button type="submit" class="btn btn-danger mt-4">Submit</button>
       </form>
     </div>
-  
-    <!-- Display the created demande if available -->
-    <div *ngIf="createdDemande" class="mt-4">
-      <h3>Created Demande</h3>
-      <p>ID: {{ createdDemande.id }}</p>
-      <p>Titre: {{ createdDemande.titre }}</p>
-      <p>Description: {{ createdDemande.description }}</p>
-      <p>Etat: {{ createdDemande.etat }}</p>
-      <p>Student Name: {{ createdDemande.studentName }}</p>
-      <p>Student Email: {{ createdDemande.studentEmail }}</p>
-      <p>CV Path: {{ createdDemande.cvPath }}</p>
-      <p>Lettre Motivation: {{ createdDemande.lettreMotivation }}</p>
-      <!-- Add more properties as needed -->
+  </div>
+
+  <!-- Display the created demande if available -->
+  <div *ngIf="createdDemande" class="mt-4">
+    <div class="card border-danger">
+      <div class="card-body">
+        <h3 class="card-title text-danger">Created Demande</h3>
+        <p class="card-text"><strong>ID:</strong> {{ createdDemande.id }}</p>
+        <p class="card-text"><strong>Titre:</strong> {{ createdDemande.titre }}</p>
+        <p class="card-text"><strong>Description:</strong> {{ createdDemande.description }}</p>
+        <p class="card-text"><strong>Etat:</strong> {{ createdDemande.etat }}</p>
+        <p class="card-text"><strong>Student Name:</strong> {{ createdDemande.studentName }}</p>
+        <p class="card-text"><strong>Student Email:</strong> {{ createdDemande.studentEmail }}</p>
+      </div>
     </div>
   </div>
-  
+</div>

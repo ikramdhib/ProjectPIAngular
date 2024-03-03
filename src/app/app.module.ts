@@ -34,6 +34,9 @@ import { DemandeDetailsComponent } from './demande-details/demande-details.compo
 import { DemandeFormComponent } from './demande-form/demande-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
 import { SchedulerComponent } from './components/scheduler.component';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/in-memory-data.service';
+import { UploadComponent } from './upload/upload.component';
 
 
 
@@ -57,7 +60,8 @@ export function createTranslateLoader(http: HttpClient): any {
     DemandeListComponent,
     DemandeDetailsComponent,
     DemandeFormComponent,
-    SchedulerComponent
+    SchedulerComponent,
+    UploadComponent,
     
   ],
   imports: [

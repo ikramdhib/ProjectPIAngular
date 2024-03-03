@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,20 @@ export class DemandeService {
   constructor(private http: HttpClient) { }
 
   getAllDemandes() {
-    return this.http.get<any[]>(`${this.apiUrl}/demandes`);
+    return this.http.get<any[]>(`${this.apiUrl}/GetListDemande`);
   }
 
   getDemandeById(id: string) {
-    return this.http.get<any>(`${this.apiUrl}/demandes/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/GetDemande/${id}`);
   }
 
   createDemande(demandeData: any) {
+    // Remove the explicit creation of HttpHeaders
+    // const headers = new HttpHeaders();
+    // headers.set('Content-Type', 'multipart/form-data');
+  
     return this.http.post<any>(`${this.apiUrl}/CreateDemande`, demandeData);
   }
+  
+  
 }

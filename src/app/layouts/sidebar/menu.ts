@@ -14,6 +14,18 @@ export const MENU: MenuItem[] = [
         
     },
     {
+        id: 980,
+        label: 'Upload',
+        link: '/upload',
+        
+    },
+    {
+        id: 989,
+        label: 'List De Stage',
+        link: '/list-demande',
+        
+    },
+    {
         id: 999,
         label: 'Calendrier',
         link: '/calendrier',

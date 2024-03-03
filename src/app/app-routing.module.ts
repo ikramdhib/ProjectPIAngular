@@ -10,6 +10,8 @@ import { DemandeListComponent } from './demande-list/demande-list.component';
 import { DemandeDetailsComponent } from './demande-details/demande-details.component';
 import { DemandeFormComponent } from './demande-form/demande-form.component';
 import { SchedulerComponent } from './components/scheduler.component';
+import { UploadComponent } from './upload/upload.component';
+
 
 const routes: Routes = [
   { path: 'account', loadChildren: () => import('./account/account.module').then(m => m.AccountModule) },
@@ -19,11 +21,17 @@ const routes: Routes = [
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
   { path: 'calendrier', component: SchedulerComponent },
 
+  { path: 'upload', component: UploadComponent },
+  { path: 'list-demande', component: DemandeListComponent },
   { path: 'create-demande', component: DemandeFormComponent },
+
+  { path: 'demande-details/:id', component: DemandeDetailsComponent },
+
+
+
 
   { path: '**', component: Page404Component },
   { path: '', component: DemandeListComponent },
-  { path: 'demande-details/:id', component: DemandeDetailsComponent },
 ];
 
 @NgModule({

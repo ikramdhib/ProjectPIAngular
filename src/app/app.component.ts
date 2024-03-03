@@ -6,6 +6,8 @@ import { Component , OnInit} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit  {
+  title = 'uploadanddownload';
+
 
   ngOnInit() {
     // document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
