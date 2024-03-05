@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Raison du rejet</h2>
+<div mat-dialog-content>
+  <mat-form-field>
+    <textarea matInput [(ngModel)]="rejectionReason" placeholder="Saisir la raison du rejet..."></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Fermer</button>
+  <button mat-button (click)="confirmRejection()">Valider</button>
+</div>

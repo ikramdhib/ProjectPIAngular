@@ -30,10 +30,10 @@ export class StageService {
     return this.http.get(`${this.baseUrl}/encadrant/${encadrantId}`);
   }
   validateTask(tacheId: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/taches/${tacheId}/valider`, null);
+    return this.http.post(`${this.baseUrl}/taches/${tacheId}/valider`,{});
   }
 
   rejectTask(tacheId: string, rejectionReason: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/taches/${tacheId}/rejeter/${rejectionReason}`, null);
+    return this.http.post(`${this.baseUrl}/taches/${tacheId}/rejeter/${rejectionReason}`, {});
   }
  }

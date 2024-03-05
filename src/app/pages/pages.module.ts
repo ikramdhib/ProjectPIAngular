@@ -52,6 +52,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
     MatDialogModule,
+    
     CommonModule,
     FormsModule,
     BsDropdownModule.forRoot(),

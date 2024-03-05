@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'attestation-stage/:studentId/:stageId', component: AttestationComponent },
+ { path: 'attestation-stage/:studentId/:stageId', component: AttestationComponent },
   {path:'nour',component:NourComponent},
 
   { path: 'chat', component: ChatComponent },

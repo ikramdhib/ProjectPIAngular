@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AttestationComponent implements AfterViewInit, AfterViewChecked {
   currentDate: string;
-  defaultEncadrantId = '65d7b5d7025a231f20900abb';
+  defaultEncadrantId = '65e2fcf80ca91442454d81e3';
   attestationText: string = ""; // Assurez-vous de l'initialiser avec le contenu de l'attestation
 
   
