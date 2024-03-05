@@ -53,25 +53,26 @@ get f(){
       ] as File;
     }
   }
+  idOffre="65e77b9acb56616185957aeb";
 
   submitDemande() {
-
     if (this.demandeForm.valid) {
       const formData = new FormData();
       formData.append('titre', this.demandeForm.get('titre')?.value);
       formData.append('description', this.demandeForm.get('description')?.value);
-
       formData.append('etat', this.demandeForm.get('etat')?.value);
-
       formData.append('studentName', this.demandeForm.get('studentName')?.value);
       formData.append('studentEmail', this.demandeForm.get('studentEmail')?.value);
-
-
-    formData.append('cvPath', this.selectedFile!!, this.selectedFile?.name);
-    formData.append('lettreMotivation', this.selectedFile!!, this.selectedFile?.name);
-
+      formData.append('idOffre',this.idOffre)
+  
+      // Append CV and Lettre Motivation files
+      formData.append('cvPath', this.selectedFile!!, this.selectedFile?.name);
+      formData.append('lettreMotivation', this.selectedFile1!!, this.selectedFile1?.name);
+  
       const demandeData = this.demandeForm.value;
-      this.demandeService.createDemande(demandeData).subscribe(
+      console.log(demandeData);
+  
+      this.demandeService.createDemande(formData).subscribe(
         (data) => {
           console.log('Demande created successfully', data);
           this.createdDemande = data; // Set the created demande variable
@@ -80,4 +81,5 @@ get f(){
       );
     }
   }
+  
 }

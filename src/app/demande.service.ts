@@ -8,6 +8,7 @@ export class DemandeService {
 
   private apiUrl = 'http://localhost:8081/api/demandes';
 
+  
   constructor(private http: HttpClient) { }
 
   getAllDemandes() {
@@ -18,13 +19,14 @@ export class DemandeService {
     return this.http.get<any>(`${this.apiUrl}/GetDemande/${id}`);
   }
 
-  createDemande(demandeData: any) {
-    // Remove the explicit creation of HttpHeaders
-    // const headers = new HttpHeaders();
-    // headers.set('Content-Type', 'multipart/form-data');
-  
-    return this.http.post<any>(`${this.apiUrl}/CreateDemande`, demandeData);
+  createDemande(demandeData: FormData) {
+    const headers = new HttpHeaders();  // No need to set content-type explicitly for FormData
+    
+    console.log(demandeData);
+    
+    return this.http.post('http://localhost:8081/file/add', demandeData, { headers });
   }
+  
   
   
 }
