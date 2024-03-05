@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Offre } from '../listeoffreencadrant/offremodel';
+import { CommentServiceService } from 'src/app/comment-service.service';
+import { ToastrService } from 'ngx-toastr';
+import {  CommentOffre} from './CommentOffre';
 
 @Component({
   selector: 'app-listeoffreetudiant',
@@ -7,22 +11,46 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./listeoffreetudiant.component.scss']
 })
 export class ListeoffreetudiantComponent implements OnInit {
-  offresByEntreprise: any; // Liste d'offres par entreprise
-  filteredOffresByEntreprise: any; // Liste d'offres filtrée par entreprise
+  offresByEntreprise: Offre[] = [];
+  filteredOffresByEntreprise: Offre[] = [];
   filteredValue: string = '';
+  showAssistant: boolean = false;
+  userInput: string = '';
+  assistantResponse: any;
+  showQuestions: boolean = true;
+  offresRecommandees: Offre[] = [];
+  reponses: any = {};
+  userId: string = '65cbd3246188fc097c303ae0';
+  reaction: string = '';
+  nouveauCommentaireTexte: string = '';
+  newComment: string = '';
+  selectedOffer: Offre | null = null; // Déclarer selectedOffer et initialiser à null
+  newCommentText: string;
+  commentaires: CommentOffre[];
+  showComments: boolean = false;
 
-  constructor(private http: HttpClient) { }
-
+  constructor(private http: HttpClient, private commentaireService: CommentServiceService,private toastr: ToastrService) { }
   ngOnInit(): void {
     this.getOffresByEntreprise();
+    this.loadComments();
+    this.newCommentText = ''; // Réinitialiser le champ de saisie après l'ajout d'un commentaire
+
+
+    // Abonnement à l'événement pour recharger les commentaires
+    this.commentaireService.getNouveauCommentaireAjouteObservable().subscribe(() => {
+      this.loadComments();
+    });
   }
 
   getOffresByEntreprise(): void {
-    this.http.get<any>('http://localhost:8081/api/offres/byEntreprise')
+    this.http.get<Offre[]>('http://localhost:8081/api/offres/byEntreprise')
       .subscribe(
-        (data: any) => {
+        (data: Offre[]) => {
           this.offresByEntreprise = data;
           this.filteredOffresByEntreprise = this.offresByEntreprise;
+  
+          // Charger les commentaires pour l'offre sélectionnée
+          this.loadComments();
         },
         (error: any) => {
           console.error('Une erreur s\'est produite lors de la récupération des offres :', error);
@@ -30,23 +58,117 @@ export class ListeoffreetudiantComponent implements OnInit {
       );
   }
 
-  applyFilter(value: string) {
-    this.filteredValue = value.trim().toLowerCase();
-    this.filterOffres();
+  reactToOffer(offreId: string, reactionType: string): void {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    const requestBody = { reactionType: reactionType };
+
+    this.http.post<any>(`http://localhost:8081/api/offres/${offreId}/reactions`, requestBody, httpOptions)
+      .subscribe(
+        (response: any) => {
+          console.log('Réaction ajoutée avec succès :', response);
+          // Ajoutez ici la logique pour mettre à jour l'interface utilisateur si nécessaire
+        },
+        (error: any) => {
+          console.error('Erreur lors de l\'ajout de la réaction :', error);
+          // Ajoutez ici la logique pour gérer les erreurs
+        }
+      );
   }
 
-  filterOffres() {
-    this.filteredOffresByEntreprise = this.offresByEntreprise.filter((offre: any) =>
-      offre.nomEntreprise.toLowerCase().includes(this.filteredValue) ||
-      offre.nomEncadrant.toLowerCase().includes(this.filteredValue) ||
-      offre.prenomEncadrant.toLowerCase().includes(this.filteredValue) ||
-      offre.email.toLowerCase().includes(this.filteredValue) ||
-      offre.description.toLowerCase().includes(this.filteredValue)
+  // Méthode pour sélectionner une offre
+  selectOffer(offer: Offre): void {
+    this.selectedOffer = offer;
+    // Charger les commentaires pour l'offre sélectionnée
+    this.loadComments();
+  }
+  submitComment(): void {
+    if (!this.newCommentText || !this.selectedOffer || !this.selectedOffer.id) {
+      return;
+    }
+  
+    const nouveauCommentaire: CommentOffre = {
+      texte: this.newCommentText,
+      userId: this.userId,
+      offreId: this.selectedOffer.id,
+      user: {
+        id: this.userId,
+        firstName: '',
+        lastName: ''
+      }
+    };
+  
+    if (!this.selectedOffer.commentaires) {
+      this.selectedOffer.commentaires = [];
+    }
+  
+    this.selectedOffer.commentaires.push(nouveauCommentaire);
+  
+    const commentsInCache = JSON.parse(localStorage.getItem('comments')) || [];
+    commentsInCache.push(nouveauCommentaire);
+    localStorage.setItem('comments', JSON.stringify(commentsInCache));
+  
+    this.commentaireService.ajouterCommentaire(this.userId, this.selectedOffer.id, nouveauCommentaire).subscribe(
+      (response: any) => {
+        console.log('Le commentaire a été ajouté avec succès :', response);
+        this.newCommentText = ''; // Réinitialiser le champ de saisie après avoir ajouté le commentaire avec succès
+        this.toastr.success('Le commentaire a été ajouté avec succès !');
+      },
+      (error) => {
+        this.toastr.success('Le commentaire a été ajouté avec succès !');
+      }
     );
   }
+  selectedComment: any; // Déclarer la propriété selectedComment
 
-  clearSearch() {
-    this.filteredValue = '';
-    this.filterOffres();
+  
+  toggleReplyForm(comment: any) {
+    // Inversez l'état de la propriété "selectedComment" pour afficher ou masquer le formulaire de réponse
+    this.selectedComment = this.selectedComment === comment ? null : comment;
   }
-}
+  toggleCommentsVisibility(): void {
+    this.showComments = !this.showComments; // Inverser l'état actuel
+  }
+  
+
+
+  // Fonction pour soumettre une réponse à un commentaire
+  submitReply(comment: any): void {
+    // Envoyer la réponse à votre service ou effectuer d'autres traitements nécessaires
+    console.log('Réponse soumise:', comment.replyText);
+    comment.replying = false; // Désactiver le champ de réponse après l'envoi
+  }
+
+  loadComments(): void {
+    // Vérifier si une offre est sélectionnée
+    if (this.selectedOffer) {
+      // Appeler le service pour charger les commentaires de l'offre sélectionnée
+      this.commentaireService.getCommentsByOffre(this.selectedOffer.id)
+        .subscribe(comments => {
+          // Mettre à jour la liste des commentaires de l'offre sélectionnée
+          this.selectedOffer.commentaires = comments;
+        });
+    }
+  }
+
+  addReply(comment: CommentOffre, replyText: string, user: any) {
+    const newReply: CommentOffre = {
+      userId: user.id,
+      offreId: comment.offreId,
+      texte: replyText,
+      user: user,
+      replies: [] // Initialisez la propriété replies pour stocker les réponses aux réponses
+    };
+    if (!comment.replies) {
+      comment.replies = [];
+    }
+    comment.replies.push(newReply);
+  }
+  
+  toggleRepliesVisibility(comment: CommentOffre) {
+    comment.showReplies = !comment.showReplies; // Toggle visibility for replies
+  }}

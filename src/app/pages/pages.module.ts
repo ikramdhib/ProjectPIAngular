@@ -39,12 +39,13 @@ import { ChartModule } from './chart/chart.module';
 import { CalendarComponent } from './calendar/calendar.component';
 import { MapsModule } from './maps/maps.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ChatComponent } from './chat/chat.component';
+import { MatIconModule } from '@angular/material/icon';
 
 import { FilemanagerComponent } from './filemanager/filemanager.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
+  declarations: [CalendarComponent, FilemanagerComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -78,7 +79,9 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
     CollapseModule.forRoot(),
     SimplebarAngularModule,
     LightboxModule,
-    PickerModule
+    PickerModule,
+    MatSidenavModule,
+    MatIconModule,
   ],
 })
 export class PagesModule { }

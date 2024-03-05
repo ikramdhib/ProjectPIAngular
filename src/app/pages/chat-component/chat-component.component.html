@@ -1,0 +1,31 @@
+<div class="conversation-container">
+  <!-- Messages de l'étudiant -->
+  <div class="student-messages">
+    <h3>Messages de l'étudiant</h3>
+    <div *ngFor="let message of studentMessages" class="message message--received" (click)="selectMessage(message)">
+     
+
+      <p>{{ message.content }}</p>
+
+      <span>{{ message.timestamp | date:'mediumTime' }}</span>
+    
+      <!-- Afficher les réponses de l'administrateur associées à ce message -->
+      <div *ngIf="message.adminResponses">
+        <p>Réponses de l'administrateur :</p>
+        <ul>
+          <li *ngFor="let adminResponse of message.adminResponses | keyvalue">
+            {{ adminResponse.key }}: {{ adminResponse.value }}
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  
+
+
+  <!-- Zone de saisie pour l'étudiant -->
+  <div class="new-student-message">
+    <input type="text" [(ngModel)]="newStudentMessage" placeholder="Nouveau message de l'étudiant">
+    <button (click)="sendStudentMessage()">Envoyer</button>
+  </div>
+</div>

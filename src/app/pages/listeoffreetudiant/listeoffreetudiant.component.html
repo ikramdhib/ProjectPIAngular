@@ -1,62 +1,126 @@
-<div class="container mt-4">
-  <!-- Barre de recherche -->
-  <div class="text-center mb-3">
-    <input type="text" class="form-control d-inline-block" placeholder="Rechercher..." (input)="applyFilter($event.target.value)">
-  </div>
-  
-  <!-- Filtrage par type de stage -->
-  <div class="dropdown mb-3">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Filtrer par type de stage
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <a class="dropdown-item" (click)="applyFilter('Tous les types')">Tous les types</a>
+<!-- Affichage des offres de stage par entreprise -->
+<div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="row mb-4">
+  <!-- Carte d'entreprise -->
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header bg-danger text-white">
+        <h3>{{ entreprise.key }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Détails de l'entreprise -->
+          <div class="col-md-3">
+            <div class="entreprise-details">
+              <span class="text-muted">
+                <strong class="text-success">{{ entreprise.value.length }}</strong> <span> offres disponibles</span>
+              </span>
+              <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="d-block mx-auto mt-3 max-width:100px; border-radius:5px; max-height:100px;">
+            </div>
+          </div>
+          <!-- Offres de stage -->
+          <div class="col-md-9">
+            <ul class="list-group">
+              <li *ngFor="let offre of entreprise.value" class="list-group-item">
+                <div class="offre-details">
+                  <!-- Informations sur l'offre de stage -->
+                  <div>
+                    <strong>Nom de l'entreprise :</strong> {{ offre.nomEntreprise }}
+                  </div>
+                  <div>
+                    <strong>Description :</strong> {{ offre.description }}
+                  </div>
+                  <!-- Autres détails de l'offre... -->
+                  <div>
+                    <strong>Nom de l'encadrant :</strong> {{ offre.nomEncadrant }}
+                  </div>
+                  <div>
+                    <strong>Prénom de l'encadrant :</strong> {{ offre.prenomEncadrant }}
+                  </div>
+                  <div>
+                    <strong>Email :</strong> {{ offre.email }}
+                  </div>
+                  <div>
+                    <strong>Date début stage :</strong> {{ offre.datedebut_stage | date: 'dd/MM/yyyy' }}
+                  </div>
+                  <div>
+                    <strong>Date fin stage :</strong> {{ offre.datefin_stage | date: 'dd/MM/yyyy' }}
+                  </div>
+                  <div>
+                    <strong>Durée (jours) :</strong> {{ offre.duree }}
+                  </div>
+                  <div>
+                    <strong>Type de Stage :</strong> {{ offre.type }}
+                  </div>
+                  <!-- Bouton pour sélectionner l'offre -->
+                  <div *ngIf="selectedOffer === offre" class="mt-3">
+                    <form (ngSubmit)="submitComment()">
+                      <div class="form-group">
+                        <label for="comment">Votre commentaire :</label>
+                        <textarea class="form-control" id="comment" [(ngModel)]="newCommentText" name="comment" rows="3" placeholder="Ajouter un commentaire"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        <i class="far fa-comment"></i> Poster un commentaire
+                      </button>
+                    </form>
+                  </div>
+                  <!-- Bouton pour sélectionner l'offre et afficher les commentaires -->
+                  <button class="btn btn-primary mt-3" (click)="selectOffer(offre)">
+                    <i class="fas fa-pencil-alt"></i> Sélectionner pour commenter
+                  </button>
+                  <!-- Bouton pour afficher ou masquer les commentaires -->
+                  <button class="btn btn-primary mt-3" (click)="toggleCommentsVisibility()">
+                    <i class="fas fa-comments"></i> {{ showComments ? 'Masquer les commentaires' : 'Afficher les commentaires' }}
+                  </button>
+                  <!-- Section pour afficher les commentaires -->
+                  <div class="mt-3" *ngIf="showComments && selectedOffer === offre">
+                    <h4>Commentaires pour {{ offre.nomEntreprise }}</h4>
+                    <ul class="list-group">
+                      <li *ngFor="let comment of selectedOffer.commentaires" class="list-group-item">
+                        <div class="comment">
+                          <!-- Informations sur le commentaire -->
+                          <p>Utilisateur : {{ comment.user?.firstName }} {{ comment.user?.lastName }}</p>
+                          <p>{{ comment.texte }}</p>
+                          <!-- Bouton pour répondre au commentaire -->
+                          <button class="btn btn-primary" (click)="toggleReplyForm(comment)">
+                            <i class="fas fa-reply"></i> Répondre
+                          </button>
+                          <!-- Formulaire de réponse -->
+                          <div *ngIf="selectedComment === comment">
+                            <form (ngSubmit)="submitReply(comment)">
+                              <div class="form-group">
+                                <label for="reply">Votre réponse :</label>
+                                <textarea class="form-control" id="reply" [(ngModel)]="comment.replyText" name="reply" rows="3" placeholder="Répondre au commentaire"></textarea>
+                              </div>
+                              <button type="submit" class="btn btn-primary">
+                                <i class="far fa-comment"></i> Envoyer la réponse
+                              </button>
+                            </form>
+                          </div>
+                         <!-- Afficher les réponses aux commentaires -->
+<ul class="list-group" *ngIf="comment.showReplies">
+  <li *ngFor="let reply of comment.replies" class="list-group-item">
+    <div class="reply">
+      <p>Utilisateur : {{ reply.user?.firstName }} {{ reply.user?.lastName }}</p>
+      <p>{{ reply.texte }}</p>
     </div>
-  </div>
-  
-  <!-- Liste des offres -->
-  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="entreprise">
-    <div class="entreprise-header bg-light p-3 mb-3 rounded">
-      <h3 class="text-dark">{{ entreprise.key }}</h3>
-      <div class="entreprise-details">
-        
-        <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="max-width: 100px; border-radius: 5px;">
-        <span class="text-muted">{{ entreprise.value.length }} offres disponibles</span>
+  </li>
+</ul>
+
+<!-- Bouton pour afficher ou masquer les réponses -->
+<button class="btn btn-primary mt-3" (click)="toggleRepliesVisibility(comment)">
+  <i class="fas fa-comments"></i> {{ comment.showReplies ? 'Masquer les réponses' : 'Afficher les réponses' }}
+</button>
+
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
-    <ul class="list-group">
-      <li *ngFor="let offre of entreprise.value" class="list-group-item mb-3">
-        <div class="offre-details">
-          <div>
-            <strong>Nom de l'entreprise:</strong> {{ offre.nomEntreprise }}
-          </div>
-          <div>
-            <strong>Description:</strong> {{ offre.description }}
-          </div>
-          <div>
-            <strong>Nom de l'encadrant:</strong> {{ offre.nomEncadrant }}
-          </div>
-          <div>
-            <strong>Prénom de l'encadrant:</strong> {{ offre.prenomEncadrant }}
-          </div>
-          <div>
-            <strong>Email:</strong> {{ offre.email }}
-          </div>
-          <div>
-            <strong>Date début stage:</strong> {{ offre.datedebut_stage | date: 'dd/MM/yyyy' }}
-          </div>
-          <div>
-            <strong>Date fin stage:</strong> {{ offre.datefin_stage | date: 'dd/MM/yyyy' }}
-          </div>
-          <div>
-            <strong>Durée (jours):</strong> {{ offre.duree }}
-          </div>
-          <div>
-            <strong>Type de Stage:</strong> {{ offre.type }}
-          </div>
-          <button (click)="postuler(offre)" class="btn btn-primary mt-2">Postuler</button>
-        </div>
-      </li>
-    </ul>
   </div>
 </div>

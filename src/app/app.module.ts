@@ -33,6 +33,15 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OffreComponent } from './pages/offrestage/offrestage.component';
 import { ListeoffreencadrantComponent } from './pages/listeoffreencadrant/listeoffreencadrant.component';
 import { ListeoffreetudiantComponent } from './pages/listeoffreetudiant/listeoffreetudiant.component';
+import { NgxStarRatingModule } from 'ngx-star-rating';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
+import { ChatComponentComponent } from './pages/chat-component/chat-component.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { AdminchatComponent } from './pages/adminchat/adminchat.component';
+import { CommentFormComponentComponent } from './comment-form-component/comment-form-component.component';
+
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -41,6 +50,7 @@ if (environment.defaultauth === 'firebase') {
   FakeBackendInterceptor;
 }
 
+const config: SocketIoConfig = { url: 'http://localhost:8081', options: {} };
 export function createTranslateLoader(http: HttpClient): any {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
@@ -51,7 +61,10 @@ export function createTranslateLoader(http: HttpClient): any {
     CyptolandingComponent,
     ListeoffreetudiantComponent,
     OffreComponent,
-    ListeoffreencadrantComponent
+    ListeoffreencadrantComponent,
+    ChatComponentComponent,
+    AdminchatComponent,
+    CommentFormComponentComponent
     
   ],
   imports: [
@@ -60,6 +73,15 @@ export function createTranslateLoader(http: HttpClient): any {
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    NgxStarRatingModule,
+    
+    MatFormFieldModule,
+    MatIconModule,
+    
+    
+    
+    
+    
 
 
     HttpClientModule,
@@ -80,6 +102,8 @@ export function createTranslateLoader(http: HttpClient): any {
     SharedModule,
     ScrollToModule.forRoot(),
     ToastrModule.forRoot(),
+    SocketIoModule.forRoot(config),
+
   ],
   bootstrap: [AppComponent],
   providers: [

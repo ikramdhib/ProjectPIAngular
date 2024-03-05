@@ -2,13 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CalendarComponent } from './calendar/calendar.component';
-import { ChatComponent } from './chat/chat.component';
 import { DefaultComponent } from './dashboards/default/default.component';
 import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { OffreComponent } from './offrestage/offrestage.component';
 import { FormsModule } from '@angular/forms';
 import { ListeoffreencadrantComponent } from './listeoffreencadrant/listeoffreencadrant.component';
 import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
+import { ChatComponentComponent } from './chat-component/chat-component.component';
+import { AdminchatComponent } from './adminchat/adminchat.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -18,11 +19,17 @@ const routes: Routes = [
   },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
-  { path: 'chat', component: ChatComponent },
   { path: 'filemanager', component: FilemanagerComponent },
+  {path:'Chatadmin',component:AdminchatComponent},
+
   {path:'offre',component:OffreComponent},
   {path:'listeencadrant',component:ListeoffreencadrantComponent},
   {path:'listedesoffre',component:ListeoffreetudiantComponent},
+  {path:'Reclamation',component:ChatComponentComponent},
+
+
+
+
 
 
 

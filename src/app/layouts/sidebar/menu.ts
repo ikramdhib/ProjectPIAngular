@@ -13,6 +13,27 @@ export const MENU: MenuItem[] = [
     icon: 'bx-briefcase-alt',
     link:'/listedesoffre'
 },
+{
+    //listeencadrant
+    id: 206,
+    label: 'Reclamation',
+    icon: 'bx-briefcase-alt',
+    link:'/Reclamation'
+},
+{
+    //listeencadrant
+    id: 2066,
+    label: 'Chat admin',
+    icon: 'bx-briefcase-alt',
+    link:'/Chatadmin'
+},
+{
+    //listeencadrant
+    id: 203,
+    label: 'Calendrier',
+    icon: 'bx-briefcase-alt',
+    link:'/calendar'
+},
 
 {
     //listeencadrant

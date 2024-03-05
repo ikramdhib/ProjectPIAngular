@@ -1,0 +1,33 @@
+<div class="admin-interface">
+  <h2>Messages des étudiants</h2>
+
+  <!-- Liste des messages des étudiants -->
+  <div class="message-container">
+    <div *ngFor="let message of studentMessages" class="message" (click)="selectMessage(message)">
+      <div class="message-content">
+
+        <p>{{ message.content }}</p>
+        
+      <!-- Afficher les réponses de l'administrateur -->
+<div *ngIf="selectedMessage && selectedMessage.id === message.id && message.adminResponses && message.adminResponses.length > 0">
+  <h4>Réponses de l'administrateur</h4>
+  <div class="admin-responses">
+    <div *ngFor="let adminResponse of message.adminResponses" class="admin-response">
+      <p>{{ adminResponse.content }}</p>
+      <span>{{ adminResponse.timestamp | date:'mediumTime' }}</span>
+    </div>
+  
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulaire de réponse -->
+  <div class="reply-form" *ngIf="selectedMessage">
+    <h3>Répondre au message</h3>
+    <textarea [(ngModel)]="adminResponseContent" placeholder="Votre réponse"></textarea>
+    <button class="send-button" (click)="sendAdminResponse()">Envoyer</button>
+  </div>
+</div>

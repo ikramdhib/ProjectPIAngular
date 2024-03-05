@@ -7,20 +7,13 @@ export class MyUploadAdapter {
     }
     upload() {
         const xhr = this.xhr = new XMLHttpRequest();
-        return new Promise((resolve, reject) => {
-          this.loader.file
-            .then(file => {
-              this._initRequest();
-              this._initListeners(resolve, reject, file);
-              this._sendRequest(file);
-            })
-            .catch(error => {
-              reject(error);
-            });
-        });
-      }
-      
-    
+        return this.loader.file
+            .then( file => new Promise( ( resolve, reject ) => {
+                this._initRequest();
+                this._initListeners(resolve, reject, file);
+                this._sendRequest(file);
+            } ) );
+    }
     abort() {
         if ( this.xhr ) {
             this.xhr.abort();

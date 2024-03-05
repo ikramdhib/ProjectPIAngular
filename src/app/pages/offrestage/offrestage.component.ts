@@ -24,6 +24,7 @@ export class OffreComponent {
     datefin_stage: this.formatDate(new Date()),
     type: 'FORMATION_HUMAINE_SOCIALE,IMMERSION_ENTREPRISE,INGENIEUR', // Add this line
     // Ajoutez cette ligne
+    duree: '0'
 
 
   };

@@ -44,20 +44,19 @@ export class ListeoffreencadrantComponent {
   }
 
   openUpdateModal(offre: any) {
-    this.currentOffre = offre; // Stockez l'offre actuelle
+    this.currentOffre = offre; 
     this.updateForm.patchValue({
       nomEntreprise: offre.nomEntreprise,
       nomEncadrant: offre.nomEncadrant,
-      // Mettez à jour les autres champs du formulaire ici
       prenomEncadrant: offre.prenomEncadrant,
       email: offre.email,
       description: offre.description,
       datedebut_stage: offre.datedebut_stage,
       datefin_stage: offre.datefin_stage,
-      type: offre.type, // Utilisez la valeur de type de l'offre
+      type: offre.type, 
       duree: offre.duree
     });
-    this.modalRef = this.modalService.show(this.updateContent); // Passer la référence au template de mise à jour
+    this.modalRef = this.modalService.show(this.updateContent); 
 
   }
 
