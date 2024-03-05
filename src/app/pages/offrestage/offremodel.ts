@@ -10,11 +10,14 @@ export interface Offre {
     description: string;
     datedebut_stage: Date;
     datefin_stage: Date;
-    duree:Number;
     type:Type;
+    duree: 0,
+    linkedinProfileUrl: '',
+    likes?:number,
+    dislikes?:number // Ajoutez cette propriété pour stocker l'URL LinkedIn
+  };
     
-  }
-
+  
   export enum Type {
     FORMATION_HUMAINE_SOCIALE = 'Formation Humaine Sociale',
     IMMERSION_ENTREPRISE = 'Immersion Entreprise',

@@ -24,11 +24,14 @@ export class OffreComponent {
     datefin_stage: this.formatDate(new Date()),
     type: 'FORMATION_HUMAINE_SOCIALE,IMMERSION_ENTREPRISE,INGENIEUR', // Add this line
     // Ajoutez cette ligne
-    duree: '0'
+    duree: 0,
+  
+    
 
 
   };
 
+  dureeN!:any;
   currentOffreID = '';
   imgURL: any; // Déclaration de la propriété imgURL
   types = Type; // Assigning the enum to a variable accessible in the template
@@ -41,6 +44,8 @@ export class OffreComponent {
     this.getAllOffres();
   }
   onSubmit() {
+    let x =this.calculateDuration() as any
+
     const formData = new FormData();
     formData.append('nomEntreprise', this.nouvelleOffre.nomEntreprise);
     formData.append('image', this.nouvelleOffre.image); // Utilisez le fichier ajouté à FormData
@@ -52,8 +57,11 @@ export class OffreComponent {
     formData.append('datedebut_stage', this.nouvelleOffre.datedebut_stage);
     formData.append('datefin_stage', this.nouvelleOffre.datefin_stage);
     formData.append('type', this.nouvelleOffre.type);
-    formData.append('duree', this.nouvelleOffre.duree);
+    console.log(this.dureeN)
+    formData.append('duree',x);
     //formData.append('image', file); // Ajoutez le fichier à FormData
+    this.nouvelleOffre.linkedinProfileUrl = 'https://fr.linkedin.com/jobs/view/stage-d%C3%A9veloppeur-front-end-angular-h-f-at-alten-3847094104?original_referer=https%3A%2F%2Fwww.bing.com%2F';
+
 
     // Enregistrez le FormData mis à jour pour l'envoi avec la requête
   
@@ -61,14 +69,8 @@ export class OffreComponent {
   
   
  // Calcul de la durée du stage
-    const startDate = new Date(this.nouvelleOffre.datedebut_stage);
-    const endDate = new Date(this.nouvelleOffre.datefin_stage);
-    const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    this.nouvelleOffre.duree = diffDays;
     
-
-    this.calculateDuration();
+   
 
     
 
@@ -144,12 +146,13 @@ export class OffreComponent {
   }
 
   // Méthode pour calculer la durée entre les dates de début et de fin
-  calculateDuration(): void {
+  calculateDuration() {
     const startDate = new Date(this.nouvelleOffre.datedebut_stage);
     const endDate = new Date(this.nouvelleOffre.datefin_stage);
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    this.nouvelleOffre.duree = diffDays;
+   return this.dureeN= diffDays;
+
   }
 
   // Méthode appelée lorsque la date de début est modifiée
@@ -181,5 +184,11 @@ export class OffreComponent {
     // Cette URL pointe maintenant vers le serveur Spring Boot
     return 'http://localhost:8081/api/offres/images/${imageName}' ;
 }
+
+
+
+
+
+
 }
 

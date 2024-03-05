@@ -28,6 +28,9 @@ export class ListeoffreetudiantComponent implements OnInit {
   newCommentText: string;
   commentaires: CommentOffre[];
   showComments: boolean = false;
+  likes:number|null;
+  dislikes:number|null;
+
 
   constructor(private http: HttpClient, private commentaireService: CommentServiceService,private toastr: ToastrService) { }
   ngOnInit(): void {
@@ -171,4 +174,43 @@ export class ListeoffreetudiantComponent implements OnInit {
   
   toggleRepliesVisibility(comment: CommentOffre) {
     comment.showReplies = !comment.showReplies; // Toggle visibility for replies
-  }}
+  }
+  
+likeOffre(offreId: string): void {
+  this.http.post('http://localhost:8081/api/offres/' + offreId + '/like', {}).subscribe(
+    () => {
+      this.toastr.success('Offre aimée avec succès', 'Succès');
+      this.getOffresByEntreprise();
+
+      // Mettre à jour les offres après avoir aimé
+     
+    },
+    (error) => {
+      console.error('Erreur lors de l\'aimée de l\'offre :', error);
+      this.toastr.error('Une erreur s\'est produite lors de l\'aimée de l\'offre', 'Erreur');
+    }
+  );
+}
+
+dislikeOffre(offreId: string): void {
+  this.http.post('http://localhost:8081/api/offres/' + offreId + '/dislike', {}).subscribe(
+    () => {
+      this.toastr.success('Offre désaimée avec succès', 'Succès');
+      this.getOffresByEntreprise();
+      // Mettre à jour les offres après avoir désaimé
+    
+    },
+    (error) => {
+      console.error('Erreur lors de la désaimée de l\'offre :', error);
+      this.toastr.error('Une erreur s\'est produite lors de la désaimée de l\'offre', 'Erreur');
+    }
+  );
+}
+
+
+
+
+
+
+
+}
