@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ForumService } from '../forum.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import { ReponseComponent } from '../reponse/reponse.component';
 
 @Component({
   selector: 'app-detail',
@@ -14,17 +15,17 @@ export class DetailComponent implements OnInit {
   breadCrumbItems: Array<{}>;
   question: any;
   responses: any[];
+  @ViewChild(ReponseComponent) reponseComponent: ReponseComponent;
 
   constructor(private route: ActivatedRoute, private forumService: ForumService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Invoices' }, { label: 'Detail', active: true }];
-    this.route.paramMap.subscribe(params => {
-      const questionId = params.get('id');
-      if (questionId) {
-        this.loadQuestionAndResponses(questionId);
-      }
-    });
+    const questionId = this.route.snapshot.paramMap.get('id');
+    if (questionId) {
+      this.loadQuestionAndResponses(questionId);
+    }
+    
   }
 
   loadQuestionAndResponses(questionId: string): void {
@@ -40,11 +41,10 @@ export class DetailComponent implements OnInit {
       this.responses = responses;
     });
   }
-
-  onAddResponse(): void {
-    // Reload question and responses after adding a new response
-    this.loadQuestionAndResponses(this.question.id);
+  onResponseChanged() {
+    this.loadResponses(this.question.id);
   }
+
   onDeleteResponse(id: string): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -74,5 +74,6 @@ export class DetailComponent implements OnInit {
       }
     });
   }
+ 
   
 }

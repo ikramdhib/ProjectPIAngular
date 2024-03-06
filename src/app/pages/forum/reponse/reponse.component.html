@@ -7,7 +7,7 @@
           <div class="card-body" style="padding-top: 50px;">
               <h5>Know someone who can answer? Share a link to this question via email, Twitter, or Facebook.</h5>
               <h3 class="card-title mb-3">Your Answer</h3>
-              <ckeditor [editor]="Editor" data="<p>Content of the editor.</p>" formControlName="content" (ready)="onReady($event)"></ckeditor>
+              <ckeditor [editor]="Editor" formControlName="content" (ready)="onReady($event)"></ckeditor>
               <div style="color: #f46a6a;" *ngIf="formResponse.get('content').invalid && (formResponse.get('content').dirty || formResponse.get('content').touched)">
                 <div *ngIf="formResponse.get('content').errors?.required">
                   Body is required!

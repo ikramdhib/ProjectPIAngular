@@ -17,22 +17,20 @@ export class ReponseComponent  {
   public Editor = ClassicEditor;
   @Input() questionId: string;
   @Output() responseAdded: EventEmitter<void> = new EventEmitter<void>();
-  @Input() editingResponse: any;
+  editingResponse: any = null;
+  public editorInstance: any;
+  
 
  constructor(private forumService: ForumService) { }
 
  ngOnInit() {
    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
-   if (this.editingResponse) {
-    this.formResponse.patchValue({
-      content: this.editingResponse.content
-    });
-  }
  }
  onReady(editor:ClassicEditor):void{
   editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
     return new MyUploadAdapter( loader );
-};}
+};
+this.editorInstance = editor}
  
  formResponse : FormGroup = new FormGroup({
   content: new FormControl('',[Validators.required,Validators.minLength(150)])
@@ -40,27 +38,14 @@ export class ReponseComponent  {
 
  
  onSubmit() {
-  if (this.formResponse.valid) {
-    this.confirm();
-  }
   if (this.formResponse.invalid) return;
-
-  const content = this.formResponse.get('content').value;
-
-  if (this.editingResponse) {
-    // Mise à jour de la réponse
-    this.forumService.updateResponse(this.editingResponse.id, content).subscribe(() => {
-      this.responseAdded.emit(); // Notifiez le composant parent de la mise à jour
-    });
-  } else {
-    // Ajout d'une nouvelle réponse
-    // ... Votre logique existante pour ajouter une réponse
-  }
+  this.confirm();
 }
+
 confirm() {
   Swal.fire({
     title: 'Are you sure?',
-    text: 'You like to add this response',
+    text: this.editingResponse ? 'Do you want to update this response?' : 'Do you want to add this response?',
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#34c38f',
@@ -68,10 +53,39 @@ confirm() {
     confirmButtonText: 'Yes'
   }).then(result => {
     if (result.isConfirmed) {
-      this.addResponse();
+      if (this.editingResponse) {
+        this.updateResponse(); // Appelez la méthode de mise à jour si vous êtes en mode édition
+      } else {
+        this.addResponse(); // Sinon, appelez la méthode pour ajouter une nouvelle réponse
+      }
     }
   });
 }
+
+updateResponse() {
+  const responseContent = this.formResponse.get('content').value;
+  this.forumService.updateResponse(this.editingResponse.id, responseContent)
+    .subscribe({
+      next: (updatedResponse) => {
+        // Gestion du succès de la mise à jour
+        this.resetForm();
+        this.responseAdded.emit();
+      },
+      error: (error) => {
+        console.error('Error updating the response: ', error);
+      }
+    });
+    console.log("modification");
+}
+
+resetForm() {
+  this.editingResponse = null;
+  this.formResponse.reset();
+  if (this.editorInstance) {
+    this.editorInstance.setData(''); // Réinitialisez le contenu de l'instance de CKEditor
+  }
+}
+
 addResponse() {
   const answerData = {
     questionId: this.questionId,
@@ -86,6 +100,15 @@ addResponse() {
   }, (error) => {
     console.error('Erreur lors de la création de la réponse : ', error);
   });
+}
+startEdit(response: any) {
+  this.editingResponse = response; // Stockez la réponse à éditer
+  this.formResponse.patchValue({
+    content: response.content // Préremplissez le formulaire avec le contenu de la réponse
+  });
+  if (this.editorInstance) {
+    this.editorInstance.setData(response.content); // Mettez à jour l'éditeur CKEditor avec le contenu de la réponse
+  }
 }
 
 }

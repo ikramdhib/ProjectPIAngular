@@ -56,8 +56,9 @@ export class ForumService {
     return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_NB_REPONSE}/${questionId}`)
   }
 
-  updateResponse(reponseId: string, reponse: string): Observable<any> {
-    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_NB_REPONSE}/${reponseId}`, { reponse });
+  updateResponse(reponseId: string, content: string): Observable<any> {
+    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_UPDATE_REPONSE}/${reponseId}`, { content });
+    
   }
   getHistoriqueByUser(userId : string): Observable<any>{
     return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_GET_HISTORIQUE}/${userId}`)
