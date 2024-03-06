@@ -50,6 +50,11 @@
                 <label for="duree">Durée du stage (jours)</label>
                 <input type="text" class="form-control" id="duree" name="duree" [(ngModel)]="nouvelleOffre.duree" readonly>
               </div>
+              <div class="form-group">
+                <label for="hashtags">Hashtags</label>
+                <input type="text" [(ngModel)]="nouvelleOffre.hashtags" class="form-control" id="hashtags" name="hashtags" placeholder="Séparez les hashtags par des virgules">
+                <small class="form-text text-muted">Séparez les hashtags par des virgules (,)</small>
+              </div>
 
           </div>
         </div>

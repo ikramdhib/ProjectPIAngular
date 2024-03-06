@@ -15,6 +15,8 @@ export interface Offre {
     linkedinProfileUrl: '',
     likes?:number,
     dislikes?:number // Ajoutez cette propriété pour stocker l'URL LinkedIn
+    hashtags?: string[]; // Ajoutez cette propriété pour stocker les hashtags
+
   };
     
   

@@ -25,6 +25,8 @@ export class OffreComponent {
     type: 'FORMATION_HUMAINE_SOCIALE,IMMERSION_ENTREPRISE,INGENIEUR', // Add this line
     // Ajoutez cette ligne
     duree: 0,
+    hashtags: [] // Initialisez le tableau de hashtags ici
+
   
     
 
@@ -36,6 +38,8 @@ export class OffreComponent {
   imgURL: any; // Déclaration de la propriété imgURL
   types = Type; // Assigning the enum to a variable accessible in the template
   uploadAdapter: any;
+  hashtagsInput: string = ''; // Propriété pour stocker la valeur saisie dans le champ des hashtags
+
 
 
   constructor(private http: HttpClient, private toastr: ToastrService) {
@@ -44,11 +48,33 @@ export class OffreComponent {
     this.getAllOffres();
   }
   onSubmit() {
-    let x =this.calculateDuration() as any
+    if (!this.nouvelleOffre.nomEntreprise ||
+        !this.nouvelleOffre.nomEncadrant ||
+        !this.nouvelleOffre.prenomEncadrant ||
+        !this.nouvelleOffre.email ||
+        !this.nouvelleOffre.description ||
+        !this.nouvelleOffre.datedebut_stage ||
+        !this.nouvelleOffre.datefin_stage ||
+        !this.nouvelleOffre.type ||
+        this.nouvelleOffre.hashtags.length === 0) {
+      this.toastr.error('Veuillez remplir tous les champs.', 'Erreur');
+      return;
+    }
+
+    if (!this.validateEmail(this.nouvelleOffre.email)) {
+      this.toastr.error('Veuillez saisir une adresse email valide.', 'Erreur');
+      return;
+    }
+
+    let x = this.calculateDuration() as any;
+    if (x < 60) {
+      this.toastr.error('La durée du stage doit être d\'au moins 2 mois.', 'Erreur');
+      return;
+    }
 
     const formData = new FormData();
     formData.append('nomEntreprise', this.nouvelleOffre.nomEntreprise);
-    formData.append('image', this.nouvelleOffre.image); // Utilisez le fichier ajouté à FormData
+    formData.append('image', this.nouvelleOffre.image);
     formData.append('nomEncadrant', this.nouvelleOffre.nomEncadrant);
     formData.append('prenomEncadrant', this.nouvelleOffre.prenomEncadrant);
     formData.append('email', this.nouvelleOffre.email);
@@ -57,24 +83,9 @@ export class OffreComponent {
     formData.append('datedebut_stage', this.nouvelleOffre.datedebut_stage);
     formData.append('datefin_stage', this.nouvelleOffre.datefin_stage);
     formData.append('type', this.nouvelleOffre.type);
-    console.log(this.dureeN)
-    formData.append('duree',x);
-    //formData.append('image', file); // Ajoutez le fichier à FormData
-    this.nouvelleOffre.linkedinProfileUrl = 'https://fr.linkedin.com/jobs/view/stage-d%C3%A9veloppeur-front-end-angular-h-f-at-alten-3847094104?original_referer=https%3A%2F%2Fwww.bing.com%2F';
+    formData.append('duree', x);
+    formData.append('hashtags', this.nouvelleOffre.hashtags);
 
-
-    // Enregistrez le FormData mis à jour pour l'envoi avec la requête
-  
-    // Le reste du code reste inchangé
-  
-  
- // Calcul de la durée du stage
-    
-   
-
-    
-
-  
     this.http.post<any>('http://localhost:8081/api/offres/add', formData).subscribe(
       response => {
         this.toastr.success('Offre ajoutée avec succès', 'Succès');
@@ -87,7 +98,12 @@ export class OffreComponent {
       }
     );
   }
-  
+
+  // Méthode de validation d'adresse email
+  validateEmail(email: string): boolean {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
 
   getAllOffres(): void {
     this.http.get('http://localhost:8081/api/offres')
@@ -175,7 +191,8 @@ export class OffreComponent {
       datedebut_stage: this.formatDate(new Date()),
       datefin_stage: this.formatDate(new Date()),
       type: '',
-      duree: ''
+      duree: '',
+      hashtags:''
     };
     this.imgURL = null; // Réinitialiser l'image prévisualisée
   }
@@ -185,7 +202,13 @@ export class OffreComponent {
     return 'http://localhost:8081/api/offres/images/${imageName}' ;
 }
 
-
+addHashtag(event: KeyboardEvent) {
+  const hashtagText = (event.target as HTMLInputElement).value; // Récupère le texte saisi dans le champ
+  if (event.key === 'Enter' && hashtagText.trim() !== '') { // Vérifie si la touche saisie est "Entrée" et si le texte n'est pas vide
+    this.nouvelleOffre.hashtags.push(hashtagText.trim()); // Ajoute le hashtag dans le tableau de hashtags
+    this.hashtagsInput = ''; // Efface le champ de saisie des hashtags
+  }
+}
 
 
 

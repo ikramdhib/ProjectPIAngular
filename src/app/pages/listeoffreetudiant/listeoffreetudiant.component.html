@@ -1,28 +1,24 @@
-<!-- Affichage des offres de stage par entreprise -->
-<div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="row mb-4">
-  <!-- Carte d'entreprise -->
-  <div class="col-md-12">
-    <div class="card">
+<div class="container">
+  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="mb-4 entreprise">
+    <div class="card shadow-sm gradient-bg">
       <div class="card-header bg-danger text-white">
-        <h3>{{ entreprise.key }}</h3>
+        <h3 class="mb-0">{{ entreprise.key }}</h3>
       </div>
       <div class="card-body">
         <div class="row">
-          <!-- Détails de l'entreprise -->
           <div class="col-md-3">
-            <div class="entreprise-details">
+            <div class="entreprise-details text-center">
               <span class="text-muted">
-                <strong class="text-success">{{ entreprise.value.length }}</strong> <span> offres disponibles</span>
+                <strong class="text-success">{{ entreprise.value.length }}</strong> offres disponibles
               </span>
-              <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="d-block mx-auto mt-3 max-width:100px; border-radius:5px; max-height:100px;">
+              <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="mt-3 mx-auto d-block img-fluid rounded-circle">
             </div>
           </div>
-          <!-- Offres de stage -->
           <div class="col-md-9">
-            <ul class="list-group">
+            <ul class="list-group list-group-flush">
               <li *ngFor="let offre of entreprise.value" class="list-group-item">
                 <div class="offre-details">
-                  <!-- Informations sur l'offre de stage -->
+                  <!-- Information sur l'offre de stage -->
                   <div>
                     <strong>Nom de l'entreprise :</strong> {{ offre.nomEntreprise }}
                   </div>
@@ -50,19 +46,17 @@
                   </div>
                   <div>
                     <strong>Type de Stage :</strong> {{ offre.type }}
-                  
-                    <button class="btn btn-primary" (click)="likeOffre(offre.id)">
-    <i class="fas fa-thumbs-up"></i> Like ({{ offre.likes }})
-  </button>
-  <button class="btn btn-primary" (click)="dislikeOffre(offre.id)">
-    <i class="fas fa-thumbs-down"></i> Dislike ({{ offre.dislikes }})
-  </button>
                   </div>
-                  
+                  <div>
+                    <strong>Competence de Stage :</strong> {{ offre.hashtags }}
 
-
-
-
+                    <button class="btn btn-primary mr-2" (click)="likeOffre(offre.id)">
+                      <i class="fas fa-thumbs-up"></i> Like ({{ offre.likes }})
+                    </button>
+                    <button class="btn btn-primary" (click)="dislikeOffre(offre.id)">
+                      <i class="fas fa-thumbs-down"></i> Dislike ({{ offre.dislikes }})
+                    </button>
+                  </div>
                   <!-- Bouton pour sélectionner l'offre -->
                   <div *ngIf="selectedOffer === offre" class="mt-3">
                     <form (ngSubmit)="submitComment()">
@@ -87,39 +81,15 @@
                   <div class="mt-3" *ngIf="showComments && selectedOffer === offre">
                     <h4>Commentaires pour {{ offre.nomEntreprise }}</h4>
                     <ul class="list-group">
-                      <li *ngFor="let comment of selectedOffer.commentaires" class="list-group-item">
-                        <div class="comment">
-                          <!-- Informations sur le commentaire -->
-                          <p>Utilisateur : {{ comment.user?.firstName }} {{ comment.user?.lastName }}</p>
-                          <p>{{ comment.texte }}</p>
-                          <!-- Bouton pour répondre au commentaire -->
-                          <button class="btn btn-primary" (click)="toggleReplyForm(comment)">
-                            <i class="fas fa-reply"></i> Répondre
-                          </button>
-                          <!-- Formulaire de réponse -->
-                          <div *ngIf="selectedComment === comment">
-                            <form (ngSubmit)="submitReply(comment)">
-                              <div class="form-group">
-                                <label for="reply">Votre réponse :</label>
-                                <textarea class="form-control" id="reply" [(ngModel)]="comment.replyText" name="reply" rows="3" placeholder="Répondre au commentaire"></textarea>
-                              </div>
-                              <button type="submit" class="btn btn-primary">
-                                <i class="far fa-comment"></i> Envoyer la réponse
-                              </button>
-                            </form>
+                      <li *ngFor="let comment of selectedOffer.commentaires" class="list-group-item comment-item">
+                        <div class="d-flex align-items-start">
+                          <div class="user-icon mr-3">
+                            <i class="fas fa-user-circle fa-2x"></i>
                           </div>
-                         <!-- Afficher les réponses aux commentaires -->
-<ul class="list-group" *ngIf="comment.showReplies">
-  <li *ngFor="let reply of comment.replies" class="list-group-item">
-    <div class="reply">
-      <p>Utilisateur : {{ reply.user?.firstName }} {{ reply.user?.lastName }}</p>
-      <p>{{ reply.texte }}</p>
-    </div>
-  </li>
-</ul>
-
-<!-- Bouton pour afficher ou masquer les réponses -->
-
+                          <div class="comment-content">
+                            <p class="mb-1"><strong>{{ comment.user?.firstName }} {{ comment.user?.lastName }}</strong></p>
+                            <p class="mb-0">{{ comment.texte }}</p>
+                          </div>
                         </div>
                       </li>
                     </ul>
