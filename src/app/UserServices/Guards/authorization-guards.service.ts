@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthenticationService } from '../AuthenticationServices/authenticationUser.service';
 import { jwtDecode } from 'jwt-decode';
 
@@ -8,7 +8,8 @@ import { jwtDecode } from 'jwt-decode';
 })
 export class AuthorizationGuardsService implements CanActivate {
 
-  constructor(public authServ : AuthenticationService) { }
+  constructor(public authServ : AuthenticationService ,
+    public router : Router) { }
 
 
   canActivate(route : ActivatedRouteSnapshot):boolean{
@@ -28,7 +29,9 @@ export class AuthorizationGuardsService implements CanActivate {
     }
     if(access==="true"){
       return true ;
+    }else{
+      this.router.navigate(['/pages/404'])
+      return false ;
     }
-    return false ;
   }
 }

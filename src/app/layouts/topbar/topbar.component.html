@@ -363,9 +363,7 @@
             {{ 'HEADER.LOGIN.PROFILE' | translate}}</a>
           <a class="dropdown-item" href="javascript: void(0);"><i
               class="bx bx-wallet font-size-16 align-middle me-1"></i>{{ 'HEADER.LOGIN.MY_WALLET' | translate}}</a>
-          <a class="dropdown-item d-block" href="javascript: void(0);"><span
-              class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i>{{
-            'HEADER.LOGIN.SETTINGS' | translate}} </a>
+          <a class="dropdown-item d-block" href="javascript: void(0);" (click)="goToChangePassword()"><i class="bx bx-wrench font-size-16 align-middle me-1"></i>Change Password </a>
           <a class="dropdown-item" href="javascript: void(0);"><i
               class="bx bx-lock-open font-size-16 align-middle me-1"></i>
             {{ 'HEADER.LOGIN.LOCK_SCREEN' | translate}}</a>

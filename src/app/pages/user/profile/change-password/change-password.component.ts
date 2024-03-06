@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormGroup, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Lightbox } from 'ngx-lightbox';
+import { ToastrService } from 'ngx-toastr';
 import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
 
 @Component({
@@ -11,7 +12,7 @@ import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceser
   styleUrls: ['./change-password.component.scss']
 })
 export class ChangePasswordComponent  implements OnInit{
-  @ViewChild('myButton') myButton: ElementRef;
+  @ViewChild('content') content: ElementRef;
   modalRef?: BsModalRef;
 
   // bread crumb items
@@ -28,10 +29,12 @@ export class ChangePasswordComponent  implements OnInit{
   codeForm: UntypedFormGroup;
   newPasswordin:string;
   bl:boolean=false;
+  isError:any=false;
 
   constructor(private lightbox: Lightbox, private modalService: BsModalService,
     private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router ,
-    public userService : UsersListService
+    public userService : UsersListService,
+    public toastr:ToastrService,
   ) {
 
   }
@@ -51,19 +54,25 @@ export class ChangePasswordComponent  implements OnInit{
   ngOnInit(): void {
     this.userId = this.route.snapshot.params['id'];
     document.body.classList.remove('auth-body-bg')
-    this.breadCrumbItems = [{ label: 'UI Elements' }, { label: 'Lightbox', active: true }];
+    this.breadCrumbItems = [{ label: 'User' }, { label: 'Change Password', active: true }];
 
     this.verifForm = this.formBuilder.group({
       oldPass: ['', [Validators.required]],
-      newPass: ['', [Validators.required]],
+      newPass: ['', [Validators.required ,  Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@*\/])[a-zA-Z0-9@*\/]+$/)]],
+      newPassConfirm: ['', [Validators.required , Validators.pattern(/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[@*\/])[a-zA-Z0-9@*\/]+$/)]],
     });
+
+    this.verifForm.valueChanges.subscribe(() => {
+      this.passwordMatchValidator();
+    });
+
     this.codeForm = this.formBuilder.group({
-      code1: ['', [Validators.required]],
-      code2: ['', [Validators.required]],
-      code3: ['', [Validators.required]],
-      code4: ['', [Validators.required]],
-      code5: ['', [Validators.required]],
-      code6: ['', [Validators.required]],
+      code1: ['', [Validators.required,Validators.minLength(1) , Validators.maxLength(1)]],
+      code2: ['', [Validators.required,Validators.minLength(1) , Validators.maxLength(1)]],
+      code3: ['', [Validators.required,Validators.minLength(1) , Validators.maxLength(1)]],
+      code4: ['', [Validators.required,Validators.minLength(1) , Validators.maxLength(1)]],
+      code5: ['', [Validators.required,Validators.minLength(1) , Validators.maxLength(1)]],
+      code6: ['', [Validators.required,Validators.minLength(1) , Validators.maxLength(1)]],
     });
   }
 
@@ -72,9 +81,8 @@ export class ChangePasswordComponent  implements OnInit{
 
   onSubmit(){
     console.log(this.submitted)
+    this.submitted=true;
     if(this.verifForm.valid){
-      
-      this.submitted=true;
       console.log(this.submitted)
       const request ={
         oldPassword:this.form.oldPass.value,
@@ -87,7 +95,11 @@ export class ChangePasswordComponent  implements OnInit{
           this.codeVerification=res.codeSent;
           this.newPasswordin=this.form.newPass.value;
         },
+        error:(err:any)=>{
+          this.isError=true;
+        },
         complete:()=>{
+        this.openMapModal(this.content);
           console.log(this.codeVerification,"zzzzzzzzzzzzzzz");
           this.bl=true;
         }
@@ -97,6 +109,7 @@ export class ChangePasswordComponent  implements OnInit{
 
 
   onchangePass(){
+    this.submit= true;
     if(this.codeForm.valid){
     const request ={
       newPassword:this.newPasswordin,
@@ -108,20 +121,35 @@ export class ChangePasswordComponent  implements OnInit{
       next:(res:any)=>{
         console.log(res);
       },
+      error:(err:any)=>{
+        this.toastr.success('Something went wrong try again', 'ERROR');
+      },
       complete:()=>{
+        this.toastr.success('Paswword changed with success', 'SUCCESS');
         console.log("sucesss");
+        this.close();
+        this.router.navigate(['/user/profile'])
       }
     })
   }
   }
-  
-  ngAfterViewInit() {
-    // Vérifiez si bl est true
-    if (this.bl) {
-      // Déclenchez automatiquement le clic sur le bouton
-      this.myButton.nativeElement.click();
+
+  passwordMatchValidator() {
+    const motpass1 = this.form.newPass.value;
+    const motpass2 = this.form.newPassConfirm.value;
+
+    if (motpass1 !== motpass2) {
+      this.verifForm.get('newPassConfirm').setErrors({ mismatch: true });
+    } else {
+      this.verifForm.get('newPassConfirm').setErrors(null);
     }
   }
+  
+ // ngAfterViewInit() {
+    // Vérifiez si bl est true
+      // Déclenchez automatiquement le clic sur le bouton
+    //  this.myButton.nativeElement.click();
+  //}
 
   /**
    * Close lightbox

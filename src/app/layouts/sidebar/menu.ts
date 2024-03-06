@@ -57,9 +57,6 @@ export const MENU: MenuItem[] = [
         label: 'MENUITEMS.CALENDAR.TEXT',
         icon: 'bx-calendar',
         link: '/calendar',
-        data:{
-           roles:"ENCADRANT"
-      } 
     },
     {
         id: 11,
