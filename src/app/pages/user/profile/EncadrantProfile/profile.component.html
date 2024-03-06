@@ -91,7 +91,7 @@
   
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title mb-4">Personal Information</h4>
+            <h4 class="card-title mb-4">Personal Informations</h4>
             <div class="table-responsive">
               <table class="table table-nowrap mb-0">
                 <tbody>
@@ -99,7 +99,7 @@
                     <th scope="row">Full Name :</th>
                     <td> {{currentUser.lastName}} {{currentUser.lastName}} </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="currentUser.role=='ENCADRANT'">
                     <th scope="row">Company :</th>
                     <td> {{currentUser.company}} </td>
                   </tr>
@@ -111,7 +111,7 @@
                     <th scope="row">E-mail :</th>
                     <td> {{currentUser.login}} </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="currentUser.role=='ENCADRANT'">
                     <th scope="row">Professional E-mail :</th>
                     <td> {{currentUser.emailPro}} </td>
                   </tr>
@@ -130,7 +130,7 @@
         </div>
         <!-- end card -->
   
-        <div class="card">
+        <div class="card" *ngIf="currentUser.role=='ENCADRANT'">
           <div class="card-body">
             <h4 class="card-title mb-5">history of last supervised internships</h4>
             <div class="">

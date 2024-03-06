@@ -26,7 +26,7 @@ const routes: Routes = [
     path:'student-users', component:ListStudentsComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
    data:{
-     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT']
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
     } 
   },
 
@@ -34,25 +34,45 @@ const routes: Routes = [
     path:'supervisor-users', component:ListSupervisorComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
     data:{
-     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT']
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
     } 
   },
 
 
   {
-    path:"editProfile/:id",component:EditProfileComponent
+    path:"editProfile/:id",component:EditProfileComponent ,
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+     roles:['ENCADRANT']
+    } 
   },
   {
-    path:"editStudentProfile/:id",component:EditProfileStudentComponent
+    path:"editStudentProfile/:id",component:EditProfileStudentComponent,
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+     roles:['ETUDIANT']
+    }
   },
   {
-    path:"addStudent",component:AddStudentComponent
+    path:"addStudent",component:AddStudentComponent,
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+    } 
   },
   {
-    path:"addSupervisor",component:AddSupervisorComponent
+    path:"addSupervisor",component:AddSupervisorComponent,
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+    } 
   },
   {
-    path:"changePassword/:id",component:ChangePasswordComponent
+    path:"changePassword/:id",component:ChangePasswordComponent,
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+      roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT','ETUDIANT']
+    } 
   },
   
 ];

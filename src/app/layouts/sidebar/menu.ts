@@ -4,12 +4,14 @@ export const MENU: MenuItem[] = [
     {
         id: 1,
         label: 'MENUITEMS.MENU.TEXT',
-        isTitle: true
+        isTitle: true,
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
     },
     {
         id: 2,
         label: 'MENUITEMS.DASHBOARDS.TEXT',
         icon: 'bx-home-circle',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 3,
@@ -45,39 +47,41 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 8,
-        isLayout: true
+        isLayout: true,
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
     },
     {
         id: 9,
         label: 'MENUITEMS.APPS.TEXT',
-        isTitle: true
+        isTitle: true,
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
     },
     {
         id: 10,
         label: 'MENUITEMS.CALENDAR.TEXT',
         icon: 'bx-calendar',
         link: '/calendar',
-        data:{
-           roles:"ENCADRANT"
-      } 
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
     },
     {
         id: 11,
         label: 'MENUITEMS.CHAT.TEXT',
         icon: 'bx-chat',
         link: '/chat',
-        
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
     },
     {
         id: 12,
         label: 'MENUITEMS.FILEMANAGER.TEXT',
         icon: 'bx-file',
         link: '/filemanager',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
     },
     {
         id: 13,
         label: 'MENUITEMS.ECOMMERCE.TEXT',
         icon: 'bx-store',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
         subItems: [
             {
                 id: 14,
@@ -133,6 +137,7 @@ export const MENU: MenuItem[] = [
         id: 22,
         label: 'MENUITEMS.CRYPTO.TEXT',
         icon: 'bx-bitcoin',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 23,
@@ -182,6 +187,7 @@ export const MENU: MenuItem[] = [
         id: 30,
         label: 'MENUITEMS.EMAIL.TEXT',
         icon: 'bx-envelope',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 31,
@@ -230,6 +236,7 @@ export const MENU: MenuItem[] = [
         id: 37,
         label: 'MENUITEMS.INVOICES.TEXT',
         icon: 'bx-receipt',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 38,
@@ -249,6 +256,7 @@ export const MENU: MenuItem[] = [
         id: 40,
         label: 'MENUITEMS.PROJECTS.TEXT',
         icon: 'bx-briefcase-alt-2',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 41,
@@ -280,6 +288,7 @@ export const MENU: MenuItem[] = [
         id: 45,
         label: 'MENUITEMS.TASKS.TEXT',
         icon: 'bx-task',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 46,
@@ -305,6 +314,7 @@ export const MENU: MenuItem[] = [
         id: 49,
         label: 'MENUITEMS.CONTACTS.TEXT',
         icon: 'bxs-user-detail',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 50,
@@ -330,6 +340,7 @@ export const MENU: MenuItem[] = [
         id: 53,
         label: 'MENUITEMS.BLOG.TEXT',
         icon: 'bx-file',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 54,
@@ -355,6 +366,7 @@ export const MENU: MenuItem[] = [
         id: 57,
         label: 'MENUITEMS.JOBS.TEXT',
         icon: 'bx-briefcase-alt',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 58,
@@ -414,12 +426,14 @@ export const MENU: MenuItem[] = [
     {
         id: 66,
         label: 'MENUITEMS.PAGES.TEXT',
-        isTitle: true
+        isTitle: true,
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
     },
     {
         id: 67,
         label: 'MENUITEMS.AUTHENTICATION.TEXT',
         icon: 'bx-user-circle',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 68,
@@ -511,6 +525,7 @@ export const MENU: MenuItem[] = [
         id: 82,
         label: 'MENUITEMS.UTILITY.TEXT',
         icon: 'bx-file',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 83,
@@ -565,12 +580,14 @@ export const MENU: MenuItem[] = [
     {
         id: 91,
         label: 'MENUITEMS.COMPONENTS.TEXT',
-        isTitle: true
+        isTitle: true,
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
     },
     {
         id: 92,
         label: 'MENUITEMS.UIELEMENTS.TEXT',
         icon: 'bx-tone',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 93,
@@ -713,9 +730,42 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
+        id: 180,
+        label: 'Users',
+        icon: 'bx-conversation',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
+        subItems: [
+            {
+                id: 181,
+                label: 'Supervisors',
+                link: '/user/supervisor-users',
+                parentId: 180
+            },
+            {
+                id: 182,
+                label: 'Students',
+                link: '/user/student-users',
+                parentId: 180
+            },
+            {
+                id: 183,
+                label: 'Add Student',
+                link: '/user/addStudent',
+                parentId: 180
+            },
+            {
+                id: 184,
+                label: 'Add Supervisor',
+                link: '/user/addSupervisor',
+                parentId: 180
+            }
+        ]
+    },
+    {
         id: 116,
         label: 'MENUITEMS.FORMS.TEXT',
         icon: 'bxs-eraser',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         badge: {
             variant: 'danger',
             text: 'MENUITEMS.FORMS.BADGE',
@@ -781,6 +831,7 @@ export const MENU: MenuItem[] = [
         id: 126,
         icon: 'bx-list-ul',
         label: 'MENUITEMS.TABLES.TEXT',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 127,
@@ -800,6 +851,7 @@ export const MENU: MenuItem[] = [
         id: 130,
         icon: 'bxs-bar-chart-alt-2',
         label: 'MENUITEMS.CHARTS.TEXT',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 131,
@@ -831,6 +883,7 @@ export const MENU: MenuItem[] = [
         id: 135,
         label: 'MENUITEMS.ICONS.TEXT',
         icon: 'bx-aperture',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 136,
@@ -862,6 +915,7 @@ export const MENU: MenuItem[] = [
         id: 140,
         label: 'MENUITEMS.MAPS.TEXT',
         icon: 'bx-map',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             // {
             //     id: 141,
@@ -881,6 +935,7 @@ export const MENU: MenuItem[] = [
         id: 143,
         label: 'MENUITEMS.MULTILEVEL.TEXT',
         icon: 'bx-share-alt',
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
         subItems: [
             {
                 id: 144,

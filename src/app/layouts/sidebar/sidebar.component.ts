@@ -23,6 +23,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() isCondensed = false;
   menu: any;
   data: any;
+  currentUser:any;
+  userRole:any;
 
   menuItems: MenuItem[] = [];
 
@@ -38,6 +40,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+  if(this.currentUser){
+    this.userRole=this.currentUser.role;
+  }
     this.initialize();
     this._scrollElement();
   }
@@ -148,5 +154,19 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
    */
   hasItems(item: MenuItem) {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
+  }
+
+  isDisabled(data:any[]):boolean{
+    console.log("eeeeeeeeeeeeeee");
+    console.log(data);
+    if(data.includes(this.userRole)){
+      console.log("t1")
+      return true ;
+    }
+    else{
+      console.log("t3")
+      return false
+    }
+    
   }
 }
