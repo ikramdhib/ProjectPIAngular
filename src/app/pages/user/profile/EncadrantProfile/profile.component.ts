@@ -24,36 +24,16 @@ export class ProfileComponent implements OnInit {
   constructor( public authService : AuthenticationService) { }
 
   ngOnInit() {
-
-
-    this.Profile();
-    
-    this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Profile', active: true }];
-    
-    
-   // this.userImage= this.userService.getImage("ff16c7f6-07d4-4bbf-bdd9-da61721ca9a9.jpg");
-    // fetches the data
-/*
-    this.userService.getImage("dhibikram00@gmail.com").subscribe({
-
-      next :(res:any)=>{
-        console.log(res.url,'@@@@@@@@@@@@@@@@@@@@@@@');
-        this.userImage= res.url;
-      }
-    }
-       
-    )*/
-
-  }
-
-  public Profile(){
     this.authService.getProfileUser().subscribe({
       next:(res:any)=>{
         console.log(res.Data,"ttt");
         this.currentUser = res.Data
       }
     })
+    
+    this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Profile', active: true }];
   }
+
 
  
 }
