@@ -231,6 +231,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
   constructor(private journalService: JournalService,private datePipe: DatePipe,private http: HttpClient,private stageService: StageService, private demandeService: DemandeService,private fb: FormBuilder, private toastr: ToastrService,private modalService: BsModalService,private ufb: UntypedFormBuilder) {
     
     
+
       this.form = this.ufb.group({
         formlist: this.ufb.array([]),
       }),
@@ -355,8 +356,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
         response => {
           console.log('Réponse du serveur :', response); // Ajoutez cette ligne
           this.toastr.success('Tàche mis à jour avec succès', 'Succès');
-          this.showTaches(this.currentTache.journal.id);
           this.modalRef2.hide();
+          this.showTaches(this.currentTache.journal.id);
         },
         error => {
           console.error('Erreur lors de la mise à jour de tàche :', error);
@@ -378,6 +379,18 @@ export class ProcessusstageetudiantComponent implements OnInit {
         error => {
           console.error('Erreur lors de la suppression du stage :', error);
           // Ajoutez ici le code pour gérer l'erreur ou afficher un message à l'utilisateur
+        }
+      );
+    }
+  }
+
+  deleteTache(tache: any): void {
+    if (confirm('Voulez-vous vraiment supprimer cette tàche ?')) {
+      this.toastr.success('Tache supprimée avec succès', 'Succès');
+      this.journalService.deleteTache(tache.id).subscribe(
+        response => {
+          console.log('Tàche supprimée avec succès:', response);
+          // Ajoutez ici le code pour rafraîchir la liste des stages ou effectuer d'autres actions nécessaires
         }
       );
     }

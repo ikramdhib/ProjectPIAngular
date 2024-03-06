@@ -33,5 +33,10 @@ export class JournalService {
     return this.http.put(`${this.baseUrl}/${tacheId}`, updatedTache);
   }
 
+  deleteTache(tacheId: string): Observable<any> {
+    const url = `${this.baseUrl}/${tacheId}`;
+    return this.http.delete(url);
+  }
+
 
 }
