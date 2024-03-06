@@ -713,6 +713,37 @@ export const MENU: MenuItem[] = [
         ]
     },
     {
+        id: 144,
+        label: 'Forum',
+        icon: 'bx-conversation',
+        subItems: [
+            {
+                id: 145,
+                label: 'ListForum',
+                link: '/forum/listforum',
+                parentId: 144
+            },
+            {
+                id: 146,
+                label: 'AddQuestion',
+                link: '/forum/addquestion',
+                parentId: 144
+            },
+            {
+                id: 147,
+                label: 'ListeFavoris',
+                link: '/forum/listFavoris',
+                parentId: 144
+            },
+            {
+                id: 148,
+                label: 'Historique',
+                link: '/forum/historique',
+                parentId: 144
+            }
+        ]
+    },
+    {
         id: 116,
         label: 'MENUITEMS.FORMS.TEXT',
         icon: 'bxs-eraser',

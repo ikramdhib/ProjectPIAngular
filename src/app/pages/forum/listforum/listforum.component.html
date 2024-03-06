@@ -1,0 +1,60 @@
+<div class="container-fluid">
+
+    <!-- start page title -->
+  
+    <app-page-title title="All Questions" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+    <div class="col-sm-4">
+      <div class="search-box me-2 mb-2 d-inline-block">
+        <div class="position-relative">
+          <input type="text" class="form-control" id="searchTableList" placeholder="Search..." [(ngModel)]="searchTerm" (ngModelChange)="filterQuestions()">
+          <i class="bx bx-search-alt search-icon"></i>
+        </div>
+      </div>
+    </div>
+  
+    <!-- end page title -->
+  
+    <div class="row" *ngFor="let question of filteredQuestions">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="invoice-title">
+              <div class="float-end">
+                <a class="btn btn-sm btn-link font-size-25 text-center" href="javascript:void(0)">
+                  <i class="bx bx-heart" [ngClass]="{'text-danger': isFavorite(question.id)}" style="font-size: large; font-weight: bold;"></i>{{translate}}
+                </a> 
+              </div>
+              <div class="auth-logo mb-4 col-10">
+                <h2><strong>{{question.titre}}</strong></h2><br>
+            </div>
+            </div>
+            <hr>
+            <div class="row" >
+              <div class="col-10" style="overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical;">
+                  <div [innerHTML]="question.content" ></div>  
+              </div>
+              <div class="col-10">
+                <div *ngFor="let tag of question.tags" class="badge bg-primary me-1 mb-1">
+                  {{ tag.name }}
+                </div>
+              </div>
+              <div class="d-print-none">
+                <div class="float-end list-inline wizard d-flex justify-content-end mb-0">
+                  <div class="btn btn-sm font-size-18 text-center">
+                    {{ responseCounts[question.id] || '0'}} Answers
+                </div>
+                <div class="btn btn-sm btn-link font-size-20 text-center">
+                  <a [routerLink]="['/detail', question.id]" >detail</a>
+                </div>
+                  
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end row -->
+  
+  </div> <!-- container-fluid -->

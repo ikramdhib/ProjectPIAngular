@@ -54,7 +54,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ForgetPasswordComponent,
     SendingMailComponent,
     ChangePasswordComponent,
-    
+    CyptolandingComponent
   ],
   imports: [
     BrowserModule,
