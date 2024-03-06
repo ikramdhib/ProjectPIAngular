@@ -6,12 +6,9 @@
         <div class="card">
           <div class="card-body border-bottom">
             <div class="d-flex align-items-center">
-              <h5 class="mb-0 card-title flex-grow-1"> List</h5>
+              <h5 class="mb-0 card-title flex-grow-1"> List des offres de stage</h5>
               <div class="flex-shrink-0 d-flex gap-1">
-                <a href="javascript:void(0);" class="btn btn-primary" >Liste</a>
-                <a href="javascript:void(0);" class="btn btn-light"><i class="mdi mdi-refresh"></i></a>
                 <div class="dropdown d-inline-block" dropdown>
-                  <button type="menu" class="btn btn-success" id="*dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><i class="mdi mdi-dots-vertical"></i></button>
                 
                 </div>
               </div>
@@ -20,7 +17,6 @@
           <div class="card-body border-bottom">
             <div class="row g-3">
               <div class="col-xxl-4 col-lg-6">
-                <input type="search" class="form-control" id="searchInput" placeholder="Search for ..." >
               </div>
             
              
@@ -28,7 +24,6 @@
              
               </div>
               <div class="col-xxl-2 col-lg-4">
-                <button type="button" class="btn btn-soft-secondary w-100"><i class="mdi mdi-filter-outline align-middle"></i> Filter</button>
               </div>
             </div>
           </div>
@@ -48,6 +43,8 @@
                     <th scope="col">Date Fin Stage</th>
                     <th scope="col">Durée (jours)</th>
                     <th scope="col">Type</th>
+                    <th scope="col">hashtags</th>
+
     
                   </tr>
                 </thead>
@@ -57,11 +54,18 @@
                         <td>{{ offre.nomEncadrant }}</td>
                         <td>{{ offre.prenomEncadrant }}</td>
                         <td>{{ offre.email }}</td>
-                        <td>{{ offre.description }}</td>
+                        <td>
+                          <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ offre.description }}">
+                              {{ offre.description.substring(0, 50) }}{{ offre.description.length > 50 ? '...' : '' }}
+                          </span>
+                      </td>
+                      
                         <td>{{ offre.datedebut_stage | date: 'shortDate' }}</td>
                         <td>{{ offre.datefin_stage | date: 'shortDate' }}</td>
                         <td>{{ offre.duree }}</td>
                         <td>{{ types[offre.type] }}</td>
+                        <td>{{ offre.hashtags }}</td>
+
                         <td>
         
                       <ul class="list-unstyled hstack gap-1 mb-0">
@@ -148,6 +152,10 @@
                     <label for="duree">Durée du stage (jours)</label>
                     <input type="text" class="form-control" id="duree" formControlName="duree">
                 </div>
+                <div class="mb-3">
+                  <label for="hashtags">hashtags</label>
+                  <input type="text" class="form-control" id="hashtags" formControlName="hashtags">
+              </div>
                 
         </div>
         <div class="modal-footer">

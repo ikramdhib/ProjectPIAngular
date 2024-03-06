@@ -78,7 +78,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 3,
                 label: 'MENUITEMS.DASHBOARDS.LIST.DEFAULT',
-                link: '/dashboard',
+                link: '/scraping',
                 parentId: 2
             },
             {

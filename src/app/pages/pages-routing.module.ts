@@ -10,6 +10,7 @@ import { ListeoffreencadrantComponent } from './listeoffreencadrant/listeoffreen
 import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
 import { ChatComponentComponent } from './chat-component/chat-component.component';
 import { AdminchatComponent } from './adminchat/adminchat.component';
+import { LinkedInScraperComponentComponent } from './linked-in-scraper-component/linked-in-scraper-component.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarComponent },
   { path: 'filemanager', component: FilemanagerComponent },
   {path:'Chatadmin',component:AdminchatComponent},
+  {path:'scraping',component:LinkedInScraperComponentComponent},
 
   {path:'offre',component:OffreComponent},
   {path:'listeencadrant',component:ListeoffreencadrantComponent},

@@ -37,7 +37,8 @@ export class ListeoffreencadrantComponent {
       datefin_stage: ['', Validators.required],
       type: ['', Validators.required],
       duree:['', Validators.required],
-      // Ajoutez les autres champs du formulaire ici
+      hashtags:['', Validators.required]
+
       
     });
 
@@ -54,7 +55,8 @@ export class ListeoffreencadrantComponent {
       datedebut_stage: offre.datedebut_stage,
       datefin_stage: offre.datefin_stage,
       type: offre.type, 
-      duree: offre.duree
+      duree: offre.duree,
+      hashtags:offre.hashtags
     });
     this.modalRef = this.modalService.show(this.updateContent); 
 
@@ -103,5 +105,8 @@ export class ListeoffreencadrantComponent {
       }
     );
   }
+
+
+  
 }
 

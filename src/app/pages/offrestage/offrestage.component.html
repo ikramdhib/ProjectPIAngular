@@ -33,7 +33,13 @@
                     <img [src]="imgURL" class="img-thumbnail logo-image" alt="Logo de l'entreprise">
                 </div>
             </div>
-            
+            <div class="form-group">
+              <label for="lienLinkedIn">Lien LinkedIn</label>
+              <input type="text" class="form-control" id="lienLinkedIn" [(ngModel)]="nouvelleOffre.lienLinkedIn" name="lienLinkedIn">
+            </div>
+            <div class="form-group">
+              <small class="form-text text-muted">Vous pouvez également exporter une description de stage depuis LinkedIn en spécifiant le lien ci-dessus.</small>
+          </div>
             <div class="form-group">
               <label for="description">Description</label>
               <textarea [(ngModel)]="nouvelleOffre.description" class="form-control" id="description" name="description" required></textarea>
@@ -47,8 +53,8 @@
               <input type="date" [ngModel]="nouvelleOffre.datefin_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datefin_stage = $event" class="form-control" id="datefin_stage" name="datefin_stage" required>
             </div>
             <div class="form-group">
-                <label for="duree">Durée du stage (jours)</label>
-                <input type="text" class="form-control" id="duree" name="duree" [(ngModel)]="nouvelleOffre.duree" readonly>
+                <label for="duree">Durée du stage ({{calculateDuration()}}jours)</label>
+                <input type="text" class="form-control" id="duree" name="duree" [(ngModel)]="nouvelleOffre.duree" readonly hidden>
               </div>
               <div class="form-group">
                 <label for="hashtags">Hashtags</label>

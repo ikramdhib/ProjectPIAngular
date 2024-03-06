@@ -1,0 +1,13 @@
+<div>
+    <label for="linkedinProfileUrl">URL du profil LinkedIn :</label>
+    <input type="text" id="linkedinProfileUrl" [(ngModel)]="linkedinProfileUrl">
+    <button (click)="scrapeLinkedIn()">Racler LinkedIn</button>
+  
+    <hr>
+  
+    <h2>Descriptions raclées :</h2>
+    <ul>
+      <li *ngFor="let description of scrapedDescriptions">{{ description }}</li>
+    </ul>
+  </div>
+  

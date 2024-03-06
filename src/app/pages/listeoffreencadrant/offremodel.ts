@@ -15,6 +15,7 @@ export interface Offre {
     duree:Number;
     type:Type;
     commentaires: CommentOffre[]; // Propriété pour stocker les commentaires associés à l'offre
+        hashtags?: string[]; // Ajoutez cette propriété pour stocker les hashtags
 
   }
 

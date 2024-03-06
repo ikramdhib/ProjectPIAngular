@@ -41,6 +41,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminchatComponent } from './pages/adminchat/adminchat.component';
 import { CommentFormComponentComponent } from './comment-form-component/comment-form-component.component';
+import { LinkedInScraperComponentComponent } from './pages/linked-in-scraper-component/linked-in-scraper-component.component';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -64,7 +65,8 @@ export function createTranslateLoader(http: HttpClient): any {
     ListeoffreencadrantComponent,
     ChatComponentComponent,
     AdminchatComponent,
-    CommentFormComponentComponent
+    CommentFormComponentComponent,
+    LinkedInScraperComponentComponent
     
   ],
   imports: [

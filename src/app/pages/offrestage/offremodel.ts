@@ -16,6 +16,7 @@ export interface Offre {
     likes?:number,
     dislikes?:number // Ajoutez cette propriété pour stocker l'URL LinkedIn
     hashtags?: string[]; // Ajoutez cette propriété pour stocker les hashtags
+    lienLinkedIn?: string; // Champ facultatif pour le lien LinkedIn
 
   };
     
