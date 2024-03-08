@@ -1,630 +1,630 @@
 <div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title mb-4">Basic Wizard</h4>
-          <div id="basic-example">
-            <ng-stepper #cdkStepper [linear]="true" class="wizard">
-  
-              <cdk-step [optional]="false">
-                <ng-template cdkStepLabel>
-                  <span class="number">1.</span>
-                  <span>Demande de stage</span>
-                </ng-template>
-                <section *ngIf="cdkStepper.selectedIndex === 0" id="contenuPdf">
-                  <div>
-                    <button (click)="afficherDemandeDeStage()" class="btn btn-primary">Demande de stage</button>
-                    <button *ngIf="demandeDeStageContent" (click)="telechargerPDF()" class="btn btn-success">Télécharger</button>
-                    
-                  </div>
-                  <div *ngIf="demandeDeStageContent" [innerHTML]="demandeDeStageContent"></div>
-                </section>
-                
-              </cdk-step>
-  
-              <cdk-step [optional]="true">
-                <ng-template cdkStepLabel>
-                  <span class="number">2.</span>
-                  <span>Détails de stage</span>
-                </ng-template>
-                <section *ngIf="cdkStepper.selectedIndex === 1">
-                  <form (ngSubmit)="onSubmit()" [formGroup]="stageForm">
-                      <div class="mb-3 row">
-                        <label for="formrow-firstname-input" class="col-md-2 col-form-label"
-                          >Nom de société</label
-                        >
-                        <div class="col-md-10">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="formrow-firstname-input"
-                          formControlName="nomSociete"
-                        />
-                        <div *ngIf="stageForm.get('nomSociete').hasError('required') && stageForm.get('nomSociete').touched">
-                          Ce champ est requis.
-                        </div>
-                        </div>
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title mb-4">Basic Wizard</h4>
+        <div id="basic-example">
+          <ng-stepper #cdkStepper [linear]="true" class="wizard">
+
+            <cdk-step [optional]="false">
+              <ng-template cdkStepLabel>
+                <span class="number">1.</span>
+                <span >Demande de stage</span>
+              </ng-template>
+              <section *ngIf="cdkStepper.selectedIndex === 0" id="contenuPdf">
+                <div>
+                  <button (click)="afficherDemandeDeStage()" class="btn btn-primary">Demande de stage</button>
+                  <button *ngIf="demandeDeStageContent" (click)="telechargerPDF()" class="btn btn-success">Télécharger</button>
+                  
+                </div>
+                <div *ngIf="demandeDeStageContent" [innerHTML]="demandeDeStageContent"></div>
+              </section>
+              
+            </cdk-step>
+
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <span class="number">2.</span>
+                <span>Détails de stage</span>
+              </ng-template>
+              <section *ngIf="cdkStepper.selectedIndex === 1">
+                <form (ngSubmit)="onSubmit()" [formGroup]="stageForm">
+                    <div class="mb-3 row">
+                      <label for="formrow-firstname-input" class="col-md-2 col-form-label"
+                        >Nom de société</label
+                      >
+                      <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="formrow-firstname-input"
+                        formControlName="nomSociete"
+                      />
+                      <div *ngIf="stageForm.get('nomSociete').hasError('required') && stageForm.get('nomSociete').touched">
+                        Ce champ est requis.
                       </div>
-          
-                      <div class="mb-3 row">
-                        <label for="formrow-tel-input" class="col-md-2 col-form-label"
-                          >Numéro de tel</label
-                        >
-                        <div class="col-md-10">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="formrow-tel-input"
-                          formControlName="numSociete"
-                        />
-                        <div *ngIf="stageForm.get('numSociete').hasError('required') && stageForm.get('numSociete').touched">
-                          Ce champ est requis.
-                        </div>
-                        <div *ngIf="stageForm.get('numSociete').hasError('numeric') && stageForm.get('numSociete').touched">
-                          Veuillez saisir un numéro valide.
-                        </div>
-                        </div>
                       </div>
-          
-                      <div class="mb-3 row">
-                        <label for="formrow-email-input" class="col-md-2 col-form-label"
-                          >Email de société</label
-                            >
-                        <div class="col-md-10">
+                    </div>
+        
+                    <div class="mb-3 row">
+                      <label for="formrow-tel-input" class="col-md-2 col-form-label"
+                        >Numéro de tel</label
+                      >
+                      <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="formrow-tel-input"
+                        formControlName="numSociete"
+                      />
+                      <div *ngIf="stageForm.get('numSociete').hasError('required') && stageForm.get('numSociete').touched">
+                        Ce champ est requis.
+                      </div>
+                      <div *ngIf="stageForm.get('numSociete').hasError('numeric') && stageForm.get('numSociete').touched">
+                        Veuillez saisir un numéro valide.
+                      </div>
+                      </div>
+                    </div>
+        
+                    <div class="mb-3 row">
+                      <label for="formrow-email-input" class="col-md-2 col-form-label"
+                        >Email de société</label
+                          >
+                      <div class="col-md-10">
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="formrow-email-input"
+                        formControlName="emailSociete"
+                      />
+                      <div *ngIf="stageForm.get('emailSociete').hasError('required') && stageForm.get('emailSociete').touched">
+                        Ce champ est requis.
+                      </div>
+                      <div *ngIf="stageForm.get('emailSociete').hasError('email') && stageForm.get('emailSociete').touched">
+                        Veuillez saisir une adresse email valide.
+                      </div>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="formrow-nom-encadrant-input" class="col-md-2 col-form-label"
+                        >Nom de l'encadrant</label
+                      >
+                      <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="formrow-nom-encadrant-input"
+                        formControlName="nomCoach"
+                      />
+                      <div *ngIf="stageForm.get('nomCoach').hasError('required') && stageForm.get('nomCoach').touched">
+                        Ce champ est requis.
+                      </div>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="formrow-prenom-encadrant-input" class="col-md-2 col-form-label"
+                        >Prénom de l'encadrant</label
+                      >
+                      <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="formrow-prenom-encadrant-input"
+                        formControlName="prenomCoach"
+                      />
+                      <div *ngIf="stageForm.get('prenomCoach').hasError('required') && stageForm.get('prenomCoach').touched">
+                        Ce champ est requis.
+                      </div>
+                      </div>
+                    </div>
+        
+                    <div class="mb-3 row">
+                      <label for="formrow-tel-input2" class="col-md-2 col-form-label"
+                        >Numéro tel encadrant</label
+                      >
+                      <div class="col-md-10">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="formrow-tel-input2"
+                        formControlName="numCoach"
+                      />
+                      <div *ngIf="stageForm.get('numCoach').hasError('required') && stageForm.get('numCoach').touched">
+                        Ce champ est requis.
+                      </div>
+                      <div *ngIf="stageForm.get('numCoach').hasError('numeric') && stageForm.get('numCoach').touched">
+                        Veuillez saisir un numéro valide.
+                      </div>
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="formrow-email-input2" class="col-md-2 col-form-label"
+                        >Email de l'encadrant</label
+                      >
+                      <div class="col-md-10">
                         <input
                           type="email"
                           class="form-control"
-                          id="formrow-email-input"
-                          formControlName="emailSociete"
+                          id="formrow-email-input2"
+                          formControlName="emailCoach"
                         />
-                        <div *ngIf="stageForm.get('emailSociete').hasError('required') && stageForm.get('emailSociete').touched">
+                        <div *ngIf="stageForm.get('emailCoach').hasError('required') && stageForm.get('emailCoach').touched">
                           Ce champ est requis.
                         </div>
-                        <div *ngIf="stageForm.get('emailSociete').hasError('email') && stageForm.get('emailSociete').touched">
+                        <div *ngIf="stageForm.get('emailCoach').hasError('email') && stageForm.get('emailCoach').touched">
                           Veuillez saisir une adresse email valide.
                         </div>
-                        </div>
                       </div>
-                      <div class="mb-3 row">
-                        <label for="formrow-nom-encadrant-input" class="col-md-2 col-form-label"
-                          >Nom de l'encadrant</label
-                        >
-                        <div class="col-md-10">
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="example-date-input" class="col-md-2 col-form-label"
+                        >Date début</label
+                      >
+                      <div class="col-md-10">
                         <input
-                          type="text"
                           class="form-control"
-                          id="formrow-nom-encadrant-input"
-                          formControlName="nomCoach"
+                          type="date"
+                          id="example-date-input"
+                          formControlName="startAt"
                         />
-                        <div *ngIf="stageForm.get('nomCoach').hasError('required') && stageForm.get('nomCoach').touched">
+                        <div *ngIf="stageForm.get('startAt').hasError('required') && stageForm.get('startAt').touched">
                           Ce champ est requis.
-                        </div>
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="formrow-prenom-encadrant-input" class="col-md-2 col-form-label"
-                          >Prénom de l'encadrant</label
-                        >
-                        <div class="col-md-10">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="formrow-prenom-encadrant-input"
-                          formControlName="prenomCoach"
-                        />
-                        <div *ngIf="stageForm.get('prenomCoach').hasError('required') && stageForm.get('prenomCoach').touched">
-                          Ce champ est requis.
-                        </div>
-                        </div>
-                      </div>
-          
-                      <div class="mb-3 row">
-                        <label for="formrow-tel-input2" class="col-md-2 col-form-label"
-                          >Numéro tel encadrant</label
-                        >
-                        <div class="col-md-10">
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="formrow-tel-input2"
-                          formControlName="numCoach"
-                        />
-                        <div *ngIf="stageForm.get('numCoach').hasError('required') && stageForm.get('numCoach').touched">
-                          Ce champ est requis.
-                        </div>
-                        <div *ngIf="stageForm.get('numCoach').hasError('numeric') && stageForm.get('numCoach').touched">
-                          Veuillez saisir un numéro valide.
-                        </div>
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="formrow-email-input2" class="col-md-2 col-form-label"
-                          >Email de l'encadrant</label
-                        >
-                        <div class="col-md-10">
-                          <input
-                            type="email"
-                            class="form-control"
-                            id="formrow-email-input2"
-                            formControlName="emailCoach"
-                          />
-                          <div *ngIf="stageForm.get('emailCoach').hasError('required') && stageForm.get('emailCoach').touched">
-                            Ce champ est requis.
-                          </div>
-                          <div *ngIf="stageForm.get('emailCoach').hasError('email') && stageForm.get('emailCoach').touched">
-                            Veuillez saisir une adresse email valide.
-                          </div>
-                        </div>
-                      </div>
-                      <div class="mb-3 row">
-                        <label for="example-date-input" class="col-md-2 col-form-label"
-                          >Date début</label
-                        >
-                        <div class="col-md-10">
-                          <input
-                            class="form-control"
-                            type="date"
-                            id="example-date-input"
-                            formControlName="startAt"
-                          />
-                          <div *ngIf="stageForm.get('startAt').hasError('required') && stageForm.get('startAt').touched">
-                            Ce champ est requis.
-                          </div>
-                        </div>
-                      </div>
-          
-                      <div class="mb-3 row">
-                        <label for="example-date-input2" class="col-md-2 col-form-label"
-                          >Date fin</label
-                        >
-                        <div class="col-md-10">
-                          <input
-                            class="form-control"
-                            type="date"
-                            id="example-date-input2"
-                            formControlName="endAt"
-                          />
-                          <div *ngIf="stageForm.get('endAt').hasError('required') && stageForm.get('endAt').touched">
-                            Ce champ est requis.
-                          </div>
-                          
-                        </div>
-                      </div>
-          
-                      <div class="mb-3 row">
-                        <label class="col-md-2 col-form-label">Select</label>
-                        <div class="col-md-10">
-                          <select class="form-select" formControlName="type">
-                            <option>FORMATION_HUMAINE_SOCIALE</option>
-                            <option>IMMERSION_ENTREPRISE</option>
-                            <option>INGENIEUR</option>
-                            <option>NON_OBLIGATOIRE</option>
-                          </select>
-                          <div *ngIf="stageForm.get('type').hasError('required') && stageForm.get('type').touched">
-                            Ce champ est requis.
-                          </div>
-                        </div>
-                      </div>
-                      <div>
-                          <button type="submit" class="btn btn-primary w-md">Ajouter</button>
-                        </div>
-                    </form>
-                    <div class="container-fluid">
-  
-
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="card">
-                            <div class="card-body border-bottom">
-                              <div class="d-flex align-items-center">
-                                <h5 class="mb-0 card-title flex-grow-1">List des stages</h5>
-                                <div class="flex-shrink-0 d-flex gap-1">
-                                  <a href="javascript:void(0);" class="btn btn-primary" >Liste</a>
-                                  <a href="javascript:void(0);" class="btn btn-light"><i class="mdi mdi-refresh"></i></a>
-                                  <div class="dropdown d-inline-block" dropdown>
-                                    <button type="menu" class="btn btn-success" id="*dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><i class="mdi mdi-dots-vertical"></i></button>
-                                  
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          
-                            <div class="card-body">
-                    
-                              <div class="table-responsive">
-                                <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
-                                  <thead>
-                                    <tr>
-                                    
-                                      <th scope="col">Nom Entreprise</th>
-                                      <th scope="col">Numéro Entreprise</th>
-                                      <th scope="col">Email Entreprise</th>
-                                      <th scope="col">Nom Encadrant</th>
-                                      <th scope="col">Prenom Encadrant</th>
-                                      <th scope="col">Numéro Encadrant</th>
-                                      <th scope="col">Email Encadrant</th>
-                                      <th scope="col">Date début</th>
-                                      <th scope="col">Date fin</th>
-                                      <th scope="col">Type</th>
-                                      <th scope="col">Action</th>                  
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                      <tr *ngFor="let stage of stages">
-                                          <td>{{ stage.nomSociete }}</td>
-                                          <td>{{ stage.numSociete }}</td>
-                                          <td>{{ stage.emailSociete }}</td>
-                                          <td>{{ stage.nomCoach }}</td>
-                                          <td>{{ stage.prenomCoach }}</td>
-                                          <td>{{ stage.numCoach }}</td>
-                                          <td>{{ stage.emailCoach }}</td>
-                                          <td>{{ stage.startAt }}</td>
-                                          <td>{{ stage.endAt }}</td>
-                                          <td>{{ stage.type}}</td>
-                                          <td>
-                          
-                                        <ul class="list-unstyled hstack gap-1 mb-0">
-                                          
-                                          <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                              <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModal(stage)">
-                                                <i class="mdi mdi-pencil-outline"></i>
-                                              </a>
-                                            </li>
-                                          <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                            <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="deleteStage(stage)"><i class="mdi mdi-delete-outline"></i></a>
-                                          </li>
-                                        </ul>
-                                      </td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                              </div>
-                              <div class="row justify-content-between align-items-center">
-                                <div class="col-auto me-auto">
-                                
-                                </div>
-                                <div class="col-auto">
-                                  <div class="text-md-right float-md-end pagination-rounded">
-                                    <ul class="pagination pagination-rounded justify-content-end mb-2">
-                                  
-                                    </ul>
-                                  </div>
-                                </div>
-                                <!--end col-->
-                              </div>
-                              <!--end row-->
-                            </div>
-                          </div>
                         </div>
                       </div>
                     </div>
-                  
-                    <ng-template #updateContent>
-                      <div class="modal-header">
-                          <h5 class="modal-title" id="updateModalLabel">Modifier Stage</h5>
-                          <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
+        
+                    <div class="mb-3 row">
+                      <label for="example-date-input2" class="col-md-2 col-form-label"
+                        >Date fin</label
+                      >
+                      <div class="col-md-10">
+                        <input
+                          class="form-control"
+                          type="date"
+                          id="example-date-input2"
+                          formControlName="endAt"
+                        />
+                        <div *ngIf="stageForm.get('endAt').hasError('required') && stageForm.get('endAt').touched">
+                          Ce champ est requis.
+                        </div>
+                        
                       </div>
-                      <form [formGroup]="updateForm" (ngSubmit)="updateForm.valid && updateStage()">
-                          <div class="modal-body">
-                              <div class="mb-3">
-                                  <label for="nomSociete" class="form-label">Nom de l'entreprise</label>
-                                  <input type="text" class="form-control" id="nomSociete" formControlName="nomSociete">
-                              </div>
-                              <div *ngIf="updateForm.get('nomSociete').hasError('required') && updateForm.get('nomSociete').touched">
-                                Ce champ est requis.
-                              </div>
-                              <div class="mb-3">
-                                  <label for="numSociete" class="form-label">Numéro Entreprise</label>
-                                  <input type="text" class="form-control" id="numSociete" formControlName="numSociete">
-                                  <div *ngIf="updateForm.get('numSociete').hasError('required') && updateForm.get('numSociete').touched">
-                                    Ce champ est requis.
-                                  </div>
-                                  <div *ngIf="updateForm.get('numSociete').hasError('numeric') && updateForm.get('numSociete').touched">
-                                    Veuillez saisir un numéro valide.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                  <label for="emailSociete" class="form-label">Email Entreprise</label>
-                                  <input type="email" class="form-control" id="emailSociete" formControlName="emailSociete">
-                                  <div *ngIf="updateForm.get('emailSociete').hasError('required') && updateForm.get('emailSociete').touched">
-                                    Ce champ est requis.
-                                  </div>
-                                  <div *ngIf="updateForm.get('emailSociete').hasError('email') && updateForm.get('emailSociete').touched">
-                                    Veuillez saisir une adresse email valide.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                  <label for="nomCoach" class="form-label">Nom Encadrant</label>
-                                  <input type="text" class="form-control" id="nomCoach" formControlName="nomCoach">
-                                  <div *ngIf="updateForm.get('nomCoach').hasError('required') && updateForm.get('nomCoach').touched">
-                                    Ce champ est requis.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                  <label for="prenomCoach" class="form-label">Prénom Encadrant</label>
-                                  <input type="text" class="form-control" id="prenomCoach" formControlName="prenomCoach">
-                                  <div *ngIf="updateForm.get('prenomCoach').hasError('required') && updateForm.get('prenomCoach').touched">
-                                    Ce champ est requis.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                <label for="numCoach" class="form-label">Numéro Encadrant</label>
-                                <input type="text" class="form-control" id="numCoach"formControlName="numCoach">
-                                <div *ngIf="updateForm.get('numCoach').hasError('required') && updateForm.get('numCoach').touched">
-                                  Ce champ est requis.
-                                </div>
-                                <div *ngIf="updateForm.get('numCoach').hasError('numeric') && updateForm.get('numCoach').touched">
-                                  Veuillez saisir un numéro valide.
-                                </div>
-                              </div>
-                              <div class="mb-3">
-                                <label for="emailCoach" class="form-label">Email Encadrant</label>
-                                <input type="text" class="form-control" id="emailCoach"formControlName="emailCoach">
-                                <div *ngIf="updateForm.get('emailCoach').hasError('required') && updateForm.get('emailCoach').touched">
-                                  Ce champ est requis.
-                                </div>
-                                <div *ngIf="updateForm.get('emailCoach').hasError('email') && updateForm.get('emailCoach').touched">
-                                  Veuillez saisir une adresse email valide.
-                                </div>
-                              </div>
-                              <div class="mb-3">
-                                  <label for="startAt" class="form-label">Date de début du stage</label>
-                                  <input type="date" class="form-control" id="startAt" formControlName="startAt">
-                                  <div *ngIf="updateForm.get('startAt').hasError('required') && updateForm.get('startAt').touched">
-                                    Ce champ est requis.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                  <label for="endAt" class="form-label">Date de fin du stage</label>
-                                  <input type="date" class="form-control" id="endAt" formControlName="endAt">
-                                  <div *ngIf="updateForm.get('endAt').hasError('required') && updateForm.get('endAt').touched">
-                                    Ce champ est requis.
-                                  </div>
-                              </div>
-                              <div class="mb-3">
-                                <label class="col-md-2 col-form-label">Select</label>
-                                <div class="col-md-10">
-                                  <select class="form-select" formControlName="type">
-                                    <option>FORMATION_HUMAINE_SOCIALE</option>
-                                    <option>IMMERSION_ENTREPRISE</option>
-                                    <option>INGENIEUR</option>
-                                    <option>NON_OBLIGATOIRE</option>
-                                  </select>
-                                  <div *ngIf="updateForm.get('type').hasError('required') && updateForm.get('type').touched">
-                                    Ce champ est requis.
-                                  </div>
-                                </div>
-                              </div>  
-                          </div>
-                          <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" (click)="modalRef?.hide()">Fermer</button>
-                              <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
-                          </div>
-                      </form>
-                  </ng-template>
-                  
-                </section>
-              </cdk-step>
-  
-              <cdk-step [optional]="true">
-                <ng-template cdkStepLabel>
-                  <span class="number">3.</span>
-                  <span>Remplir votre journal</span>
-                </ng-template>
-                <section *ngIf="cdkStepper.selectedIndex === 2">
-                  <div class="card-body"> 
-                    <div class="table-responsive">
-                      <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
-                        <thead>
-                          <tr>
-                          
-                            <th scope="col">Nom Entreprise</th>
-                            <th scope="col">Nom Encadrant</th>
-                            <th scope="col">Date début</th>
-                            <th scope="col">Date fin</th>
-                            <th scope="col">Type</th>
-                            <th scope="col">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let stage of stages">
-                                <td>{{ stage.nomSociete }}</td>
-                                <td>{{ stage.nomCoach }}</td>
-                                <td>{{ stage.startAt }}</td>
-                                <td>{{ stage.endAt }}</td>
-                                <td>{{ stage.type}}</td>
-                                <td>
-                              <ul class="list-unstyled hstack gap-1 mb-0">
-                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter journal">
-                                  <button  class="btn btn-sm btn-soft-info" (click)="addJournal(stage)">
-                                    Ajouter journal
-                                  </button>
-                                </li>
-                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="{{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}">
-                                  <button class="btn btn-sm btn-soft-info" (click)="toggleTacheForm(stage.id)">
-                                    {{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}
-                                  </button>
-                                </li>
-                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher tàches">
-                                  <button  class="btn btn-sm btn-soft-info" (click)="showTaches(stage.journal.id)" >
-                                    Afficher tàches
-                                  </button>
-                                </li>                        
-                              </ul>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
-                    <!--end row-->
-                    <form *ngIf="showTacheForm" [formGroup]="tacheForm" >
-
-                      <div class="mb-3 row">
-                        <label for="date" class="col-md-2 col-form-label"
-                          >Date </label
-                        >
-                        <div class="col-md-10">
-                          <input
-                            class="form-control"
-                            type="date"
-                            id="date"
-                            formControlName="date"
-                          />
-                        </div>
-                        <div *ngIf="tacheForm.get('date').hasError('required') && tacheForm.get('date').touched">
+        
+                    <div class="mb-3 row">
+                      <label class="col-md-2 col-form-label">Select</label>
+                      <div class="col-md-10">
+                        <select class="form-select" formControlName="type">
+                          <option>FORMATION_HUMAINE_SOCIALE</option>
+                          <option>IMMERSION_ENTREPRISE</option>
+                          <option>INGENIEUR</option>
+                          <option>NON_OBLIGATOIRE</option>
+                        </select>
+                        <div *ngIf="stageForm.get('type').hasError('required') && stageForm.get('type').touched">
                           Ce champ est requis.
                         </div>
                       </div>
-                      <div class="mb-3 row">
-                        <label for="libelle" class="col-md-2 col-form-label"
-                          >Tache </label
-                        >
-                        <div class="col-md-10">
-                          <textarea
-                            class="form-control"
-                            type="text"
-                            id="libelle"
-                            formControlName="libelle"
-                          ></textarea>
-                        </div>
-                        <div *ngIf="tacheForm.get('libelle').hasError('required') && tacheForm.get('libelle').touched">
-                          Ce champ est requis.
-                        </div>
-                      </div>
-                      <div>
-                          <button type="submit" class="btn btn-primary w-md" (click)="onTacheFormSubmit()">Ajouter</button>
-                      </div>
-                    </form>
-                  </div>
-                  <section *ngIf="taches.length > 0">
-                  <div class="card-body">
-                    <h4>Liste des tàches :</h4>
-                    <div class="table-responsive">
-                      <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
-                        <thead>
-                          <tr>                            
-                            <th scope="col">Date Tàche</th>
-                            <th scope="col">Contenu Tàche</th>             
-                          </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let tache of taches">
-                                <td>{{ tache.date }}</td>
-                                <td>{{ tache.libelle }}</td>
-                                <td>
-                
-                              <ul class="list-unstyled hstack gap-1 mb-0">
-                                
-                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                    <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModalTache(tache)">
-                                      <i class="mdi mdi-pencil-outline"></i>
-                                    </a>
-                                  </li>
-                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                  <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="deleteTache(tache)"><i class="mdi mdi-delete-outline"></i></a>
-                                </li>
-                              </ul>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
-                    <!--end row-->
-                  </div>
-                </section>
-                <ng-template #updateContent2>
-                  <div class="modal-header">
-                      <h5 class="modal-title" id="updateModalLabel">Modifier Tàche</h5>
-                      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
-                  </div>
-                  <form [formGroup]="updateFormTache" (ngSubmit)="updateFormTache.valid && updateTache()">
-                      <div class="modal-body">
-                          <div class="mb-3">
-                              <label for="date" class="form-label">Date Tàche</label>
-                              <input type="date" class="form-control" id="date" formControlName="date">
-                              <div *ngIf="updateFormTache.get('date').hasError('required') && updateFormTache.get('date').touched">
-                                Ce champ est requis.
-                              </div>
-                          </div>
-                          <div class="mb-3">
-                            <label for="libelle" class="form-label">Contenu Tàche</label>
-                            <textarea type="text" class="form-control" id="libelle" formControlName="libelle"></textarea>
-                        </div>
-                        <div *ngIf="updateFormTache.get('libelle').hasError('required') && updateFormTache.get('libelle').touched">
-                          Ce champ est requis.
-                        </div> 
-                      </div>
-                      <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" (click)="modalRef2?.hide()">Fermer</button>
-                          <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    <div>
+                        <button type="submit" class="btn btn-primary w-md">Ajouter</button>
                       </div>
                   </form>
-              </ng-template>
-                </section>
-              </cdk-step>
-  
-              <cdk-step [optional]="true">
-                <ng-template cdkStepLabel>
-                  <span class="number">4.</span>
-                  <span>Déposer votre rapport</span>
-                </ng-template>
-                <section *ngIf="cdkStepper.selectedIndex === 3">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title">Dropzone</div>
-                          <p class="card-title-desc">DropzoneJS is an open source library
-                            that provides drag’n’drop file uploads with image previews.
-                          </p>
-                          <div>
-                            <form>
-                              <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'image/*'">
-                                <ngx-dropzone-label class="dz-message needsclick">
-                                    <div class="mb-3">
-                                        <i class="display-4 text-muted bx bxs-cloud-upload"></i>
-                                    </div>
-                
-                                    <h5>Drop files here or click to upload.</h5>
-                                </ngx-dropzone-label>
-                            </ngx-dropzone>
-                            <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
-                                <ngx-dropzone-label>
-                                    <div class="d-flex p-2">
-                                        <div class="flex-shrink-0 me-3">
-                                            <div class="avatar-sm bg-light rounded">
-                                                <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1">
-                                            <div class="pt-1">
-                                                <strong class="error text-danger"></strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </ngx-dropzone-label>
-                            </ngx-dropzone-preview>
-                            <!-- end dropzon-preview -->
-                            </form>
+                  <div class="container-fluid">
+
+
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="card">
+                          <div class="card-body border-bottom">
+                            <div class="d-flex align-items-center">
+                              <h5 class="mb-0 card-title flex-grow-1">List des stages</h5>
+                              <div class="flex-shrink-0 d-flex gap-1">
+                                <a href="javascript:void(0);" class="btn btn-primary" >Liste</a>
+                                <a href="javascript:void(0);" class="btn btn-light"><i class="mdi mdi-refresh"></i></a>
+                                <div class="dropdown d-inline-block" dropdown>
+                                  <button type="menu" class="btn btn-success" id="*dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><i class="mdi mdi-dots-vertical"></i></button>
+                                
+                                </div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="text-center mt-4">
-                            <button type="button" class="btn btn-primary">Send Files</button>
+                        
+                          <div class="card-body">
+                  
+                            <div class="table-responsive">
+                              <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                                <thead>
+                                  <tr>
+                                  
+                                    <th scope="col">Nom Entreprise</th>
+                                    <th scope="col">Numéro Entreprise</th>
+                                    <th scope="col">Email Entreprise</th>
+                                    <th scope="col">Nom Encadrant</th>
+                                    <th scope="col">Prenom Encadrant</th>
+                                    <th scope="col">Numéro Encadrant</th>
+                                    <th scope="col">Email Encadrant</th>
+                                    <th scope="col">Date début</th>
+                                    <th scope="col">Date fin</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Action</th>                  
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let stage of stages">
+                                        <td>{{ stage.nomSociete }}</td>
+                                        <td>{{ stage.numSociete }}</td>
+                                        <td>{{ stage.emailSociete }}</td>
+                                        <td>{{ stage.nomCoach }}</td>
+                                        <td>{{ stage.prenomCoach }}</td>
+                                        <td>{{ stage.numCoach }}</td>
+                                        <td>{{ stage.emailCoach }}</td>
+                                        <td>{{ stage.startAt }}</td>
+                                        <td>{{ stage.endAt }}</td>
+                                        <td>{{ stage.type}}</td>
+                                        <td>
+                        
+                                      <ul class="list-unstyled hstack gap-1 mb-0">
+                                        
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                            <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModal(stage)">
+                                              <i class="mdi mdi-pencil-outline"></i>
+                                            </a>
+                                          </li>
+                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                          <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="deleteStage(stage)"><i class="mdi mdi-delete-outline"></i></a>
+                                        </li>
+                                      </ul>
+                                    </td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="row justify-content-between align-items-center">
+                              <div class="col-auto me-auto">
+                              
+                              </div>
+                              <div class="col-auto">
+                                <div class="text-md-right float-md-end pagination-rounded">
+                                  <ul class="pagination pagination-rounded justify-content-end mb-2">
+                                
+                                  </ul>
+                                </div>
+                              </div>
+                              <!--end col-->
+                            </div>
+                            <!--end row-->
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </section>
-              </cdk-step>
-  
-            </ng-stepper>
-          </div>
-  
+                
+                  <ng-template #updateContent>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="updateModalLabel">Modifier Stage</h5>
+                        <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
+                    </div>
+                    <form [formGroup]="updateForm" (ngSubmit)="updateForm.valid && updateStage()">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="nomSociete" class="form-label">Nom de l'entreprise</label>
+                                <input type="text" class="form-control" id="nomSociete" formControlName="nomSociete">
+                            </div>
+                            <div *ngIf="updateForm.get('nomSociete').hasError('required') && updateForm.get('nomSociete').touched">
+                              Ce champ est requis.
+                            </div>
+                            <div class="mb-3">
+                                <label for="numSociete" class="form-label">Numéro Entreprise</label>
+                                <input type="text" class="form-control" id="numSociete" formControlName="numSociete">
+                                <div *ngIf="updateForm.get('numSociete').hasError('required') && updateForm.get('numSociete').touched">
+                                  Ce champ est requis.
+                                </div>
+                                <div *ngIf="updateForm.get('numSociete').hasError('numeric') && updateForm.get('numSociete').touched">
+                                  Veuillez saisir un numéro valide.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailSociete" class="form-label">Email Entreprise</label>
+                                <input type="email" class="form-control" id="emailSociete" formControlName="emailSociete">
+                                <div *ngIf="updateForm.get('emailSociete').hasError('required') && updateForm.get('emailSociete').touched">
+                                  Ce champ est requis.
+                                </div>
+                                <div *ngIf="updateForm.get('emailSociete').hasError('email') && updateForm.get('emailSociete').touched">
+                                  Veuillez saisir une adresse email valide.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="nomCoach" class="form-label">Nom Encadrant</label>
+                                <input type="text" class="form-control" id="nomCoach" formControlName="nomCoach">
+                                <div *ngIf="updateForm.get('nomCoach').hasError('required') && updateForm.get('nomCoach').touched">
+                                  Ce champ est requis.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="prenomCoach" class="form-label">Prénom Encadrant</label>
+                                <input type="text" class="form-control" id="prenomCoach" formControlName="prenomCoach">
+                                <div *ngIf="updateForm.get('prenomCoach').hasError('required') && updateForm.get('prenomCoach').touched">
+                                  Ce champ est requis.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="numCoach" class="form-label">Numéro Encadrant</label>
+                              <input type="text" class="form-control" id="numCoach"formControlName="numCoach">
+                              <div *ngIf="updateForm.get('numCoach').hasError('required') && updateForm.get('numCoach').touched">
+                                Ce champ est requis.
+                              </div>
+                              <div *ngIf="updateForm.get('numCoach').hasError('numeric') && updateForm.get('numCoach').touched">
+                                Veuillez saisir un numéro valide.
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                              <label for="emailCoach" class="form-label">Email Encadrant</label>
+                              <input type="text" class="form-control" id="emailCoach"formControlName="emailCoach">
+                              <div *ngIf="updateForm.get('emailCoach').hasError('required') && updateForm.get('emailCoach').touched">
+                                Ce champ est requis.
+                              </div>
+                              <div *ngIf="updateForm.get('emailCoach').hasError('email') && updateForm.get('emailCoach').touched">
+                                Veuillez saisir une adresse email valide.
+                              </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="startAt" class="form-label">Date de début du stage</label>
+                                <input type="date" class="form-control" id="startAt" formControlName="startAt">
+                                <div *ngIf="updateForm.get('startAt').hasError('required') && updateForm.get('startAt').touched">
+                                  Ce champ est requis.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="endAt" class="form-label">Date de fin du stage</label>
+                                <input type="date" class="form-control" id="endAt" formControlName="endAt">
+                                <div *ngIf="updateForm.get('endAt').hasError('required') && updateForm.get('endAt').touched">
+                                  Ce champ est requis.
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                              <label class="col-md-2 col-form-label">Select</label>
+                              <div class="col-md-10">
+                                <select class="form-select" formControlName="type">
+                                  <option>FORMATION_HUMAINE_SOCIALE</option>
+                                  <option>IMMERSION_ENTREPRISE</option>
+                                  <option>INGENIEUR</option>
+                                  <option>NON_OBLIGATOIRE</option>
+                                </select>
+                                <div *ngIf="updateForm.get('type').hasError('required') && updateForm.get('type').touched">
+                                  Ce champ est requis.
+                                </div>
+                              </div>
+                            </div>  
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" (click)="modalRef?.hide()">Fermer</button>
+                            <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                        </div>
+                    </form>
+                </ng-template>
+                
+              </section>
+            </cdk-step>
+
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <span class="number">3.</span>
+                <span>Remplir votre journal</span>
+              </ng-template>
+              <section *ngIf="cdkStepper.selectedIndex === 2">
+                <div class="card-body"> 
+                  <div class="table-responsive">
+                    <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                      <thead>
+                        <tr>
+                        
+                          <th scope="col">Nom Entreprise</th>
+                          <th scope="col">Nom Encadrant</th>
+                          <th scope="col">Date début</th>
+                          <th scope="col">Date fin</th>
+                          <th scope="col">Type</th>
+                          <th scope="col">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let stage of stages">
+                              <td>{{ stage.nomSociete }}</td>
+                              <td>{{ stage.nomCoach }}</td>
+                              <td>{{ stage.startAt }}</td>
+                              <td>{{ stage.endAt }}</td>
+                              <td>{{ stage.type}}</td>
+                              <td>
+                            <ul class="list-unstyled hstack gap-1 mb-0">
+                              <li data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter journal">
+                                <button  class="btn btn-sm btn-soft-info" (click)="addJournal(stage)">
+                                  Ajouter journal
+                                </button>
+                              </li>
+                              <li data-bs-toggle="tooltip" data-bs-placement="top" title="{{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}">
+                                <button class="btn btn-sm btn-soft-info" (click)="toggleTacheForm(stage.id)">
+                                  {{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}
+                                </button>
+                              </li>
+                              <li data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher tàches">
+                                <button  class="btn btn-sm btn-soft-info" (click)="showTaches(stage.journal.id)" >
+                                  Afficher tàches
+                                </button>
+                              </li>                        
+                            </ul>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!--end row-->
+                  <form *ngIf="showTacheForm" [formGroup]="tacheForm" >
+
+                    <div class="mb-3 row">
+                      <label for="date" class="col-md-2 col-form-label"
+                        >Date </label
+                      >
+                      <div class="col-md-10">
+                        <input
+                          class="form-control"
+                          type="date"
+                          id="date"
+                          formControlName="date"
+                        />
+                      </div>
+                      <div *ngIf="tacheForm.get('date').hasError('required') && tacheForm.get('date').touched">
+                        Ce champ est requis.
+                      </div>
+                    </div>
+                    <div class="mb-3 row">
+                      <label for="libelle" class="col-md-2 col-form-label"
+                        >Tache </label
+                      >
+                      <div class="col-md-10">
+                        <textarea
+                          class="form-control"
+                          type="text"
+                          id="libelle"
+                          formControlName="libelle"
+                        ></textarea>
+                      </div>
+                      <div *ngIf="tacheForm.get('libelle').hasError('required') && tacheForm.get('libelle').touched">
+                        Ce champ est requis.
+                      </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary w-md" (click)="onTacheFormSubmit()">Ajouter</button>
+                    </div>
+                  </form>
+                </div>
+                <section *ngIf="taches.length > 0">
+                <div class="card-body">
+                  <h4>Liste des tàches :</h4>
+                  <div class="table-responsive">
+                    <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                      <thead>
+                        <tr>                            
+                          <th scope="col">Date Tàche</th>
+                          <th scope="col">Contenu Tàche</th>             
+                        </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let tache of taches">
+                              <td>{{ tache.date }}</td>
+                              <td>{{ tache.libelle }}</td>
+                              <td>
+              
+                            <ul class="list-unstyled hstack gap-1 mb-0">
+                              
+                              <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                  <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModalTache(tache)">
+                                    <i class="mdi mdi-pencil-outline"></i>
+                                  </a>
+                                </li>
+                              <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="deleteTache(tache)"><i class="mdi mdi-delete-outline"></i></a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!--end row-->
+                </div>
+              </section>
+              <ng-template #updateContent2>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateModalLabel">Modifier Tàche</h5>
+                    <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
+                </div>
+                <form [formGroup]="updateFormTache" (ngSubmit)="updateFormTache.valid && updateTache()">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Date Tàche</label>
+                            <input type="date" class="form-control" id="date" formControlName="date">
+                            <div *ngIf="updateFormTache.get('date').hasError('required') && updateFormTache.get('date').touched">
+                              Ce champ est requis.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                          <label for="libelle" class="form-label">Contenu Tàche</label>
+                          <textarea type="text" class="form-control" id="libelle" formControlName="libelle"></textarea>
+                      </div>
+                      <div *ngIf="updateFormTache.get('libelle').hasError('required') && updateFormTache.get('libelle').touched">
+                        Ce champ est requis.
+                      </div> 
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="modalRef2?.hide()">Fermer</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </ng-template>
+              </section>
+            </cdk-step>
+
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <span class="number">4.</span>
+                <span>Déposer votre rapport</span>
+              </ng-template>
+              <section *ngIf="cdkStepper.selectedIndex === 3">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="card-title">Dropzone</div>
+                        <p class="card-title-desc">DropzoneJS is an open source library
+                          that provides drag’n’drop file uploads with image previews.
+                        </p>
+                        <div>
+                          <form>
+                            <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'image/*'">
+                              <ngx-dropzone-label class="dz-message needsclick">
+                                  <div class="mb-3">
+                                      <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                                  </div>
+              
+                                  <h5>Drop files here or click to upload.</h5>
+                              </ngx-dropzone-label>
+                          </ngx-dropzone>
+                          <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
+                              <ngx-dropzone-label>
+                                  <div class="d-flex p-2">
+                                      <div class="flex-shrink-0 me-3">
+                                          <div class="avatar-sm bg-light rounded">
+                                              <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
+                                          </div>
+                                      </div>
+                                      <div class="flex-grow-1">
+                                          <div class="pt-1">
+                                              <strong class="error text-danger"></strong>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </ngx-dropzone-label>
+                          </ngx-dropzone-preview>
+                          <!-- end dropzon-preview -->
+                          </form>
+                        </div>
+                        <div class="text-center mt-4">
+                          <button type="button" class="btn btn-primary">Send Files</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </cdk-step>
+
+          </ng-stepper>
         </div>
-        <!-- end card body -->
+
       </div>
-      <!-- end card -->
+      <!-- end card body -->
     </div>
-    <!-- end col -->
+    <!-- end card -->
   </div>
-  <!-- end row -->
+  <!-- end col -->
+</div>
+<!-- end row -->

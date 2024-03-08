@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DemandeService {
+
   private readonly apiUrl = 'http://localhost:8081/api/user';
   private readonly apiUrl2= 'http://localhost:8081/api/stages';
 
@@ -30,12 +32,6 @@ export class DemandeService {
         responseType: 'arraybuffer'
     });
   }
-
-  saveDemandeStage(userId: string, demandeStageContent: string): Observable<any> {
-    const url = `${this.apiUrl2}/save-demande-stage/${userId}`;
-    return this.http.post(url, demandeStageContent);
-}
-
 
 
 }

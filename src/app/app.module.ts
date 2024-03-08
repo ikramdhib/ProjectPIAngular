@@ -34,11 +34,12 @@ import { FakeBackendInterceptor } from "./core/helpers/fake-backend";
 import { ToastrModule } from "ngx-toastr";
 import { StageetudiantComponent } from "./pages/stageetudiant/stageetudiant.component";
 import { ProcessusstageetudiantComponent } from "./pages/processusstageetudiant/processusstageetudiant.component";
-import { FormsModule } from "@angular/forms";
-import { CdkStepperModule } from "@angular/cdk/stepper";
-import { NgStepperModule } from "angular-ng-stepper";
 import { DemandestageComponent } from "./pages/demandestage/demandestage.component";
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from "@angular/forms";
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {NgStepperModule} from 'angular-ng-stepper';
+
 
 if (environment.defaultauth === "firebase") {
   initFirebaseBackend(environment.firebaseConfig);
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient): any {
 }
 
 @NgModule({
+
   declarations: [
     AppComponent,
     CyptolandingComponent,

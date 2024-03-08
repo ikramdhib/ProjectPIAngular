@@ -1,23 +1,20 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { StageService } from "../../services/stage.service";
 import { DemandeService } from "src/app/services/demande.service";
-import { DemandestageComponent } from "../demandestage/demandestage.component";
-import { saveAs } from 'file-saver';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
 
-import { FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { ToastrService } from "ngx-toastr";
 
-import { UntypedFormGroup, UntypedFormArray, UntypedFormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
 
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from "@angular/common";
 import { JournalService } from "src/app/services/journal.service";
-import { Observable, startWith } from "rxjs";
 
 
 
@@ -39,11 +36,14 @@ export class ProcessusstageetudiantComponent implements OnInit {
   userId: string = '65d7b036577f851e1873aa10'; // Remplacez par l'ID de l'utilisateur
 
   currentStage: any; // Variable pour stocker le stage actuelle en cours de modification
-  currentTache: any;
+  currentTache: any; 
+
   modalRef: BsModalRef;
   modalRef2: BsModalRef;
+
   updateForm: FormGroup;
   updateFormTache: FormGroup;
+
   @ViewChild('updateContent') updateContent: any; // Déclaration de la propriété updateContent de type ViewChild
   @ViewChild('updateContent2') updateContent2: any;
 
@@ -54,18 +54,20 @@ export class ProcessusstageetudiantComponent implements OnInit {
     this.getStagesForUser();
   }
 
+
   showTacheFormMap: { [stageId: string]: boolean } = {};
   showTacheForm: boolean = false;
 
   selectedStage: any;
 
   // Ajoutez la méthode pour afficher ou masquer le formulaire tacheForm pour un stage spécifique
+
   toggleTacheForm(stageId: string) {
     this.stageService.isJournalAssociated(stageId).subscribe((isAssociated) => {
       if (isAssociated) {
-        this.selectedStage = this.stages.find((stage) => stage.id === stageId);
-        this.showTacheFormMap[stageId] = !this.showTacheFormMap[stageId];
-        // S'il y a un journal associé, inversez l'état du formulaire
+        // stocker l'id de stage séléctionner
+        this.selectedStage = this.stages.find((stage) => stage.id === stageId); // recherche dans le tableau stages de stage avec l'id de stage donné
+        this.showTacheFormMap[stageId] = !this.showTacheFormMap[stageId]; 
         this.showTacheForm = !this.showTacheForm;
       } else {
         // S'il n'y a pas de journal associé, affichez un message d'alerte avec Toaster
@@ -73,6 +75,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
       }
     });
   }
+
+  // ajouter un journal
 
   selectedJournalId: string | null = null;
 
@@ -92,7 +96,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
             console.log('Journal ajouté avec succès', response);
             this.toastr.success('Journal ajouté avec succès', 'Succès');
 
-            // Stockez l'ID du journal dans formJournal si nécessaire
+            // Stockez l'ID du journal 
             this.selectedJournalId = response.id;
           }, (error) => {
             // Traitez les erreurs si nécessaire
@@ -104,6 +108,9 @@ export class ProcessusstageetudiantComponent implements OnInit {
       console.error('Erreur lors de la vérification de l\'association du journal', error);
     });
   }
+
+
+  // ajouter une tàche
 
   onTacheFormSubmit() {
     
@@ -151,6 +158,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
   taches: any[] = [];
 
 
+  // pour afficher les tàches 
+
   showTaches(journalId: string) {
     if (this.showTachesMap[journalId]) {
       // Si la liste des tâches est déjà affichée, on la masque
@@ -176,19 +185,6 @@ export class ProcessusstageetudiantComponent implements OnInit {
     this.showTachesMap[stageId] = !this.showTachesMap[stageId];
   }
 
-  
-
-  
-
-
-  resetForm() {
-    // Réinitialisez le formulaire des tâches si nécessaire
-    this.form.reset();
-  }
-
-
-  
-
   // File Upload
   imageURL: any;
   onSelect(event: any) {
@@ -210,9 +206,10 @@ export class ProcessusstageetudiantComponent implements OnInit {
 
   demandeDeStageContent: string;
 
-  // Initialisation du formulaire
+  // Initialisation du formulaire d'ajout de stage
   stageForm: FormGroup;
 
+  // Initialisation du formulaire d'ajout de tàche
   tacheForm: FormGroup;
 
   // Propriétés liées aux champs du formulaire
@@ -280,6 +277,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
   }
 
 
+  // afficher les stages par utilisateur
+
   getStagesForUser() {
     this.stageService.getStagesByUserId(this.userId).subscribe(
       (data: any) => {
@@ -292,12 +291,14 @@ export class ProcessusstageetudiantComponent implements OnInit {
   }
 
 
+  // afficher la modal de la modification de stage  // patchValue pour MAJ plusieurs propriétés en mm temps
+
   openUpdateModal(stage: any) {
     this.currentStage = stage; 
     // Formatez les dates avant de les affecter au formulaire
     const formattedStartDate = this.datePipe.transform(stage.startAt, 'yyyy-MM-dd');
     const formattedEndDate = this.datePipe.transform(stage.endAt, 'yyyy-MM-dd');
-    this.updateForm.patchValue({
+    this.updateForm.patchValue({  
       nomSociete: stage.nomSociete,
       numSociete: stage.numSociete,
       emailSociete: stage.emailSociete,
@@ -310,8 +311,9 @@ export class ProcessusstageetudiantComponent implements OnInit {
       type: stage.type
     });
     this.modalRef = this.modalService.show(this.updateContent); 
-
   }
+
+  // afficher la modal de la modification de tàche
 
   openUpdateModalTache(tache: any) {
     this.currentTache = tache; 
@@ -321,18 +323,20 @@ export class ProcessusstageetudiantComponent implements OnInit {
       libelle: tache.libelle,
     });
     this.modalRef2 = this.modalService.show(this.updateContent2); 
-
   }
+
+
+  // modifier le stage 
 
   updateStage() {
     
     if (this.updateForm.valid && this.currentStage) {
-      const updatedStage = { ...this.currentStage, ...this.updateForm.value }; 
-      console.log('Données :', updatedStage); // Ajoutez cette ligne
+      const updatedStage = { ...this.currentStage, ...this.updateForm.value }; // updatedStage est un nouveau objet qui prend toute les propriété de currentStage et les MAJ de updateForm
+      console.log('Données :', updatedStage); 
 
       this.stageService.updateStage(this.currentStage.id, updatedStage).subscribe(
         response => {
-          console.log('Réponse du serveur :', response); // Ajoutez cette ligne
+          console.log('Réponse du serveur :', response); 
           this.toastr.success('Stage mis à jour avec succès', 'Succès');
           this.getStagesForUser();
           this.modalRef.hide();
@@ -344,6 +348,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
       );
     }
   }
+
+  // modifier la tàche 
 
   updateTache() {
     
@@ -367,6 +373,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
     }
   }
 
+  // pour supprimer un stage 
+
   deleteStage(stage: any): void {
     if (confirm('Voulez-vous vraiment supprimer ce stage ?')) {
       this.toastr.success('Stage supprimé avec succès', 'Succès');
@@ -374,15 +382,15 @@ export class ProcessusstageetudiantComponent implements OnInit {
         response => {
           console.log('Stage supprimé avec succès:', response);
           this.getStagesForUser();
-          // Ajoutez ici le code pour rafraîchir la liste des stages ou effectuer d'autres actions nécessaires
         },
         error => {
           console.error('Erreur lors de la suppression du stage :', error);
-          // Ajoutez ici le code pour gérer l'erreur ou afficher un message à l'utilisateur
         }
       );
     }
   }
+
+  // pour supprimer une tàche 
 
   deleteTache(tache: any): void {
     if (confirm('Voulez-vous vraiment supprimer cette tàche ?')) {
@@ -390,7 +398,6 @@ export class ProcessusstageetudiantComponent implements OnInit {
       this.journalService.deleteTache(tache.id).subscribe(
         response => {
           console.log('Tàche supprimée avec succès:', response);
-          // Ajoutez ici le code pour rafraîchir la liste des stages ou effectuer d'autres actions nécessaires
         }
       );
     }
@@ -413,6 +420,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
   }
 
 
+  // construction de demande de stage 
+  
   private construireDemandeDeStageContent() {
     this.demandeService.getDemandeStageContent().subscribe(
       (content) => {
@@ -427,29 +436,33 @@ export class ProcessusstageetudiantComponent implements OnInit {
   }
 
 
+  //pour télécharger le PDF
+
   telechargerPDF() {
-    // Assurez-vous que le contenu est construit avant de générer le PDF
+    
    this.construireDemandeDeStageContent();
 
     setTimeout(() => { // Utilisez setTimeout pour s'assurer que le contenu est mis à jour
-    const element = document.getElementById('contenuPdf'); // ID de l'élément contenant votre contenu HTML
+    const element = document.getElementById('contenuPdf'); 
     html2canvas(element).then((canvas) => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
         format: 'a4',
         orientation: 'portrait',
       });
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+      const imgProps = pdf.getImageProperties(imgData); // obtenir les propriétés de l'image généré par canvas
+      const pdfWidth = pdf.internal.pageSize.getWidth(); // le largeur de PDF
+      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; // hauteur
       pdf.addImage(imgData, 'PNG', 10, -10, pdfWidth, pdfHeight);
       pdf.save('demande_stage.pdf');
     });
-  }, 500);
+  }, 500); 
   }
 
+
+  // Cette méthode réinitialise tous les champs du formulaire
   clearForm() {
-    this.stageForm.reset(); // Cette méthode réinitialise tous les champs du formulaire
+    this.stageForm.reset(); 
   }
 
   clearFormTache(){
@@ -458,7 +471,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
 
   
 
-  // Méthode appelée lors de la soumission du formulaire
+  // Méthode appelée lors de la soumission du formulaire ( ajout stage) 
+
   onSubmit() {
 
     const formData = {
@@ -469,7 +483,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
       prenomCoach: this.prenomCoach,
       numCoach: this.numCoach,
       emailCoach: this.emailCoach,
-      startAt: this.startAt, // Convertir la date en chaîne ISO
+      startAt: this.startAt, 
       endAt: this.endAt,
       type: this.type,
     };
@@ -484,7 +498,6 @@ export class ProcessusstageetudiantComponent implements OnInit {
 
       this.toastr.success('Stage ajoutée avec succès', 'Succès');
       this.clearForm();
-      this.getStagesForUser();
       // Utilisez le service pour envoyer les données au backend
       this.stageService.ajouterStage(formData).subscribe((response: any) => {
         console.log("Succès de l'ajout du stage");
