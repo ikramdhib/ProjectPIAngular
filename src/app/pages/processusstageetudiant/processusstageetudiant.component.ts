@@ -52,6 +52,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
     this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form File Upload', active: true }];
 
     this.getStagesForUser();
+
   }
 
 
@@ -143,7 +144,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
 
     this.journalService.addTacheWithJournal(formData2, journalId).subscribe(
       (response: any) => {
-        this.showTacheFormMap[this.selectedStage.id] = false;
+        this.showTacheFormMap[this.selectedStage.id] = true;
         this.clearFormTache();
         this.toastr.success('Tâche ajoutée avec succès!', 'Succès');
 
@@ -161,6 +162,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
   // pour afficher les tàches 
 
   showTaches(journalId: string) {
+
     if (this.showTachesMap[journalId]) {
       // Si la liste des tâches est déjà affichée, on la masque
       this.taches = [];
@@ -433,6 +435,33 @@ export class ProcessusstageetudiantComponent implements OnInit {
         console.error('Erreur lors de la récupération du contenu de demande_stage.html:', error);
       }
     );
+  }
+
+  //Pour ajouter le rapport à un stage séléctionner
+
+  onFileSelected(event: any, stageId: string): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.stageService.isRapportExiste(stageId).subscribe(
+        (rapportExiste: boolean) => {
+          if (!rapportExiste) {
+            console.log(rapportExiste);
+            this.toastr.success('RapportPdf ajouté avec succès', 'Succès');
+            this.stageService.uploadRapportPdf(stageId, file).subscribe(
+              (response) => {
+                console.log('Fichier téléchargé avec succès:', response);
+                // Réalisez des actions supplémentaires si nécessaire, comme actualiser la liste des stages
+              },)
+          } else {
+            this.toastr.error('Ce stage a déjà un rapport enregistré', 'Erreur');
+          }
+        },
+        (error) => {
+          console.error('Erreur lors de la vérification du rapport pour le stage ' + stageId + ':', error);
+          // Gérer l'erreur de manière appropriée
+        }
+      );
+    }
   }
 
 

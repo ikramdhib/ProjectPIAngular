@@ -45,5 +45,15 @@ export class StageService {
     return this.http.get<boolean>(`${this.apiUrl}/isJournalAssociated/${stageId}`);
   }
   
+  uploadRapportPdf(stageId: string, file: File) {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post<any>(`http://localhost:8081/api/stages/${stageId}/rapportPdf`, formData);
+  }
+
+  isRapportExiste(stageId: string): Observable<boolean> {
+    return this.http.get<boolean>(`http://localhost:8081/api/stages/${stageId}/rapportExiste`);
+  }
 
 }

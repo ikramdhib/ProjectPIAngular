@@ -568,51 +568,48 @@
                 <span class="number">4.</span>
                 <span>Déposer votre rapport</span>
               </ng-template>
-              <section *ngIf="cdkStepper.selectedIndex === 3">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
-                      <div class="card-body">
-                        <div class="card-title">Dropzone</div>
-                        <p class="card-title-desc">DropzoneJS is an open source library
-                          that provides drag’n’drop file uploads with image previews.
-                        </p>
-                        <div>
-                          <form>
-                            <ngx-dropzone class="dropzone" (change)="onSelect($event)" [accept]="'image/*'">
-                              <ngx-dropzone-label class="dz-message needsclick">
-                                  <div class="mb-3">
-                                      <i class="display-4 text-muted bx bxs-cloud-upload"></i>
-                                  </div>
-              
-                                  <h5>Drop files here or click to upload.</h5>
-                              </ngx-dropzone-label>
-                          </ngx-dropzone>
-                          <ngx-dropzone-preview *ngIf="imageURL" class="border rounded" [removable]="true" (removed)="onRemove()">
-                              <ngx-dropzone-label>
-                                  <div class="d-flex p-2">
-                                      <div class="flex-shrink-0 me-3">
-                                          <div class="avatar-sm bg-light rounded">
-                                              <img class="img-fluid rounded d-block" src="{{imageURL}}" alt="Dropzone-Image">
-                                          </div>
-                                      </div>
-                                      <div class="flex-grow-1">
-                                          <div class="pt-1">
-                                              <strong class="error text-danger"></strong>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </ngx-dropzone-label>
-                          </ngx-dropzone-preview>
-                          <!-- end dropzon-preview -->
-                          </form>
-                        </div>
-                        <div class="text-center mt-4">
-                          <button type="button" class="btn btn-primary">Send Files</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div class="table-responsive">
+                <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                  <thead>
+                    <tr>
+                    
+                      <th scope="col">Nom Entreprise</th>
+                      <th scope="col">Nom Encadrant</th>
+                      <th scope="col">Date début</th>
+                      <th scope="col">Date fin</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let stage of stages">
+                          <td>{{ stage.nomSociete }}</td>
+                          <td>{{ stage.nomCoach }}</td>
+                          <td>{{ stage.startAt }}</td>
+                          <td>{{ stage.endAt }}</td>
+                          <td>{{ stage.type}}</td>
+                          <td>
+                            <label for="fileInput{{ stage.id }}">
+                              <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                            </label>
+                            <input type="file" id="fileInput{{ stage.id }}" style="display: none" (change)="onFileSelected($event,stage.id)">
+                          </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </cdk-step>
+
+            <cdk-step [optional]="true">
+              <ng-template cdkStepLabel>
+                <span class="number">5.</span>
+                <span>Télécharger l'attestation</span>
+              </ng-template>
+              <section *ngIf="cdkStepper.selectedIndex === 5" >
+                <div>
+                  <button class="btn btn-primary">Attestation</button>
+                  <button class="btn btn-success">Télécharger</button>
+                  
                 </div>
               </section>
             </cdk-step>
