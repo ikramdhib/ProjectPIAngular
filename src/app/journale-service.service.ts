@@ -17,4 +17,9 @@ export class JournaleServiceService {
     return this.http.get(`http://localhost:8081/tachesByJournal/${journalId}`);
    
   }
+  getTachesByEtudiantId(etudiantId: string): Observable<any> {
+    return this.http.get(`http://localhost:8081/tachesByEtudiant/${etudiantId}`);
+   
+  }
+
 }

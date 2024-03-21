@@ -13,6 +13,9 @@ export class StageService {
   getStudentTimeline(studentId: string, stageId: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/students/${studentId}/stages/${stageId}`);
   }
+  getStagesByUserIdd(userId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/user/${userId}`);
+  }
 
   getAllStagesWithUserNames(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/userNames`);
@@ -21,7 +24,7 @@ export class StageService {
     return this.http.post(`${this.baseUrl}/sendEmailToEncadrant/65d74e47bc2c3b110cbf4905`, {});
   }
   sendEmailToStudent(stageId: string, reason: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/sendEmailToStudent/65d74684bc2c3b110cbf4903/${reason}`, {});
+    return this.http.post(`${this.baseUrl}/sendEmailToStudent/65d74e47bc2c3b110cbf4905/${reason}`, {});
   }
   getStagesByUserId(userId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/user/${userId}`);

@@ -87,6 +87,8 @@ import { RouterModule } from '@angular/router';
     SimplebarAngularModule,
     LightboxModule,
     PickerModule,
+
+    
   ],
 })
 export class PagesModule {

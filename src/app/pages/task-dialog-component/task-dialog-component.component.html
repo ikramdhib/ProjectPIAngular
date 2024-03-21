@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Tâches de l'étudiant</h2>
+<div mat-dialog-content>
+  <ul>
+    <li *ngFor="let task of tasks">{{ task.libelle }}</li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Fermer</button>
+</div>

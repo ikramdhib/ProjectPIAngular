@@ -4,7 +4,7 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title mb-4">Horizontal Timeline</h4>
+          <h4 class="card-title mb-4"></h4>
          
 
           <div class="hori-timeline">
@@ -91,19 +91,7 @@
                 </div>
                 </div>
               </ng-template>
-              <ng-template carouselSlide>
-                <div class="item event-list">
-                  <div>
-                    <div class="event-date">
-                      <div class="text-primary mb-1">21 December</div>
-                      <h5 class="mb-4">Sixth event</h5>
-                    </div>
-                   
-
-                   
-                  </div>
-                </div>
-              </ng-template>
+           
 
             </owl-carousel-o>
           </div>
@@ -121,18 +109,18 @@
 
 
 
-<div class="row">
-    <div class="col-lg-12">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title mb-4">Basic Wizard</h4>
-          <div id="basic-example">
-            <ng-stepper #cdkStepper [linear]="true" class="wizard">
+<div class="row" >
+    <div class="col-lg-12" >
+      <div class="card" >
+        <div class="card-body" >
+          <h4 class="card-title mb-4"></h4>
+          <div id="basic-example" >
+            <ng-stepper #cdkStepper [linear]="true" class="wizard" >
   
-              <cdk-step [optional]="false">
-                <ng-template cdkStepLabel>
-                  <span class="number">1.</span>
-                  <span>Liste Etudiant</span>
+              <cdk-step [optional]="false" >
+                <ng-template cdkStepLabel >
+                  <span class="number" >1.</span>
+                  <span >Liste Etudiant</span>
                 </ng-template>
                 <section *ngIf="cdkStepper.selectedIndex === 0">
                  
@@ -161,17 +149,14 @@
                                     <th scope="col">Prenom_Etudiant</th>
                                     <th scope="col">Telephone</th>
                                     <th scope="col">Email</th>
-                                 
-                                  
-                                    
-                                    <th scope="col">Action</th>
+                                 <th scope="col" >Action</th>
                                   </tr>
                                 </thead>
                                 <tbody>
                                   <tr  *ngFor="let student of students">
                                     <th scope="row"  >{{ student.firstName }}</th>
                                     <td> {{ student.lastName }} </td>
-                                    <td>{{ student.phoneNumber }} </td>
+                                    <td>98995297 </td>
                                     <td>{{ student.login }}</td>
                                    
                                    
@@ -181,14 +166,10 @@
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
                                           <a class="btn btn-sm btn-soft-primary" (click)="viewStudentDetails(student.id, student.stageId)">
                                             
-                                            <i class="mdi mdi-eye-outline"></i>
+                                            <i class="mdi mdi-eye-outline" style="font-size: 13px;"></i>
 
                                           </a>
-                                          <a class="btn btn-sm btn-soft-primary"(click)="redirectToAttestationStage(student)">
-                                            
-                                            <i class="mdi mdi-eye-outline"></i>
-
-                                          </a>
+                                      
                                         </li>
                                       
                                       </ul>
@@ -413,7 +394,7 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let stage of stages">
-                                <td>{{stage.nomSociete }}</td>
+                                <td>Vermeg</td>
                                 <td>{{ stage.nomCoach }}</td>
                                 <td>{{ stage.startAt }}</td>
                                 <td>{{ stage.endAt }}</td>
@@ -437,45 +418,68 @@
                   </div>
                   <section *ngIf="taches.length > 0">
                     <div class="card-body">
-                      <h4>Liste des tâches :</h4>
-                      <div class="table-responsive">
-                        <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
-                          <thead>
-                            <tr>                            
-                              <th scope="col">Date Tâche</th>
-                              <th scope="col">Contenu Tâche</th>
-                              <th scope="col">Actions</th> <!-- Ajout de la colonne Actions -->
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr *ngFor="let tache of taches">
-                              <td>{{ tache.date }}</td>
-                              <td>{{ tache.libelle }}</td>
-                              <td>
-                                <ul class="list-unstyled hstack gap-1 mb-0">
-                                  <li data-bs-toggle="tooltip" data-bs-placement="top" title="Valider">
-                                    <button class="btn btn-sm btn-soft-info" (click)="validerTache(tache.id)">
-                                      <i class="mdi mdi-pencil-outline"></i> Valider
-                                    </button>
-                                  </li>
-                                  <li data-bs-toggle="tooltip" data-bs-placement="top" title="Refuser">
-                                    <button class="btn btn-sm btn-soft-danger" (click)="openRejectionReasonInput(tache.id)">
-                                      <i class="mdi mdi-delete-outline"></i> Refuser
-                                    </button>
-                                  </li>
-                                </ul>
-                                <!-- Déplacer la zone de texte sous les boutons -->
-                                <div *ngIf="tacheId === tache.id">
-                                  <textarea class="form-control mt-2" rows="3" [(ngModel)]="rejectionReason" placeholder="Entrez la raison du rejet"></textarea>
-                                  <button class="btn btn-primary mt-2" (click)="rejectTask()">Confirmer</button>
-                                </div>
-                              </td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
+                        <h4>Liste des tâches :</h4>
+                        <div class="table-responsive">
+                            <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                                <thead>
+                                    <tr>                            
+                                        <th scope="col">Date Tâche</th>
+                                        <th scope="col">Contenu Tâche</th>
+                                        <th scope="col">Actions</th> <!-- Ajout de la colonne Actions -->
+                                        <th scope="col">Status</th> <!-- Ajout de la colonne Actions -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let tache of taches">
+                                        <td>{{ tache.date }}</td>
+                                        <td>{{ tache.libelle }}</td>
+                                        <td>
+                                            <ul class="list-unstyled hstack gap-1 mb-0">
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Valider">
+                                                    <button class="btn btn-sm btn-soft-info" (click)="validerTache(tache.id)" [disabled]="tache.disabled">
+                                                        <i class="mdi mdi-pencil-outline"></i> Valider
+                                                    </button>
+                                                </li>
+                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Refuser">
+                                                    <button class="btn btn-sm btn-soft-danger" (click)="openRejectionReasonInput(tache.id)" [disabled]="tache.disabled">
+                                                        <i class="mdi mdi-delete-outline"></i> Refuser
+                                                    </button>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>
+     
+                                          <span *ngIf="tache.status === 'Valide'" class="text-success">
+                                         
+                                            <span class="badge badge-pill badge-soft-success font-size-11" [ngClass]="{
+                                              'badge-soft-danger': tache.status === 'Chargeback',
+                                              'badge-soft-warning': tache.status === 'Refund'
+                                            }">{{ tache.status }}</span>
+                                          </span>
+                                          <span *ngIf="tache.status === 'NValide'" class="text-danger">
+                                            <span class="badge badge-pill badge-soft-success font-size-11" [ngClass]="{
+                                              'badge-soft-danger': tache.status === 'NValide',
+                                              'badge-soft-warning': tache.status === 'Refund'
+                                            }">{{ tache.status }}</span>
+                                            
+                                          </span>
+                                          
+    <span *ngIf="tache.status !== 'Valide' && tache.status !== 'NValide'" class="text-muted">   Non traite</span>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                  </section>
+                </section>
+                
+                <!-- Ajouter cette section à l'extérieur de la table -->
+                <div *ngIf="tacheId">
+                    <textarea class="form-control mt-2" rows="3" [(ngModel)]="rejectionReason" placeholder="Entrez la raison du rejet"></textarea>
+                    <button class="btn btn-primary mt-2" (click)="rejectTask(tacheId)"  >Confirmer</button>
+                </div>
+                
                   
                   
                 
@@ -490,53 +494,9 @@
                 </ng-template>
                 <section *ngIf="cdkStepper.selectedIndex === 2">
                   <div>
-                    <form>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="basicpill-namecard-input">Name on Card</label>
-                            <input type="text" class="form-control" id="basicpill-namecard-input">
-                          </div>
-                        </div>
-  
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label>Credit Card Type</label>
-                            <select class="form-select">
-                              <option selected>Select Card Type</option>
-                              <option value="AE">American Express</option>
-                              <option value="VI">Visa</option>
-                              <option value="MC">MasterCard</option>
-                              <option value="DI">Discover</option>
-                            </select>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="basicpill-cardno-input">Credit Card Number</label>
-                            <input type="text" class="form-control" id="basicpill-cardno-input">
-                          </div>
-                        </div>
-  
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="basicpill-card-verification-input">Card Verification Number</label>
-                            <input type="text" class="form-control" id="basicpill-card-verification-input">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div class="mb-3">
-                            <label for="basicpill-expiration-input">Expiration Date</label>
-                            <input type="text" class="form-control" id="basicpill-expiration-input">
-                          </div>
-                        </div>
-  
-                      </div>
-                    </form>
+                    <li class="next list-inline-item" aria-disabled="false"><button class="btn btn-primary" cdkStepperNext>Afficher Rapport</button></li>
+
+                
                   </div>
   
                   <ul class="list-inline wizard d-flex justify-content-end mb-0">
@@ -560,9 +520,7 @@
                           <tr>
                             <th scope="col">Nom_Etudiant</th>
                             <th scope="col">Prenom_Etudiant</th>
-                            <th scope="col">Telephone</th>
-                            <th scope="col">Email</th>
-                         
+                       
                           
                             
                             <th scope="col">Action</th>
@@ -572,19 +530,14 @@
                           <tr  *ngFor="let student of students">
                             <th scope="row"  >{{ student.firstName }}</th>
                             <td> {{ student.lastName }} </td>
-                            <td>{{ student.phoneNumber }} </td>
-                            <td>{{ student.login }}</td>
+                      
                            
                            
                           
                             <td>
                               <ul class="list-unstyled hstack gap-1 mb-0">
                                 <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                  <a class="btn btn-sm btn-soft-primary" (click)="viewStudentDetails(student.id, student.stageId)">
-                                    
-                                    <i class="mdi mdi-eye-outline"></i>
-
-                                  </a>
+                                 
                                   <a class="btn btn-sm btn-soft-primary"(click)="redirectToAttestationStage(student)">
                                     
                                     <i class="mdi mdi-eye-outline"></i>

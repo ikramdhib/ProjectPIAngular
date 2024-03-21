@@ -1,0 +1,42 @@
+.download-icon {
+    font-size: 24px; /* Taille de l'icône */
+    cursor: pointer; /* Curseur pointeur pour indiquer qu'il est cliquable */
+    color: rgba(0, 0, 0, 0.479); /* Couleur de l'icône */
+  }
+  
+  /* Effet de survol */
+  .download-icon:hover {
+    color: rgb(90, 90, 207); /* Changement de couleur au survol */
+  }
+  
+  /* Animation lors du clic */
+  .clicked {
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+  .clicked {
+    color: blue; /* Changement de couleur en bleu lorsqu'il est cliqué */
+    animation: moveIcon 0.5s ease; /* Animation de mouvement */
+  }
+  
+  @keyframes moveIcon {
+    0% {
+      transform: translateX(0); /* Position initiale */
+    }
+    50% {
+      transform: translateX(10px); /* Déplacement vers la droite */
+    }
+    100% {
+      transform: translateX(0); /* Retour à la position initiale */
+    }
+  }
+  
+  

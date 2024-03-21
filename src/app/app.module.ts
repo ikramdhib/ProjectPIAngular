@@ -45,6 +45,7 @@ import { CdkStepperModule } from '@angular/cdk/stepper';
 import { NgStepperModule } from 'angular-ng-stepper';
 import { TimelineComponent } from './pages/utility/timeline/timeline.component';
 import { RejectionReasonDialogComponent } from './pages/rejection-reason-dialog/rejection-reason-dialog.component';
+import { ListEtudiantServiceStageComponent } from './pages/list-etudiant-service-stage/list-etudiant-service-stage.component';
 
 
 if (environment.defaultauth === 'firebase') {
@@ -71,6 +72,7 @@ export function createTranslateLoader(http: HttpClient): any {
   ],
 
   imports: [
+
     CdkStepperModule,
     NgStepperModule,
     FormsModule,

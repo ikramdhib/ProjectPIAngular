@@ -22,7 +22,7 @@ export class NourComponent {
   selectedJournalTasks: any[] = []; // Modifier le type de selectedJournalTasks pour accepter des objets de type Journal
   timeline: any[] = []; // Ajoutez cette ligne
   stages: any[] = [];
-  encadrantId: string = '65e2fcf80ca91442454d81e3'; // Remplacez par l'ID de l'utilisateur
+  encadrantId: string = '65fb3f9b12606c2f28507ae8'; // Remplacez par l'ID de l'utilisateur
   constructor(private http: HttpClient,    private toastr: ToastrService ,public dialog: MatDialog,private userList: UserServiceService, private router: Router, private journalService: JournaleServiceService,private Stage:StageService) { }
   showTaches(journalId: string) {
     if (this.showTachesMap[journalId]) {
@@ -52,38 +52,115 @@ export class NourComponent {
       }
     );
   }
+  tacheValidee: boolean = false;
+  disableRefusButton: boolean = false;
+
+ 
   validerTache(tacheId: string) {
     this.Stage.validateTask(tacheId).subscribe(
-      () => {
-        // Rafraîchir la liste des tâches après validation
-        this.showTaches(this.stages[0].journal.id); // Vous pouvez ajuster cela pour obtenir le journal correct si nécessaire
-        console.log('Tâche validée avec succès');
+      (validated: boolean) => {
+        if (validated) {
+          // Mettre à jour le statut de la tâche à "Valide" si elle est validée avec succès
+          const tache = this.taches.find(t => t.id === tacheId);
+          if (tache) {
+            tache.status = 'Valide'; // Mettez ici le statut souhaité après validation
+            tache.disabled = true; // Désactiver les boutons pour cette tâche
+          }
+  
+          // Désactiver le bouton de refus
+          const tachesNonValidees = this.taches.filter(t => t.status !== 'Valide');
+          if (tachesNonValidees.length === 0) {
+            // S'il n'y a plus de tâches non validées, désactivez le bouton de refus
+            this.disableRefusButton = true;
+          }
+  
+          console.log('Tâche validée avec succès');
+        } else {
+          console.log('Échec de la validation de la tâche');
+        }
       },
       (error) => {
         console.error('Erreur lors de la validation de la tâche : ', error);
+  
+        // Mettre à jour le statut de la tâche en cas d'erreur
+        const tache = this.taches.find(t => t.id === tacheId);
+        if (tache) {
+          tache.status = 'Valide'; // Mettez ici le statut souhaité en cas d'erreur
+          tache.disabled = true; // Désactiver les boutons pour cette tâche
+        }
+  
+        // Désactiver le bouton de refus
+        const tachesNonValidees = this.taches.filter(t => t.status !== 'Valide');
+        if (tachesNonValidees.length === 0) {
+          // S'il n'y a plus de tâches non validées, désactivez le bouton de refus
+          this.disableRefusButton = true;
+        }
       }
     );
-  
   }
+  
+  
+  
+
   rejectionReason: string = '';
   tacheId: string = '';
-
-  // Fonction pour rejeter la tâche avec raison
   rejeterTache(tacheId: string): void {
     const dialogRef = this.dialog.open(RejectionReasonDialogComponent);
-  
+
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // result contient la raison du rejet si l'utilisateur a cliqué sur "Valider"
-        this.Stage.rejectTask(tacheId, result).subscribe(response => {
-          console.log(response);
-        }, error => {
-          console.error(error);
-          // Gérer les erreurs éventuelles
-        });
-      }
+        if (result) {
+            // Renvoie la raison du rejet si l'utilisateur a cliqué sur "Valider"
+            this.Stage.rejectTask(tacheId, result).subscribe(
+              (rejected: boolean) => {
+                if (rejected) {
+                  // Mettre à jour le statut de la tâche à "NValide" si elle est rejetée avec succès
+                  const tache = this.taches.find(t => t.id === tacheId);
+                  if (tache) {
+                      tache.status = 'NValide';
+                      tache.disabled = true; // Désactiver les boutons pour cette tâche
+                  }
+
+                  console.log('Tâche refusée avec succès');
+                } else {
+                  console.log('Échec du refus de la tâche');
+                }
+
+                // Désactiver le bouton de refus
+                const tachesNonValidees = this.taches.filter(t => t.status !== 'NValide');
+                if (tachesNonValidees.length === 0) {
+                  // S'il n'y a plus de tâches non validées, désactivez le bouton de refus
+                  this.disableRefusButton = true;
+                }
+              },
+              (error) => {
+                  console.error('Erreur lors du refus de la tâche : ', error);
+
+                  // Mettre à jour le statut de la tâche en cas d'erreur
+                  const tache = this.taches.find(t => t.id === tacheId);
+                  if (tache) {
+                      tache.status = 'NValide'; // Mettez ici le statut souhaité en cas d'erreur
+                      tache.disabled = true; // Désactiver les boutons pour cette tâche
+                  }
+
+                  // Désactiver le bouton de refus
+                  const tachesNonValidees = this.taches.filter(t => t.status !== 'NValide');
+                  if (tachesNonValidees.length === 0) {
+                    // S'il n'y a plus de tâches non validées, désactivez le bouton de refus
+                    this.disableRefusButton = true;
+                  }
+              }
+            );
+        }
     });
-  }
+}
+
+  
+
+
+
+
+  
+  
   afficherAttestation(): void {
     // Récupérer le contenu HTML du composant d'attestation
     this.http.get('/attestation', { responseType: 'text' })
@@ -106,7 +183,7 @@ export class NourComponent {
     });
   }
   ngOnInit(): void {
-    const encadrantId = '65e2fcf80ca91442454d81e3';
+    const encadrantId = '65fb3f9b12606c2f28507ae8';
     this.userList.getStudentsBySupervisor(encadrantId).subscribe(
       students => {
         this.students = students;
@@ -146,6 +223,12 @@ export class NourComponent {
         .subscribe(
           () => {
             console.log('Tâche rejetée avec succès');
+            // Met à jour le statut de la tâche à "Refusée" dans le tableau taches
+            const tache = this.taches.find(t => t.id === this.tacheId);
+            if (tache) {
+              tache.status = 'NValide';
+              tache.disabled = true; // Désactive les boutons pour cette tâche
+            }
             // Réinitialise la raison du rejet et l'ID de la tâche une fois le rejet réussi
             this.rejectionReason = '';
             this.tacheId = null;
@@ -154,13 +237,24 @@ export class NourComponent {
           (error) => {
             console.error('Erreur lors du rejet de la tâche:', error);
             // Gérer les erreurs de rejet de la tâche
+            const tache = this.taches.find(t => t.id === this.tacheId);
+            if (tache) {
+              tache.status = 'NValide';
+              tache.disabled = true; // Désactive les boutons pour cette tâche
+            }
+            // Réinitialise la raison du rejet et l'ID de la tâche une fois le rejet réussi
+            this.rejectionReason = '';
+            this.tacheId = null;
+            // Ajoutez ici toute logique supplémentaire à effectuer après le rejet de la tâche
+          
           }
         );
     } else {
       console.error('La raison du rejet est vide ou aucune tâche sélectionnée');
       // Gérer le cas où aucune raison n'est saisie ou aucune tâche n'est sélectionnée
     }
-  }
+}
+
 
 redirectToAttestationStage(student: any): void {
   console.log("Student:", student);

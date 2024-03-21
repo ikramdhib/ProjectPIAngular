@@ -80,6 +80,9 @@ export class StageListtComponent {
       success => {
       
         this.toastr.success('envoie avec succes');
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
         // Afficher un message d'erreur à l'utilisateur ou effectuer d'autres actions nécessaires
       }
     );

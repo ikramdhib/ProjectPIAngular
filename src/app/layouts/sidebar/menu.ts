@@ -5,15 +5,17 @@ export const MENU: MenuItem[] = [
     {
         id: 148,
         label: 'Liste Encadrant et Etudiant',
-        icon: 'bx-home-circle',
+        icon: 'bx-file',
         link: '/stageList',
     },
+  
     {
         id: 149,
-        label: 'Validation Documents Stage',
-        icon: 'bx-home-circle',
-        link: '/nour',
+        label: 'Document Stage',
+        icon: 'bx-file',
+        link: '/stage',
     },
-  
+   
+ 
 ];
 

@@ -1,0 +1,57 @@
+<div class="card-body">
+  <div class="table-responsive">
+    <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+      <thead>
+        <tr>
+          <th scope="col">Nom_Etudiant</th>
+          <th scope="col">Prenom_Etudiant</th>
+          <th scope="col">Taches</th>
+          <th scope="col">Rapport</th>
+          <th scope="col">Attestation</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of students">
+          <td>{{ student.id }}</td>
+          <td>{{ student.firstName }}</td>
+          <td>{{ student.lastName }}</td>
+          <td>
+            <i class='bx bx-file fs-3' (click)="showTasks(student)"></i>
+
+          </td>
+          <td> 
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <i class="dripicons-arrow-down download-icon" (click)="downloadReport(student.id)" [class.clicked]="isClicked"></i> 
+            </div>
+          </td>
+          <td> 
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+              <i class="dripicons-arrow-down download-icon" (click)="downloadReport(student.id)" [class.clicked]="isClicked"></i> 
+            </div>
+          </td>
+          <td> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- Zone pour afficher les tâches de l'étudiant sélectionné -->
+  <div *ngIf="selectedStudentTasks.length > 0">
+    <h4>Tâches de l'étudiant</h4>
+    <ul>
+      <li *ngFor="let task of selectedStudentTasks">{{ task.libelle }}</li>
+    </ul>
+  </div>
+  
+  <div class="row justify-content-between align-items-center">
+    <div class="col-auto me-auto"></div>
+    <div class="col-auto">
+      <div class="text-md-right float-md-end pagination-rounded">
+        <ul class="pagination pagination-rounded justify-content-end mb-2"></ul>
+      </div>
+    </div>
+    <!--end col-->
+  </div>
+  <!--end row-->
+</div>

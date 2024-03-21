@@ -12,6 +12,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { AttestationComponent } from './attestation/attestation.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NourComponent } from './nour/nour.component';
+import { ListEtudiantServiceStageComponent } from './list-etudiant-service-stage/list-etudiant-service-stage.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -22,8 +23,9 @@ const routes: Routes = [
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
  { path: 'attestation-stage/:studentId/:stageId', component: AttestationComponent },
-  {path:'nour',component:NourComponent},
+ {path:'serviceStage',component:ListEtudiantServiceStageComponent},
 
+  {path:'stage',component:NourComponent},
   { path: 'chat', component: ChatComponent },
   {path:'stageList',component:StageListtComponent},
   {path:'userr',component:UserListComponent},

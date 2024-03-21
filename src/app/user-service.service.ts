@@ -25,7 +25,9 @@ export class UserServiceService {
     );
   }
 
-
+  getStudentsByAllStages(serviceId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/stages/students/${serviceId}`);
+  }
 
 
   }

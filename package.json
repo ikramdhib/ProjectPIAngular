@@ -27,6 +27,7 @@
     "@ckeditor/ckeditor5-angular": "^7.0.0",
     "@ckeditor/ckeditor5-build-classic": "^38.1.1",
     "@ctrl/ngx-emoji-mart": "^9.2.0",
+    "@fortawesome/angular-fontawesome": "^0.14.1",
     "@fullcalendar/angular": "^6.1.8",
     "@fullcalendar/core": "^6.1.8",
     "@fullcalendar/daygrid": "^6.1.8",
