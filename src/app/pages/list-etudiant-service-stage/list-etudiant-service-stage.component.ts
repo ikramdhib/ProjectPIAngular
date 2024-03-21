@@ -152,9 +152,26 @@ openDialog(tasks: any[]): void {
     } else {
       console.error('ID de l\'étudiant non défini.');
     }
+    
   }
   
-  
+  downloadRapportDeStage(userId: string): void {
+    this.Stage.downloadRapportDeStage(userId).subscribe(
+      (data: Blob) => {
+        const blob = new Blob([data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'rapport_de_stage.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Erreur lors du téléchargement du rapport de stage :', error);
+      }
+    );
+  }
   
   
 

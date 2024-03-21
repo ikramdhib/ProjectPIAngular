@@ -39,4 +39,7 @@ export class StageService {
   rejectTask(tacheId: string, rejectionReason: string): Observable<any> {
     return this.http.post(`${this.baseUrl}/taches/${tacheId}/rejeter/${rejectionReason}`, {});
   }
+  downloadRapportDeStage(userId: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/rapports/${userId}`, { responseType: 'blob' });
+  }
  }

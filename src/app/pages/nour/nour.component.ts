@@ -257,16 +257,12 @@ export class NourComponent {
 
 
 redirectToAttestationStage(student: any): void {
-  console.log("Student:", student);
-    // Vérifiez si l'étudiant et son ID sont définis
   if (student && student.id && student.stageId) {
-    console.log("Student:", student)
-
     // Naviguer vers la page AttestationComponent avec les données de l'étudiant
     this.router.navigate(['/attestation-stage', student.id, student.stageId]);
   } else {
-    console.error('Unable to redirect to attestation stage: Invalid student data');
+    console.error('Impossible de rediriger vers la page d\'attestation : Données d\'étudiant invalides');
   }
-
 }
+
 }

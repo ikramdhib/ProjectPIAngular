@@ -21,9 +21,9 @@
 
           </td>
           <td> 
-            <div class="col-xl-3 col-lg-4 col-sm-6">
-              <i class="dripicons-arrow-down download-icon" (click)="downloadReport(student.id)" [class.clicked]="isClicked"></i> 
-            </div>
+            <button (click)="downloadRapportDeStage(student.id)">
+              <i class="fa fa-download"></i> Télécharger rapport
+            </button>
           </td>
           <td> 
             <div class="col-xl-3 col-lg-4 col-sm-6">
