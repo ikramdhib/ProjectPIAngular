@@ -66,56 +66,82 @@ export class AttestationComponent implements AfterViewInit, AfterViewChecked {
     document.body.removeChild(a);
     URL.revokeObjectURL(fileURL);
   }
-  onSaveAttestation() {
-    // Appeler la méthode pour générer et enregistrer le PDF en utilisant this.stageId
-    const attestationContent = '';
-    this.generatePdf(this.stageId, attestationContent, (pdfBlob) => {
-      // Actions supplémentaires à effectuer une fois que le PDF est généré et enregistré
-      console.log('PDF généré et enregistré avec succès.');
-    });
+onSaveAttestation() {
+  // Définir le contenu de l'attestation
+  const attestationContent = ''; // Mettez le contenu de votre attestation ici
+  this.addLogoToAttestation(this.logoUrl);
+
+  // Appeler la méthode pour générer et enregistrer le PDF en utilisant this.stageId
+  this.generatePdf(this.stageId, attestationContent, '', (pdfBlob) => {
+    // Actions supplémentaires à effectuer une fois que le PDF est généré et enregistré
+    console.log('PDF généré et enregistré avec succès.');
+  });
+}
+logoUrl: string = ''; // Assurez-vous de fournir une valeur appropriée pour l'URL de votre image
+
+addLogoToAttestation(logoUrl: string) {
+  // Ajouter le logo de la société à l'attestation
+  const logoImg = document.createElement('img');
+  logoImg.src = logoUrl;
+  logoImg.style.maxWidth = '100%';
+  logoImg.style.marginTop = '20px';
+
+  const contentToConvert = document.getElementById('contentToConvert');
+  if (contentToConvert) {
+    contentToConvert.insertBefore(logoImg, contentToConvert.firstChild);
+  } else {
+    console.error('Impossible de trouver l\'élément pour ajouter le logo à l\'attestation.');
+  }
 }
 
-  generatePdf(stageId: string, attestation: string, callback: (pdfBlob: Blob) => void) {
-    // Récupérer l'élément contenant le contenu à convertir en PDF par son ID
-    const element = document.getElementById('contentToConvert');
+ 
+generatePdf(stageId: string, attestation: string, logoUrl: string, callback: (pdfBlob: Blob) => void) {
+  // Récupérer l'élément contenant le contenu à convertir en PDF par son ID
+  const element = document.getElementById('contentToConvert');
 
-    // Vérifier si l'élément existe avant de continuer
-    if (element) {
-      // Ajouter le contenu de l'attestation au début de l'élément
-      element.insertAdjacentHTML('afterbegin', attestation);
+  // Vérifier si l'élément existe avant de continuer
+  if (element) {
+    // Ajouter le contenu de l'attestation au début de l'élément
+    element.insertAdjacentHTML('afterbegin', attestation);
 
-      const options = {
-        margin: 1,
-        filename: 'attestation.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-      };
-
-      // Utiliser html2pdf pour générer le PDF à partir du contenu de l'élément
-      html2pdf().from(element).set(options).outputPdf('blob').then((pdfBlob) => {
-        callback(pdfBlob);
-
-        // Envoyer le fichier PDF au serveur
-        const formData = new FormData();
-        formData.append('pdf', pdfBlob);
-
-        this.http.post(`${this.baseUrl}/stages/${stageId}/upload-pdf`, formData)
-          .subscribe(
-            () => console.log('Fichier PDF enregistré avec succès dans la base de données.'),
-            (error) => console.error('Erreur lors de l\'enregistrement du fichier PDF dans la base de données :', error)
-          );
-
-        // Retirer le contenu de l'attestation ajouté précédemment
-        element.removeChild(element.firstChild);
-
-        // Ajouter un log pour afficher le fichier PDF après la conversion
-        console.log("Fichier PDF après conversion :", pdfBlob);
-      });
-    } else {
-      console.error('Impossible de trouver l\'élément pour la conversion en PDF.');
+    // Ajouter le logo de la société s'il existe
+    if (logoUrl) {
+      element.insertAdjacentHTML('afterbegin', `<img src="${logoUrl}" style="max-width: 100%;" />`);
     }
+
+    const options = {
+      margin: 1,
+      filename: 'attestation.pdf',
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // Utiliser html2pdf pour générer le PDF à partir du contenu de l'élément
+    html2pdf().from(element).set(options).outputPdf('blob').then((pdfBlob) => {
+      callback(pdfBlob);
+
+      // Envoyer le fichier PDF au serveur
+      const formData = new FormData();
+      formData.append('pdf', pdfBlob);
+
+      this.http.post(`${this.baseUrl}/stages/${stageId}/upload-pdf`, formData)
+        .subscribe(
+          () => console.log('Fichier PDF enregistré avec succès dans la base de données.'),
+          (error) => console.error('Erreur lors de l\'enregistrement du fichier PDF dans la base de données :', error)
+        );
+
+      // Retirer le contenu de l'attestation ajouté précédemment
+      element.innerHTML = '';
+
+      // Ajouter un log pour afficher le fichier PDF après la conversion
+      console.log("Fichier PDF après conversion :", pdfBlob);
+    });
+  } else {
+    console.error('Impossible de trouver l\'élément pour la conversion en PDF.');
   }
+}
+
 
   
   updateSignatureImageSrc(): void {

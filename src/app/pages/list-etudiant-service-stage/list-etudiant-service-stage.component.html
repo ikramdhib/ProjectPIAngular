@@ -3,11 +3,13 @@
     <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
       <thead>
         <tr>
+          <th scope="col">ID</th>
           <th scope="col">Nom_Etudiant</th>
           <th scope="col">Prenom_Etudiant</th>
           <th scope="col">Taches</th>
           <th scope="col">Rapport</th>
           <th scope="col">Attestation</th>
+          <th scope="col">Action</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -17,19 +19,22 @@
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
           <td>
-            <i class='bx bx-file fs-3' (click)="showTasks(student)"></i>
+            <i class="display-4 custom-red bx bxs-cloud-upload"  (click)="showTasks(student)"></i>
+          
 
           </td>
           <td> 
-            <button (click)="downloadRapportDeStage(student.id)">
-              <i class="fa fa-download"></i> Télécharger rapport
+            <button class="btn btn-download" (click)="downloadRapportDeStage(student.id)">
+              <i class="fa fa-download"></i> Télécharger Rapport
             </button>
+            
           </td>
           <td> 
-            <div class="col-xl-3 col-lg-4 col-sm-6">
-              <i class="dripicons-arrow-down download-icon" (click)="downloadReport(student.id)" [class.clicked]="isClicked"></i> 
-            </div>
+            <button class="btn btn-download" (click)="downloadAttestationDeStage(student.id)">
+              <i class="fa fa-download"></i> Télécharger Attestation
+            </button>
           </td>
+          <td>              </td>
           <td> </td>
         </tr>
       </tbody>

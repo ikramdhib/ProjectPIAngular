@@ -172,6 +172,23 @@ openDialog(tasks: any[]): void {
       }
     );
   }
+  downloadAttestationDeStage(userId: string): void {
+    this.Stage.downloadAttestationDeStage(userId).subscribe(
+      (data: Blob) => {
+        const blob = new Blob([data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Attestation_de_stage.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+      },
+      error => {
+        console.error('Erreur lors du téléchargement du attestation de stage :', error);
+      }
+    );
+  }
   
   
 

@@ -42,4 +42,7 @@ export class StageService {
   downloadRapportDeStage(userId: string): Observable<Blob> {
     return this.http.get(`${this.baseUrl}/rapports/${userId}`, { responseType: 'blob' });
   }
+  downloadAttestationDeStage(userId: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/attestation/${userId}`, { responseType: 'blob' });
+  }
  }

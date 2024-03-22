@@ -13,6 +13,7 @@
   <div class="container">
     <div class="content">
       <div class="attestation">
+        <img *ngIf="logoUrl" [src]="logoUrl" style="max-width: 100%; margin-top: 20px;" /> <!-- Ajout de l'image ici -->
         <p style="font-size: 16px; text-align: center;">{{ currentDate }}</p>
         <h3 style="text-align: center;">Attestation de stage</h3>
 

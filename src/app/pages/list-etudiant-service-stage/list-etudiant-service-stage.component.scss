@@ -37,6 +37,23 @@
     100% {
       transform: translateX(0); /* Retour à la position initiale */
     }
+    
   }
+  /* Ajoutez ces styles CSS pour styliser le bouton de téléchargement */
+.btn-download {
+  background-color: #dc3546c2; /* Couleur rouge jolie */
+  color: white; /* Texte en blanc */
+  border: none; /* Supprime la bordure */
+  padding:  5px; /* Ajoute de l'espace autour du texte */
+  font-size: 10px; /* Taille de la police */
+  border-radius: 5px; /* Bords arrondis */
+  cursor: pointer; /* Curseur de la souris au survol */
+  transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+.btn-download:hover {
+  background-color: #c82333e1; /* Couleur rouge légèrement plus foncée au survol */
+}
+
   
   
