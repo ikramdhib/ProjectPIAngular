@@ -13,7 +13,7 @@
               </ng-template>
               <section *ngIf="cdkStepper.selectedIndex === 0" id="contenuPdf">
                 <div>
-                  <button (click)="afficherDemandeDeStage()" class="btn btn-primary">Demande de stage</button>
+                  <button (click)="afficherDemandeDeStage()" class="btn btn-red2">Demande de stage</button>
                   <button *ngIf="demandeDeStageContent" (click)="telechargerPDF()" class="btn btn-success">Télécharger</button>
                   
                 </div>
@@ -206,7 +206,7 @@
                       </div>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-primary w-md">Ajouter</button>
+                        <button type="submit" class="btn btn-red2 w-md ">Ajouter</button>
                       </div>
                   </form>
                   <div class="container-fluid">
@@ -218,14 +218,6 @@
                           <div class="card-body border-bottom">
                             <div class="d-flex align-items-center">
                               <h5 class="mb-0 card-title flex-grow-1">List des stages</h5>
-                              <div class="flex-shrink-0 d-flex gap-1">
-                                <a href="javascript:void(0);" class="btn btn-primary" >Liste</a>
-                                <a href="javascript:void(0);" class="btn btn-light"><i class="mdi mdi-refresh"></i></a>
-                                <div class="dropdown d-inline-block" dropdown>
-                                  <button type="menu" class="btn btn-success" id="*dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><i class="mdi mdi-dots-vertical"></i></button>
-                                
-                                </div>
-                              </div>
                             </div>
                           </div>
                         
@@ -266,12 +258,14 @@
                                       <ul class="list-unstyled hstack gap-1 mb-0">
                                         
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                            <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModal(stage)">
+                                            <a href="javascript:void(0);" class="btn btn-green btn-soft-info" (click)="openUpdateModal(stage)">
                                               <i class="mdi mdi-pencil-outline"></i>
                                             </a>
                                           </li>
                                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                          <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="deleteStage(stage)"><i class="mdi mdi-delete-outline"></i></a>
+                                          <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-red btn-soft-danger" (click)="deleteStage(stage)">
+                                            <i class="mdi mdi-delete-outline"></i>
+                                          </a>
                                         </li>
                                       </ul>
                                     </td>
@@ -434,19 +428,19 @@
                               <td>{{ stage.endAt }}</td>
                               <td>{{ stage.type}}</td>
                               <td>
-                            <ul class="list-unstyled hstack gap-1 mb-0">
+                              <ul class="list-unstyled hstack gap-1 mb-0">
                               <li data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter journal">
-                                <button  class="btn btn-sm btn-soft-info" (click)="addJournal(stage)">
+                                <button  class="btn btn-sm btn-red" (click)="addJournal(stage)">
                                   Ajouter journal
                                 </button>
                               </li>
                               <li data-bs-toggle="tooltip" data-bs-placement="top" title="{{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}">
-                                <button class="btn btn-sm btn-soft-info" (click)="toggleTacheForm(stage.id)">
+                                <button class="btn btn-sm btn-red" (click)="toggleTacheForm(stage.id)">
                                   {{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}
                                 </button>
                               </li>
                               <li data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher tàches">
-                                <button  class="btn btn-sm btn-soft-info" (click)="showTaches(stage.journal.id)" >
+                                <button  class="btn btn-sm btn-red" (click)="showTaches(stage.journal.id)" >
                                   Afficher tàches
                                 </button>
                               </li>                        
@@ -568,6 +562,7 @@
                 <span class="number">4.</span>
                 <span>Déposer votre rapport</span>
               </ng-template>
+              <section *ngIf="cdkStepper.selectedIndex === 3" >
               <div class="table-responsive">
                 <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
                   <thead>
@@ -590,7 +585,7 @@
                           <td>{{ stage.type}}</td>
                           <td>
                             <label for="fileInput{{ stage.id }}">
-                              <i class="display-4 text-muted bx bxs-cloud-upload"></i>
+                              <i class="display-4 custom-red bx bxs-cloud-upload"></i>
                             </label>
                             <input type="file" id="fileInput{{ stage.id }}" style="display: none" (change)="onFileSelected($event,stage.id)">
                           </td>
@@ -598,6 +593,7 @@
                   </tbody>
                 </table>
               </div>
+              </section>
             </cdk-step>
 
             <cdk-step [optional]="true">
@@ -605,12 +601,35 @@
                 <span class="number">5.</span>
                 <span>Télécharger l'attestation</span>
               </ng-template>
-              <section *ngIf="cdkStepper.selectedIndex === 5" >
-                <div>
-                  <button class="btn btn-primary">Attestation</button>
-                  <button class="btn btn-success">Télécharger</button>
-                  
+              <section *ngIf="cdkStepper.selectedIndex === 4" >
+                <div class="table-responsive">
+                  <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                    <thead>
+                      <tr>
+                      
+                        <th scope="col">Nom Entreprise</th>
+                        <th scope="col">Nom Encadrant</th>
+                        <th scope="col">Date début</th>
+                        <th scope="col">Date fin</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let stage of stages">
+                            <td>{{ stage.nomSociete }}</td>
+                            <td>{{ stage.nomCoach }}</td>
+                            <td>{{ stage.startAt }}</td>
+                            <td>{{ stage.endAt }}</td>
+                            <td>{{ stage.type}}</td>
+                            <td>
+                              <a href="{{ stage.downloadLink }}"><i class="fas fa-download fa-2x custom-red"></i></a>
+                            </td>  
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
+                
               </section>
             </cdk-step>
 

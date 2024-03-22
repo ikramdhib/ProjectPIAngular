@@ -7,6 +7,7 @@ import { DefaultComponent } from "./dashboards/default/default.component";
 import { FilemanagerComponent } from "./filemanager/filemanager.component";
 import { StageetudiantComponent } from "./stageetudiant/stageetudiant.component";
 import { ProcessusstageetudiantComponent } from "./processusstageetudiant/processusstageetudiant.component";
+import { GerernoteComponent } from './gerernote/gerernote.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: "chat", component: ChatComponent },
   { path: "addstage", component: StageetudiantComponent },
   { path: "processusStage", component: ProcessusstageetudiantComponent},
+  { path: "gererNote", component: GerernoteComponent},
   { path: "filemanager", component: FilemanagerComponent },
   {
     path: "dashboards",

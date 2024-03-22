@@ -1,22 +1,23 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { StageService } from "../../services/stage.service";
 import { DemandeService } from "src/app/services/demande.service";
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
 
-
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  AbstractControl,
+} from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 
-import { UntypedFormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from "@angular/forms";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 
-
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
 import { JournalService } from "src/app/services/journal.service";
-
-
 
 @Component({
   selector: "app-processusstageetudiant",
@@ -24,8 +25,6 @@ import { JournalService } from "src/app/services/journal.service";
   styleUrls: ["./processusstageetudiant.component.scss"],
 })
 export class ProcessusstageetudiantComponent implements OnInit {
-
-
   // bread crumb items
   breadCrumbItems: Array<{}>;
   files: File[] = [];
@@ -33,10 +32,10 @@ export class ProcessusstageetudiantComponent implements OnInit {
   form: FormGroup;
 
   stages: any[] = [];
-  userId: string = '65d7b036577f851e1873aa10'; // Remplacez par l'ID de l'utilisateur
+  userId: string = "65d7b036577f851e1873aa10"; // Remplacez par l'ID de l'utilisateur
 
   currentStage: any; // Variable pour stocker le stage actuelle en cours de modification
-  currentTache: any; 
+  currentTache: any;
 
   modalRef: BsModalRef;
   modalRef2: BsModalRef;
@@ -44,17 +43,17 @@ export class ProcessusstageetudiantComponent implements OnInit {
   updateForm: FormGroup;
   updateFormTache: FormGroup;
 
-  @ViewChild('updateContent') updateContent: any; // Déclaration de la propriété updateContent de type ViewChild
-  @ViewChild('updateContent2') updateContent2: any;
-
+  @ViewChild("updateContent") updateContent: any; // Déclaration de la propriété updateContent de type ViewChild
+  @ViewChild("updateContent2") updateContent2: any;
 
   ngOnInit(): void {
-    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form File Upload', active: true }];
+    this.breadCrumbItems = [
+      { label: "Forms" },
+      { label: "Form File Upload", active: true },
+    ];
 
     this.getStagesForUser();
-
   }
-
 
   showTacheFormMap: { [stageId: string]: boolean } = {};
   showTacheForm: boolean = false;
@@ -68,11 +67,11 @@ export class ProcessusstageetudiantComponent implements OnInit {
       if (isAssociated) {
         // stocker l'id de stage séléctionner
         this.selectedStage = this.stages.find((stage) => stage.id === stageId); // recherche dans le tableau stages de stage avec l'id de stage donné
-        this.showTacheFormMap[stageId] = !this.showTacheFormMap[stageId]; 
+        this.showTacheFormMap[stageId] = !this.showTacheFormMap[stageId];
         this.showTacheForm = !this.showTacheForm;
       } else {
         // S'il n'y a pas de journal associé, affichez un message d'alerte avec Toaster
-        this.toastr.warning('Ajoutez un journal svp!', 'Alerte');
+        this.toastr.warning("Ajoutez un journal svp!", "Alerte");
       }
     });
   }
@@ -83,40 +82,45 @@ export class ProcessusstageetudiantComponent implements OnInit {
 
   addJournal(stage: any) {
     // Obtenez l'ID du stage
-  const stageId = stage.id;
-  // Appelez votre service backend pour vérifier si un journal est associé à ce stage
-  this.stageService.isJournalAssociated(stageId)
-    .subscribe((isAssociated) => {
-      if (isAssociated) {
-        // Un journal est déjà associé à ce stage, affichez un message d'erreur
-        this.toastr.error('Un stage peut avoir un seul journal', 'Erreur');
-      } else {
-        // Aucun journal n'est associé, appelez votre service backend pour ajouter un journal
-        this.journalService.addJournal(stageId)
-          .subscribe((response) => {
-            console.log('Journal ajouté avec succès', response);
-            this.toastr.success('Journal ajouté avec succès', 'Succès');
+    const stageId = stage.id;
+    // Appelez votre service backend pour vérifier si un journal est associé à ce stage
+    this.stageService.isJournalAssociated(stageId).subscribe(
+      (isAssociated) => {
+        if (isAssociated) {
+          // Un journal est déjà associé à ce stage, affichez un message d'erreur
+          this.toastr.error("Un stage peut avoir un seul journal", "Erreur");
+        } else {
+          // Aucun journal n'est associé, appelez votre service backend pour ajouter un journal
+          this.journalService.addJournal(stageId).subscribe(
+            (response) => {
+              console.log("Journal ajouté avec succès", response);
+              this.toastr.success("Journal ajouté avec succès", "Succès");
 
-            // Stockez l'ID du journal 
-            this.selectedJournalId = response.id;
-          }, (error) => {
-            // Traitez les erreurs si nécessaire
-            console.error('Erreur lors de l\'ajout du journal', error);
-          });
+              // Stockez l'ID du journal
+              this.selectedJournalId = response.id;
+            },
+            (error) => {
+              // Traitez les erreurs si nécessaire
+              console.error("Erreur lors de l'ajout du journal", error);
+            }
+          );
+        }
+      },
+      (error) => {
+        // Traitez les erreurs si nécessaire lors de la vérification de l'association du journal
+        console.error(
+          "Erreur lors de la vérification de l'association du journal",
+          error
+        );
       }
-    }, (error) => {
-      // Traitez les erreurs si nécessaire lors de la vérification de l'association du journal
-      console.error('Erreur lors de la vérification de l\'association du journal', error);
-    });
+    );
   }
-
 
   // ajouter une tàche
 
   onTacheFormSubmit() {
-    
-    console.log("Stage selectionné est " ,this.selectedStage);
-  
+    console.log("Stage selectionné est ", this.selectedStage);
+
     // Reste du code de votre fonction onSubmitTacheForm ici
     const formData2 = this.tacheForm.value;
     console.log("FormData:", formData2);
@@ -124,7 +128,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
     // Vérifiez si le stage a un journal lié
     if (!this.selectedStage.journal || !this.selectedStage.journal.id) {
       console.error("Le stage sélectionné n'a pas de journal associé");
-    return;
+      return;
     }
 
     // Vérifiez si la date de la tâche est comprise entre la date de début et de fin du stage
@@ -133,8 +137,13 @@ export class ProcessusstageetudiantComponent implements OnInit {
     const dateFinStage = new Date(this.selectedStage.endAt);
 
     if (dateTache < dateDebutStage || dateTache > dateFinStage) {
-      console.error("La date de la tâche doit être entre la date de début et de fin du stage");
-      this.toastr.error('La date de la tâche doit être entre la date de début et de fin du stage', 'Erreur');
+      console.error(
+        "La date de la tâche doit être entre la date de début et de fin du stage"
+      );
+      this.toastr.error(
+        "La date de la tâche doit être entre la date de début et de fin du stage",
+        "Erreur"
+      );
       this.clearFormTache();
       return;
     }
@@ -146,23 +155,20 @@ export class ProcessusstageetudiantComponent implements OnInit {
       (response: any) => {
         this.showTacheFormMap[this.selectedStage.id] = true;
         this.clearFormTache();
-        this.toastr.success('Tâche ajoutée avec succès!', 'Succès');
-
+        this.toastr.success("Tâche ajoutée avec succès!", "Succès");
       },
       (error) => {
-        console.error('Erreur lors de l\'ajout de la Tâche:', error);
-        this.toastr.error('Erreur lors de l\'ajout de la Tâche', 'Erreur');
+        console.error("Erreur lors de l'ajout de la Tâche:", error);
+        this.toastr.error("Erreur lors de l'ajout de la Tâche", "Erreur");
       }
     );
   }
 
   taches: any[] = [];
 
-
-  // pour afficher les tàches 
+  // pour afficher les tàches
 
   showTaches(journalId: string) {
-
     if (this.showTachesMap[journalId]) {
       // Si la liste des tâches est déjà affichée, on la masque
       this.taches = [];
@@ -175,7 +181,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
           this.showTachesMap[journalId] = true;
         },
         (error) => {
-          console.error('Erreur lors de la récupération des tâches:', error);
+          console.error("Erreur lors de la récupération des tâches:", error);
         }
       );
     }
@@ -198,11 +204,9 @@ export class ProcessusstageetudiantComponent implements OnInit {
       setTimeout(() => {
         // this.profile.push(this.imageURL)
       }, 100);
-    }
-    reader.readAsDataURL(file)
+    };
+    reader.readAsDataURL(file);
   }
-
-
 
   utilisateurData: any;
 
@@ -226,58 +230,59 @@ export class ProcessusstageetudiantComponent implements OnInit {
   endAt: Date = new Date();
   type: string = "";
 
+  constructor(
+    private journalService: JournalService,
+    private datePipe: DatePipe,
+    private http: HttpClient,
+    private stageService: StageService,
+    private demandeService: DemandeService,
+    private fb: FormBuilder,
+    private toastr: ToastrService,
+    private modalService: BsModalService,
+    private ufb: UntypedFormBuilder
+  ) {
+    (this.form = this.ufb.group({
+      formlist: this.ufb.array([]),
+    })),
+      // Création du formulaire avec les champs et les validateurs
+      (this.stageForm = this.fb.group({
+        nomSociete: ["", Validators.required],
+        numSociete: ["", [Validators.required, numericValidator]],
+        emailSociete: ["", [Validators.required, Validators.email]],
+        nomCoach: ["", Validators.required],
+        prenomCoach: ["", Validators.required],
+        numCoach: ["", [Validators.required, numericValidator]],
+        emailCoach: ["", [Validators.required, Validators.email]],
+        startAt: ["", Validators.required],
+        endAt: ["", Validators.required],
+        type: ["", Validators.required],
+        // Ajoutez d'autres champs avec leurs validateurs ici
+        // ...
+      }));
 
-  constructor(private journalService: JournalService,private datePipe: DatePipe,private http: HttpClient,private stageService: StageService, private demandeService: DemandeService,private fb: FormBuilder, private toastr: ToastrService,private modalService: BsModalService,private ufb: UntypedFormBuilder) {
-    
-    
-
-      this.form = this.ufb.group({
-        formlist: this.ufb.array([]),
-      }),
-    
-    // Création du formulaire avec les champs et les validateurs
-    this.stageForm = this.fb.group({
-      nomSociete: ['', Validators.required],
-      numSociete: ['', [Validators.required, numericValidator]],
-      emailSociete: ['', [Validators.required, Validators.email]],
-      nomCoach: ['', Validators.required],
-      prenomCoach: ['', Validators.required],
-      numCoach: ['', [Validators.required, numericValidator]],
-      emailCoach: ['', [Validators.required, Validators.email]],
-      startAt: ['', Validators.required],
-      endAt: ['', Validators.required],
-      type: ['', Validators.required],
-      // Ajoutez d'autres champs avec leurs validateurs ici
-      // ...
+    this.updateForm = this.fb.group({
+      nomSociete: ["", Validators.required],
+      numSociete: ["", [Validators.required, numericValidator]],
+      emailSociete: ["", [Validators.required, Validators.email]],
+      nomCoach: ["", Validators.required],
+      prenomCoach: ["", Validators.required],
+      numCoach: ["", [Validators.required, numericValidator]],
+      emailCoach: ["", [Validators.required, Validators.email]],
+      startAt: ["", Validators.required],
+      endAt: ["", Validators.required],
+      type: ["", Validators.required],
     });
 
-      this.updateForm = this.fb.group({
-        nomSociete: ['', Validators.required],
-        numSociete: ['', [Validators.required, numericValidator]],
-        emailSociete: ['', [Validators.required, Validators.email]],
-        nomCoach: ['', Validators.required],
-        prenomCoach: ['', Validators.required],
-        numCoach: ['', [Validators.required, numericValidator]],
-        emailCoach: ['', [Validators.required, Validators.email]],
-        startAt: ['', Validators.required],
-        endAt:['', Validators.required],
-        type:['', Validators.required],
-        
-      });
+    this.tacheForm = this.fb.group({
+      date: ["", Validators.required],
+      libelle: ["", Validators.required],
+    });
 
-
-      this.tacheForm = this.fb.group({
-        date: ['', Validators.required],
-        libelle: ['', Validators.required],
-      });
-
-      this.updateFormTache = this.fb.group({
-        date: ['', Validators.required],
-        libelle: ['', Validators.required],
-      });
-    
+    this.updateFormTache = this.fb.group({
+      date: ["", Validators.required],
+      libelle: ["", Validators.required],
+    });
   }
-
 
   // afficher les stages par utilisateur
 
@@ -287,20 +292,22 @@ export class ProcessusstageetudiantComponent implements OnInit {
         this.stages = data;
       },
       (error) => {
-        console.error('Erreur lors de la récupération des stages : ', error);
+        console.error("Erreur lors de la récupération des stages : ", error);
       }
     );
   }
 
-
   // afficher la modal de la modification de stage  // patchValue pour MAJ plusieurs propriétés en mm temps
 
   openUpdateModal(stage: any) {
-    this.currentStage = stage; 
+    this.currentStage = stage;
     // Formatez les dates avant de les affecter au formulaire
-    const formattedStartDate = this.datePipe.transform(stage.startAt, 'yyyy-MM-dd');
-    const formattedEndDate = this.datePipe.transform(stage.endAt, 'yyyy-MM-dd');
-    this.updateForm.patchValue({  
+    const formattedStartDate = this.datePipe.transform(
+      stage.startAt,
+      "yyyy-MM-dd"
+    );
+    const formattedEndDate = this.datePipe.transform(stage.endAt, "yyyy-MM-dd");
+    this.updateForm.patchValue({
       nomSociete: stage.nomSociete,
       numSociete: stage.numSociete,
       emailSociete: stage.emailSociete,
@@ -308,107 +315,115 @@ export class ProcessusstageetudiantComponent implements OnInit {
       prenomCoach: stage.prenomCoach,
       numCoach: stage.numCoach,
       emailCoach: stage.emailCoach,
-      startAt: formattedStartDate, 
+      startAt: formattedStartDate,
       endAt: formattedEndDate,
-      type: stage.type
+      type: stage.type,
     });
-    this.modalRef = this.modalService.show(this.updateContent); 
+    this.modalRef = this.modalService.show(this.updateContent);
   }
 
   // afficher la modal de la modification de tàche
 
   openUpdateModalTache(tache: any) {
-    this.currentTache = tache; 
-    const formattedDate = this.datePipe.transform(tache.date, 'yyyy-MM-dd');
+    this.currentTache = tache;
+    const formattedDate = this.datePipe.transform(tache.date, "yyyy-MM-dd");
     this.updateFormTache.patchValue({
       date: formattedDate,
       libelle: tache.libelle,
     });
-    this.modalRef2 = this.modalService.show(this.updateContent2); 
+    this.modalRef2 = this.modalService.show(this.updateContent2);
   }
 
-
-  // modifier le stage 
+  // modifier le stage
 
   updateStage() {
-    
     if (this.updateForm.valid && this.currentStage) {
       const updatedStage = { ...this.currentStage, ...this.updateForm.value }; // updatedStage est un nouveau objet qui prend toute les propriété de currentStage et les MAJ de updateForm
-      console.log('Données :', updatedStage); 
+      console.log("Données :", updatedStage);
 
-      this.stageService.updateStage(this.currentStage.id, updatedStage).subscribe(
-        response => {
-          console.log('Réponse du serveur :', response); 
-          this.toastr.success('Stage mis à jour avec succès', 'Succès');
-          this.getStagesForUser();
-          this.modalRef.hide();
-        },
-        error => {
-          console.error('Erreur lors de la mise à jour de stage :', error);
-          this.toastr.error('Une erreur s\'est produite lors de la mise à jour de stage', 'Erreur');
-        }
-      );
+      this.stageService
+        .updateStage(this.currentStage.id, updatedStage)
+        .subscribe(
+          (response) => {
+            console.log("Réponse du serveur :", response);
+            this.toastr.success("Stage mis à jour avec succès", "Succès");
+            this.getStagesForUser();
+            this.modalRef.hide();
+          },
+          (error) => {
+            console.error("Erreur lors de la mise à jour de stage :", error);
+            this.toastr.error(
+              "Une erreur s'est produite lors de la mise à jour de stage",
+              "Erreur"
+            );
+          }
+        );
     }
   }
 
-  // modifier la tàche 
+  // modifier la tàche
 
   updateTache() {
-    
     if (this.updateFormTache.valid && this.currentTache) {
-      const updatedTache = { ...this.currentTache, ...this.updateFormTache.value }; 
+      const updatedTache = {
+        ...this.currentTache,
+        ...this.updateFormTache.value,
+      };
 
-      console.log('Données :', updatedTache); // Ajoutez cette ligne
+      console.log("Données :", updatedTache); // Ajoutez cette ligne
 
-      this.journalService.updateTache(this.currentTache.id, updatedTache).subscribe(
-        response => {
-          console.log('Réponse du serveur :', response); // Ajoutez cette ligne
-          this.toastr.success('Tàche mis à jour avec succès', 'Succès');
-          this.modalRef2.hide();
-          this.showTaches(this.currentTache.journal.id);
-        },
-        error => {
-          console.error('Erreur lors de la mise à jour de tàche :', error);
-          this.toastr.error('Une erreur s\'est produite lors de la mise à jour de tàche', 'Erreur');
-        }
-      );
+      this.journalService
+        .updateTache(this.currentTache.id, updatedTache)
+        .subscribe(
+          (response) => {
+            console.log("Réponse du serveur :", response); // Ajoutez cette ligne
+            this.toastr.success("Tàche mis à jour avec succès", "Succès");
+            this.modalRef2.hide();
+            this.showTaches(this.currentTache.journal.id);
+          },
+          (error) => {
+            console.error("Erreur lors de la mise à jour de tàche :", error);
+            this.toastr.error(
+              "Une erreur s'est produite lors de la mise à jour de tàche",
+              "Erreur"
+            );
+          }
+        );
     }
   }
 
-  // pour supprimer un stage 
+  // pour supprimer un stage
 
   deleteStage(stage: any): void {
-    if (confirm('Voulez-vous vraiment supprimer ce stage ?')) {
-      this.toastr.success('Stage supprimé avec succès', 'Succès');
+    if (confirm("Voulez-vous vraiment supprimer ce stage ?")) {
+      this.toastr.success("Stage supprimé avec succès", "Succès");
       this.stageService.deleteStage(stage.id).subscribe(
-        response => {
-          console.log('Stage supprimé avec succès:', response);
+        (response) => {
+          console.log("Stage supprimé avec succès:", response);
           this.getStagesForUser();
         },
-        error => {
-          console.error('Erreur lors de la suppression du stage :', error);
+        (error) => {
+          console.error("Erreur lors de la suppression du stage :", error);
         }
       );
     }
   }
 
-  // pour supprimer une tàche 
+  // pour supprimer une tàche
 
   deleteTache(tache: any): void {
-    if (confirm('Voulez-vous vraiment supprimer cette tàche ?')) {
-      this.toastr.success('Tache supprimée avec succès', 'Succès');
-      this.journalService.deleteTache(tache.id).subscribe(
-        response => {
-          console.log('Tàche supprimée avec succès:', response);
-        }
-      );
+    if (confirm("Voulez-vous vraiment supprimer cette tàche ?")) {
+      this.toastr.success("Tache supprimée avec succès", "Succès");
+      this.journalService.deleteTache(tache.id).subscribe((response) => {
+        console.log("Tàche supprimée avec succès:", response);
+      });
     }
   }
 
   // affichage de demande de stage
 
   afficherDemandeDeStage() {
-    const userId = '65d7b036577f851e1873aa10'; // Remplacez par l'id de l'utilisateur que vous souhaitez récupérer
+    const userId = "65d7b036577f851e1873aa10"; // Remplacez par l'id de l'utilisateur que vous souhaitez récupérer
 
     this.demandeService.getUserById(userId).subscribe(
       (data) => {
@@ -416,23 +431,36 @@ export class ProcessusstageetudiantComponent implements OnInit {
         this.construireDemandeDeStageContent();
       },
       (error) => {
-        console.error('Erreur lors de la récupération des données utilisateur:', error);
+        console.error(
+          "Erreur lors de la récupération des données utilisateur:",
+          error
+        );
       }
     );
   }
 
+  // construction de demande de stage
 
-  // construction de demande de stage 
-  
   private construireDemandeDeStageContent() {
     this.demandeService.getDemandeStageContent().subscribe(
       (content) => {
         // Injectez les données de l'utilisateur dans le contenu récupéré
-        const updatedContent = content.replace('{{studentName}}', `${this.utilisateurData.firstName || ''} ${this.utilisateurData.lastName || ''}`);
-        this.demandeDeStageContent = updatedContent.replace('{{studentInfo}}', this.utilisateurData.level || '');
+        const updatedContent = content.replace(
+          "{{studentName}}",
+          `${this.utilisateurData.firstName || ""} ${
+            this.utilisateurData.lastName || ""
+          }`
+        );
+        this.demandeDeStageContent = updatedContent.replace(
+          "{{studentInfo}}",
+          this.utilisateurData.level || ""
+        );
       },
       (error) => {
-        console.error('Erreur lors de la récupération du contenu de demande_stage.html:', error);
+        console.error(
+          "Erreur lors de la récupération du contenu de demande_stage.html:",
+          error
+        );
       }
     );
   }
@@ -446,64 +474,68 @@ export class ProcessusstageetudiantComponent implements OnInit {
         (rapportExiste: boolean) => {
           if (!rapportExiste) {
             console.log(rapportExiste);
-            this.toastr.success('RapportPdf ajouté avec succès', 'Succès');
-            this.stageService.uploadRapportPdf(stageId, file).subscribe(
-              (response) => {
-                console.log('Fichier téléchargé avec succès:', response);
+            this.toastr.success("RapportPdf ajouté avec succès", "Succès");
+            this.stageService
+              .uploadRapportPdf(stageId, file)
+              .subscribe((response) => {
+                console.log("Fichier téléchargé avec succès:", response);
                 // Réalisez des actions supplémentaires si nécessaire, comme actualiser la liste des stages
-              },)
+              });
           } else {
-            this.toastr.error('Ce stage a déjà un rapport enregistré', 'Erreur');
+            this.toastr.error(
+              "Ce stage a déjà un rapport enregistré",
+              "Erreur"
+            );
           }
         },
         (error) => {
-          console.error('Erreur lors de la vérification du rapport pour le stage ' + stageId + ':', error);
+          console.error(
+            "Erreur lors de la vérification du rapport pour le stage " +
+              stageId +
+              ":",
+            error
+          );
           // Gérer l'erreur de manière appropriée
         }
       );
     }
   }
 
-
   //pour télécharger le PDF
 
   telechargerPDF() {
-    
-   this.construireDemandeDeStageContent();
+    this.construireDemandeDeStageContent();
 
-    setTimeout(() => { // Utilisez setTimeout pour s'assurer que le contenu est mis à jour
-    const element = document.getElementById('contenuPdf'); 
-    html2canvas(element).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        format: 'a4',
-        orientation: 'portrait',
+    setTimeout(() => {
+      // Utilisez setTimeout pour s'assurer que le contenu est mis à jour
+      const element = document.getElementById("contenuPdf");
+      html2canvas(element).then((canvas) => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPDF({
+          format: "a4",
+          orientation: "portrait",
+        });
+        const imgProps = pdf.getImageProperties(imgData); // obtenir les propriétés de l'image généré par canvas
+        const pdfWidth = pdf.internal.pageSize.getWidth(); // le largeur de PDF
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; // hauteur
+        pdf.addImage(imgData, "PNG", 10, -10, pdfWidth, pdfHeight);
+        pdf.save("demande_stage.pdf");
       });
-      const imgProps = pdf.getImageProperties(imgData); // obtenir les propriétés de l'image généré par canvas
-      const pdfWidth = pdf.internal.pageSize.getWidth(); // le largeur de PDF
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width; // hauteur
-      pdf.addImage(imgData, 'PNG', 10, -10, pdfWidth, pdfHeight);
-      pdf.save('demande_stage.pdf');
-    });
-  }, 500); 
+    }, 500);
   }
-
 
   // Cette méthode réinitialise tous les champs du formulaire
   clearForm() {
-    this.stageForm.reset(); 
+    this.stageForm.reset();
   }
 
-  clearFormTache(){
+  clearFormTache() {
     this.tacheForm.reset();
   }
 
-  
-
-  // Méthode appelée lors de la soumission du formulaire ( ajout stage) 
+  // Méthode appelée lors de la soumission du formulaire ( ajout stage)
 
   onSubmit() {
-
     const formData = {
       nomSociete: this.nomSociete,
       numSociete: this.numSociete,
@@ -512,50 +544,39 @@ export class ProcessusstageetudiantComponent implements OnInit {
       prenomCoach: this.prenomCoach,
       numCoach: this.numCoach,
       emailCoach: this.emailCoach,
-      startAt: this.startAt, 
+      startAt: this.startAt,
       endAt: this.endAt,
       type: this.type,
     };
 
     if (this.stageForm.valid) {
-      const formData = this.stageForm.value; 
+      const formData = this.stageForm.value;
 
-    try {
-      // Afficher la chaîne JSON dans la console avant l'envoi
-      console.log("FormData:", formData);
-      console.log("JSON Stringify:", JSON.stringify(formData));
+      try {
+        // Afficher la chaîne JSON dans la console avant l'envoi
+        console.log("FormData:", formData);
+        console.log("JSON Stringify:", JSON.stringify(formData));
 
-      this.toastr.success('Stage ajoutée avec succès', 'Succès');
-      this.clearForm();
-      // Utilisez le service pour envoyer les données au backend
-      this.stageService.ajouterStage(formData).subscribe((response: any) => {
-        console.log("Succès de l'ajout du stage");
-      });
-
-    } catch (error) {
-      console.error("Erreur dans onSubmit:", error);
+        this.toastr.success("Stage ajoutée avec succès", "Succès");
+        this.clearForm();
+        // Utilisez le service pour envoyer les données au backend
+        this.stageService.ajouterStage(formData).subscribe((response: any) => {
+          console.log("Succès de l'ajout du stage");
+        });
+      } catch (error) {
+        console.error("Erreur dans onSubmit:", error);
+      }
+    } else {
+      // Affichez des messages d'erreur appropriés si nécessaire
+      console.log("Formulaire invalide. Veuillez corriger les erreurs.");
     }
   }
-  else {
-    // Affichez des messages d'erreur appropriés si nécessaire
-    console.log("Formulaire invalide. Veuillez corriger les erreurs.");
-  }
-  
-  }
-
-
 }
 
-  function numericValidator(control: AbstractControl): { [key: string]: any } | null {
-     const isNumeric = !isNaN(parseFloat(control.value)) && isFinite(control.value);
-     return isNumeric ? null : { 'numeric': { value: control.value } };
-   }
-
-
-
-  
-
-  
-
-
-
+function numericValidator(
+  control: AbstractControl
+): { [key: string]: any } | null {
+  const isNumeric =
+    !isNaN(parseFloat(control.value)) && isFinite(control.value);
+  return isNumeric ? null : { numeric: { value: control.value } };
+}

@@ -42,10 +42,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ChatComponent } from './chat/chat.component';
 
 import { FilemanagerComponent } from './filemanager/filemanager.component';
+import { GerernoteComponent } from './gerernote/gerernote.component';
 
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent, GerernoteComponent],
   imports: [
     CommonModule,
     FormsModule,
