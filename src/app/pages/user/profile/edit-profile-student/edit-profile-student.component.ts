@@ -69,8 +69,8 @@ export class EditProfileStudentComponent {
         phoneNumber: [data && data.phoneNumber ? data.phoneNumber :'',[Validators.required]],
         unvId: [data && data.unvId ? data.unvId :'', [Validators.required]],
         cin: [data && data.cin ? data.cin: '',[Validators.required]],
-        img: ['',[Validators.required]],
       });
+      
   }
 
   get form() {
@@ -79,6 +79,7 @@ export class EditProfileStudentComponent {
 
  
   validSubmit() {
+    console.log(this.validationform.valid);
     if(this.validationform.valid){
       this.submit = true;
       console.log(this.file,"777777777777777")
@@ -86,13 +87,13 @@ export class EditProfileStudentComponent {
       formData.append('phoneNumber', this.form.phoneNumber.value);
       formData.append('address', this.form.address.value);
       formData.append('cin', this.form.cin.value);
-      formData.append('file',this.file);
+      if(this.file){formData.append('file',this.file);}
+      else{formData.append('file', this.imageURL);}
+      
 
 
       this.userService.updateUser(this.userId,formData).subscribe({
-        error:(err:any)=>{
-          this.toastr.warning('Something went wrong', 'WARNING');
-        },
+        
         complete:()=>{
           this.toastr.success('Supervisor updated with success', 'SUCCESS');
           this.router.navigate(['/user/profile']);
@@ -103,7 +104,7 @@ export class EditProfileStudentComponent {
    
   }
 
-  imageURL: string | undefined;
+  imageURL: any =this.userToUpdate.pic;
    file:File;
   fileChange(event: any) {
 

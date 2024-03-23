@@ -10,6 +10,7 @@ import { ListStudentsComponent } from './list-students/list-students.component';
 import { ListSupervisorComponent } from './list-supervisor/list-supervisor.component';
 import { EditProfileStudentComponent } from './profile/edit-profile-student/edit-profile-student.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
+import { ListServicestageComponent } from './list-servicestage/list-servicestage.component';
 
 const routes: Routes = [
 
@@ -26,6 +27,14 @@ const routes: Routes = [
     path:'student-users', component:ListStudentsComponent , 
     canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
    data:{
+     roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
+    } 
+  },
+
+  {
+    path:'intership-service-users', component:ListServicestageComponent , 
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
      roles:['SERVICE_STAGE','CHEF_DEPARTEMENT']
     } 
   },

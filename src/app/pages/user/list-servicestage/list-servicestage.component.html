@@ -1,0 +1,148 @@
+<div class="container-fluid">
+    <app-page-title title="Intership service list" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body border-bottom">
+            <div class="d-flex align-items-center">
+              <div class="flex-shrink-0 d-flex gap-1">
+                <a href="javascript:void(0);" class="btn btn-primary" (click)="openModal(content)">Add New Intership service user</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card-body">
+  
+            <div class="table-responsive">
+              <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                <thead>
+                  <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phne Number</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of lists;let i = index;">
+                    <th scope="row">{{i}}</th>
+                    <td>{{data.firstName}} {{data.lastName}} </td>
+                    <td>{{data.login}}</td>
+                    <td>{{data.phoneNumber}}</td>
+                    <td><span class="badge" [ngClass]="{ 'bg-success': data.activated == true,  'bg-danger': data.activated == false}">
+                    <span *ngIf="data.activated">Active</span>
+                    <span *ngIf="!data.activated" >NON Active</span>
+                    </span></td>
+                    <td>
+                      <ul class="list-unstyled hstack gap-1 mb-0">
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                          <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="editDataGet(data.id,content)"><i class="mdi mdi-pencil-outline"></i></a>
+                        </li>
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                          <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="removeUser(data.id)"><i class="mdi mdi-delete-outline"></i></a>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <!--end row-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Order Create Model -->
+  <ng-template #content role="document" let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Add Intership service user</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal" (click)="modalRef?.hide()"></button>
+    </div>
+    <form (ngSubmit)="saveUser()" [formGroup]="jobListForm">
+      <div class="modal-body">
+        <div class="mb-3">
+          <label for="customername-field" class="form-label">First Name</label>
+          <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required formControlName="firstName" [ngClass]="{ 'is-invalid': submitted && form['firstName'].errors }" />
+          <div *ngIf="submitted && form['firstName'].errors" class="invalid-feedback" align="left">
+            <div *ngIf="form['firstName'].errors['required']">First Name is required</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="customername-field" class="form-label">Last Name</label>
+          <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required formControlName="lastName" [ngClass]="{ 'is-invalid': submitted && form['lastName'].errors }" />
+          <div *ngIf="submitted && form['lastName'].errors" class="invalid-feedback" align="left">
+            <div *ngIf="form['lastName'].errors['required']">Last Name is required</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="customername-field" class="form-label">Email</label>
+          <input type="text" id="customername-field" class="form-control" placeholder="Enter Location" required formControlName="login" [ngClass]="{ 'is-invalid': submitted && form['login'].errors }" />
+          <div *ngIf="submitted && form['login'].errors" class="invalid-feedback" align="left">
+            <div *ngIf="form['login'].errors['required']">Email is required</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="customername-field" class="form-label">Phone Number</label>
+          <input type="text" id="customername-field" class="form-control" placeholder="Enter Experience" required formControlName="phoneNumber" [ngClass]="{ 'is-invalid': submitted && form['phoneNumber'].errors }" />
+          <div *ngIf="submitted && form['phoneNumber'].errors" class="invalid-feedback" align="left">
+            <div *ngIf="form['phoneNumber'].errors['required']">Phone Number is required</div>
+          </div>
+        </div>
+  
+        <div class="mb-3">
+          <label for="customername-field" class="form-label">Card ID</label>
+          <input type="text" id="customername-field" class="form-control" placeholder="Enter Position" required formControlName="cin" [ngClass]="{ 'is-invalid': submitted && form['cin'].errors }" />
+          <div *ngIf="submitted && form['cin'].errors" class="invalid-feedback" align="left">
+            <div *ngIf="form['cin'].errors['required']">Card ID is required</div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="customername-field" class="form-label">Address</label>
+            <input type="text" id="customername-field" class="form-control" placeholder="Enter Position" required formControlName="address" [ngClass]="{ 'is-invalid': submitted && form['address'].errors }" />
+            <div *ngIf="submitted && form['address'].errors" class="invalid-feedback" align="left">
+              <div *ngIf="form['address'].errors['required']">Address is required</div>
+            </div>
+          </div>
+  
+      </div>
+      <div class="modal-footer">
+        <div class="hstack gap-2 justify-content-end">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modalRef?.hide()">Close</button>
+          <button type="submit" class="btn btn-success" id="add-btn">Save</button>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <!--End Modal -->
+
+
+    <!-- removeItemModal -->
+    <div bsModal #removeItemModal="bs-modal" class="modal fade" id="removeItemModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content">
+            <div class="modal-body px-4 py-5 text-center">
+              <button type="button" class="btn-close position-absolute end-0 top-0 m-3"  (click)="removeItemModal.hide()"></button>
+              <div class="avatar-sm mb-4 mx-auto">
+                <div class="avatar-title bg-primary text-primary bg-opacity-10 font-size-20 rounded-3">
+                  <i class="mdi mdi-trash-can-outline"></i>
+                </div>
+              </div>
+              <p class="text-muted font-size-16 mb-4">Are you Sure You want to Remove this User ?</p>
+      
+              <div class="hstack gap-2 justify-content-center mb-0">
+                <button type="button" class="btn btn-danger me-1" id="remove-item" (click)="confirmDelete()">Remove Now</button>
+                <button type="button" class="btn btn-secondary" (click)="removeItemModal.hide()">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end removeItemModal -->

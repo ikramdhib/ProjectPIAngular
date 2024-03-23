@@ -31,9 +31,10 @@ import { ChangePasswordComponent } from './profile/change-password/change-passwo
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ExtrapagesRoutingModule } from 'src/app/extrapages/extrapages-routing.module';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { ListServicestageComponent } from './list-servicestage/list-servicestage.component';
 
 @NgModule({
-  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent  ],
+  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent, ListServicestageComponent  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
