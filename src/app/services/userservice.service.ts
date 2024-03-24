@@ -31,5 +31,10 @@ export class UserServiceService {
     const url = `${this.apiUrl2}/assign/${studentId}/${encadrantId}`;
     return this.http.post<any>(url, note);
   }
+
+  getNotesByStudentId(studentId: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl2}/student/${studentId}`);
+  }
+
 }
 

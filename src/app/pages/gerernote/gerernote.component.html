@@ -1,176 +1,399 @@
 <div class="row">
-    <div *ngFor="let student of students" class="col-xl-4 col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex">
-            <div class="flex-shrink-0 me-4">
-              <div class="avatar-md">
-                <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                  <img src="" alt height="30" />
-                </span>
-              </div>
-            </div>
-
-            <div class="flex-grow-1 overflow-hidden">
-              <h5 class="text-truncate font-size-15">
-                {{ student.firstName }} {{ student.lastName }}
-              </h5>
-              <p class="text-muted mb-4">{{ student.stages[0].type }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="px-4 py-3 border-top">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item me-3">
-              {{ student.stages[0].startAt | date: 'mediumDate' }}
-            </li>
-            <li class="list-inline-item me-3" title="Date début" tooltip="Date début">
-              <i class="bx bx-calendar me-1"></i>
-            </li>
-            <li class="list-inline-item me-3">
-              {{ student.stages[0].endAt | date: 'mediumDate' }}
-            </li>
-            <li class="list-inline-item me-3" title="Date fin" tooltip="Date fin">
-              <i class="bx bx-calendar me-1"></i>
-            </li>
-            <li class="list-inline-item me-3" title="Comments" tooltip="Comments">
-              <a (click)="showGrilleTable(student.id)" class="btn btn-success">
-                Grille
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-xl-8" *ngIf="showGrille">
+  <div *ngFor="let student of students" class="col-xl-4 col-sm-6">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title mb-4">Note RDV Pédagogique</h4>
-        <div class="table-responsive">
-          <table class="table table-centered mb-0 table-nowrap align-middle">
-            <thead class="table-light">
-              <tr>
-                <th>Critére/Note</th>
-                <th>Note=5</th>
-                <th>Note=4</th>
-                <th>Note=3</th>
-                <th>Note=2</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Motivation et Autonomie</td>
-                <td>
-                  <input type="radio" name="motivation" [(ngModel)]="motivationNote" value="excellent">
-                  <label >Excellent</label>
-                </td>
-                <td>
-                  <input type="radio" name="motivation" [(ngModel)]="motivationNote" value="tres_bien">
-                  <label >Très Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="motivation" [(ngModel)]="motivationNote" value="bien">
-                  <label >Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="motivation" [(ngModel)]="motivationNote" value="assez_bien">
-                  <label >Assez Bien</label>
-                </td>
-              </tr>
-              <tr>
-                <td>Compétences Techniques</td>
-                <td>
-                  <input type="radio" name="technique" [(ngModel)]="techniqueNote" value="excellent">
-                  <label >Excellent</label>
-                </td>
-                <td>
-                  <input type="radio" name="technique" [(ngModel)]="techniqueNote" value="tres_bien">
-                  <label >Très Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="technique" [(ngModel)]="techniqueNote" value="bien">
-                  <label >Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="technique" [(ngModel)]="techniqueNote" value="assez_bien">
-                  <label >Assez Bien</label>
-                </td>
-              </tr>
-              <tr>
-                <td>Compétences de Communication</td>
-                <td>
-                  <input type="radio" name="communication" [(ngModel)]="communicationNote" value="excellent">
-                  <label >Excellent</label>
-                </td>
-                <td>
-                  <input type="radio" name="communication" [(ngModel)]="communicationNote" value="tres_bien">
-                  <label >Très Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="communication" [(ngModel)]="communicationNote" value="bien">
-                  <label >Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="communication" [(ngModel)]="communicationNote" value="assez_bien">
-                  <label >Assez Bien</label>
-                </td>
-              </tr>
-              <tr>
-                <td>Gestion du Temps et Apprentissage</td>
-                <td>
-                  <input type="radio" name="apprentissage" [(ngModel)]="apprentissageNote" value="excellent">
-                  <label >Excellent</label>
-                </td>
-                <td>
-                  <input type="radio" name="apprentissage" [(ngModel)]="apprentissageNote" value="tres_bien">
-                  <label >Très Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="apprentissage" [(ngModel)]="apprentissageNote" value="bien">
-                  <label >Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="apprentissage" [(ngModel)]="apprentissageNote" value="assez_bien">
-                  <label >Assez Bien</label>
-                </td>
-              </tr>
-              <tr>
-                <td>Professionnalisme et Qualité du Travail</td>
-                <td>
-                  <input type="radio" name="professionnalisme" [(ngModel)]="professionnalismeNote" value="excellent">
-                  <label >Excellent</label>
-                </td>
-                <td>
-                  <input type="radio" name="professionnalisme" [(ngModel)]="professionnalismeNote" value="tres_bien">
-                  <label >Très Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="professionnalisme" [(ngModel)]="professionnalismeNote" value="bien">
-                  <label >Bien</label>
-                </td>
-                <td>
-                  <input type="radio" name="professionnalisme" [(ngModel)]="professionnalismeNote" value="assez_bien">
-                  <label >Assez Bien</label>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="row mt-4">
-          <div class="col-sm-6">
-            <div class="text-sm-end mt-2 mt-sm-0">
-              <a (click)="assignNote()" class="btn btn-success">
-                Attribuer
-              </a>
+        <div class="d-flex">
+          <div class="flex-shrink-0 me-4">
+            <div class="avatar-md">
+              <span
+                class="avatar-title rounded-circle bg-light text-danger font-size-16"
+              >
+                <img src="" alt height="30" />
+              </span>
             </div>
-          </div> <!-- end col -->
-          <div class="col-sm-6">
-            <a routerLink="" class="btn btn-secondary">
-              <i class="mdi mdi-arrow-right me-1"></i> Note Appréciation globale</a>
-          </div> <!-- end col -->
-        </div> <!-- end row-->
+          </div>
+
+          <div class="flex-grow-1 overflow-hidden">
+            <h5 class="text-truncate font-size-15">
+              {{ student.firstName }} {{ student.lastName }}
+            </h5>
+            <p class="text-muted mb-4">{{ student.stages[0].type }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-3 border-top">
+        <ul class="list-inline mb-0">
+          <li class="list-inline-item me-3">
+            {{ student.stages[0].startAt | date : "mediumDate" }}
+          </li>
+          <li
+            class="list-inline-item me-3"
+            title="Date début"
+            tooltip="Date début"
+          >
+            <i class="bx bx-calendar me-1"></i>
+          </li>
+          <li class="list-inline-item me-3">
+            {{ student.stages[0].endAt | date : "mediumDate" }}
+          </li>
+          <li class="list-inline-item me-3" title="Date fin" tooltip="Date fin">
+            <i class="bx bx-calendar me-1"></i>
+          </li>
+          <li class="list-inline-item me-3" title="Grille" tooltip="Grille">
+            <a (click)="showGrilleTable(student.id)" class="btn btn-success">
+              Grille
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
+</div>
+
+<div class="col-xl-8" *ngIf="showGrille" >
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title mb-4">Note RDV Pédagogique</h4>
+      <div class="table-responsive">
+        <table class="table table-centered mb-0 table-nowrap align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Critére/Note</th>
+              <th>Note=4</th>
+              <th>Note=3</th>
+              <th>Note=2</th>
+              <th>Note=1</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Motivation et Autonomie</td>
+              <td>
+                <input
+                  type="radio"
+                  name="motivation"
+                  [(ngModel)]="motivationNote"
+                  value="excellent"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Excellent</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="motivation"
+                  [(ngModel)]="motivationNote"
+                  value="tres_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Très Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="motivation"
+                  [(ngModel)]="motivationNote"
+                  value="bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="motivation"
+                  [(ngModel)]="motivationNote"
+                  value="assez_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Assez Bien</label>
+              </td>
+            </tr>
+            <tr>
+              <td>Compétences Techniques</td>
+              <td>
+                <input
+                  type="radio"
+                  name="technique"
+                  [(ngModel)]="techniqueNote"
+                  value="excellent"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Excellent</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="technique"
+                  [(ngModel)]="techniqueNote"
+                  value="tres_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Très Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="technique"
+                  [(ngModel)]="techniqueNote"
+                  value="bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="technique"
+                  [(ngModel)]="techniqueNote"
+                  value="assez_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Assez Bien</label>
+              </td>
+            </tr>
+            <tr>
+              <td>Compétences de Communication</td>
+              <td>
+                <input
+                  type="radio"
+                  name="communication"
+                  [(ngModel)]="communicationNote"
+                  value="excellent"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Excellent</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="communication"
+                  [(ngModel)]="communicationNote"
+                  value="tres_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Très Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="communication"
+                  [(ngModel)]="communicationNote"
+                  value="bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="communication"
+                  [(ngModel)]="communicationNote"
+                  value="assez_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Assez Bien</label>
+              </td>
+            </tr>
+            <tr>
+              <td>Gestion du Temps et Apprentissage</td>
+              <td>
+                <input
+                  type="radio"
+                  name="apprentissage"
+                  [(ngModel)]="apprentissageNote"
+                  value="excellent"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Excellent</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="apprentissage"
+                  [(ngModel)]="apprentissageNote"
+                  value="tres_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Très Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="apprentissage"
+                  [(ngModel)]="apprentissageNote"
+                  value="bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="apprentissage"
+                  [(ngModel)]="apprentissageNote"
+                  value="assez_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Assez Bien</label>
+              </td>
+            </tr>
+            <tr>
+              <td>Professionnalisme et Qualité du Travail</td>
+              <td>
+                <input
+                  type="radio"
+                  name="professionnalisme"
+                  [(ngModel)]="professionnalismeNote"
+                  value="excellent"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Excellent</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="professionnalisme"
+                  [(ngModel)]="professionnalismeNote"
+                  value="tres_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Très Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="professionnalisme"
+                  [(ngModel)]="professionnalismeNote"
+                  value="bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Bien</label>
+              </td>
+              <td>
+                <input
+                  type="radio"
+                  name="professionnalisme"
+                  [(ngModel)]="professionnalismeNote"
+                  value="assez_bien"
+                  (ngModelChange)="updateTotalNotes()"
+                />
+                <label>Assez Bien</label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-1">
+        <div class="col-sm-4">
+          <div class="text-center">
+            <a (click)="resetNotes()" class="btn btn-secondary"> Effacer </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="text-center">
+            <span>Note: {{ totalNotes }}/20</span>
+            
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <a (click)="showGrilleTable2() ; getNoteByStudent()" class="btn btn-secondary ms-2">
+            <i class="mdi mdi-arrow-right me-1"></i> Note Appréciation globale
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- end row-->
+  </div>
+</div> 
+<div class="col-xl-8" *ngIf="showAppreciationNoteSection">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title mb-4">Note Apréciation Globale</h4>
+      <div class="table-responsive">
+        <table class="table table-centered mb-0 table-nowrap align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>
+                Note Encadrant Académique = (Note RDV Pédagogiques * 80% + Note
+                Appréciation Globale * 20% )
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td >Note RDV Pédagogiques</td>
+              <td >Note : {{ previousTotalNotes }}/20</td>
+            </tr>
+            <tr>
+              <td>Note Appréciation Globale Encadrant Académique</td>
+              <td> <label>Note: <div class="mb-3 row">
+                <div class="col-md-10">
+                    <input class="form-control" type="number" value="10" [(ngModel)]="noteApprecGlob" id="note-apprec-glob-input">
+                </div>
+            </div> </label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-1">       
+        <div class="col-sm-4">
+          <div class="text-center">
+            <a  class="btn btn-secondary"> Effacer </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <a (click)="showGrilleTable3()" class="btn btn-secondary ms-2">
+            <i class="mdi mdi-arrow-right me-1"></i> Synthèse Note Encadrement
+          </a>
+        </div>
+      </div>
+    <!-- end row-->
+  </div>
+</div>
+<div class="col-xl-20" *ngIf="showSyntheseNoteSection">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title mb-4">Synthèse Note Encadrement</h4>
+      <div class="table-responsive">
+        <table class="table table-centered mb-0 table-nowrap align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>
+                Note Finale = (Note Encadrement Académique * 40% + Note
+                Expert * 40% + Note Encadrant Professionnel * 20%)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Note Expert</td>
+              <td> <label>Note: <div class="mb-3 row">
+                    <input class="form-control" type="number" value="10" [(ngModel)]="noteExpert" id="note-expert-input">
+            </div> </label></td>
+            </tr>
+            <tr>
+              <td>Note Encadrant Professionnel</td>
+              <td> <label>Note: <div class="mb-3 row">
+                    <input class="form-control" type="number" value="10" [(ngModel)]="noteEncadrantPro" id="note-encadrant-pro-input">
+            </div> </label></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row mt-1">       
+        <div class="col-sm-4">
+          <div class="text-center">
+            <a  class="btn btn-secondary"> Effacer </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="text-center">
+            <a (click)="assignNote()" class="btn btn-success"> Attribuer </a>
+          </div>
+        </div>
+        
+      </div>
+    <!-- end row-->
+  </div>
+</div>
