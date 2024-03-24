@@ -6,6 +6,8 @@ import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceser
 import { DecimalPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-supervisor',
@@ -27,7 +29,10 @@ export class ListSupervisorComponent {
    files: File[] = [];
    userId:any;
    user:any;
-
+   totalCount: number = 0;
+   pageSize: number = 5;
+   currentPage: number = 1;
+   API_RL=environment.API_URL;
    students:any;
  
    @ViewChild('updateUser', { static: false }) updateUser?: ModalDirective;
@@ -40,24 +45,16 @@ export class ListSupervisorComponent {
      public userServiseStudents : UsersListService,
      public toastr:ToastrService, 
      public router : Router,
+     private http:HttpClient ,
      private formBuilder: UntypedFormBuilder) {
      
      }
  
    ngOnInit() {
      this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Users List', active: true }];
- 
-     setTimeout(() => {
 
-       this.userServiseStudents.getAllSupervisor().subscribe({
-         next :(res:any)=>{
-           this.students=res;
-           console.log(this.students.length,"tttttttttttttttttttt")
-         }
-       })
-     }, 1200);
+     this.loadUsers();
  
-     
      this.createContactForm = this.formBuilder.group({
       firstName: ['',[Validators.required]],
       lastName: ['', [Validators.required]],
@@ -69,7 +66,28 @@ export class ListSupervisorComponent {
       emailPro: ['', [Validators.required]],
     })
    }
+
+   loadUsers(){
+    this.http.get(`${this.API_RL}api/v1/user/users/ENCADRANT`,{
+      params: {
+        page: (this.currentPage - 1),
+        size: this.pageSize
+      }
+    }).subscribe({
+      next :(res:any)=>{
+        this.students=res.content;
+        this.totalCount = res.totalCount;
+      }
+    });
+  }
+
  
+   pageChanged(event: any): void {
+    console.log(this.currentPage,"@@@@@@@@@@");
+    this.currentPage = event;
+    console.log(event,"@@@@@@@@@@");
+    this.loadUsers();
+  }
  
      // Save User
      saveUser() {

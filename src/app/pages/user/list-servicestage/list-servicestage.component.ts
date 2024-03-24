@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import { DecimalPipe } from '@angular/common';
 import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-servicestage',
@@ -31,27 +33,22 @@ export class ListServicestageComponent {
   jobList:any;
   total: Observable<number>;
   @ViewChild('removeItemModal', { static: false }) removeItemModal?: ModalDirective;
-  currentPage: any;
+
+  totalCount: number = 0;
+  pageSize: number = 5;
+  currentPage: number = 1;
+  API_RL=environment.API_URL; 
 
   constructor(private modalService: BsModalService, 
      private formBuilder: UntypedFormBuilder,
+     private http:HttpClient ,
      public userServiseStudents:UsersListService) {
   }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Intership Service' }, { label: 'Intership Service user list', active: true }];
 
-      this.userServiseStudents.getAllServicesstage().subscribe({
-        next :(res:any)=>{
-          this.lists=res;
-        },
-       /* complete:()=>{
-          this.jobList.subscribe(x => {
-            this.content = this.lists;
-            this.lists = Object.assign([], x);
-          });
-        }*/
-      });
+    this.loadUsers();
 
     /**
      * Form Validation
@@ -77,6 +74,28 @@ export class ListServicestageComponent {
   // The master checkbox will check/ uncheck all items
   checkUncheckAll(ev: any) {
     this.lists.forEach((x: { state: any; }) => x.state = ev.target.checked)
+  }
+
+  
+  loadUsers(){
+    this.http.get(`${this.API_RL}api/v1/user/users/SERVICE_STAGE`,{
+      params: {
+        page: (this.currentPage - 1),
+        size: this.pageSize
+      }
+    }).subscribe({
+      next :(res:any)=>{
+        this.lists=res.content;
+        this.totalCount = res.totalCount;
+      }
+    });
+  }
+
+  pageChanged(event: any): void {
+    console.log(this.currentPage,"@@@@@@@@@@");
+    this.currentPage = event;
+    console.log(event,"@@@@@@@@@@");
+    this.loadUsers();
   }
 
 

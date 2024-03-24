@@ -6,6 +6,8 @@ import { DecimalPipe } from '@angular/common';
 
 import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-students',
@@ -27,6 +29,10 @@ export class ListStudentsComponent {
     currentUser:any=null;
     userId:any;
     user:any;
+    totalCount: number = 0;
+    pageSize: number = 5;
+    currentPage: number = 1;
+    API_RL=environment.API_URL;
 
     students:any;
   
@@ -40,6 +46,7 @@ export class ListStudentsComponent {
     constructor(private modalService: BsModalService, 
       public userServiseStudents : UsersListService,
       private formBuilder: UntypedFormBuilder,
+      private http:HttpClient ,
       public toastr:ToastrService,) {
       
     }
@@ -47,11 +54,7 @@ export class ListStudentsComponent {
     ngOnInit() {
       this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Users List', active: true }];
   
-       this.userServiseStudents.getAllStudents().subscribe({
-          next :(res:any)=>{
-            this.students=res;
-          }
-        })
+       this.loadUsers();
        
   
       this.createContactForm = this.formBuilder.group({
@@ -65,8 +68,29 @@ export class ListStudentsComponent {
         level: ['', [Validators.required]],
       })
     }
-  
-    
+
+    loadUsers(){
+      this.http.get(`${this.API_RL}api/v1/user/users/ETUDIANT`,{
+        params: {
+          page: (this.currentPage - 1),
+          size: this.pageSize
+        }
+      }).subscribe({
+        next :(res:any)=>{
+          this.students=res.content;
+          this.totalCount = res.totalCount;
+        }
+      });
+    }
+
+    pageChanged(event: any): void {
+      console.log(this.currentPage,"@@@@@@@@@@");
+      this.currentPage = event;
+      console.log(event,"@@@@@@@@@@");
+      this.loadUsers();
+    }
+
+   
     // Save User
     saveUser() {
       this.submitted=true;

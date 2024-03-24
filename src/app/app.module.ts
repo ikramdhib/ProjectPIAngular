@@ -11,10 +11,8 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
-
-
 import { SharedModule } from './cyptolanding/shared/shared.module';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ExtrapagesModule } from './extrapages/extrapages.module';
 
 import { LayoutsModule } from './layouts/layouts.module';
@@ -76,6 +74,7 @@ export function createTranslateLoader(http: HttpClient): any {
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
     SharedModule,
+    NgxPaginationModule,
     ScrollToModule.forRoot(),
     ToastrModule.forRoot(),
     ReactiveFormsModule,

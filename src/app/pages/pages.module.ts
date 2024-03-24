@@ -7,7 +7,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
@@ -52,6 +52,7 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
     ModalModule.forRoot(),
     PagesRoutingModule,
     NgApexchartsModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
     DashboardsModule,
     CryptoModule,
