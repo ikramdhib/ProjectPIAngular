@@ -501,6 +501,37 @@ export class ProcessusstageetudiantComponent implements OnInit {
     }
   }
 
+
+  // Pour télécharger l'attestation PDF
+
+  downloadAttestation(stageId: string): void {
+    this.stageService.downloadAttestation(stageId)
+      .subscribe((data: any) => {
+        // Créer un objet Blob avec le contenu renvoyé par le service
+        const blob = new Blob([data], { type: 'application/pdf' });
+
+        // Créer un objet URL à partir du Blob
+        const url = window.URL.createObjectURL(blob);
+
+        // Créer un élément <a> pour le téléchargement
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'attestation.pdf'; // Nom du fichier à télécharger
+
+        // Ajouter l'élément <a> à la page et cliquer dessus pour démarrer le téléchargement
+        document.body.appendChild(link);
+        link.click();
+
+        // Nettoyer l'URL créée après le téléchargement
+        window.URL.revokeObjectURL(url);
+
+        // Supprimer l'élément <a> de la page
+        document.body.removeChild(link);
+      }, (error) => {
+        console.error('Erreur lors du téléchargement de l\'attestation:', error);
+      });
+  }
+
   //pour télécharger le PDF
 
   telechargerPDF() {

@@ -56,4 +56,8 @@ export class StageService {
     return this.http.get<boolean>(`http://localhost:8081/api/stages/${stageId}/rapportExiste`);
   }
 
+  downloadAttestation(stageId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/attestation/${stageId}`, { responseType: 'blob' as 'json' });
+  }
+
 }

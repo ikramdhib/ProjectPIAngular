@@ -623,7 +623,8 @@
                             <td>{{ stage.endAt }}</td>
                             <td>{{ stage.type}}</td>
                             <td>
-                              <a href="{{ stage.downloadLink }}"><i class="fas fa-download fa-2x custom-red"></i></a>
+                              <a (click)="downloadAttestation(stage.id)">
+                                <i class="fas fa-download fa-2x custom-red"></i></a>
                             </td>  
                       </tr>
                     </tbody>
