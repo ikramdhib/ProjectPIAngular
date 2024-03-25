@@ -61,8 +61,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div [hidden]="captcha">
+                                            <re-captcha (resolved)="resolved($event)" siteKey="6LdId6MpAAAAAFs7xYmJbZyswn86EUTxBTzM7Icg"></re-captcha>
+                                        </div>
+
                                     <div class="mt-3 d-grid">
-                                        <button class="btn btn-danger btn-block" type="submit">Log In</button>
+                                        <button class="btn btn-danger btn-block" type="submit" [disabled]="isHumen">Log In</button>
                                     </div>
 
                                 </form>

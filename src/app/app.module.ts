@@ -33,6 +33,8 @@ import { AuthenticationInterceptor } from './helpers_User/authentication.interce
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SendingMailComponent } from './forget-password/sending-mail/sending-mail.component';
 import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
+import { RecaptchaModule } from 'ng-recaptcha';
+
 
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
@@ -78,6 +80,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ScrollToModule.forRoot(),
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    RecaptchaModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

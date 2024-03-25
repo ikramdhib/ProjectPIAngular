@@ -31,7 +31,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ExtrapagesRoutingModule } from 'src/app/extrapages/extrapages-routing.module';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ListServicestageComponent } from './list-servicestage/list-servicestage.component';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 @NgModule({
   declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent, ListServicestageComponent  ],
   imports: [
@@ -43,6 +43,7 @@ import { ListServicestageComponent } from './list-servicestage/list-servicestage
     NgSelectModule,
     WidgetModule,
     UIModule,
+    RecaptchaModule,
     ContactsRoutingModule,
     ModalModule,
     BsDropdownModule,

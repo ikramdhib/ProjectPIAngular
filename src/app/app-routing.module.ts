@@ -11,7 +11,6 @@ import { SendingMailComponent } from './forget-password/sending-mail/sending-mai
 import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
 import { AuthorizationGuardsService } from './UserServices/Guards/authorization-guards.service';
 
-
 const routes: Routes = [
   { path: 'authentication', component:AuthenticationComponent},
   { path: 'forgetPassword', component:ForgetPasswordComponent},
