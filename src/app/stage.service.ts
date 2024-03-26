@@ -46,7 +46,7 @@ export class StageService {
     return this.http.get(`${this.baseUrl}/attestation/${userId}`, { responseType: 'blob' });
   }
   getRapportDeStagePdfAvecOCR(userId: string): Observable<any> {
-    return this.http.get(`${this.baseUrl}/rapportDeStagePdfAvecOCR/${userId}`, { 
+    return this.http.get(`${this.baseUrl}/rapportDeStagePdfAvecTIKA/${userId}`, { 
       responseType: 'blob' as 'json' // Spécifiez 'blob' comme type de réponse attendu
     }).pipe(
       catchError((error: HttpErrorResponse) => {

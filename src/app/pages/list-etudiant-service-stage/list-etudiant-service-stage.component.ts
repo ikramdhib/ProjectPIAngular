@@ -194,6 +194,7 @@ openDialog(tasks: any[]): void {
         throw error;
       })
     ).subscribe(() => {
+      
       // Si la validation réussit, mettez à jour le statut de l'étudiant dans la liste
       student.validated = true;
       this.toastr.success('Étudiant validé avec succès', 'Succès');

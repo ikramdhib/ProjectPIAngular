@@ -182,6 +182,21 @@ export class NourComponent {
       console.log(this.timeline); // Pour vérifier les données dans la console du navigateur
     });
   }
+  currentDate: Date = new Date(); // Déclaration de la propriété currentDate
+  isRapportAccessible(rapportDate: string): boolean {
+    // Convertissez la date de rapport en objet Date
+    const reportDateObject: Date = new Date(rapportDate);
+
+    // Vérifiez si la date actuelle est supérieure ou égale à la date de rapport
+    return this.currentDate >= reportDateObject;
+  }
+  isAttestationAccessible(attestationDate: string): boolean {
+    // Convertissez la date de rapport en objet Date
+    const attestationDateObject: Date = new Date(attestationDate);
+
+    // Vérifiez si la date actuelle est supérieure ou égale à la date de rapport
+    return this.currentDate >= attestationDateObject;
+  }
   ngOnInit(): void {
     const encadrantId = '65fb3f9b12606c2f28507ae8';
     this.userList.getStudentsBySupervisor(encadrantId).subscribe(
