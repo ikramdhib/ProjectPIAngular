@@ -24,6 +24,9 @@ export class UserServiceService {
       })
     );
   }
+  validateStudent(studentId: string) {
+    return this.http.put(`${this.apiUrl}/${studentId}/validate`, {});
+  }
 
   getStudentsByAllStages(serviceId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/stages/students/${serviceId}`);

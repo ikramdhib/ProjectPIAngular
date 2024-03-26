@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,5 +44,19 @@ export class StageService {
   }
   downloadAttestationDeStage(userId: string): Observable<Blob> {
     return this.http.get(`${this.baseUrl}/attestation/${userId}`, { responseType: 'blob' });
+  }
+  getRapportDeStagePdfAvecOCR(userId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/rapportDeStagePdfAvecOCR/${userId}`, { 
+      responseType: 'blob' as 'json' // Spécifiez 'blob' comme type de réponse attendu
+    }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400 && error.error === 'Le texte extrait ne respecte pas les normes') {
+          this.toastr.error('Le texte extrait ne respecte pas les normes.', 'Attention');
+          console.error('Le texte extrait ne respecte pas les normes.'); // Affichez l'erreur dans la console du frontend
+        } 
+        console.error('Le texte extrait ne respecte pas les normes. :', error.error); // Affichez l'erreur dans la console du frontend
+        return throwError(error);
+      })
+    );
   }
  }

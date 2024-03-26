@@ -3,39 +3,43 @@
     <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
       <thead>
         <tr>
-          <th scope="col">ID</th>
+        
           <th scope="col">Nom_Etudiant</th>
           <th scope="col">Prenom_Etudiant</th>
           <th scope="col">Taches</th>
           <th scope="col">Rapport</th>
           <th scope="col">Attestation</th>
-          <th scope="col">Action</th>
-          <th scope="col"></th>
+          <th scope="col">&nbsp;&nbsp;Action</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let student of students">
-          <td>{{ student.id }}</td>
+          <ng-container *ngIf="!student.validated">
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
           <td>
-            <i class="display-4 custom-red bx bxs-cloud-upload"  (click)="showTasks(student)"></i>
+            <i class="display-4 custom-red bx bx-task fs-2" (click)="showTasks(student)" ></i>
+
           
 
           </td>
           <td> 
-            <button class="btn btn-download" (click)="downloadRapportDeStage(student.id)">
-              <i class="fa fa-download"></i> Télécharger Rapport
-            </button>
+          
+            <i class="display-4 custom-red bx bx-cloud-download" (click)="downloadRapportDeStage(student.id)" style="font-size:2rem;"></i>
             
           </td>
           <td> 
-            <button class="btn btn-download" (click)="downloadAttestationDeStage(student.id)">
-              <i class="fa fa-download"></i> Télécharger Attestation
-            </button>
+        
+              <i class="display-4 custom-red bx bx-cloud-download" (click)="downloadAttestationDeStage(student.id)" style="font-size:2rem;"></i>
+       
           </td>
-          <td>              </td>
-          <td> </td>
+          <td>   <button  class="btn btn-sm btn-red"(click)="validerEtudiant(student)">
+            VALIDE
+          </button>&nbsp;&nbsp; <button  class="btn btn-sm btn-red">
+            NON_VALIDE
+          </button>   </td>
+        </ng-container>
+
         </tr>
       </tbody>
     </table>

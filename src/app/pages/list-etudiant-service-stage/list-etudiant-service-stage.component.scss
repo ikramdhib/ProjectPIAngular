@@ -44,8 +44,8 @@
   background-color: #dc3546c2; /* Couleur rouge jolie */
   color: white; /* Texte en blanc */
   border: none; /* Supprime la bordure */
-  padding:  5px; /* Ajoute de l'espace autour du texte */
-  font-size: 10px; /* Taille de la police */
+  padding:  7px; /* Ajoute de l'espace autour du texte */
+  font-size: 15px; /* Taille de la police */
   border-radius: 5px; /* Bords arrondis */
   cursor: pointer; /* Curseur de la souris au survol */
   transition: background-color 0.3s ease; /* Animation de transition */
@@ -53,6 +53,17 @@
 
 .btn-download:hover {
   background-color: #c82333e1; /* Couleur rouge légèrement plus foncée au survol */
+}
+.btn-red {
+  background-color: #fcd6d6;
+  border-color: #fcd6d6;
+  color: #ff0000;
+}
+
+.btn-red:hover {
+  background-color: #cc0000; /* Couleur de survol rouge plus foncé */
+  border-color: #cc0000; /* Couleur de bordure de survol rouge plus foncé */
+  color: #ffffff; /* Texte en blanc au survol */
 }
 
   

@@ -8,6 +8,7 @@ import { JournaleServiceService } from 'src/app/journale-service.service';
 import { StageService } from 'src/app/stage.service';
 import { TaskDialogComponentComponent } from 'src/app/pages/task-dialog-component/task-dialog-component.component';
 import { UserServiceService } from 'src/app/user-service.service';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-list-etudiant-service-stage',
@@ -154,24 +155,52 @@ openDialog(tasks: any[]): void {
     }
     
   }
-  
-  downloadRapportDeStage(userId: string): void {
-    this.Stage.downloadRapportDeStage(userId).subscribe(
-      (data: Blob) => {
-        const blob = new Blob([data], { type: 'application/pdf' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'rapport_de_stage.pdf';
-        document.body.appendChild(a);
-        a.click();
-        window.URL.revokeObjectURL(url);
-      },
-      error => {
-        console.error('Erreur lors du téléchargement du rapport de stage :', error);
-      }
-    );
+  downloadRapportDeStage(etudiantId: string): void {
+    this.Stage.getRapportDeStagePdfAvecOCR(etudiantId)
+      .subscribe(response => {
+        if (response.status === 200) {
+          const contentDisposition = response.headers.get('content-disposition');
+          if (contentDisposition && contentDisposition.includes('attachment')) {
+            const blob = new Blob([response.body], { type: 'application/pdf' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'rapport_de_stage.pdf';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+          } else {
+            // Convertir le blob en texte
+            response.body.text().then(text => {
+              console.error('Erreur lors de la récupération du rapport de stage:', text);
+              if (text.includes('Le texte extrait ne respecte pas les normes')) {
+                this.toastr.error('Le texte extrait ne respecte pas les normes.', 'Attention');
+              } 
+            });
+          }
+        }
+      }, error => {
+        console.error('Le texte extrait ne respecte pas les normes.', error);
+        this.toastr.error('Le texte extrait ne respecte pas les normes.', 'Erreur');
+      });
   }
+  
+  validerEtudiant(student: any) {
+    // Logique pour valider l'étudiant
+    this.userList.validateStudent(student.id).pipe(
+      catchError(error => {
+        console.error('Erreur lors de la validation de l\'étudiant : ', error);
+        this.toastr.error('Une erreur s\'est produite lors de la validation de l\'étudiant', 'Erreur');
+        throw error;
+      })
+    ).subscribe(() => {
+      // Si la validation réussit, mettez à jour le statut de l'étudiant dans la liste
+      student.validated = true;
+      this.toastr.success('Étudiant validé avec succès', 'Succès');
+    });
+  }
+  
+  
   downloadAttestationDeStage(userId: string): void {
     this.Stage.downloadAttestationDeStage(userId).subscribe(
       (data: Blob) => {
