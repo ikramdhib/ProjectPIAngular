@@ -53,29 +53,40 @@ onReady(editor:ClassicEditor): void {
 
   onSubmit() {
     if (this.formQuestion.valid) {
-      // Créer des objets Tag à partir des noms des tags sélectionnés
+      // Création des objets Tag à partir des noms des tags sélectionnés
       const tagObjects = this.selectedTags.map(tagName => ({ name: tagName }));
-      const formData = new FormData();
       const questionData = {
         titre: this.formQuestion.get('titre').value,
         content: this.formQuestion.get('content').value,
         tags: tagObjects // Ici, on envoie un tableau d'objets
       };
   
-      this.forumService.createQuestion(questionData).subscribe((response) => {
-        console.log('Question créée avec succès !', response);
-        this.success = true;
-        this.successmsg();
+      this.forumService.createQuestion(questionData).subscribe((response: any) => {
+        // Assurez-vous que le champ est 'toxic' si c'est le cas dans la réponse de l'API
+        if (response.toxic) {
+          // Affichez une alerte à l'utilisateur si le contenu est toxique
+          this.basicMessage();
+        } else {
+          // Si le contenu n'est pas toxique, affichez le message de réussite
+          console.log('Question créée avec succès !', response);
+          this.success = true;
+          this.successmsg();
+        }
       }, (error) => {
         console.error('Erreur lors de la création de la question : ', error);
+        // Ici, vous pouvez afficher une alerte ou un message d'erreur à l'utilisateur
+        alert('Une erreur est survenue lors de lenvoi de votre question.');
       });
     }
   }
+  
   successmsg() {
     Swal.fire('Good job!', 'Ajout avec succès!', 'success');
     
   }
-
+  basicMessage() {
+    Swal.fire('votre contenu contient des mots généralement considérés comme inappropriés !!');
+  }
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
 add(event: MatChipInputEvent): void {
