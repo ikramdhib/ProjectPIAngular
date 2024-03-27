@@ -53,40 +53,53 @@ onReady(editor:ClassicEditor): void {
 
   onSubmit() {
     if (this.formQuestion.valid) {
-      // Création des objets Tag à partir des noms des tags sélectionnés
       const tagObjects = this.selectedTags.map(tagName => ({ name: tagName }));
       const questionData = {
         titre: this.formQuestion.get('titre').value,
         content: this.formQuestion.get('content').value,
-        tags: tagObjects // Ici, on envoie un tableau d'objets
+        tags: tagObjects
       };
   
-      this.forumService.createQuestion(questionData).subscribe((response: any) => {
-        // Assurez-vous que le champ est 'toxic' si c'est le cas dans la réponse de l'API
-        if (response.toxic) {
-          // Affichez une alerte à l'utilisateur si le contenu est toxique
-          this.basicMessage();
-        } else {
-          // Si le contenu n'est pas toxique, affichez le message de réussite
-          console.log('Question créée avec succès !', response);
-          this.success = true;
-          this.successmsg();
+      this.forumService.createQuestion(questionData).subscribe({
+        next: (response) => {
+          if (!response.toxic) { // Vérifiez si la propriété `toxic` est false, indiquant une réponse non toxique
+            console.log('Question créée avec succès !', response);
+            this.success = true;
+            this.successmsg(); // Afficher le message de réussite
+          } else {
+            // Si `toxic` est true, cela signifie que la création a échoué à cause du contenu
+            console.error('La création de la question a échoué : ', response.message);
+            alert(response.message); // Afficher le message d'erreur du serveur
+          }
+        },
+        error: (error) => {
+          console.error('Erreur lors de la communication avec le serveur : ', error);
+          if (error.status === 400) {
+            // Vérifiez si la réponse du serveur est dans error.error et si elle contient un message.
+            const errorMessage = error.error ? error.error.message : null;
+            if(errorMessage === 'Le contenu de la question n\'est pas lié à la programmation informatique.') {
+              this.basicMessage(); // Affiche un message spécifique pour l'erreur liée au contenu
+            } else {
+              this.basicMessage2(); // Affiche un message différent pour les autres types d'erreurs 400
+            }
+          } else {
+            // Pour toutes les autres erreurs HTTP, affichez une alerte générique
+            alert('Une erreur est survenue lors de l\'envoi de votre question.');
+          }
         }
-      }, (error) => {
-        console.error('Erreur lors de la création de la question : ', error);
-        // Ici, vous pouvez afficher une alerte ou un message d'erreur à l'utilisateur
-        alert('Une erreur est survenue lors de lenvoi de votre question.');
       });
-    }
-  }
-  
+    }}
   successmsg() {
     Swal.fire('Good job!', 'Ajout avec succès!', 'success');
     
   }
   basicMessage() {
-    Swal.fire('votre contenu contient des mots généralement considérés comme inappropriés !!');
+    Swal.fire('votre contenu nest pas lié a linformatique');
   }
+  basicMessage2() {
+    Swal.fire('Votre contenu contient des mots toxiques');
+  }
+
   separatorKeysCodes: number[] = [ENTER, COMMA];
 
 add(event: MatChipInputEvent): void {
