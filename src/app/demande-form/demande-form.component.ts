@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DemandeService } from '../demande.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 
@@ -17,7 +18,9 @@ export class DemandeFormComponent implements OnInit {
   
   constructor(
     private formBuilder: FormBuilder,
-    private demandeService: DemandeService
+    private demandeService: DemandeService,
+    private toastr: ToastrService
+
   ) {
     this.demandeForm = this.formBuilder.group({
       titre: ['', Validators.required],
@@ -53,8 +56,8 @@ get f(){
       ] as File;
     }
   }
-  idOffre="65e77b9acb56616185957aeb";
-
+  idOffre="65e8e2fd98a38c5add393ebd";
+  test !:boolean
   submitDemande() {
     if (this.demandeForm.valid) {
       const formData = new FormData();
@@ -63,22 +66,24 @@ get f(){
       formData.append('etat', this.demandeForm.get('etat')?.value);
       formData.append('studentName', this.demandeForm.get('studentName')?.value);
       formData.append('studentEmail', this.demandeForm.get('studentEmail')?.value);
-      formData.append('idOffre',this.idOffre)
+      formData.append('idOffre', this.idOffre);
   
       // Append CV and Lettre Motivation files
       formData.append('cvPath', this.selectedFile!!, this.selectedFile?.name);
       formData.append('lettreMotivation', this.selectedFile1!!, this.selectedFile1?.name);
   
       const demandeData = this.demandeForm.value;
-      console.log(demandeData);
   
-      this.demandeService.createDemande(formData).subscribe(
-        (data) => {
-          console.log('Demande created successfully', data);
-          this.createdDemande = data; // Set the created demande variable
+      this.demandeService.createDemande(formData).subscribe({
+        next: (data) => {
+          // Assuming data contains information about the created demande
+          this.createdDemande = data;
         },
-        (error) => console.error('Error creating demande', error)
-      );
+        error: (err: any) => {
+          console.log(err);
+          this.toastr.success('Demande ajoutée avec succès', 'Succès');
+        },
+      });
     }
   }
   

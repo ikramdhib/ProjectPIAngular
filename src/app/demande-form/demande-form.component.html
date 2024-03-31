@@ -6,6 +6,8 @@
       <h1 class="mb-0">Postuler</h1>
     </div>
     <div class="card-body">
+  <div *ngIf="test==true" class="alert alert-success"> Demande Created</div>
+  <div *ngIf="test==false" class="alert alert-danger"> Demande Refused</div>
 
       <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()" enctype="multipart/form-data">
 

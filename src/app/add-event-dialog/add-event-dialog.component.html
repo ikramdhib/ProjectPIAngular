@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>Ajouter un événement</h1>
+<div mat-dialog-content>
+  <form [formGroup]="eventForm" (ngSubmit)="onSaveClick()">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Titre" formControlName="text" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" placeholder="Date de début" formControlName="start_date" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="date" placeholder="Date de fin" formControlName="end_date" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Annuler</button>
+  <button mat-button color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()">Enregistrer</button>
+</div>

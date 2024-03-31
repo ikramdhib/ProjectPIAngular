@@ -1,36 +1,29 @@
-import {Injectable} from "@angular/core";
-import {Event} from "../models/event";
-import {HttpClient} from "@angular/common/http";
-import {HandleError} from "./service.helper";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { SchedulerEvent } from '../models/event';
 
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class EventService {
-    private eventUrl = "api/events";
+  private apiUrl = 'http://localhost:8081/api/events';
 
-    constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-    get(): Promise<Event[]> {
-        return this.http.get(this.eventUrl)
-            .toPromise()
-            .catch(HandleError);
-    }
+  getEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.apiUrl}/GetEvent`);
+  }
 
-    insert(event: Event): Promise<Event> {
-        return this.http.post(this.eventUrl, event)
-            .toPromise()
-            .catch(HandleError);
-    }
+  createEvent(event: SchedulerEvent): Observable<SchedulerEvent> {
+    return this.http.post<SchedulerEvent>(`${this.apiUrl}/CreateEvent`, event);
+  }
 
-    update(event: Event): Promise<void> {
-        return this.http.put(`${this.eventUrl}/${event.id}`, event)
-            .toPromise()
-            .catch(HandleError);
-    }
+  updateEvent(event: SchedulerEvent): Observable<SchedulerEvent> {
+    return this.http.put<SchedulerEvent>(`${this.apiUrl}/UpdateEvent/${event.id}`, event);
+  }
 
-    remove(id: number): Promise<void> {
-        return this.http.delete(`${this.eventUrl}/${id}`)
-            .toPromise()
-            .catch(HandleError);
-    }
+  deleteEvent(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/DeleteEvent/${id}`);
+  }
 }

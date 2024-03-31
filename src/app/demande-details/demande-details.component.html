@@ -5,9 +5,7 @@
     </div>
     <div class="card-body">
       <div *ngIf="demande">
-        <div class="mb-3">
-          <strong>ID:</strong> {{ demande.id }}
-        </div>
+        
         <div class="mb-3">
           <strong>Titre:</strong> {{ demande.titre }}
         </div>
@@ -17,13 +15,19 @@
         <div class="mb-3">
           <strong>Etat:</strong> {{ demande.etat }}
         </div>
+
         <div class="mb-3">
           <strong>Lettre de motivation:</strong> 
-          <iframe [src]="demande.lettreMotivation" class="embed-responsive" frameborder="0"></iframe>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe [src]="demande.lettreMotivation" class="embed-responsive-item" frameborder="0"></iframe>
+          </div>
         </div>
+
         <div class="mb-3">
           <strong>CV:</strong> 
-          <iframe [src]="demande.cvPath" class="embed-responsive" frameborder="0"></iframe>
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe [src]="demande.cvPath" class="embed-responsive-item" frameborder="0"></iframe>
+          </div>
         </div>
         
         <!-- Add more details as needed -->

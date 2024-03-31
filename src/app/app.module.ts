@@ -33,10 +33,22 @@ import { DemandeListComponent } from './demande-list/demande-list.component';
 import { DemandeDetailsComponent } from './demande-details/demande-details.component';
 import { DemandeFormComponent } from './demande-form/demande-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import ReactiveFormsModule
-import { SchedulerComponent } from './components/scheduler.component';
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
 import { UploadComponent } from './upload/upload.component';
+import { UpdateDemandeComponent } from './update-demande/update-demande.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { EventSchedulerComponent } from './event-scheduler/event-scheduler.component';
+import { CalendarModule } from 'primeng/calendar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component'; // Import MatDialogModule
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
+
+
+
+
 
 
 
@@ -60,12 +72,19 @@ export function createTranslateLoader(http: HttpClient): any {
     DemandeListComponent,
     DemandeDetailsComponent,
     DemandeFormComponent,
-    SchedulerComponent,
     UploadComponent,
+    UpdateDemandeComponent,
+    EventSchedulerComponent,
+    AddEventDialogComponent,
+    
     
   ],
   imports: [
     AppRoutingModule,
+    MatFormFieldModule,
+    MatDialogModule,
+    CalendarModule,
+    FullCalendarModule,
     FormsModule,
     ReactiveFormsModule, // Add ReactiveFormsModule here
     BrowserModule,
@@ -98,4 +117,9 @@ export function createTranslateLoader(http: HttpClient): any {
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],
 })
-export class AppModule { }
+export class AppModule {
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin]
+  };
+ }

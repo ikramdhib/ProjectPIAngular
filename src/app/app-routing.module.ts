@@ -9,8 +9,8 @@ import { Page404Component } from './extrapages/page404/page404.component';
 import { DemandeListComponent } from './demande-list/demande-list.component';
 import { DemandeDetailsComponent } from './demande-details/demande-details.component';
 import { DemandeFormComponent } from './demande-form/demande-form.component';
-import { SchedulerComponent } from './components/scheduler.component';
 import { UploadComponent } from './upload/upload.component';
+import { EventSchedulerComponent } from './event-scheduler/event-scheduler.component';
 
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule), canActivate: [AuthGuard] },
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule), canActivate: [AuthGuard] },
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
-  { path: 'calendrier', component: SchedulerComponent },
+  { path: 'calendrier', component: EventSchedulerComponent },
 
   { path: 'upload', component: UploadComponent },
   { path: 'list-demande', component: DemandeListComponent },

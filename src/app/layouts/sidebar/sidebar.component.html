@@ -3,32 +3,32 @@
 <ng-template #contentTemplate>
 
   <!--- Sidemenu -->
-  <div id="sidebar-menu">
+  <div id="sidebar-menu" style="background-color: rgb(156, 158, 159)">
     <!-- Left Menu Start -->
     <ul class="metismenu list-unstyled" id="side-menu" #sideMenu>
       <!-- {{menuItems}} -->
       <ng-container *ngFor="let item of menuItems">
-        <li class="menu-title" *ngIf="item.isTitle">{{ item.label | translate }}</li>
+        <li class="menu-title"style="color: white;" *ngIf="item.isTitle">{{ item.label | translate }}</li>
         <li *ngIf="!item.isTitle && !item.isLayout">
           <a *ngIf="hasItems(item)" href="javascript:void(0);" class="is-parent"
-            [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}">
-            <i class="bx {{item.icon}}" *ngIf="item.icon"></i>
-            <span> {{ item.label | translate }}</span>
-            <span class="badge rounded-pill float-end bg-{{item.badge.variant}}" *ngIf="item.badge">{{item.badge.text |
+            [ngClass]="{'has-arrow': !item.badge, 'has-dropdown': item.badge}"style="color: white;">
+            <i class="bx {{item.icon}}" *ngIf="item.icon"style="color: white;"></i>
+            <span style="color: white;"> {{ item.label | translate }}</span>
+            <span class="badge rounded-pill float-end bg-{{item.badge.variant}}" *ngIf="item.badge" style="color: white;">{{item.badge.text |
               translate}}</span>
           </a>
 
           <a routerLink="{{item.link}}" *ngIf="!hasItems(item)" class="side-nav-link-ref" routerLinkActive="active">
-            <i class="bx {{ item.icon }}" *ngIf="item.icon"></i>
-            <span> {{ item.label | translate }}</span>
-            <span class="badge rounded-pill bg-{{item.badge.variant}} float-end" *ngIf="item.badge">{{item.badge.text |
+            <i class="bx {{ item.icon }}" *ngIf="item.icon"style="color: white;"></i>
+            <span style="color: white;"> {{ item.label | translate }}</span>
+            <span style="color: white;" class="badge rounded-pill bg-{{item.badge.variant}} float-end" *ngIf="item.badge">{{item.badge.text |
               translate}}</span>
           </a>
 
           <ul *ngIf="hasItems(item)" class="sub-menu" aria-expanded="false">
             <li *ngFor="let subitem of item.subItems">
               <a routerLink="{{subitem.link}}" *ngIf="!hasItems(subitem)" class="side-nav-link-ref"
-                [attr.data-parent]="subitem.parentId" routerLinkActive="active">
+                [attr.data-parent]="subitem.parentId" routerLinkActive="active" style="color: white;">
                 {{ subitem.label | translate}}
                 <span class="badge rounded-pill bg-{{subitem.badge.variant}} float-end" *ngIf="subitem.badge">{{subitem.badge.text |
                   translate}}</span>

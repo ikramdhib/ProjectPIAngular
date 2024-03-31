@@ -1,0 +1,23 @@
+/* Styles pour rendre l'interface plus grande et esthétique */
+
+/* Modifier la taille de la boîte de dialogue */
+.mat-dialog-container {
+    max-width: 600px; /* Définir la largeur maximale de la boîte de dialogue */
+  }
+  
+  /* Ajouter de l'espace autour des éléments du formulaire */
+  mat-form-field {
+    margin-bottom: 16px; /* Ajouter une marge en bas de chaque champ de formulaire */
+  }
+  
+  /* Ajouter une marge en haut du bouton Enregistrer */
+  .mat-dialog-actions {
+    margin-top: 16px; /* Ajouter une marge en haut du groupe de boutons */
+  }
+  
+  /* Modifier le style du bouton Enregistrer */
+  button[type="submit"] {
+    min-width: 120px; /* Définir une largeur minimale pour le bouton Enregistrer */
+    font-size: 16px; /* Augmenter la taille de la police du bouton */
+  }
+  
