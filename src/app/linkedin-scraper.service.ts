@@ -29,8 +29,7 @@ export class LinkedinScraperService {
   
 
   isSoftwareEngineeringOffer(description: string): Observable<boolean> {
-    // Votre logique actuelle pour déterminer si l'offre est une offre d'ingénierie logicielle
-    const keywords = ['informatique', 'développeur', 'stage', 'programmation','Angular','springboot'];
+    const keywords = ['informatique', 'développeur', 'stage', 'programmation','Angular','springboot','skills','Backend','Frontend'];
     const isOffer = keywords.some(keyword => description.toLowerCase().includes(keyword));
     return new Observable<boolean>(observer => {
       observer.next(isOffer);

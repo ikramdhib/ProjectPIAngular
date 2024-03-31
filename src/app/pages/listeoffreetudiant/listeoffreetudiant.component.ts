@@ -20,7 +20,7 @@ export class ListeoffreetudiantComponent implements OnInit {
   showQuestions: boolean = true;
   offresRecommandees: Offre[] = [];
   reponses: any = {};
-  userId: string = '65cbd3246188fc097c303ae0';
+  userId: string = '65c3d6f5e969ef6cc82524c0';
   reaction: string = '';
   nouveauCommentaireTexte: string = '';
   newComment: string = '';
@@ -30,6 +30,8 @@ export class ListeoffreetudiantComponent implements OnInit {
   showComments: boolean = false;
   likes:number|null;
   dislikes:number|null;
+  userReactions: { [offreId: string]: 'like' | 'dislike' } = {};
+  trouverOffreParId: any;
 
 
   constructor(private http: HttpClient, private commentaireService: CommentServiceService,private toastr: ToastrService) { }
@@ -46,20 +48,19 @@ export class ListeoffreetudiantComponent implements OnInit {
   }
 
   getOffresByEntreprise(): void {
-    this.http.get<Offre[]>('http://localhost:8081/api/offres/byEntreprise')
-      .subscribe(
-        (data: Offre[]) => {
-          this.offresByEntreprise = data;
-          this.filteredOffresByEntreprise = this.offresByEntreprise;
-  
-          // Charger les commentaires pour l'offre sélectionnée
-          this.loadComments();
-        },
-        (error: any) => {
-          console.error('Une erreur s\'est produite lors de la récupération des offres :', error);
-        }
-      );
+    this.http.get<Offre[]>('http://localhost:8081/api/offres/byEntreprise').subscribe(
+      (data: Offre[]) => {
+        console.log(data); // Inspecter les données reçues
+        this.offresByEntreprise = data;
+        this.filteredOffresByEntreprise = this.offresByEntreprise;
+        this.loadComments();
+      },
+      (error: any) => {
+        console.error('Une erreur s\'est produite lors de la récupération des offres :', error);
+      }
+    );
   }
+  
 
   reactToOffer(offreId: string, reactionType: string): void {
     const httpOptions = {
@@ -83,6 +84,11 @@ export class ListeoffreetudiantComponent implements OnInit {
       );
   }
 
+  showFullDescription: { [key: string]: boolean } = {};
+
+  toggleDescription(offreId: string) {
+    this.showFullDescription[offreId] = !this.showFullDescription[offreId];
+  }
   // Méthode pour sélectionner une offre
   selectOffer(offer: Offre): void {
     this.selectedOffer = offer;
@@ -175,42 +181,66 @@ export class ListeoffreetudiantComponent implements OnInit {
   toggleRepliesVisibility(comment: CommentOffre) {
     comment.showReplies = !comment.showReplies; // Toggle visibility for replies
   }
+
+ 
+
   
-likeOffre(offreId: string): void {
-  this.http.post('http://localhost:8081/api/offres/' + offreId + '/like', {}).subscribe(
-    () => {
-      this.toastr.success('Offre aimée avec succès', 'Succès');
-      this.getOffresByEntreprise();
-
-      // Mettre à jour les offres après avoir aimé
-     
-    },
-    (error) => {
-      console.error('Erreur lors de l\'aimée de l\'offre :', error);
-      this.toastr.error('Une erreur s\'est produite lors de l\'aimée de l\'offre', 'Erreur');
+  likeOffre(offreId: string): void {
+    // Vérifier si l'utilisateur a déjà réagi à cette offre
+    if (this.userReactions[offreId]) {
+      this.toastr.warning('Vous avez déjà réagi à cette offre.');
+      return;
     }
-  );
-}
-
-dislikeOffre(offreId: string): void {
-  this.http.post('http://localhost:8081/api/offres/' + offreId + '/dislike', {}).subscribe(
-    () => {
-      this.toastr.success('Offre désaimée avec succès', 'Succès');
-      this.getOffresByEntreprise();
-      // Mettre à jour les offres après avoir désaimé
-    
-    },
-    (error) => {
-      console.error('Erreur lors de la désaimée de l\'offre :', error);
-      this.toastr.error('Une erreur s\'est produite lors de la désaimée de l\'offre', 'Erreur');
+  
+    Object.entries(this.offresByEntreprise).forEach(([entreprise, offres]) => {
+      const offre = offres.find(o => o.id === offreId);
+      if (offre) {
+        this.http.post(`http://localhost:8081/api/offres/${offreId}/like?userId=${this.userId}`, {}).subscribe(
+          () => {
+            this.toastr.success('Offre aimée avec succès', 'Succès');
+            offre.likes = (offre.likes || 0) + 1; // Incrémenter les likes
+            this.userReactions[offreId] = 'like'; // Marquer que l'utilisateur a aimé cette offre
+          },
+          (error) => {
+            console.error('Erreur lors de l\'aimée de l\'offre :', error);
+            this.toastr.error('Une erreur s\'est produite lors de l\'aimée de l\'offre', 'Erreur');
+          }
+        );
+        return;
+      }
+    });
+  }
+  
+  
+  dislikeOffre(offreId: string): void {
+    // Vérifier si l'utilisateur a déjà "liké" cette offre
+    if (this.userReactions[offreId] === 'like') {
+      this.toastr.warning('Vous ne pouvez pas disliker une offre que vous avez déjà aimée.');
+      return;
     }
-  );
-}
-
-
-
-
-
-
-
-}
+  
+    // Vérifier si l'utilisateur a déjà "disliké" cette offre
+    if (this.userReactions[offreId] === 'dislike') {
+      this.toastr.warning('Vous avez déjà réagi à cette offre.');
+      return;
+    }
+  
+    Object.entries(this.offresByEntreprise).forEach(([entreprise, offres]) => {
+      const offre = offres.find(o => o.id === offreId);
+      if (offre) {
+        this.http.post(`http://localhost:8081/api/offres/${offreId}/dislike?userId=${this.userId}`, {}).subscribe(
+          () => {
+            this.toastr.success('Offre désaimée avec succès', 'Succès');
+            offre.dislikes = (offre.dislikes || 0) + 1; // Incrémenter les dislikes
+            this.userReactions[offreId] = 'dislike'; // Marquer que l'utilisateur a "disliké" cette offre
+          },
+          (error) => {
+            console.error('Erreur lors de la désaimée de l\'offre :', error);
+            this.toastr.error('Une erreur s\'est produite lors de la désaimée de l\'offre', 'Erreur');
+          }
+        );
+        return;
+      }
+    });
+  }
+}  

@@ -50,9 +50,13 @@ export class OffreComponent {
     this.linkedInScraperService.isSoftwareEngineeringOffer(description)
       .subscribe(isOffer => {
         if (isOffer) {
+          this.toastr.success('Cette description correspond à une offre de stage informatique');
+
           console.log('Cette description correspond à une offre de stage informatique');
           // Traitement spécifique si l'offre correspond à une offre d'ingénierie logicielle
         } else {
+          this.toastr.error('Cette description ne correspond à une offre de stage informatique');
+
           console.log('Cette description ne correspond pas à une offre de stage informatique');
           // Traitement spécifique si l'offre ne correspond pas à une offre d'ingénierie logicielle
         }
@@ -82,6 +86,7 @@ export class OffreComponent {
   
     // Appel du scraping de discussion
     this.scrapeLinkedIn();
+    //this.checkIfSoftwareEngineeringOffer();
   }
 
 scrapeLinkedIn(): void {
@@ -90,6 +95,7 @@ scrapeLinkedIn(): void {
         console.log('Descriptions extraites :', descriptions);
         // Attribution des descriptions au champ de description
         this.nouvelleOffre.description = descriptions.join('\n'); // Mettre les descriptions dans une chaîne séparée par des sauts de ligne
+        this.checkIfSoftwareEngineeringOffer(this.nouvelleOffre.description);
 
         // Après avoir extrait la description, ajouter l'offre
         this.addOffre();

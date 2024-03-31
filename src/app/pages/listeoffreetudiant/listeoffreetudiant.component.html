@@ -23,7 +23,20 @@
                     <strong>Nom de l'entreprise :</strong> {{ offre.nomEntreprise }}
                   </div>
                   <div>
-                    <strong>Description :</strong> {{ offre.description }}
+                    <strong>Description :</strong>
+                    <!-- Description tronquée -->
+                    <div *ngIf="offre.description.length > 100">
+                      {{ offre.description | slice:0:100 }} <!-- Affiche les 100 premiers caractères -->
+                      <span *ngIf="!showFullDescription[offre.id]" class="text-primary" (click)="toggleDescription(offre.id)">
+                        <button class="btn btn-link">Lire la suite</button>
+                      </span>
+                      
+                      <span *ngIf="showFullDescription[offre.id]" class="text-primary" (click)="toggleDescription(offre.id)">Réduire</span>
+                    </div>
+                    <!-- Description complète -->
+                    <div *ngIf="offre.description.length <= 100 || showFullDescription[offre.id]">
+                      {{ offre.description }}
+                    </div>
                   </div>
                   <!-- Autres détails de l'offre... -->
                   <div>
