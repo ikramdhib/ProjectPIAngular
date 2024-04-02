@@ -1,18 +1,32 @@
-<h1 mat-dialog-title>Ajouter un événement</h1>
+<h1 mat-dialog-title>Ajouter un nouvel événement</h1>
+
 <div mat-dialog-content>
+  <!-- Formulaire pour ajouter un nouvel événement -->
   <form [formGroup]="eventForm" (ngSubmit)="onSaveClick()">
-    <mat-form-field>
-      <input matInput type="text" placeholder="Titre" formControlName="text" required>
+    <!-- Champ pour le titre de l'événement -->
+    <mat-form-field appearance="fill">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="text" required>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput type="date" placeholder="Date de début" formControlName="start_date" required>
+
+    <!-- Champ pour la date de début -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date de début</mat-label>
+      <input matInput type="date" formControlName="start_date" required>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput type="date" placeholder="Date de fin" formControlName="end_date" required>
+
+    <!-- Champ pour la date de fin -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date de fin</mat-label>
+      <input matInput type="date" formControlName="end_date" required>
     </mat-form-field>
   </form>
 </div>
+
 <div mat-dialog-actions>
+  <!-- Bouton pour annuler et fermer la boîte de dialogue -->
   <button mat-button (click)="onCancelClick()">Annuler</button>
-  <button mat-button color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()">Enregistrer</button>
+  
+  <!-- Bouton pour sauvegarder l'événement et fermer la boîte de dialogue -->
+  <button mat-button color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()">Sauvegarder</button>
 </div>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -16,39 +16,65 @@ export class EventSchedulerComponent {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin, interactionPlugin],
-    dateClick: (arg) => this.handleDateClick(arg),
-    events: [] as any[] // Initialize events as an empty array of any type
+    events: [] // Initialisation vide, sera rempli avec les événements chargés
   };
 
-  constructor(private eventService: EventService, private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private eventService: EventService) {}
 
+  // ngOnInit() {
+  //   this.loadEvents();
+  // }
+
+  // loadEvents() {
+  //   this.eventService.getEvents().subscribe(events => {
+  //     // Transformez chaque événement récupéré pour correspondre à la structure attendue par FullCalendar
+  //     const formattedEvents = events.map(event => ({
+  //       title: event.text, // Assurez-vous que 'text' correspond au titre de l'événement dans votre modèle
+  //       start: event.start_date,
+  //       end: event.end_date,
+  //       id: event.id
+  //     }));
+
+      // Mettez à jour les options de FullCalendar avec les événements chargés
+  //     this.calendarOptions = { ...this.calendarOptions, events: formattedEvents };
+  //   });
+  // }
   handleDateClick(arg) {
     alert('date click! ' + arg.dateStr);
   }
 
+  
+
   openCreateEventPopup() {
     const dialogRef = this.dialog.open(AddEventDialogComponent, {
-      width: '400px',
-      data: { title: '', date: '' }
+      width: '400px'
     });
   
-    dialogRef.afterClosed().subscribe(result => {
-      if (result && result.title && result.date) {
-        const newEvent: SchedulerEvent = {
-          id: 'generated_id',
-          text: result.title,
-          start_date: result.date,
-          end_date: result.date // Pour simplifier, utilisez la même date pour start_date et end_date
-        };
-
+    dialogRef.afterClosed().subscribe(newEvent => {
+      if (newEvent) {
+        // Vérifie si la liste des événements est déjà un tableau
         if (Array.isArray(this.calendarOptions.events)) {
-          this.calendarOptions.events.push(newEvent);
+          // Ajoute le nouvel événement à la liste existante
+          this.calendarOptions.events = [
+            ...this.calendarOptions.events,
+            {
+              title: newEvent.text,
+              start: newEvent.start_date,
+              end: newEvent.end_date,
+              id: newEvent.id
+            }
+          ];
         } else {
-          console.error('Invalid events type:', this.calendarOptions.events);
+          // Initialise la liste des événements avec le nouvel événement
+          this.calendarOptions.events = [
+            {
+              title: newEvent.text,
+              start: newEvent.start_date,
+              end: newEvent.end_date,
+              id: newEvent.id
+            }
+          ];
         }
-      } else {
-        console.error('Invalid event data:', result);
       }
     });
-  }
-}
+  }}

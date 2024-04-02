@@ -29,18 +29,18 @@ export class AddEventDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  
+
   onSaveClick(): void {
     if (this.eventForm.valid) {
-      const eventData: SchedulerEvent = {
-        id: '', // Générer un ID ou utiliser une autre méthode
-        text: this.eventForm.value.text,
-        start_date: this.eventForm.value.start_date,
-        end_date: this.eventForm.value.end_date
+      const event = {
+        ...this.eventForm.value,
+        title: this.eventForm.value.text // Assurez-vous que 'text' est le nom du champ du titre dans votre formulaire
       };
-
-      this.eventService.createEvent(eventData).subscribe(newEvent => {
+  
+      // Appel au service pour créer l'événement, puis fermeture de la boîte de dialogue avec l'événement créé
+      this.eventService.createEvent(event).subscribe(newEvent => {
         this.dialogRef.close(newEvent);
-        this.eventAdded.emit(newEvent); // Émettre un événement lorsque l'événement est ajouté avec succès
       });
     }
   }
