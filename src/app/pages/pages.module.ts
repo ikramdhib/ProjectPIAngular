@@ -46,12 +46,15 @@ import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { ToastrModule } from 'ngx-toastr';
 import SignaturePad from 'signature_pad';
 import { RouterModule } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
   imports: [
     ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
     MatDialogModule,
+    MatDialogModule,
+    MatFormFieldModule,
     
     CommonModule,
     FormsModule,

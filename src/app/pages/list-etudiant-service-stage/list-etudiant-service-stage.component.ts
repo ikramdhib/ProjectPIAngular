@@ -8,7 +8,8 @@ import { JournaleServiceService } from 'src/app/journale-service.service';
 import { StageService } from 'src/app/stage.service';
 import { TaskDialogComponentComponent } from 'src/app/pages/task-dialog-component/task-dialog-component.component';
 import { UserServiceService } from 'src/app/user-service.service';
-import { catchError, throwError } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
+import { ReasonDialogComponent } from '../reason-dialog/reason-dialog.component';
 
 @Component({
   selector: 'app-list-etudiant-service-stage',
@@ -23,7 +24,7 @@ export class ListEtudiantServiceStageComponent {
   students: any[] = [];
   serviceId: string = '65f8536e64a75e5c7ef2c291'; // Remplacez par l'ID réel du service de stage
 
-  constructor(private studentService: UserServiceService,private http: HttpClient,    private toastr: ToastrService ,public dialog: MatDialog,private userList: UserServiceService, private router: Router, private journalService: JournaleServiceService,private Stage:StageService) { }
+  constructor(private studentService: UserServiceService,private http: HttpClient, private toastr: ToastrService ,public dialog: MatDialog,private userList: UserServiceService, private router: Router, private journalService: JournaleServiceService,private Stage:StageService) { }
 
   ngOnInit(): void {
     this.getStudentsByAllStages();
@@ -31,6 +32,38 @@ export class ListEtudiantServiceStageComponent {
     this.getStagesForUser();
 
   }
+  rejectStudent(studentId: string): void {
+    const dialogRef = this.dialog.open(ReasonDialogComponent, {
+      width: '400px',
+      data: { reason: '' } // Initialisez la donnée avec une chaîne vide
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) { // Vérifiez si la raison a été fournie
+        // Mettre à jour l'attribut validated de l'étudiant à false
+        this.studentService.rejectStudent(studentId, result).pipe(
+          catchError(error => {
+            console.error('Une erreur est survenue lors du rejet de l\'étudiant : ', error);
+            this.toastr.error('Une erreur est survenue lors du rejet de l\'étudiant', 'Erreur');
+            throw error;
+          }),
+          finalize(() => {
+            // Rafraîchir la liste des étudiants après le rejet
+            this.getStudentsByAllStages();
+          })
+        ).subscribe(() => {
+          // Si le rejet réussit, mettez à jour le statut de l'étudiant dans la liste
+          const student = this.students.find(student => student.id === studentId);
+          if (student) {
+            student.validated = false; // Mettez à false puisque c'est un rejet
+            this.toastr.success('Étudiant rejeté avec succès', 'Succès');
+          }
+        });
+      }
+    });
+  }
+  
+  
   getStagesForUser() {
     this.Stage.getStagesByUserIdd(this.serviceId).subscribe(
       (data: any) => {
@@ -89,6 +122,7 @@ export class ListEtudiantServiceStageComponent {
     this.studentService.getStudentsByAllStages(this.serviceId)
       .subscribe(
         (data: any[]) => {
+          console.log('Données récupérées:', data); // Afficher les données récupérées dans la console
           this.students = data;
         },
         (error) => {
@@ -96,6 +130,7 @@ export class ListEtudiantServiceStageComponent {
         }
       );
   }
+  
 
   showTachesMap: { [key: string]: boolean } = {};
   showJournalTasks(student: any): void {
@@ -155,6 +190,7 @@ openDialog(tasks: any[]): void {
     }
     
   }
+  
   downloadRapportDeStage(etudiantId: string): void {
     this.Stage.getRapportDeStagePdfAvecOCR(etudiantId)
       .subscribe(response => {
@@ -190,11 +226,14 @@ openDialog(tasks: any[]): void {
     this.userList.validateStudent(student.id).pipe(
       catchError(error => {
         console.error('Erreur lors de la validation de l\'étudiant : ', error);
-        this.toastr.error('Une erreur s\'est produite lors de la validation de l\'étudiant', 'Erreur');
+        this.toastr.success('Étudiant validé avec succès', 'Succès');
         throw error;
+      }),
+      finalize(() => {
+        // Rafraîchir la liste des étudiants après la validation
+        this.getStudentsByAllStages();
       })
     ).subscribe(() => {
-      
       // Si la validation réussit, mettez à jour le statut de l'étudiant dans la liste
       student.validated = true;
       this.toastr.success('Étudiant validé avec succès', 'Succès');

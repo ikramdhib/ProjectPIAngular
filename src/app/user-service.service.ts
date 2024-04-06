@@ -31,7 +31,10 @@ export class UserServiceService {
   getStudentsByAllStages(serviceId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/stages/students/${serviceId}`);
   }
-
+  rejectStudent(studentId: string, rejectionReason: string): Observable<any> {
+    const url = `${this.apiUrl}/${studentId}/reject/${rejectionReason}`;
+    return this.http.post(url, null); // Nous n'envoyons pas de données dans le corps de la requête car nous passons la raison de rejet dans l'URL
+  }
 
   }
 

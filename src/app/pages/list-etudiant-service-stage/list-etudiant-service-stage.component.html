@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let student of students">
-          <ng-container *ngIf="!student.validated">
+          <ng-container>
           <td>{{ student.firstName }}</td>
           <td>{{ student.lastName }}</td>
           <td>
@@ -35,7 +35,7 @@
           </td>
           <td>   <button  class="btn btn-sm btn-red"(click)="validerEtudiant(student)">
             VALIDE
-          </button>&nbsp;&nbsp; <button  class="btn btn-sm btn-red">
+          </button>&nbsp;&nbsp; <button  class="btn btn-sm btn-red" (click)="rejectStudent(student.id)">
             NON_VALIDE
           </button>   </td>
         </ng-container>
@@ -44,6 +44,13 @@
       </tbody>
     </table>
   </div>
+  
+
+
+
+  
+  <!-- Zone pour afficher les tâches de l'étudiant sélectionné -->
+
   
   <!-- Zone pour afficher les tâches de l'étudiant sélectionné -->
   <div *ngIf="selectedStudentTasks.length > 0">
