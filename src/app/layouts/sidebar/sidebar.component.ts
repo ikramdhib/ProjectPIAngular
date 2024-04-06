@@ -157,14 +157,10 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   isDisabled(data:any[]):boolean{
-    console.log("eeeeeeeeeeeeeee");
-    console.log(data);
     if(data.includes(this.userRole)){
-      console.log("t1")
       return true ;
     }
     else{
-      console.log("t3")
       return false
     }
     
