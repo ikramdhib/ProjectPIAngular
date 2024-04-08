@@ -1,5 +1,6 @@
 <div class="container">
-  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="mb-4 entreprise">
+  <!-- Title for the list of available internship offers -->
+  <h1 class="text-center mt-4 mb-5">Liste des offres de stage disponibles</h1>  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="mb-4 entreprise">
     <div class="card shadow-sm gradient-bg">
       <div class="card-header bg-danger text-white">
         <h3 class="mb-0">{{ entreprise.key }}</h3>
@@ -68,6 +69,9 @@
                     </button>
                     <button class="btn btn-primary" (click)="dislikeOffre(offre.id)">
                       <i class="fas fa-thumbs-down"></i> Dislike ({{ offre.dislikes }})
+                    </button>
+                    <button class="btn btn-success mt-3" (click)="applyForOffer(offre.id)">
+                      <i class="fas fa-paper-plane"></i> Postuler
                     </button>
                   </div>
                   <!-- Bouton pour sélectionner l'offre -->
