@@ -2,17 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { LightboxModule } from 'ngx-lightbox';
-
 import { WidgetModule } from '../shared/widget/widget.module';
 import { UIModule } from '../shared/ui/ui.module';
 
@@ -43,10 +44,14 @@ import { ChatComponent } from './chat/chat.component';
 
 import { FilemanagerComponent } from './filemanager/filemanager.component';
 import { ForumModule } from './forum/forum.module';
-
+import { ToastrModule } from 'ngx-toastr';
+import { StageListtComponent } from './stage-listt/stage-listt.component';
+import { ReasonModalComponent } from './reason-modal/reason-modal.component';
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent , StageListtComponent ],
   imports: [
+    ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
+    MatDialogModule,
     CommonModule,
     FormsModule,
     BsDropdownModule.forRoot(),
@@ -80,7 +85,11 @@ import { ForumModule } from './forum/forum.module';
     CollapseModule.forRoot(),
     SimplebarAngularModule,
     LightboxModule,
-    PickerModule
+    PickerModule,
+    
+    
   ],
 })
-export class PagesModule { }
+export class PagesModule {
+  
+ }

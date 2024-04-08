@@ -12,6 +12,14 @@ import { ChangePasswordComponent } from './forget-password/change-password/chang
 import { AuthorizationGuardsService } from './UserServices/Guards/authorization-guards.service';
 
 
+  import { StageListComponent } from './stage-list/stage-list.component';
+import { StageListtComponent } from './pages/stage-listt/stage-listt.component';
+import { FormModule } from './pages/form/form.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+
+
+
 const routes: Routes = [
   { path: 'authentication', component:AuthenticationComponent},
   { path: 'forgetPassword', component:ForgetPasswordComponent},
@@ -34,11 +42,18 @@ const routes: Routes = [
   }  },
   { path: 'crypto-ico-landing', component: CyptolandingComponent ,canActivate: [AuthenticationGuardsService] },
   { path: '**', component: Page404Component ,canActivate: [AuthenticationGuardsService]},
+  { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
+  { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule) },
+  {path:'stageList',component:StageListComponent},
+  { path: 'crypto-ico-landing', component: CyptolandingComponent },
+
+  { path: '**', component: Page404Component },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' })],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),FormModule],
   exports: [RouterModule]
 })
 
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+}

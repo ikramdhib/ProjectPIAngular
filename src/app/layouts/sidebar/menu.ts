@@ -5,7 +5,7 @@ export const MENU: MenuItem[] = [
         id: 1,
         label: 'MENUITEMS.MENU.TEXT',
         isTitle: true,
-        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ETUDIANT'],
     },
     {
         id: 2,
@@ -137,7 +137,7 @@ export const MENU: MenuItem[] = [
         id: 22,
         label: 'MENUITEMS.CRYPTO.TEXT',
         icon: 'bx-bitcoin',
-        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ETUDIANT'],
         subItems: [
             {
                 id: 23,
@@ -256,7 +256,7 @@ export const MENU: MenuItem[] = [
         id: 40,
         label: 'MENUITEMS.PROJECTS.TEXT',
         icon: 'bx-briefcase-alt-2',
-        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
+        role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ETUDIANT'],
         subItems: [
             {
                 id: 41,
@@ -729,47 +729,6 @@ export const MENU: MenuItem[] = [
             },
         ]
     },
-
-    {
-        id: 155,
-        label: 'List of forums',
-        icon: 'bx-conversation',
-        link: '/forum/listforum',
-        role:['CHEF_DEPARTEMENT','SERVICE_STAGE'],
-    },
-    
-   {
-    id: 144,
-    label: 'Forum',
-    icon: 'bx-conversation',
-    role:['ETUDIANT'],
-    subItems: [
-        {
-            id: 145,
-            label: 'ListForum',
-            link: '/forum/listforum',
-            parentId: 144
-        },
-        {
-            id: 146,
-            label: 'AddQuestion',
-            link: '/forum/addquestion',
-            parentId: 144
-        },
-        {
-            id: 147,
-            label: 'ListeFavoris',
-            link: '/forum/listFavoris',
-            parentId: 144
-        },
-        {
-            id: 148,
-            label: 'Historique',
-            link: '/forum/historique',
-            parentId: 144
-        }
-    ]
-},
     {
         id: 180,
         label: 'Users',

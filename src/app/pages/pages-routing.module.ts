@@ -5,6 +5,14 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ChatComponent } from './chat/chat.component';
 import { DefaultComponent } from './dashboards/default/default.component';
 import { FilemanagerComponent } from './filemanager/filemanager.component';
+import { StageListtComponent } from './stage-listt/stage-listt.component';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { UserListComponent } from './user-list/user-list.component';
+import { AttestationComponent } from './attestation/attestation.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NourComponent } from './nour/nour.component';
+import { ListEtudiantServiceStageComponent } from './list-etudiant-service-stage/list-etudiant-service-stage.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
@@ -15,7 +23,12 @@ const routes: Routes = [
   { path: 'user', loadChildren: () => import('./user/user.module').then(m=>m.UserModule) },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
+  { path: 'attestation-stage/:studentId/:stageId', component: AttestationComponent },
+  {path:'stage',component:NourComponent},
+  {path:'serviceStage',component:ListEtudiantServiceStageComponent},
   { path: 'chat', component: ChatComponent },
+  {path:'stageList',component:StageListtComponent},
+  {path:'userr',component:UserListComponent},
   { path: 'filemanager', component: FilemanagerComponent },
   { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },
   { path: 'ecommerce', loadChildren: () => import('./ecommerce/ecommerce.module').then(m => m.EcommerceModule) },
@@ -38,7 +51,10 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forChild(routes),FormsModule,ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
+
+],
+
+  exports: []
 })
 export class PagesRoutingModule { }

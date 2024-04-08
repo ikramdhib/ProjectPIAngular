@@ -1,0 +1,73 @@
+<div class="card-body">
+    <div class="table-responsive">
+      <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+        <thead>
+          <tr>
+          
+            <th scope="col">Nom_Etudiant</th>
+            <th scope="col">Prenom_Etudiant</th>
+            <th scope="col">Taches</th>
+            <th scope="col">Rapport</th>
+            <th scope="col">Attestation</th>
+            <th scope="col">&nbsp;&nbsp;Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <ng-container>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>
+              <i class="display-4 custom-red bx bx-task fs-2" (click)="showTasks(student)" ></i>
+  
+            
+  
+            </td>
+            <td> 
+            
+              <i class="display-4 custom-red bx bx-cloud-download" (click)="downloadRapportDeStage(student.id)" style="font-size:2rem;"></i>
+              
+            </td>
+            <td> 
+          
+                <i class="display-4 custom-red bx bx-cloud-download" (click)="downloadAttestationDeStage(student.id)" style="font-size:2rem;"></i>
+         
+            </td>
+            <td>   <button  class="btn btn-sm btn-red"(click)="validerEtudiant(student)">
+              VALIDE
+            </button>&nbsp;&nbsp; <button  class="btn btn-sm btn-red" (click)="rejectStudent(student.id)">
+              NON_VALIDE
+            </button>   </td>
+          </ng-container>
+  
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+  
+  
+  
+    
+    <!-- Zone pour afficher les tâches de l'étudiant sélectionné -->
+  
+    
+    <!-- Zone pour afficher les tâches de l'étudiant sélectionné -->
+    <div *ngIf="selectedStudentTasks.length > 0">
+      <h4>Tâches de l'étudiant</h4>
+      <ul>
+        <li *ngFor="let task of selectedStudentTasks">{{ task.libelle }}</li>
+      </ul>
+    </div>
+    
+    <div class="row justify-content-between align-items-center">
+      <div class="col-auto me-auto"></div>
+      <div class="col-auto">
+        <div class="text-md-right float-md-end pagination-rounded">
+          <ul class="pagination pagination-rounded justify-content-end mb-2"></ul>
+        </div>
+      </div>
+      <!--end col-->
+    </div>
+    <!--end row-->
+  </div>

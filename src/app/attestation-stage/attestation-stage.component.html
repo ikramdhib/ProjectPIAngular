@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="content">
+      <div class="attestation">
+        <p class="attestation-text">
+          Nous soussignés, [Nom de l'entreprise], attestons par la présente que, étudiant(e) en [Nom de la formation] à [Nom de l'établissement],, a effectué un stage au sein de notre entreprise du [Date de début] au [Date de fin]. Durant cette période, a démontré un haut niveau d'engagement, d'initiative et de professionnalisme dans l'accomplissement de ses missions. Ses compétences, sa capacité d'adaptation et son attitude positive ont grandement contribué à la réussite des projets auxquels il/elle a participé. Nous lui souhaitons plein succès dans la poursuite de ses études et dans sa carrière future.
+        </p>
+      </div>
+      <canvas #signatureCanvas width="400" height="200"></canvas>
+      <button (click)="clearSignature()">Effacer la signature</button>
+      <button (click)="saveSignature()">Enregistrer la signature</button>
+      <button (click)="saveAttestation()">Enregistrer l'attestation</button>
+    </div>
+  </div>
+  

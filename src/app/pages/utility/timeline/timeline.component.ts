@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-timeline',
@@ -33,4 +34,5 @@ export class TimelineComponent implements OnInit {
   ngOnInit() {
     this.breadCrumbItems = [{ label: 'Utility' }, { label: 'Timeline', active: true }];
   }
+  
 }

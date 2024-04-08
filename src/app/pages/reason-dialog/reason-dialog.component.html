@@ -1,0 +1,17 @@
+<div class="dialog-overlay">
+
+  <div class="dialog-container">
+  
+  <h1 mat-dialog-title>Raison du rejet</h1>
+      <div mat-dialog-content>
+        <p>Veuillez saisir la raison du rejet de l'étudiant :</p>
+        <mat-form-field>
+          <textarea matInput [(ngModel)]="data.reason" placeholder="Raison du rejet"></textarea>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button >Annuler</button>
+        <button mat-button [mat-dialog-close]="data.reason" cdkFocusInitial>Confirmer</button>
+      </div>
+    </div></div>
+    

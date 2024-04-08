@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 
 import { environment } from '../environments/environment';
-
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -36,6 +35,15 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
 import { SendingMailComponent } from './forget-password/sending-mail/sending-mail.component';
 import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
 
+import { StageListComponent } from './stage-list/stage-list.component';
+import { NourComponent } from './pages/nour/nour.component';
+import { UserListComponent } from './pages/user-list/user-list.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CdkStepperModule } from '@angular/cdk/stepper';
+import { NgStepperModule } from 'angular-ng-stepper';
+
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
 } else {
@@ -54,11 +62,26 @@ export function createTranslateLoader(http: HttpClient): any {
     ForgetPasswordComponent,
     SendingMailComponent,
     ChangePasswordComponent,
-    CyptolandingComponent
+    CyptolandingComponent,
+
+  UserListComponent,
+    StageListComponent,
+        NourComponent,
+        //StageListtComponent,
+       // ReasonModalComponent
+        
   ],
+
   imports: [
+    CdkStepperModule,
+    NgStepperModule,
+    FormsModule,
+    ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
+    MatDialogModule,
+    RouterModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {
@@ -81,6 +104,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
+
         tokenGetter: tokenGetter,
         allowedDomains: ["localhost:8081"]
       },
@@ -98,8 +122,10 @@ export function createTranslateLoader(http: HttpClient): any {
     // { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptorService, multi: true },
   ],
 })
-export class AppModule { }
+export class AppModule {
+  
+ }
 
-export function tokenGetter() {
+ export function tokenGetter() {
   return localStorage.getItem("token");
 }
