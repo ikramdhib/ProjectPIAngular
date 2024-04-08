@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { Routes, RouterModule } from "@angular/router";
 
 import { LayoutComponent } from './layouts/layout.component';
 import { CyptolandingComponent } from './cyptolanding/cyptolanding.component';
@@ -12,11 +12,7 @@ import { ChangePasswordComponent } from './forget-password/change-password/chang
 import { AuthorizationGuardsService } from './UserServices/Guards/authorization-guards.service';
 
 
-  import { StageListComponent } from './stage-list/stage-list.component';
-import { StageListtComponent } from './pages/stage-listt/stage-listt.component';
-import { FormModule } from './pages/form/form.module';
-import { MatDialogModule } from '@angular/material/dialog';
-import { CommonModule } from '@angular/common';
+import { StageListComponent } from './stage-list/stage-list.component';
 
 
 
@@ -51,9 +47,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),FormModule],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: "top" })],
+  exports: [RouterModule],
 })
-
-export class AppRoutingModule { 
-}
+export class AppRoutingModule {}

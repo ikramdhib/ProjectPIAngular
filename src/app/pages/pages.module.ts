@@ -47,8 +47,9 @@ import { ForumModule } from './forum/forum.module';
 import { ToastrModule } from 'ngx-toastr';
 import { StageListtComponent } from './stage-listt/stage-listt.component';
 import { ReasonModalComponent } from './reason-modal/reason-modal.component';
+import { GerernoteComponent } from './gerernote/gerernote.component';
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent , StageListtComponent ],
+  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent , StageListtComponent,GerernoteComponent ],
   imports: [
     ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
     MatDialogModule,

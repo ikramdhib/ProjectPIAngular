@@ -1,0 +1,40 @@
+.custom-red {
+    color: #ff0000; /* Remplacez cette valeur par le code couleur de votre choix */
+}
+.btn-red {
+    background-color: #fcd6d6;
+    border-color: #fcd6d6;
+    color: #ff0000;
+}
+
+.btn-red:hover {
+    background-color: #cc0000; /* Couleur de survol rouge plus foncé */
+    border-color: #cc0000; /* Couleur de bordure de survol rouge plus foncé */
+    color: #ffffff; /* Texte en blanc au survol */
+}
+
+.btn-red2 {
+    background-color: #ff0000;
+    border-color: #ff0000;
+    color: #ffffff;
+}
+
+.btn-red2:hover {
+    background-color: #cc0000; /* Couleur de survol rouge plus foncé */
+    border-color: #cc0000; /* Couleur de bordure de survol rouge plus foncé */
+    color: #ffffff; /* Texte en blanc au survol */
+}
+
+.btn-green {
+    background-color: #b1ebbb;
+    border-color: #b1ebbb;
+    color: #1db515;
+}
+.btn-green:hover {
+    background-color: #1db515;
+    border-color: #1db515;
+    color: #ffffff;
+}
+.cdk-step {
+    background-color: #ff0000; /* Couleur du rectangle */
+}
