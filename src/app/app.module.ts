@@ -53,6 +53,9 @@ import { UserListComponent } from './pages/user-list/user-list.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { OffreComponent } from './pages/offrestage/offrestage.component';
+import { ListeoffreencadrantComponent } from './pages/listeoffreencadrant/listeoffreencadrant.component';
+import { ListeoffreetudiantComponent } from './pages/listeoffreetudiant/listeoffreetudiant.component';
 
 
 if (environment.defaultauth === "firebase") {
@@ -80,7 +83,9 @@ export function createTranslateLoader(http: HttpClient): any {
         NourComponent,
         //StageListtComponent,
        // ReasonModalComponent
-        
+    ListeoffreetudiantComponent,
+    OffreComponent,
+    ListeoffreencadrantComponent
   ],
 
   imports: [
@@ -96,6 +101,9 @@ export function createTranslateLoader(http: HttpClient): any {
     NgStepperModule,
     BrowserAnimationsModule,
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
     HttpClientModule,
     TranslateModule.forRoot({
       loader: {

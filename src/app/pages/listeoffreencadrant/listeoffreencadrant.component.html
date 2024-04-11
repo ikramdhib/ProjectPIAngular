@@ -1,0 +1,325 @@
+<div class="container-fluid">
+  
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body border-bottom">
+          <div class="d-flex align-items-center">
+            <h5 class="mb-0 card-title flex-grow-1"> List des offres de stage</h5>
+            <div class="flex-shrink-0 d-flex gap-1">
+              <div class="dropdown d-inline-block" dropdown>
+              
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body border-bottom">
+          <div class="row g-3">
+            <div class="col-xxl-4 col-lg-6">
+            </div>
+          
+           
+            <div class="col-xxl-2 col-lg-4">
+           
+            </div>
+            <div class="col-xxl-2 col-lg-4">
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="table-responsive">
+            <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+              <thead>
+                <tr>
+                
+                  <th scope="col">Nom Entreprise</th>
+                  <th scope="col">Nom Encadrant</th>
+                  <th scope="col">Prénom Encadrant</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Date Début Stage</th>
+                  <th scope="col">Date Fin Stage</th>
+                  <th scope="col">Durée (jours)</th>
+                  <th scope="col">Type</th>
+                  <th scope="col">hashtags</th>
+
+  
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let offre of offres">
+                      <td>{{ offre.nomEntreprise }}</td>
+                      <td>{{ offre.nomEncadrant }}</td>
+                      <td>{{ offre.prenomEncadrant }}</td>
+                      <td>{{ offre.email }}</td>
+                      <td>
+                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="{{ offre.description }}">
+                            {{ offre.description.substring(0, 50) }}{{ offre.description.length > 50 ? '...' : '' }}
+                        </span>
+                    </td>
+                    
+                      <td>{{ offre.datedebut_stage | date: 'shortDate' }}</td>
+                      <td>{{ offre.datefin_stage | date: 'shortDate' }}</td>
+                      <td>{{ offre.duree }}</td>
+                      <td>{{ types[offre.type] }}</td>
+                      <td>{{ offre.hashtags }}</td>
+
+                      <td>
+      
+                    <ul class="list-unstyled hstack gap-1 mb-0">
+                      
+                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                          <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="openUpdateModal(offre)">
+                            <i class="mdi mdi-pencil-outline"></i>
+                          </a>
+                        </li>
+                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger" (click)="deleteOffre(offre)"><i class="mdi mdi-delete-outline"></i></a>
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row justify-content-between align-items-center">
+            <div class="col-auto me-auto">
+            
+            </div>
+            <div class="col-auto">
+              <div class="text-md-right float-md-end pagination-rounded">
+                <ul class="pagination pagination-rounded justify-content-end mb-2">
+              
+                </ul>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #updateContent>
+  <div class="modal-header">
+      <h5 class="modal-title" id="updateModalLabel">Modifier Offre</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
+  </div>
+  <form [formGroup]="updateForm" (ngSubmit)="updateForm.valid && updateOffre()">
+      <div class="modal-body">
+          <div class="mb-3">
+              <label for="nomEntreprise" class="form-label">Nom de l'entreprise</label>
+              <input type="text" class="form-control" id="nomEntreprise" formControlName="nomEntreprise">
+          </div>
+          <div class="mb-3">
+              <label for="nomEncadrant" class="form-label">Nom de l'encadrant</label>
+              <input type="text" class="form-control" id="nomEncadrant" formControlName="nomEncadrant">
+          </div>
+          <div class="mb-3">
+              <label for="prenomEncadrant" class="form-label">Prénom de l'encadrant</label>
+              <input type="text" class="form-control" id="prenomEncadrant" formControlName="prenomEncadrant">
+          </div>
+          <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" formControlName="email">
+          </div>
+          <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea class="form-control" id="description" rows="3" formControlName="description"></textarea>
+          </div>
+          <div class="mb-3">
+              <label for="datedebut_stage" class="form-label">Date de début du stage</label>
+              <input type="date" class="form-control" id="datedebut_stage" formControlName="datedebut_stage">
+          </div>
+          <div class="mb-3">
+              <label for="datefin_stage" class="form-label">Date de fin du stage</label>
+              <input type="date" class="form-control" id="datefin_stage" formControlName="datefin_stage">
+          </div>
+          <div class="mb-3">
+              <label for="type" class="form-label">Type</label>
+              <select class="form-control" id="type" formControlName="type">
+                  <option *ngFor="let type of types | keyvalue" [value]="type.key" [selected]="type.key === updateForm.value.type">{{ type.value }}</option>
+              </select>
+              
+
+          </div>
+          <!-- Ajoutez les autres champs du formulaire ici -->
+              <div class="mb-3">
+                  <label for="duree">Durée du stage (jours)</label>
+                  <input type="text" class="form-control" id="duree" formControlName="duree">
+              </div>
+              <div class="mb-3">
+                <label for="hashtags">hashtags</label>
+                <input type="text" class="form-control" id="hashtags" formControlName="hashtags">
+            </div>
+              
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modalRef?.hide()">Fermer</button>
+          <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+      </div>
+  </form>
+</ng-template>
+
+<!-- View Details Model -->
+<ng-template #ViewContent role="document" let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title mt-0">Order Details</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+  </div>
+  <div class="modal-body">
+    <p class="mb-2">
+      Product id:
+      <span class="text-primary">#SK2540</span>
+    </p>
+    <p class="mb-4">
+      Billing Name:
+      <span class="text-primary">Neal Matthews</span>
+    </p>
+    <div class="table-responsive">
+      <table class="table table-centered table-nowrap">
+      
+        <tbody>
+          <tr>
+            <th scope="row">
+              <div>
+                <img src="assets/images/product/img-7.png" alt class="avatar-sm" />
+              </div>
+            </th>
+            <td>
+              <div>
+                <h5 class="text-truncate font-size-14">Wireless Headphone (Black)</h5>
+                <p class="text-muted mb-0">$ 225 x 1</p>
+              </div>
+            </td>
+            <td>$ 255</td>
+          </tr>
+          <tr>
+            <th scope="row">
+              <div>
+                <img src="assets/images/product/img-4.png" alt class="avatar-sm" />
+              </div>
+            </th>
+            <td>
+              <div>
+                <h5 class="text-truncate font-size-14">Phone patterned cases</h5>
+                <p class="text-muted mb-0">$ 145 x 1</p>
+              </div>
+            </td>
+            <td>$ 145</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h6 class="m-0">Sub Total:</h6>
+            </td>
+            <td>$ 400</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h6 class="m-0">Shipping:</h6>
+            </td>
+            <td>Free</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <h6 class="m-0">Total:</h6>
+            </td>
+            <td>$ 400</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<!-- Order Create Model -->
+<ng-template #content role="document" let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Add Jobs</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal" (click)="modalRef?.hide()"></button>
+  </div>
+  <form (ngSubmit)="saveUser()" [formGroup]="jobListForm">
+    <div class="modal-body">
+      <input type="hidden" name="id" value="" formControlName="ids" />
+      <div class="mb-3">
+        <label for="customername-field" class="form-label">Jobs Title</label>
+        <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required formControlName="title" [ngClass]="{ 'is-invalid': submitted && form['title'].errors }" />
+        <div *ngIf="submitted && form['title'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['title'].errors['required']">Jobs Title is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="customername-field" class="form-label">Company Name</label>
+        <input type="text" id="customername-field" class="form-control" placeholder="Enter Name" required formControlName="name" [ngClass]="{ 'is-invalid': submitted && form['name'].errors }" />
+        <div *ngIf="submitted && form['name'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['name'].errors['required']">Company Name is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="customername-field" class="form-label">Location</label>
+        <input type="text" id="customername-field" class="form-control" placeholder="Enter Location" required formControlName="location" [ngClass]="{ 'is-invalid': submitted && form['location'].errors }" />
+        <div *ngIf="submitted && form['location'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['location'].errors['required']">Location is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="customername-field" class="form-label">Experience</label>
+        <input type="text" id="customername-field" class="form-control" placeholder="Enter Experience" required formControlName="experience" [ngClass]="{ 'is-invalid': submitted && form['experience'].errors }" />
+        <div *ngIf="submitted && form['experience'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['experience'].errors['required']">Experience is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="customername-field" class="form-label">Position</label>
+        <input type="text" id="customername-field" class="form-control" placeholder="Enter Position" required formControlName="position" [ngClass]="{ 'is-invalid': submitted && form['position'].errors }" />
+        <div *ngIf="submitted && form['position'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['position'].errors['required']">Position is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="payment-field" class="form-label">Type</label>
+        <select class="form-control" data-trigger name="payment-method" id="payment-field" formControlName="type" [ngClass]="{ 'is-invalid': submitted && form['type'].errors }">
+          <option value="">Type</option>
+          <option value="Full Time">Full Time</option>
+          <option value="Part Time">Part Time</option>
+        </select>
+        <div *ngIf="submitted && form['type'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['type'].errors['required']">Type is required</div>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="payment-field" class="form-label">Status</label>
+        <select class="form-control" data-trigger name="payment-method" id="payment-field" formControlName="status" [ngClass]="{ 'is-invalid': submitted && form['status'].errors }">
+          <option value="">Status</option>
+          <option value="Active">Active</option>
+          <option value="New">New</option>
+          <option value="Close">Close</option>
+        </select>
+        <div *ngIf="submitted && form['status'].errors" class="invalid-feedback" align="left">
+          <div *ngIf="form['status'].errors['required']">Status is required</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <div class="hstack gap-2 justify-content-end">
+        <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="modal.close('Close click')">Close</button>
+        <button type="submit" class="btn btn-success" id="add-btn">Add Order</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+<!--End Modal -->

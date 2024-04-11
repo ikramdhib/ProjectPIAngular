@@ -1,0 +1,71 @@
+<div class="container mt-4">
+  <h1>Ajouter une offre</h1>
+  <div class="card">
+    <form (ngSubmit)="onSubmit()" #offreForm="ngForm" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="nomEntreprise">Nom de l'entreprise</label>
+            <input type="text" [(ngModel)]="nouvelleOffre.nomEntreprise" class="form-control" id="nomEntreprise" name="nomEntreprise" required>
+          </div>
+          <div class="form-group">
+            <label for="nomEncadrant">Nom de l'encadrant</label>
+            <input type="text" [(ngModel)]="nouvelleOffre.nomEncadrant" class="form-control" id="nomEncadrant" name="nomEncadrant" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" [(ngModel)]="nouvelleOffre.email" class="form-control" id="email" name="email" required>
+          </div>
+          <label for="type">Type de stage</label>
+          <select class="form-control" id="type" [(ngModel)]="nouvelleOffre.type" name="type">
+            <option *ngFor="let type of types | keyvalue" [value]="type.key">{{ type.value }}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="prenomEncadrant">Prénom de l'encadrant</label>
+            <input type="text" [(ngModel)]="nouvelleOffre.prenomEncadrant" class="form-control" id="prenomEncadrant" name="prenomEncadrant" required>
+          </div>
+          <div class="form-group">
+              <label for="logoInput">Logo de l'entreprise</label>
+              <input type="file" (change)="onFileSelected($event)" name="image" accept="image/*">
+              <div *ngIf="imgURL" class="mt-2">
+                  <img [src]="imgURL" class="img-thumbnail logo-image" alt="Logo de l'entreprise">
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="lienLinkedIn">Lien LinkedIn</label>
+            <input type="text" class="form-control" id="lienLinkedIn" [(ngModel)]="nouvelleOffre.lienLinkedIn" name="lienLinkedIn">
+          </div>
+          <div class="form-group">
+            <small class="form-text text-muted">Vous pouvez également exporter une description de stage depuis LinkedIn en spécifiant le lien ci-dessus.</small>
+        </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea [(ngModel)]="nouvelleOffre.description" class="form-control" id="description" name="description" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="datedebut_stage">Date début stage</label>
+            <input type="date" [ngModel]="nouvelleOffre.datedebut_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datedebut_stage = $event" class="form-control" id="datedebut_stage" name="datedebut_stage" required>
+          </div>
+          <div class="form-group">
+            <label for="datefin_stage">Date fin stage</label>
+            <input type="date" [ngModel]="nouvelleOffre.datefin_stage | date: 'yyyy-MM-dd'" (ngModelChange)="nouvelleOffre.datefin_stage = $event" class="form-control" id="datefin_stage" name="datefin_stage" required>
+          </div>
+          <div class="form-group">
+              <label for="duree">Durée du stage ({{calculateDuration()}}jours)</label>
+              <input type="text" class="form-control" id="duree" name="duree" [(ngModel)]="nouvelleOffre.duree" readonly hidden>
+            </div>
+            <div class="form-group">
+              <label for="hashtags">Hashtags(Competences)</label>
+              <input type="text" [(ngModel)]="nouvelleOffre.hashtags" class="form-control" id="hashtags" name="hashtags" placeholder="Séparez les hashtags par des virgules">
+              <small class="form-text text-muted">Séparez les hashtags par des virgules (,)</small>
+            </div>
+
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary mt-4">Ajouter</button>
+    </form>
+  </div>
+</div>

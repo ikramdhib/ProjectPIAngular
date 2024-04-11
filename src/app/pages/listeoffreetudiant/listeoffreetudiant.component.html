@@ -1,0 +1,122 @@
+<div class="container">
+  <!-- Title for the list of available internship offers -->
+  <h1 class="text-center mt-4 mb-5">Liste des offres de stage disponibles</h1>  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="mb-4 entreprise">
+    <div class="card shadow-sm gradient-bg">
+      <div class="card-header bg-danger text-white">
+        <h3 class="mb-0">{{ entreprise.key }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-3">
+            <div class="entreprise-details text-center">
+              <span class="text-muted">
+                <strong class="text-success">{{ entreprise.value.length }}</strong> offres disponibles
+              </span>
+              <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="mt-3 mx-auto d-block img-fluid rounded-circle">
+            </div>
+          </div>
+          <div class="col-md-9">
+            <ul class="list-group list-group-flush">
+              <li *ngFor="let offre of entreprise.value" class="list-group-item">
+                <div class="offre-details">
+                  <!-- Information sur l'offre de stage -->
+                  <div>
+                    <strong>Nom de l'entreprise :</strong> {{ offre.nomEntreprise }}
+                  </div>
+                  <div>
+                    <strong>Description :</strong>
+                    <!-- Description tronquée -->
+                    <div *ngIf="offre.description.length > 100">
+                      {{ offre.description | slice:0:100 }} <!-- Affiche les 100 premiers caractères -->
+                      <span *ngIf="!showFullDescription[offre.id]" class="text-primary" (click)="toggleDescription(offre.id)">
+                        <button class="btn btn-link">Lire la suite</button>
+                      </span>
+                      
+                      <span *ngIf="showFullDescription[offre.id]" class="text-primary" (click)="toggleDescription(offre.id)">Réduire</span>
+                    </div>
+                    <!-- Description complète -->
+                    <div *ngIf="offre.description.length <= 100 || showFullDescription[offre.id]">
+                      {{ offre.description }}
+                    </div>
+                  </div>
+                  <!-- Autres détails de l'offre... -->
+                  <div>
+                    <strong>Nom de l'encadrant :</strong> {{ offre.nomEncadrant }}
+                  </div>
+                  <div>
+                    <strong>Prénom de l'encadrant :</strong> {{ offre.prenomEncadrant }}
+                  </div>
+                  <div>
+                    <strong>Email :</strong> {{ offre.email }}
+                  </div>
+                  <div>
+                    <strong>Date début stage :</strong> {{ offre.datedebut_stage | date: 'dd/MM/yyyy' }}
+                  </div>
+                  <div>
+                    <strong>Date fin stage :</strong> {{ offre.datefin_stage | date: 'dd/MM/yyyy' }}
+                  </div>
+                  <div>
+                    <strong>Durée (jours) :</strong> {{ offre.duree }}
+                  </div>
+                  <div>
+                    <strong>Type de Stage :</strong> {{ offre.type }}
+                  </div>
+                  <div>
+                    <strong>Competence de Stage :</strong> {{ offre.hashtags }}
+
+                    <button class="btn btn-primary mr-2" (click)="likeOffre(offre.id)">
+                      <i class="fas fa-thumbs-up"></i> Like ({{ offre.likes }})
+                    </button>
+                    <button class="btn btn-primary" (click)="dislikeOffre(offre.id)">
+                      <i class="fas fa-thumbs-down"></i> Dislike ({{ offre.dislikes }})
+                    </button>
+                    <button class="btn btn-success mt-3" (click)="applyForOffer(offre.id)">
+                      <i class="fas fa-paper-plane"></i> Postuler
+                    </button>
+                  </div>
+                  <!-- Bouton pour sélectionner l'offre -->
+                  <div *ngIf="selectedOffer === offre" class="mt-3">
+                    <form (ngSubmit)="submitComment()">
+                      <div class="form-group">
+                        <label for="comment">Votre commentaire :</label>
+                        <textarea class="form-control" id="comment" [(ngModel)]="newCommentText" name="comment" rows="3" placeholder="Ajouter un commentaire"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-primary">
+                        <i class="far fa-comment"></i> Poster un commentaire
+                      </button>
+                    </form>
+                  </div>
+                  <!-- Bouton pour sélectionner l'offre et afficher les commentaires -->
+                  <button class="btn btn-primary mt-3" (click)="selectOffer(offre)">
+                    <i class="fas fa-pencil-alt"></i> Sélectionner pour commenter
+                  </button>
+                  <!-- Bouton pour afficher ou masquer les commentaires -->
+                  <button class="btn btn-primary mt-3" (click)="toggleCommentsVisibility()">
+                    <i class="fas fa-comments"></i> {{ showComments ? 'Masquer les commentaires' : 'Afficher les commentaires' }}
+                  </button>
+                  <!-- Section pour afficher les commentaires -->
+                  <div class="mt-3" *ngIf="showComments && selectedOffer === offre">
+                    <h4>Commentaires pour {{ offre.nomEntreprise }}</h4>
+                    <ul class="list-group">
+                      <li *ngFor="let comment of selectedOffer.commentaires" class="list-group-item comment-item">
+                        <div class="d-flex align-items-start">
+                          <div class="user-icon mr-3">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                          </div>
+                          <div class="comment-content">
+                            <p class="mb-1"><strong>{{ comment.user?.firstName }} {{ comment.user?.lastName }}</strong></p>
+                            <p class="mb-0">{{ comment.texte }}</p>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

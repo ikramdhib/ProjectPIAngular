@@ -42,7 +42,6 @@ const routes: Routes = [
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule) },
   {path:'stageList',component:StageListComponent},
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
-
   { path: '**', component: Page404Component },
 ];
 
