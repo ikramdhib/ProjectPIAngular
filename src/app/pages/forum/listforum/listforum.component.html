@@ -13,7 +13,7 @@
     </div>
   
     <!-- end page title -->
-  
+    
     <div class="row" *ngFor="let question of filteredQuestions">
       <div class="col-lg-12">
         <div class="card">
@@ -23,11 +23,13 @@
                 <a class="btn btn-sm btn-link font-size-25 text-center" href="javascript:void(0)">
                   <i class="bx bx-heart" [ngClass]="{'text-danger': isFavorite(question.id)}" style="font-size: large; font-weight: bold;"></i>{{translate}}
                 </a> 
+                
               </div>
               <div class="auth-logo mb-4 col-10">
                 <h2><strong>{{question.titre}}</strong></h2><br>
             </div>
             </div>
+            
             <hr>
             <div class="row" >
               <div class="col-10" style="overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; display: -webkit-box; -webkit-box-orient: vertical;">
@@ -56,5 +58,7 @@
       </div>
     </div>
     <!-- end row -->
+    <li class="previous list-inline-item" aria-disabled="true" style="margin-bottom: 20px; margin-left: 1200px; "><button class="btn btn-primary" (click)="previousPage()" style="background-color: rgb(245, 73, 73);">Previous</button></li>
+    <li class="next list-inline-item" aria-disabled="false" style="margin-bottom: 20px;"><button class="btn btn-primary" (click)="nextPage()" style="background-color: rgb(245, 73, 73);">Next</button></li>
   
   </div> <!-- container-fluid -->

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Historique } from './Historique';
+import { Page } from './Page';
+import { Question } from './Question';
 
 @Injectable({
   providedIn: 'root'
@@ -26,8 +28,8 @@ export class ForumService {
   
   constructor(private httpClient:HttpClient) { 
   }
-  getQuestions(){
-    return this.httpClient.get(this.API_URL+this.ENDPOINT_QUESTIONS)
+  getQuestions(page: number, size: number){
+    return this.httpClient.get<Page<Question>>(`${this.API_URL}/getQuestion?page=${page}&size=${size}`);
   }
   createQuestion(questionData: any) {
     return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_QUESTION, questionData);

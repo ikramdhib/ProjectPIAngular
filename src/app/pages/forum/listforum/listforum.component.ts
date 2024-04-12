@@ -11,6 +11,10 @@ import { Question } from '../Question';
 })
 export class ListforumComponent implements OnInit {
   questions : any[];
+  page: number = 0;
+  size: number= 10;
+  totalPages: number = 0;
+  totalElements: number = 0;
   responseCounts: { [questionId: string]: number } = {};
   breadCrumbItems: Array<{}>;
   filteredQuestions: any[] = []; // Tableau pour les questions filtrées
@@ -24,26 +28,22 @@ export class ListforumComponent implements OnInit {
     ngOnInit(): void {
       
       this.breadCrumbItems = [{ label: 'Question' }, { label: 'All', active: true }];
-      this.forumService.getQuestions().subscribe((datas: Question[]) => { // Utilisez Question[] pour le typage
-        this.questions = datas.map(question => ({
+        this.loadQuestions();
+        
+    }
+    loadQuestions(): void {
+      this.forumService.getQuestions(this.page, this.size).subscribe(data => {
+        this.totalPages = data.totalPages;
+        this.totalElements = data.totalElements;
+        this.questions = data.content.map(question => ({
           ...question,
           content: this.sanitizer.bypassSecurityTrustHtml(question.content)
         }));
         this.filteredQuestions = this.questions;
-        this.loadResponseCounts();
-        
+        this.loadResponseCounts(); 
       }, error => {
         console.error('Erreur lors de la récupération des questions : ', error);
       });
-      this.forumService.getListFavoris(this.userId).subscribe(
-        (favoris) => {
-          this.favoris = favoris;
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des favoris :', error);
-        }
-      );
-      
     }
     loadResponseCounts(): void {
       this.questions.forEach(question => {
@@ -57,6 +57,19 @@ export class ListforumComponent implements OnInit {
           }
         );
       });
+    }
+    nextPage(): void {
+      if (this.page < this.totalPages - 1) {
+        this.page++;
+        this.loadQuestions();
+      }
+    }
+  
+    previousPage(): void {
+      if (this.page > 0) {
+        this.page--;
+        this.loadQuestions();
+      }
     }
     filterQuestions(): void {
       console.log("Filtering with searchTerm:", this.searchTerm);
