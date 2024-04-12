@@ -17,12 +17,14 @@ export class ListeoffreencadrantComponent {
   types = Type;
   modalRef: BsModalRef;
   updateForm: FormGroup;
+  staticUserId: string = '65cbd3246188fc097c303ae0';  // Replace '1234567890' with your static user ID
+
   @ViewChild('updateContent') updateContent: any; // Déclaration de la propriété updateContent de type ViewChild
 
 
 
   constructor(private http: HttpClient, private toastr: ToastrService, private modalService: BsModalService, private fb: FormBuilder) {
-    this.getAllOffres();
+    this.getAllOffresbyuser(this.staticUserId);  // Use the static user ID
     this.initUpdateForm();
   }
 
@@ -78,6 +80,19 @@ export class ListeoffreencadrantComponent {
       );
     }
   }
+  getAllOffresbyuser(userId: string): void {
+    this.http.get(`http://localhost:8081/api/offres/byuser/${userId}`)
+      .subscribe(
+        (resultData: any) => {
+          console.log(resultData);
+          this.offres = resultData;
+        },
+        (error) => {
+          console.error('Une erreur s\'est produite lors de la récupération des offres :', error);
+        }
+      );
+  }
+  
 
   getAllOffres(): void {
     this.http.get('http://localhost:8081/api/offres')
