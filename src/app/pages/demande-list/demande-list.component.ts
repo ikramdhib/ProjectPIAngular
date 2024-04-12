@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DemandeService } from '../demande.service';
+import { DemandeService } from '../../demande.service';
 
 @Component({
   selector: 'app-demande-list',

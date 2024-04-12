@@ -18,8 +18,17 @@ export class StageetudiantComponent {
   startAt: string = "";
   endAt: string = "";
   type: string = "";
+  currentUser:any;
+  userId:any;
 
   constructor(private stageService: StageService) {}
+  ngOnInit() {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    }
+  }
+
 
   // Méthode appelée lors de la soumission du formulaire
   onSubmit(event: Event) {
@@ -44,7 +53,7 @@ export class StageetudiantComponent {
       console.log("JSON Stringify:", JSON.stringify(formData));
 
       // Utilisez le service pour envoyer les données au backend
-      this.stageService.ajouterStage(formData).subscribe((response : any) => {
+      this.stageService.ajouterStage(formData,this.userId).subscribe((response : any) => {
         console.log("Succès de l'ajout du stage");
         // Ajoutez ici d'autres actions si nécessaire
       });

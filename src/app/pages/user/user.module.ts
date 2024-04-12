@@ -9,7 +9,6 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { NgApexchartsModule } from 'ng-apexcharts';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
@@ -18,7 +17,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { WidgetModule } from '../../shared/widget/widget.module';
 import { UIModule } from '../../shared/ui/ui.module';
 import { ContactsRoutingModule } from '../../pages/contacts/contacts-routing.module';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { EditProfileComponent } from './profile/edit-profileEncadrant/edit-profile.component';
@@ -31,18 +30,20 @@ import { ChangePasswordComponent } from './profile/change-password/change-passwo
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { ExtrapagesRoutingModule } from 'src/app/extrapages/extrapages-routing.module';
 import { NgOtpInputModule } from 'ng-otp-input';
-
+import { ListServicestageComponent } from './list-servicestage/list-servicestage.component';
+import { RecaptchaModule } from 'ng-recaptcha';
 @NgModule({
-  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent  ],
+  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent, ListServicestageComponent  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     UserRoutingModule,
-    NgApexchartsModule,
+    NgxPaginationModule,
     NgSelectModule,
     WidgetModule,
     UIModule,
+    RecaptchaModule,
     ContactsRoutingModule,
     ModalModule,
     BsDropdownModule,

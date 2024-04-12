@@ -6,16 +6,7 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <div class="row mb-2">
-              <div class="col-sm-4">
-                <div class="search-box me-2 mb-2 d-inline-block">
-                  <div class="position-relative">
-                    <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
-                    <i class="bx bx-search-alt search-icon"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
+           
             <!-- end row -->
             <div class="table-responsive">
               <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100" id="userList-table">
@@ -33,7 +24,12 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let data of students;let i = index;">
+                  <tr *ngFor="let data of students | paginate : {
+                    id:'server',
+                   itemsPerPage: pageSize,
+                   currentPage: currentPage,
+                   totalItems: totalCount
+                 };let i = index;">
                     <td>
                       <div class="avatar-xs" *ngIf="!data.pic">
                         <span class="avatar-title rounded-circle">
@@ -69,17 +65,18 @@
                     <td>
                       <ul class="list-inline font-size-20 contact-links mb-0">
                         <li class="list-inline-item px-2">
-                          <a href="javascript:void(0);" tooltip="Message"><i class="bx bx-message-square-dots"></i></a>
-                        </li>
-                        <li class="list-inline-item px-2">
                           <a href="javascript:void(0);" tooltip="Profile"><i class="bx bx-user-circle"></i></a>
                         </li>
                         <li class="list-inline-item">
                           <div dropdown class="dropdown">
                             <a dropdownToggle href="javascript: void(0);" class="dropdown-toggle card-drop px-2 show" aria-expanded="true"> <i class="mdi mdi-dots-horizontal font-size-18"></i> </a>
                             <ul *dropdownMenu class="dropdown-menu dropdown-menu-end show" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 31.25px);" placement="bottom-end">
-                              <li><a href="javascript:void(0);" (click)="removeUser(data.id)" class="dropdown-item remove-list" data-remove-id="8">
+                              <li><a href="javascript:void(0);" (click)="editUser(data.id)" class="dropdown-item edit-list" data-edit-id="8"><i class="mdi mdi-pencil font-size-16 text-success me-1"></i> Edit</a></li>
+                              <li><a href="javascript:void(0);" (click)="blockUser(data.id)" class="dropdown-item remove-list" data-remove-id="8">
                                 <i class="bx bxs-no-entry font-size-16 text-danger me-1"></i> Blcok</a></li>
+                                <li><a href="javascript:void(0);" (click)="unblockUser(data.id)" class="dropdown-item remove-list" data-remove-id="8">
+                                  <i class="fas fa-chevron-circle-down font-size-16 text-success me-1"></i> Unblcok</a></li>
+                                <li><a href="javascript:void(0);" (click)="removeUser(data.id)" class="dropdown-item remove-list" data-remove-id="8"><i class="mdi mdi-trash-can font-size-16 text-danger me-1"></i> Delete</a></li>
                             </ul>
                           </div>
                         </li>
@@ -92,8 +89,13 @@
             <div class="row">
               <div class="col-lg-12">
                 <ul class="pagination pagination-rounded justify-content-center mt-4">
-                  <pagination [totalItems]="(total | async)!" [(ngModel)]="service.page">
-                  </pagination>
+                  <pagination-controls 
+                  previousLabel="Prev"
+                  nextLabel="Next"
+                  [responsive]="true"
+                  (pageChange)="pageChanged($event)" id="server"></pagination-controls>
+                <!--  <pagination [totalItems]="(total | async)!" [(ngModel)]="service.page">
+                  </pagination>-->
                 </ul>
               </div>
             </div>
@@ -102,3 +104,124 @@
       </div>
     </div>
   </div>
+
+  <!-- removeItemModal -->
+  <div bsModal #removeItemModal="bs-modal" class="modal fade" id="removeItemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-body px-4 py-5 text-center">
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3"  (click)="removeItemModal.hide()"></button>
+          <div class="avatar-sm mb-4 mx-auto">
+            <div class="avatar-title bg-primary text-primary bg-opacity-10 font-size-20 rounded-3">
+              <i class="mdi mdi-trash-can-outline"></i>
+            </div>
+          </div>
+          <p class="text-muted font-size-16 mb-4">Are you Sure You want to Remove this User ?</p>
+  
+          <div class="hstack gap-2 justify-content-center mb-0">
+            <button type="button" class="btn btn-danger me-1" id="remove-item" (click)="confirmDelete()">Remove Now</button>
+            <button type="button" class="btn btn-secondary" (click)="removeItemModal.hide()">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end removeItemModal -->
+   <!-- Modal -->
+<div bsModal #updateUser="bs-modal" class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateUserLabel">Add Contact</h5>
+        <button type="button" class="btn-close" (click)="updateUser.hide()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="saveUser()" [formGroup]="createContactForm" autocomplete="off" class="needs-validation createContact-form" id="createContact-form" novalidate>
+          <div class="row">
+              <div class="col-lg-6 mb-3">
+                <label for="username-input" class="form-label">First Name</label>
+                <input type="text" id="username-input" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && form.firstName.errors}"  placeholder="Enter first name" formControlName="firstName" />
+                <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+                  <div *ngIf="form.firstName.errors.required">First Name  requis</div>
+              </div>
+              </div>
+              <div class="col-lg-6 mb-3">
+                <label for="designation-input" class="form-label">Last Name</label>
+                <input type="text" id="designation-input" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && form.lastName.errors}"  placeholder="Enter last name" formControlName="lastName"  />
+                <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+                  <div *ngIf="form.lastName.errors.required">Last Name id requis</div>
+              </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-lg-6 mb-3">
+                <label for="email-input" class="form-label">Login</label>
+                <input type="email" id="email-input" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && form.login.errors}" placeholder="Enter login" formControlName="login"  />
+                <div *ngIf="submitted && form.login.errors" class="invalid-feedback">
+                  <div *ngIf="form.login.errors.required">Loginid requis</div>
+              </div>
+              </div>
+              <div class="col-lg-6 mb-3">
+                <label for="email-input" class="form-label">Card ID</label>
+                <input type="email" id="email-input" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && form.cin.errors}"  placeholder="Enter card id" formControlName="cin"  />
+                <div *ngIf="submitted && form.cin.errors" class="invalid-feedback">
+                  <div *ngIf="form.cin.errors.required">Card ID id requis</div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 mb-3">
+                <label for="email-input" class="form-label">Professional email</label>
+                <input type="email" id="email-input" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && form.emailPro.errors}" placeholder="Enter Professional email" formControlName="emailPro"/>
+                <div *ngIf="submitted && form.emailPro.errors" class="invalid-feedback">
+                  <div *ngIf="form.emailPro.errors.required">Professional email requis</div>
+              </div>
+              </div>
+             
+              <div class="col-lg-6 mb-3">
+                <label for="email-input" class="form-label">Company</label>
+                <input type="text" id="email-input" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && form.company.errors}" placeholder="Enter Unversity id" formControlName="company"  />
+                <div *ngIf="submitted && form.company.errors" class="invalid-feedback">
+                  <div *ngIf="form.company.errors.required">company id requis</div>
+              </div>
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 mb-3">
+                <label for="email-input" class="form-label">Address</label>
+                <input type="email" id="email-input" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && form.level.errors}" placeholder="Enter Adress" formControlName="address" />
+                <div *ngIf="submitted && form.address.errors" class="invalid-feedback">
+                  <div *ngIf="form.address.errors.required">Adress requis</div>
+              </div>
+              </div>
+              <div class="col-lg-6 mb-3">
+                <label for="email-input" class="form-label">Phone Number</label>
+                <input type="email" id="email-input" class="form-control" 
+                [ngClass]="{ 'is-invalid': submitted && form.phoneNumber.errors}" placeholder="Enter phone number" formControlName="phoneNumber" />
+                <div *ngIf="submitted && form.phoneNumber.errors" class="invalid-feedback">
+                  <div *ngIf="form.phoneNumber.errors.required">phone Number id requis</div>
+              </div>
+              </div>
+              </div>
+            <div class="col-lg-12">
+              <div class="text-end">
+                <button type="button" class="btn btn-outline-secondary me-1" (click)="updateUser.hide()">Cancel</button>
+                <button type="submit" id="addContact-btn" class="btn btn-success">Add Customer</button>
+              </div>
+            </div>
+        </form>
+      </div>
+      <!-- end modal body -->
+    </div>
+    <!-- end modal-content -->
+  </div>
+  <!-- end modal-dialog -->
+</div>
+<!-- end updateUser -->

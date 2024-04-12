@@ -1,6 +1,6 @@
  import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { DemandeService } from '../demande.service';
+import { DemandeService } from '../../demande.service';
 
 @Component({
   selector: 'app-demande-details',

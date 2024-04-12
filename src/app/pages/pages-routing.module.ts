@@ -20,6 +20,10 @@ import { GerernoteComponent } from "./gerernote/gerernote.component";
 import { OffreComponent } from './offrestage/offrestage.component';
 import { ListeoffreencadrantComponent } from './listeoffreencadrant/listeoffreencadrant.component';
 import { ListeoffreetudiantComponent } from './listeoffreetudiant/listeoffreetudiant.component';
+import { EventSchedulerComponent } from "./event-scheduler/event-scheduler.component";
+import { DemandeListComponent } from "./demande-list/demande-list.component";
+import { DemandeFormComponent } from "./demande-form/demande-form.component";
+import { DemandeDetailsComponent } from "./demande-details/demande-details.component";
 const routes: Routes = [
   // { path: '', redirectTo: 'dashboard' },
   {
@@ -126,6 +130,10 @@ const routes: Routes = [
   {path:'listeencadrant',component:ListeoffreencadrantComponent},
   {path:'listedesoffre',component:ListeoffreetudiantComponent},
 
+  { path: 'calendrier', component: EventSchedulerComponent },
+  { path: 'list-demande', component: DemandeListComponent },
+  { path: 'create-demande/:id', component: DemandeFormComponent },
+  { path: 'demande-details/:id', component: DemandeDetailsComponent },
 
 
   { path: 'dashboards', loadChildren: () => import('./dashboards/dashboards.module').then(m => m.DashboardsModule) },

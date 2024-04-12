@@ -21,18 +21,23 @@ export class ListEtudiantServiceStageComponent {
   selectedStudentTasks: any[] = []; // Initialisez la variable selectedStudentTasks
 
   students: any[] = [];
-  serviceId: string = '65f8536e64a75e5c7ef2c291'; // Remplacez par l'ID réel du service de stage
-
+  serviceId: any; // Remplacez par l'ID réel du service de stage
+  currentUser:any;
+  
   constructor(private studentService: UserServiceService,private http: HttpClient, 
     private toastr: ToastrService ,public dialog: MatDialog,private userList: UserServiceService,
      private router: Router, private journalService: JournaleServiceService
     ,private Stage:StageService) { }
 
   ngOnInit(): void {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.serviceId=this.currentUser.id;
+    
     this.getStudentsByAllStages();
     this.breadCrumbItems = [{ label: 'Icons' }, { label: 'Dripicons', active: true }];
     this.getStagesForUser();
-
+    }
   }
   rejectStudent(studentId: string): void {
     const dialogRef = this.dialog.open(ReasonDialogComponent, {

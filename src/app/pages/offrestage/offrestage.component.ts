@@ -13,27 +13,15 @@ import { LinkedinScraperService } from 'src/app/linkedin-scraper.service';
 export class OffreComponent {
 
   offres: any[] = [];
-  nouvelleOffre: any = {
-    nomEntreprise: '',
-    image: '',
-    nomEncadrant: '',
-    prenomEncadrant: '',
-    email: '',
-    lienLinkedIn: '' ,// Initialisation du champ lienLinkedIn
+  
 
-    description: '',
-    datedebut_stage: this.formatDate(new Date()),
-    datefin_stage: this.formatDate(new Date()),
-    type: 'FORMATION_HUMAINE_SOCIALE,IMMERSION_ENTREPRISE,INGENIEUR',
-    duree: 0,
-    hashtags: []
-
-  };
-
+  userId:any;
+  currentUser:any;
   dureeN: any;
   currentOffreID = '';
   imgURL: any;
   types = Type;
+  nouvelleOffre: any 
   uploadAdapter: any;
   hashtagsInput: string = '';
   lienLinkedIn: string = 'https://www.linkedin.com/jobs/view/3841933311/?alternateChannel=search%26refId=doprx7B3yldvImXbgmgZLA%3D%3D%26trackingId=qw2XB2WC3nfCt9pXoQk8Hg%3D%3D';
@@ -42,7 +30,30 @@ export class OffreComponent {
     this.uploadAdapter = new MyUploadAdapter(http);
     this.getAllOffres();
   }
+  ngOnInit() {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    
 
+   this.nouvelleOffre= {
+      nomEntreprise: this.currentUser.company,
+      image: '',
+      nomEncadrant: this.currentUser.firstName,
+      prenomEncadrant: this.currentUser.lastName,
+      email: this.currentUser.emailPro,
+      lienLinkedIn: '' ,// Initialisation du champ lienLinkedIn
+  
+      description: '',
+      datedebut_stage: this.formatDate(new Date()),
+      datefin_stage: this.formatDate(new Date()),
+      type: 'FORMATION_HUMAINE_SOCIALE,IMMERSION_ENTREPRISE,INGENIEUR',
+      duree: 0,
+      hashtags: []
+  
+    };
+  }
+  }
  
   
 
@@ -118,7 +129,7 @@ addOffre() {
     formData.append('prenomEncadrant', this.nouvelleOffre.prenomEncadrant);
     formData.append('email', this.nouvelleOffre.email);
     formData.append('description', this.nouvelleOffre.description);
-    formData.append('userId', '65cbd3246188fc097c303ae0');
+    formData.append('userId', this.userId);
     formData.append('datedebut_stage', this.nouvelleOffre.datedebut_stage);
     formData.append('datefin_stage', this.nouvelleOffre.datefin_stage);
     formData.append('type', this.nouvelleOffre.type);

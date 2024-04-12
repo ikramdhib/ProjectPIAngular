@@ -32,14 +32,14 @@ export class ProcessusstageetudiantComponent implements OnInit {
   form: FormGroup;
 
   stages: any[] = [];
-  userId: string = "65d7b036577f851e1873aa10"; // Remplacez par l'ID de l'utilisateur
+  userId: any; // Remplacez par l'ID de l'utilisateur
 
   currentStage: any; // Variable pour stocker le stage actuelle en cours de modification
   currentTache: any;
 
   modalRef: BsModalRef;
   modalRef2: BsModalRef;
-
+  currentUser:any;
   updateForm: FormGroup;
   updateFormTache: FormGroup;
 
@@ -47,6 +47,10 @@ export class ProcessusstageetudiantComponent implements OnInit {
   @ViewChild("updateContent2") updateContent2: any;
 
   ngOnInit(): void {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    }
     this.breadCrumbItems = [
       { label: "Forms" },
       { label: "Form File Upload", active: true },
@@ -423,9 +427,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
   // affichage de demande de stage
 
   afficherDemandeDeStage() {
-    const userId = "65d7b036577f851e1873aa10"; // Remplacez par l'id de l'utilisateur que vous souhaitez récupérer
-
-    this.demandeService.getUserById(userId).subscribe(
+    this.demandeService.getUserById(this.userId).subscribe(
       (data) => {
         this.utilisateurData = data;
         this.construireDemandeDeStageContent();
@@ -591,7 +593,7 @@ export class ProcessusstageetudiantComponent implements OnInit {
         this.toastr.success("Stage ajoutée avec succès", "Succès");
         this.clearForm();
         // Utilisez le service pour envoyer les données au backend
-        this.stageService.ajouterStage(formData).subscribe((response: any) => {
+        this.stageService.ajouterStage(formData, this.userId).subscribe((response: any) => {
           console.log("Succès de l'ajout du stage");
         });
       } catch (error) {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { DemandeService } from '../demande.service';
+import { DemandeService } from '../../demande.service';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -19,7 +20,8 @@ export class DemandeFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private demandeService: DemandeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
 
   ) {
     this.demandeForm = this.formBuilder.group({
@@ -33,11 +35,17 @@ export class DemandeFormComponent implements OnInit {
       offre: [''],
     });
   }
+
+  idOffre:any;
 get f(){
   
   return this.demandeForm.controls}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.idOffre = params['id'];
+    });
+  }
 
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
@@ -56,7 +64,7 @@ get f(){
       ] as File;
     }
   }
-  idOffre="661457f6b232bd2bed7b2813";
+
   test !:boolean
   submitDemande() {
     if (this.demandeForm.valid) {

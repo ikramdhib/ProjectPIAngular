@@ -21,7 +21,6 @@ import { UIModule } from '../shared/ui/ui.module';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 import { PagesRoutingModule } from './pages-routing.module';
-
 import { DashboardsModule } from './dashboards/dashboards.module';
 import { EcommerceModule } from './ecommerce/ecommerce.module';
 import { CryptoModule } from './crypto/crypto.module';

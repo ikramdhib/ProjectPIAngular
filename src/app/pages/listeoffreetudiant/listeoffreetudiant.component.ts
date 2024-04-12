@@ -20,7 +20,7 @@ export class ListeoffreetudiantComponent implements OnInit {
   showQuestions: boolean = true;
   offresRecommandees: Offre[] = [];
   reponses: any = {};
-  userId: string = '65c3d6f5e969ef6cc82524c0';
+  userId:any;
   reaction: string = '';
   nouveauCommentaireTexte: string = '';
   newComment: string = '';
@@ -32,10 +32,14 @@ export class ListeoffreetudiantComponent implements OnInit {
   dislikes:number|null;
   userReactions: { [offreId: string]: 'like' | 'dislike' } = {};
   trouverOffreParId: any;
-
+  currentUser:any;
 
   constructor(private http: HttpClient, private commentaireService: CommentServiceService,private toastr: ToastrService) { }
   ngOnInit(): void {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    }
     this.getOffresByEntreprise();
     this.loadComments();
     this.newCommentText = ''; // Réinitialiser le champ de saisie après l'ajout d'un commentaire

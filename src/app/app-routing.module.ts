@@ -11,15 +11,14 @@ import { SendingMailComponent } from './forget-password/sending-mail/sending-mai
 import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
 import { AuthorizationGuardsService } from './UserServices/Guards/authorization-guards.service';
 
-
 import { StageListComponent } from './stage-list/stage-list.component';
 
 
 
-import { DemandeListComponent } from './demande-list/demande-list.component';
-import { DemandeDetailsComponent } from './demande-details/demande-details.component';
-import { DemandeFormComponent } from './demande-form/demande-form.component';
-import { EventSchedulerComponent } from "./event-scheduler/event-scheduler.component";
+import { DemandeListComponent } from './pages/demande-list/demande-list.component';
+import { DemandeDetailsComponent } from './pages/demande-details/demande-details.component';
+import { DemandeFormComponent } from './pages/demande-form/demande-form.component';
+import { EventSchedulerComponent } from "./pages/event-scheduler/event-scheduler.component";
 
 const routes: Routes = [
   { path: 'authentication', component:AuthenticationComponent},
@@ -45,10 +44,6 @@ const routes: Routes = [
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule) },
   {path:'stageList',component:StageListComponent},
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
-  { path: 'calendrier', component: EventSchedulerComponent },
-  { path: 'list-demande', component: DemandeListComponent },
-  { path: 'create-demande', component: DemandeFormComponent },
-  { path: 'demande-details/:id', component: DemandeDetailsComponent },
   { path: '**', component: Page404Component },
   { path: '', component: DemandeListComponent },
   

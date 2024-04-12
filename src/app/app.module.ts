@@ -56,19 +56,21 @@ import { CommonModule } from '@angular/common';
 import { OffreComponent } from './pages/offrestage/offrestage.component';
 import { ListeoffreencadrantComponent } from './pages/listeoffreencadrant/listeoffreencadrant.component';
 import { ListeoffreetudiantComponent } from './pages/listeoffreetudiant/listeoffreetudiant.component';
-import { DemandeListComponent } from './demande-list/demande-list.component';
-import { DemandeDetailsComponent } from './demande-details/demande-details.component';
-import { DemandeFormComponent } from './demande-form/demande-form.component';
+import { DemandeListComponent } from './pages/demande-list/demande-list.component';
+import { DemandeDetailsComponent } from './pages/demande-details/demande-details.component';
+import { DemandeFormComponent } from './pages/demande-form/demande-form.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { EventSchedulerComponent } from './event-scheduler/event-scheduler.component';
+import { EventSchedulerComponent } from './pages/event-scheduler/event-scheduler.component';
 import { CalendarModule } from 'primeng/calendar';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component'; // Import MatDialogModule
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { RecaptchaModule } from 'ng-recaptcha';
 
 
 if (environment.defaultauth === "firebase") {
@@ -114,6 +116,7 @@ export function createTranslateLoader(http: HttpClient): any {
     MatDialogModule,
     RouterModule,
     FormsModule,
+    RecaptchaModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule, // Add ReactiveFormsModule here
@@ -122,6 +125,8 @@ export function createTranslateLoader(http: HttpClient): any {
     NgStepperModule,
     BrowserAnimationsModule,
     CommonModule,
+    NgxPaginationModule,
+    NgApexchartsModule,
     CalendarModule,
     FormsModule,
     ReactiveFormsModule,

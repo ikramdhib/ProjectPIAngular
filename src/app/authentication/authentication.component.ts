@@ -20,7 +20,7 @@ export class AuthenticationComponent  implements OnInit {
   submitted:any = false;
   returnUrl: string;
   isError :boolean=false;
-
+  isHumen=true;
   changeType : boolean=true;
 
   viewPasswor(){
@@ -29,16 +29,20 @@ export class AuthenticationComponent  implements OnInit {
 
   // set the currenr year
   year: number = new Date().getFullYear();
-
+  captcha: string; 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
     });
 
-   
-
   }
+
+  resolved(captchaResponse: string) {
+    this.captcha = captchaResponse;
+    this.isHumen=false;
+}
+
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 

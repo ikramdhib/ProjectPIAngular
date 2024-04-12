@@ -2,19 +2,19 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title mb-4">Basic Wizard</h4>
+        <h4 class="card-title mb-4">Complete the stages of the internship</h4>
         <div id="basic-example">
           <ng-stepper #cdkStepper [linear]="true" class="wizard">
 
             <cdk-step [optional]="false">
               <ng-template cdkStepLabel>
                 <span class="number">1.</span>
-                <span >Demande de stage</span>
+                <span >Internship Application</span>
               </ng-template>
               <section *ngIf="cdkStepper.selectedIndex === 0" id="contenuPdf">
                 <div>
-                  <button (click)="afficherDemandeDeStage()" class="btn btn-red2">Demande de stage</button>
-                  <button *ngIf="demandeDeStageContent" (click)="telechargerPDF()" class="btn btn-success">Télécharger</button>
+                  <button (click)="afficherDemandeDeStage()" class="btn btn-danger mt-4">Internship Application</button>
+                  <button *ngIf="demandeDeStageContent" (click)="telechargerPDF()" class="btn btn-success">Download</button>
                   
                 </div>
                 <div *ngIf="demandeDeStageContent" [innerHTML]="demandeDeStageContent"></div>
@@ -25,13 +25,13 @@
             <cdk-step [optional]="true">
               <ng-template cdkStepLabel>
                 <span class="number">2.</span>
-                <span>Détails de stage</span>
+                <span>Internship details</span>
               </ng-template>
               <section *ngIf="cdkStepper.selectedIndex === 1">
                 <form (ngSubmit)="onSubmit()" [formGroup]="stageForm">
                     <div class="mb-3 row">
                       <label for="formrow-firstname-input" class="col-md-2 col-form-label"
-                        >Nom de société</label
+                        >Company name</label
                       >
                       <div class="col-md-10">
                       <input
@@ -41,14 +41,14 @@
                         formControlName="nomSociete"
                       />
                       <div *ngIf="stageForm.get('nomSociete').hasError('required') && stageForm.get('nomSociete').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                       </div>
                     </div>
         
                     <div class="mb-3 row">
                       <label for="formrow-tel-input" class="col-md-2 col-form-label"
-                        >Numéro de tel</label
+                        >Phone number</label
                       >
                       <div class="col-md-10">
                       <input
@@ -58,17 +58,17 @@
                         formControlName="numSociete"
                       />
                       <div *ngIf="stageForm.get('numSociete').hasError('required') && stageForm.get('numSociete').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                       <div *ngIf="stageForm.get('numSociete').hasError('numeric') && stageForm.get('numSociete').touched">
-                        Veuillez saisir un numéro valide.
+                        Please enter a valid number.
                       </div>
                       </div>
                     </div>
         
                     <div class="mb-3 row">
                       <label for="formrow-email-input" class="col-md-2 col-form-label"
-                        >Email de société</label
+                        >Company email</label
                           >
                       <div class="col-md-10">
                       <input
@@ -78,16 +78,16 @@
                         formControlName="emailSociete"
                       />
                       <div *ngIf="stageForm.get('emailSociete').hasError('required') && stageForm.get('emailSociete').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                       <div *ngIf="stageForm.get('emailSociete').hasError('email') && stageForm.get('emailSociete').touched">
-                        Veuillez saisir une adresse email valide.
+                        Please enter a valid email address.
                       </div>
                       </div>
                     </div>
                     <div class="mb-3 row">
                       <label for="formrow-nom-encadrant-input" class="col-md-2 col-form-label"
-                        >Nom de l'encadrant</label
+                        >Supervisor's last name</label
                       >
                       <div class="col-md-10">
                       <input
@@ -97,13 +97,13 @@
                         formControlName="nomCoach"
                       />
                       <div *ngIf="stageForm.get('nomCoach').hasError('required') && stageForm.get('nomCoach').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                       </div>
                     </div>
                     <div class="mb-3 row">
                       <label for="formrow-prenom-encadrant-input" class="col-md-2 col-form-label"
-                        >Prénom de l'encadrant</label
+                        >Supervisor's first name</label
                       >
                       <div class="col-md-10">
                       <input
@@ -113,14 +113,14 @@
                         formControlName="prenomCoach"
                       />
                       <div *ngIf="stageForm.get('prenomCoach').hasError('required') && stageForm.get('prenomCoach').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                       </div>
                     </div>
         
                     <div class="mb-3 row">
                       <label for="formrow-tel-input2" class="col-md-2 col-form-label"
-                        >Numéro tel encadrant</label
+                        >Supervisor's phone number</label
                       >
                       <div class="col-md-10">
                       <input
@@ -130,16 +130,16 @@
                         formControlName="numCoach"
                       />
                       <div *ngIf="stageForm.get('numCoach').hasError('required') && stageForm.get('numCoach').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                       <div *ngIf="stageForm.get('numCoach').hasError('numeric') && stageForm.get('numCoach').touched">
-                        Veuillez saisir un numéro valide.
+                        Please enter a valid number.
                       </div>
                       </div>
                     </div>
                     <div class="mb-3 row">
                       <label for="formrow-email-input2" class="col-md-2 col-form-label"
-                        >Email de l'encadrant</label
+                        >Supervisor's email</label
                       >
                       <div class="col-md-10">
                         <input
@@ -149,16 +149,16 @@
                           formControlName="emailCoach"
                         />
                         <div *ngIf="stageForm.get('emailCoach').hasError('required') && stageForm.get('emailCoach').touched">
-                          Ce champ est requis.
+                         required
                         </div>
                         <div *ngIf="stageForm.get('emailCoach').hasError('email') && stageForm.get('emailCoach').touched">
-                          Veuillez saisir une adresse email valide.
+                          Please enter a valid email address.
                         </div>
                       </div>
                     </div>
                     <div class="mb-3 row">
                       <label for="example-date-input" class="col-md-2 col-form-label"
-                        >Date début</label
+                        >Start date</label
                       >
                       <div class="col-md-10">
                         <input
@@ -168,14 +168,14 @@
                           formControlName="startAt"
                         />
                         <div *ngIf="stageForm.get('startAt').hasError('required') && stageForm.get('startAt').touched">
-                          Ce champ est requis.
+                          required
                         </div>
                       </div>
                     </div>
         
                     <div class="mb-3 row">
                       <label for="example-date-input2" class="col-md-2 col-form-label"
-                        >Date fin</label
+                        >End date   </label
                       >
                       <div class="col-md-10">
                         <input
@@ -185,7 +185,7 @@
                           formControlName="endAt"
                         />
                         <div *ngIf="stageForm.get('endAt').hasError('required') && stageForm.get('endAt').touched">
-                          Ce champ est requis.
+                          required
                         </div>
                         
                       </div>
@@ -201,7 +201,7 @@
                           <option>NON_OBLIGATOIRE</option>
                         </select>
                         <div *ngIf="stageForm.get('type').hasError('required') && stageForm.get('type').touched">
-                          Ce champ est requis.
+                          required
                         </div>
                       </div>
                     </div>
@@ -228,15 +228,15 @@
                                 <thead>
                                   <tr>
                                   
-                                    <th scope="col">Nom Entreprise</th>
-                                    <th scope="col">Numéro Entreprise</th>
-                                    <th scope="col">Email Entreprise</th>
-                                    <th scope="col">Nom Encadrant</th>
-                                    <th scope="col">Prenom Encadrant</th>
-                                    <th scope="col">Numéro Encadrant</th>
-                                    <th scope="col">Email Encadrant</th>
-                                    <th scope="col">Date début</th>
-                                    <th scope="col">Date fin</th>
+                                    <th scope="col">Company name</th>
+                                    <th scope="col">Compny's phone number</th>
+                                    <th scope="col">Company's email</th>
+                                    <th scope="col">Supervisor's last name</th>
+                                    <th scope="col">Supervisor's first name</th>
+                                    <th scope="col">Supervisor's phone number</th>
+                                    <th scope="col">Supervisor's email</th>
+                                    <th scope="col">Start date</th>
+                                    <th scope="col">End Date</th>
                                     <th scope="col">Type</th>
                                     <th scope="col">Action</th>                  
                                   </tr>
@@ -295,84 +295,84 @@
                 
                   <ng-template #updateContent>
                     <div class="modal-header">
-                        <h5 class="modal-title" id="updateModalLabel">Modifier Stage</h5>
+                        <h5 class="modal-title" id="updateModalLabel">Update intership</h5>
                         <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()"></button>
                     </div>
                     <form [formGroup]="updateForm" (ngSubmit)="updateForm.valid && updateStage()">
                         <div class="modal-body">
                             <div class="mb-3">
-                                <label for="nomSociete" class="form-label">Nom de l'entreprise</label>
+                                <label for="nomSociete" class="form-label">Company name</label>
                                 <input type="text" class="form-control" id="nomSociete" formControlName="nomSociete">
                             </div>
                             <div *ngIf="updateForm.get('nomSociete').hasError('required') && updateForm.get('nomSociete').touched">
                               Ce champ est requis.
                             </div>
                             <div class="mb-3">
-                                <label for="numSociete" class="form-label">Numéro Entreprise</label>
+                                <label for="numSociete" class="form-label">Company's phone number</label>
                                 <input type="text" class="form-control" id="numSociete" formControlName="numSociete">
                                 <div *ngIf="updateForm.get('numSociete').hasError('required') && updateForm.get('numSociete').touched">
-                                  Ce champ est requis.
+                                  required
                                 </div>
                                 <div *ngIf="updateForm.get('numSociete').hasError('numeric') && updateForm.get('numSociete').touched">
-                                  Veuillez saisir un numéro valide.
+                                  Please enter a valid number.
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="emailSociete" class="form-label">Email Entreprise</label>
+                                <label for="emailSociete" class="form-label">Company's email</label>
                                 <input type="email" class="form-control" id="emailSociete" formControlName="emailSociete">
                                 <div *ngIf="updateForm.get('emailSociete').hasError('required') && updateForm.get('emailSociete').touched">
-                                  Ce champ est requis.
+                                  required
                                 </div>
                                 <div *ngIf="updateForm.get('emailSociete').hasError('email') && updateForm.get('emailSociete').touched">
-                                  Veuillez saisir une adresse email valide.
+                                  Please enter a valid email address.
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="nomCoach" class="form-label">Nom Encadrant</label>
+                                <label for="nomCoach" class="form-label">Supervisor's last name</label>
                                 <input type="text" class="form-control" id="nomCoach" formControlName="nomCoach">
                                 <div *ngIf="updateForm.get('nomCoach').hasError('required') && updateForm.get('nomCoach').touched">
-                                  Ce champ est requis.
+                                  required
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="prenomCoach" class="form-label">Prénom Encadrant</label>
+                                <label for="prenomCoach" class="form-label">Supervisor's first name</label>
                                 <input type="text" class="form-control" id="prenomCoach" formControlName="prenomCoach">
                                 <div *ngIf="updateForm.get('prenomCoach').hasError('required') && updateForm.get('prenomCoach').touched">
-                                  Ce champ est requis.
+                                  required
                                 </div>
                             </div>
                             <div class="mb-3">
-                              <label for="numCoach" class="form-label">Numéro Encadrant</label>
+                              <label for="numCoach" class="form-label">Supervisor's phone number</label>
                               <input type="text" class="form-control" id="numCoach"formControlName="numCoach">
                               <div *ngIf="updateForm.get('numCoach').hasError('required') && updateForm.get('numCoach').touched">
-                                Ce champ est requis.
+                                required
                               </div>
                               <div *ngIf="updateForm.get('numCoach').hasError('numeric') && updateForm.get('numCoach').touched">
-                                Veuillez saisir un numéro valide.
+                                Please enter a valid number.
                               </div>
                             </div>
                             <div class="mb-3">
-                              <label for="emailCoach" class="form-label">Email Encadrant</label>
+                              <label for="emailCoach" class="form-label">Supervisor's email</label>
                               <input type="text" class="form-control" id="emailCoach"formControlName="emailCoach">
                               <div *ngIf="updateForm.get('emailCoach').hasError('required') && updateForm.get('emailCoach').touched">
-                                Ce champ est requis.
+                                required
                               </div>
                               <div *ngIf="updateForm.get('emailCoach').hasError('email') && updateForm.get('emailCoach').touched">
-                                Veuillez saisir une adresse email valide.
+                                Please enter a valid email address.
                               </div>
                             </div>
                             <div class="mb-3">
-                                <label for="startAt" class="form-label">Date de début du stage</label>
+                                <label for="startAt" class="form-label">Internship start date</label>
                                 <input type="date" class="form-control" id="startAt" formControlName="startAt">
                                 <div *ngIf="updateForm.get('startAt').hasError('required') && updateForm.get('startAt').touched">
-                                  Ce champ est requis.
+                                 required
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="endAt" class="form-label">Date de fin du stage</label>
+                                <label for="endAt" class="form-label">End date of the internship</label>
                                 <input type="date" class="form-control" id="endAt" formControlName="endAt">
                                 <div *ngIf="updateForm.get('endAt').hasError('required') && updateForm.get('endAt').touched">
-                                  Ce champ est requis.
+                                 required
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -385,7 +385,7 @@
                                   <option>NON_OBLIGATOIRE</option>
                                 </select>
                                 <div *ngIf="updateForm.get('type').hasError('required') && updateForm.get('type').touched">
-                                  Ce champ est requis.
+                                  required
                                 </div>
                               </div>
                             </div>  
@@ -403,7 +403,7 @@
             <cdk-step [optional]="true">
               <ng-template cdkStepLabel>
                 <span class="number">3.</span>
-                <span>Remplir votre journal</span>
+                <span>Fill out your journal</span>
               </ng-template>
               <section *ngIf="cdkStepper.selectedIndex === 2">
                 <div class="card-body"> 
@@ -412,10 +412,10 @@
                       <thead>
                         <tr>
                         
-                          <th scope="col">Nom Entreprise</th>
-                          <th scope="col">Nom Encadrant</th>
-                          <th scope="col">Date début</th>
-                          <th scope="col">Date fin</th>
+                          <th scope="col">Comany's name</th>
+                          <th scope="col">Supervisor's name</th>
+                          <th scope="col">Start date</th>
+                          <th scope="col">End date</th>
                           <th scope="col">Type</th>
                           <th scope="col">Actions</th>
                         </tr>
@@ -431,7 +431,7 @@
                               <ul class="list-unstyled hstack gap-1 mb-0">
                               <li data-bs-toggle="tooltip" data-bs-placement="top" title="Ajouter journal">
                                 <button  class="btn btn-sm btn-red" (click)="addJournal(stage)">
-                                  Ajouter journal
+                                 Add journal
                                 </button>
                               </li>
                               <li data-bs-toggle="tooltip" data-bs-placement="top" title="{{ showTacheFormMap[stage.id] ? 'Masquer tâche' : 'Ajouter tâche' }}">
@@ -441,7 +441,7 @@
                               </li>
                               <li data-bs-toggle="tooltip" data-bs-placement="top" title="Afficher tàches">
                                 <button  class="btn btn-sm btn-red" (click)="showTaches(stage.journal.id)" >
-                                  Afficher tàches
+                                  Show tasks
                                 </button>
                               </li>                        
                             </ul>
@@ -466,12 +466,12 @@
                         />
                       </div>
                       <div *ngIf="tacheForm.get('date').hasError('required') && tacheForm.get('date').touched">
-                        Ce champ est requis.
+                        required
                       </div>
                     </div>
                     <div class="mb-3 row">
                       <label for="libelle" class="col-md-2 col-form-label"
-                        >Tache </label
+                        >Task </label
                       >
                       <div class="col-md-10">
                         <textarea
@@ -482,7 +482,7 @@
                         ></textarea>
                       </div>
                       <div *ngIf="tacheForm.get('libelle').hasError('required') && tacheForm.get('libelle').touched">
-                        Ce champ est requis.
+                       required
                       </div>
                     </div>
                     <div>
@@ -492,13 +492,13 @@
                 </div>
                 <section *ngIf="taches.length > 0">
                 <div class="card-body">
-                  <h4>Liste des tàches :</h4>
+                  <h4>To do-list :                  </h4>
                   <div class="table-responsive">
                     <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
                       <thead>
                         <tr>                            
-                          <th scope="col">Date Tàche</th>
-                          <th scope="col">Contenu Tàche</th>             
+                          <th scope="col">Date Task</th>
+                          <th scope="col">Task Content</th>             
                         </tr>
                       </thead>
                       <tbody>
@@ -534,18 +534,18 @@
                 <form [formGroup]="updateFormTache" (ngSubmit)="updateFormTache.valid && updateTache()">
                     <div class="modal-body">
                         <div class="mb-3">
-                            <label for="date" class="form-label">Date Tàche</label>
+                            <label for="date" class="form-label">Date Task</label>
                             <input type="date" class="form-control" id="date" formControlName="date">
                             <div *ngIf="updateFormTache.get('date').hasError('required') && updateFormTache.get('date').touched">
-                              Ce champ est requis.
+                             required
                             </div>
                         </div>
                         <div class="mb-3">
-                          <label for="libelle" class="form-label">Contenu Tàche</label>
+                          <label for="libelle" class="form-label">Task Content</label>
                           <textarea type="text" class="form-control" id="libelle" formControlName="libelle"></textarea>
                       </div>
                       <div *ngIf="updateFormTache.get('libelle').hasError('required') && updateFormTache.get('libelle').touched">
-                        Ce champ est requis.
+                     required
                       </div> 
                     </div>
                     <div class="modal-footer">
@@ -560,7 +560,7 @@
             <cdk-step [optional]="true">
               <ng-template cdkStepLabel>
                 <span class="number">4.</span>
-                <span>Déposer votre rapport</span>
+                <span>Submit your report</span>
               </ng-template>
               <section *ngIf="cdkStepper.selectedIndex === 3" >
               <div class="table-responsive">
@@ -568,10 +568,10 @@
                   <thead>
                     <tr>
                     
-                      <th scope="col">Nom Entreprise</th>
-                      <th scope="col">Nom Encadrant</th>
-                      <th scope="col">Date début</th>
-                      <th scope="col">Date fin</th>
+                      <th scope="col">Comany's name</th>
+                      <th scope="col">Supervisor's name</th>
+                      <th scope="col">Start date</th>
+                      <th scope="col">End date</th>
                       <th scope="col">Type</th>
                       <th scope="col">Actions</th>
                     </tr>
@@ -599,18 +599,17 @@
             <cdk-step [optional]="true">
               <ng-template cdkStepLabel>
                 <span class="number">5.</span>
-                <span>Télécharger l'attestation</span>
+                <span>Download the certificate</span>
               </ng-template>
               <section *ngIf="cdkStepper.selectedIndex === 4" >
                 <div class="table-responsive">
                   <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
                     <thead>
                       <tr>
-                      
-                        <th scope="col">Nom Entreprise</th>
-                        <th scope="col">Nom Encadrant</th>
-                        <th scope="col">Date début</th>
-                        <th scope="col">Date fin</th>
+                        <th scope="col">Comany's name</th>
+                        <th scope="col">Supervisor's name</th>
+                        <th scope="col">Start date</th>
+                        <th scope="col">End date</th>
                         <th scope="col">Type</th>
                         <th scope="col">Actions</th>
                       </tr>

@@ -15,14 +15,14 @@ export class GerernoteComponent implements OnInit {
 
   // Propriétés pour stocker les IDs de l'étudiant et de l'encadrant
   studentId: string = '';
-  encadrantId: string = '';
+  encadrantId: any;
 
   motivationNote: string = ''; // Par défaut, aucune note n'est sélectionnée
   techniqueNote: string = '';
   communicationNote: string = '';
   apprentissageNote: string = '';
   professionnalismeNote: string = '';
-
+  currentUser:any;
 
   // Fonctions pour gérer la sélection d'une note pour chaque critère
   handleMotivationSelection(note: string) {
@@ -50,8 +50,10 @@ export class GerernoteComponent implements OnInit {
   notes: any[] = [];
 
   ngOnInit(): void {
-    const encadrantId = '66128f263b2bf916525d6e66';
-    this.userService.getStudentsBySupervisor(encadrantId).subscribe(
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.encadrantId=this.currentUser.id;
+    this.userService.getStudentsBySupervisor(this.encadrantId).subscribe(
       students => {
         this.students = students;
       },
@@ -59,6 +61,7 @@ export class GerernoteComponent implements OnInit {
         console.error('Error fetching students:', error);
       }
     );
+  }
 
   }
 
@@ -82,7 +85,7 @@ showGrilleTable(studentId: string): void {
     // Assigner l'ID de l'étudiant à la propriété du composant
     this.studentId = studentId;
     // Assigner l'ID de l'encadrant (votre propre ID par exemple)
-    this.encadrantId = '66128f263b2bf916525d6e66';
+    
 }
 
 showAppreciationNoteSection: boolean = false;

@@ -14,7 +14,6 @@ import { RightsidebarComponent } from './rightsidebar/rightsidebar.component';
 import { HorizontalComponent } from './horizontal/horizontal.component';
 import { VerticalComponent } from './vertical/vertical.component';
 import { HorizontaltopbarComponent } from './horizontaltopbar/horizontaltopbar.component';
-import { LanguageService } from '../core/services/language.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -28,6 +27,6 @@ import { TranslateModule } from '@ngx-translate/core';
     UIModule,
     SimplebarAngularModule
   ],
-  providers: [LanguageService]
+  providers: []
 })
 export class LayoutsModule { }

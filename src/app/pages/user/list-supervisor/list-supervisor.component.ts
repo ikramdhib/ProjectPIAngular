@@ -1,21 +1,19 @@
 import { Component, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Observable } from 'rxjs';
-import { userListModel } from '../list-students/userlist.model';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { NgbdUserListSortableHeader } from '../list-students/userlist-sortable.directive';
 import { BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { UsersListService } from 'src/app/UserServices/UsersList/usersServiceservice';
-import { userListService } from '../list-students/userlist.service';
-import { userList } from '../list-students/data';
 import { DecimalPipe } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-list-supervisor',
   templateUrl: './list-supervisor.component.html',
   styleUrls: ['./list-supervisor.component.scss'],
-  providers: [userListService, DecimalPipe]
+  providers: [DecimalPipe]
 })
 export class ListSupervisorComponent {
    // bread crumb items
@@ -29,11 +27,15 @@ export class ListSupervisorComponent {
    submitted = false;
    contacts: any;
    files: File[] = [];
-
+   userId:any;
+   user:any;
+   totalCount: number = 0;
+   pageSize: number = 5;
+   currentPage: number = 1;
+   API_RL=environment.API_URL;
    students:any;
  
-   @ViewChildren(NgbdUserListSortableHeader) headers!: QueryList<NgbdUserListSortableHeader>;
-   @ViewChild('newContactModal', { static: false }) newContactModal?: ModalDirective;
+   @ViewChild('updateUser', { static: false }) updateUser?: ModalDirective;
    @ViewChild('removeItemModal', { static: false }) removeItemModal?: ModalDirective;
    deleteId: any;
  
@@ -42,111 +44,144 @@ export class ListSupervisorComponent {
    constructor(private modalService: BsModalService, 
      public userServiseStudents : UsersListService,
      public toastr:ToastrService, 
-     public service: userListService, 
      public router : Router,
+     private http:HttpClient ,
      private formBuilder: UntypedFormBuilder) {
      
      }
  
    ngOnInit() {
      this.breadCrumbItems = [{ label: 'Contacts' }, { label: 'Users List', active: true }];
- 
-     setTimeout(() => {
 
-       this.userServiseStudents.getAllSupervisor().subscribe({
-         next :(res:any)=>{
-           this.students=res;
-           console.log(this.students.length,"tttttttttttttttttttt")
-         }
-       })
-     }, 1200);
+     this.loadUsers();
  
      this.createContactForm = this.formBuilder.group({
-       id: [''],
-       name: ['', [Validators.required]],
-       email: ['', [Validators.required]],
-       position: ['', [Validators.required]],
-       tags: ['', [Validators.required]],
-       img: ['', [Validators.required]],
-     })
+      firstName: ['',[Validators.required]],
+      lastName: ['', [Validators.required]],
+      login: ['', [Validators.required]],
+      cin: ['', [Validators.required]],
+      phoneNumber: ['', [Validators.required]],
+      address: ['', [Validators.required]],
+      company: ['', [Validators.required]],
+      emailPro: ['', [Validators.required]],
+    })
    }
+
+   loadUsers(){
+    this.http.get(`${this.API_RL}api/v1/user/users/ENCADRANT`,{
+      params: {
+        page: (this.currentPage - 1),
+        size: this.pageSize
+      }
+    }).subscribe({
+      next :(res:any)=>{
+        this.students=res.content;
+        this.totalCount = res.totalCount;
+      }
+    });
+  }
+
  
-   // File Upload
-   imageURL: string | undefined;
-   fileChange(event: any) {
-     let fileList: any = (event.target as HTMLInputElement);
-     let file: File = fileList.files[0];
-     const reader = new FileReader();
-     reader.onload = () => {
-       this.imageURL = reader.result as string;
-       document.querySelectorAll('#member-img').forEach((element: any) => {
-         element.src = this.imageURL;
-       });
-       this.createContactForm.controls['img'].setValue(this.imageURL);
-     }
-     reader.readAsDataURL(file)
-   }
+   pageChanged(event: any): void {
+    console.log(this.currentPage,"@@@@@@@@@@");
+    this.currentPage = event;
+    console.log(event,"@@@@@@@@@@");
+    this.loadUsers();
+  }
  
-   // Save User
-   saveUser() {
-     if (this.createContactForm.valid) {
-       if (this.createContactForm.get('id')?.value) {
-         this.service.products = userList.map((data: { id: any; }) => data.id === this.createContactForm.get('id')?.value ? { ...data, ...this.createContactForm.value } : data)
-       }
-       else {
-         const name = this.createContactForm.get('name')?.value;
-         const email = this.createContactForm.get('email')?.value;
-         const position = this.createContactForm.get('position')?.value;
-         const tags = this.createContactForm.get('tags')?.value;
-         userList.push({
-           id: userList.length + 1,
-           profile: this.imageURL,
-           name,
-           email,
-           position,
-           tags,
-           project: "136",
-           isSelected: false
-         })
-       }
-       this.createContactForm.reset();
-       this.newContactModal.hide()
-     }
-   }
+     // Save User
+     saveUser() {
+      this.submitted=true;
+      if (this.createContactForm.valid) {
+        const formData = new FormData();
+      formData.append('phoneNumber', this.form.phoneNumber.value);
+      formData.append('firstName', this.form.firstName.value);
+      formData.append('lastName', this.form.lastName.value);
+      formData.append('address', this.form.address.value);
+      formData.append('company', this.form.company.value);
+      formData.append('cin', this.form.cin.value);
+      formData.append('emailPro', this.form.emailPro.value);
+
+     this.userServiseStudents.updateUser(this.userId,formData).subscribe({
+      error:()=>{
+        this.toastr.warning('Something went wrong', 'WARNING');
+      },
+          complete:()=>{
+        this.createContactForm.reset();
+        this.updateUser.hide()
+        window.location.reload();
+        this.toastr.success('Student deleted with success', 'SUCCESS');
+          }
+        })
+      
+      }
+    }
  
    // Edit User
    editUser(id: any) {
-     this.submitted = false;
-     this.newContactModal.show();
+    this.submitted = false;
+    this.userId=id;
+    this.userServiseStudents.getUser(id).subscribe({
+      next:(res:any)=>{
+        this.user=res;
+      },
+      complete:()=>{
+        this.updateUser.show();
+
+        var modelTitle = document.querySelector('.modal-title') as HTMLAreaElement;
+        modelTitle.innerHTML = 'Edit Profile';
+        var updateBtn = document.getElementById('addContact-btn') as HTMLAreaElement;
+        updateBtn.innerHTML = "Update";
+    
+        this.createContactForm.controls['firstName'].setValue(this.user.firstName);
+        this.createContactForm.controls['lastName'].setValue(this.user.lastName);
+        this.createContactForm.controls['login'].setValue(this.user.login);
+        this.createContactForm.controls['phoneNumber'].setValue(this.user.phoneNumber);
+        this.createContactForm.controls['cin'].setValue(this.user.cin);
+        this.createContactForm.controls['address'].setValue(this.user.address);
+        this.createContactForm.controls['company'].setValue(this.user.company);
+        this.createContactForm.controls['emailPro'].setValue(this.user.emailPro);
+        
+      }
+    })
+   
+  }
  
-     var modelTitle = document.querySelector('.modal-title') as HTMLAreaElement;
-     modelTitle.innerHTML = 'Edit Profile';
-     var updateBtn = document.getElementById('addContact-btn') as HTMLAreaElement;
-     updateBtn.innerHTML = "Update";
- 
-     var listData = this.contacts[id];
- 
-     this.createContactForm.controls['id'].setValue(listData.id);
-     this.createContactForm.controls['name'].setValue(listData.name);
-     this.createContactForm.controls['email'].setValue(listData.email);
-     this.createContactForm.controls['position'].setValue(listData.position);
-     this.createContactForm.controls['tags'].setValue(listData.tags);
-     this.createContactForm.controls['img'].setValue(listData.profile);
-   }
- 
-   // Delete User
-   removeUser(id: any) {
+
+   blockUser(id: any) {
     this.userServiseStudents.blockUser(id).subscribe({
       complete:()=>{
-        this.toastr.success('Student added with success','SUCCESS');
+        this.toastr.success('Supervisor BLOCKED with success','SUCCESS');
         window.location.reload();
       }
     })
    }
+   unblockUser(id: any) {
+    this.userServiseStudents.unblockUser(id).subscribe({
+      complete:()=>{
+        this.toastr.success('Supervisor UnBLOCKED with success','SUCCESS');
+        window.location.reload();
+      }
+    })
+   }
+   get form() {
+    return this.createContactForm.controls;
+  }
+
+   // Delete User
+   removeUser(id: any) {
+    this.deleteId=id
+    this.removeItemModal.show();
+   }
  
    confirmDelete() {
-     userList.splice(this.deleteId, 1);
-     this.removeItemModal.hide();
-   }
+    console.log('this user is ',this.deleteId);
+      this.userServiseStudents.deleteUser(this.deleteId).subscribe({
+        complete:()=>{
+          this.removeItemModal.hide();
+          window.location.reload();
+        }
+      })
+    }
 
 }

@@ -4,11 +4,11 @@
         <thead>
           <tr>
           
-            <th scope="col">Nom_Etudiant</th>
-            <th scope="col">Prenom_Etudiant</th>
-            <th scope="col">Taches</th>
-            <th scope="col">Rapport</th>
-            <th scope="col">Attestation</th>
+            <th scope="col">Student last name</th>
+            <th scope="col">Student first name</th>
+            <th scope="col">Tasks</th>
+            <th scope="col">Report</th>
+            <th scope="col">Certificate</th>
             <th scope="col">&nbsp;&nbsp;Action</th>
           </tr>
         </thead>
@@ -54,7 +54,7 @@
     
     <!-- Zone pour afficher les tâches de l'étudiant sélectionné -->
     <div *ngIf="selectedStudentTasks.length > 0">
-      <h4>Tâches de l'étudiant</h4>
+      <h4>Student Tasks</h4>
       <ul>
         <li *ngFor="let task of selectedStudentTasks">{{ task.libelle }}</li>
       </ul>

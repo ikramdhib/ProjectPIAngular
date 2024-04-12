@@ -16,11 +16,11 @@ export class StageService {
     }),
   };
   // Exemple de méthode pour envoyer les données au backend
-  ajouterStage(data: any): Observable<any> {
+  ajouterStage(data: any, userId:any): Observable<any> {
     // Ajoutez des en-têtes pour gérer CORS
 
     return this.http.post(
-      `http://localhost:8081/ajouterEtAffecterStageAUtilisateur/65d7b036577f851e1873aa10`,
+      `http://localhost:8081/ajouterEtAffecterStageAUtilisateur/${userId}`,
       data,
       this.httpOptions
     ).pipe(

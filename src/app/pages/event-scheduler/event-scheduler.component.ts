@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
+import { AddEventDialogComponent } from '../../add-event-dialog/add-event-dialog.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CalendarOptions } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
-import { SchedulerEvent } from '../models/event';
-import { EventService } from '../services/event.service';
+import { SchedulerEvent } from '../../models/event';
+import { EventService } from '../../services/event.service';
 
 @Component({
   selector: 'app-event-scheduler',

@@ -57,6 +57,20 @@ export class UsersListService {
     blockUser(id:string){
       return this.http.put(`${this.API_RL}api/v1/user/blockUser/${id}`,null);
     }
+    unblockUser(id:string){
+      return this.http.put(`${this.API_RL}api/v1/user/deblockUser/${id}`,null);
+    }
 
-
+    deleteUser(id:String){
+      return this.http.delete(`${this.API_RL}api/v1/user/deleteUser/${id}`);
+    }
+    getAllServicesstage(){
+      return this.http.get(`${this.API_RL}api/v1/user/users/SERVICE_STAGE`,this.httpOptions);
+    }
+    addIntershipServiceUser(request:any){
+      return this.http.post(`${this.API_RL}api/v1/user/addServiceStage`,request,this.httpOptions);
+    }
+    updateIntershipService(id:String, request:any){
+      return this.http.put(`${this.API_RL}api/v1/user/updateService/${id}`,request);
+    }
 }

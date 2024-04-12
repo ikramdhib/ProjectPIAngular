@@ -25,11 +25,14 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // default settings
-    this.layoutType = LAYOUT_VERTICAL;
+
+    setTimeout(() => {
+      this.layoutType = LAYOUT_VERTICAL;
     this.layoutwidth = LAYOUT_WIDTH;
     this.topbar = TOPBAR;
     this.mode = LAYOUT_MODE;
     this.sidebartype = SIDEBAR_TYPE;
+    }, 2000); // Délai de 2000 millisecondes (2 secondes)
 
     // document.body.setAttribute('data-bs-theme', this.mode);
 
@@ -118,7 +121,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
       case "colored":
         document.body.classList.remove('sidebar-enable');
         document.body.classList.remove('vertical-collpsed');
-        document.body.setAttribute('data-sidebar', 'colored');
+        document.body.setAttribute('data-sidebar', 'red');
         document.body.removeAttribute('data-layout-size');
         document.body.removeAttribute('data-keep-enlarged');
         document.body.removeAttribute('data-topbar');
@@ -126,7 +129,7 @@ export class LayoutComponent implements OnInit, AfterViewInit {
         document.body.removeAttribute('data-sidebar-size');
         break;
       default:
-        document.body.setAttribute('data-sidebar', 'dark');
+        document.body.setAttribute('data-sidebar', 'red');
         break;
     }
   }

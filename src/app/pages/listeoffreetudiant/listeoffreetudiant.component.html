@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Title for the list of available internship offers -->
-  <h1 class="text-center mt-4 mb-5">Liste des offres de stage disponibles</h1>  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="mb-4 entreprise">
+  <h1 class="text-center mt-4 mb-5">List of available internship offers</h1>  <div *ngFor="let entreprise of offresByEntreprise | keyvalue" class="mb-4 entreprise">
     <div class="card shadow-sm gradient-bg">
       <div class="card-header bg-danger text-white">
         <h3 class="mb-0">{{ entreprise.key }}</h3>
@@ -10,7 +10,7 @@
           <div class="col-md-3">
             <div class="entreprise-details text-center">
               <span class="text-muted">
-                <strong class="text-success">{{ entreprise.value.length }}</strong> offres disponibles
+                <strong class="text-success">{{ entreprise.value.length }}</strong> offers available
               </span>
               <img [src]="entreprise.value[0]?.image" alt="Logo entreprise" class="mt-3 mx-auto d-block img-fluid rounded-circle">
             </div>
@@ -21,7 +21,7 @@
                 <div class="offre-details">
                   <!-- Information sur l'offre de stage -->
                   <div>
-                    <strong>Nom de l'entreprise :</strong> {{ offre.nomEntreprise }}
+                    <strong> Company name</strong> {{ offre.nomEntreprise }}
                   </div>
                   <div>
                     <strong>Description :</strong>
@@ -41,28 +41,28 @@
                   </div>
                   <!-- Autres détails de l'offre... -->
                   <div>
-                    <strong>Nom de l'encadrant :</strong> {{ offre.nomEncadrant }}
+                    <strong>Supervisor last name :</strong> {{ offre.nomEncadrant }}
                   </div>
                   <div>
-                    <strong>Prénom de l'encadrant :</strong> {{ offre.prenomEncadrant }}
+                    <strong>Supervisor first name:</strong> {{ offre.prenomEncadrant }}
                   </div>
                   <div>
                     <strong>Email :</strong> {{ offre.email }}
                   </div>
                   <div>
-                    <strong>Date début stage :</strong> {{ offre.datedebut_stage | date: 'dd/MM/yyyy' }}
+                    <strong>Internship start date:</strong> {{ offre.datedebut_stage | date: 'dd/MM/yyyy' }}
                   </div>
                   <div>
-                    <strong>Date fin stage :</strong> {{ offre.datefin_stage | date: 'dd/MM/yyyy' }}
+                    <strong>Internship end date:</strong> {{ offre.datefin_stage | date: 'dd/MM/yyyy' }}
                   </div>
                   <div>
-                    <strong>Durée (jours) :</strong> {{ offre.duree }}
+                    <strong>Duration (days):</strong> {{ offre.duree }}
                   </div>
                   <div>
-                    <strong>Type de Stage :</strong> {{ offre.type }}
+                    <strong>Type of Internship:</strong> {{ offre.type }}
                   </div>
                   <div>
-                    <strong>Competence de Stage :</strong> {{ offre.hashtags }}
+                    <strong>Internship Skill:</strong> {{ offre.hashtags }}
 
                     <button class="btn btn-primary mr-2" (click)="likeOffre(offre.id)">
                       <i class="fas fa-thumbs-up"></i> Like ({{ offre.likes }})
@@ -70,25 +70,25 @@
                     <button class="btn btn-primary" (click)="dislikeOffre(offre.id)">
                       <i class="fas fa-thumbs-down"></i> Dislike ({{ offre.dislikes }})
                     </button>
-                    <button class="btn btn-success mt-3" (click)="applyForOffer(offre.id)">
-                      <i class="fas fa-paper-plane"></i> Postuler
+                    <button class="btn btn-success mt-3" [routerLink]="['/create-demande', offre.id]">
+                      <i class="fas fa-paper-plane"></i> Apply
                     </button>
                   </div>
                   <!-- Bouton pour sélectionner l'offre -->
                   <div *ngIf="selectedOffer === offre" class="mt-3">
                     <form (ngSubmit)="submitComment()">
                       <div class="form-group">
-                        <label for="comment">Votre commentaire :</label>
+                        <label for="comment">Your comment :</label>
                         <textarea class="form-control" id="comment" [(ngModel)]="newCommentText" name="comment" rows="3" placeholder="Ajouter un commentaire"></textarea>
                       </div>
                       <button type="submit" class="btn btn-primary">
-                        <i class="far fa-comment"></i> Poster un commentaire
+                        <i class="far fa-comment"></i> Post a comment
                       </button>
                     </form>
                   </div>
                   <!-- Bouton pour sélectionner l'offre et afficher les commentaires -->
                   <button class="btn btn-primary mt-3" (click)="selectOffer(offre)">
-                    <i class="fas fa-pencil-alt"></i> Sélectionner pour commenter
+                    <i class="fas fa-pencil-alt"></i> Select to comment
                   </button>
                   <!-- Bouton pour afficher ou masquer les commentaires -->
                   <button class="btn btn-primary mt-3" (click)="toggleCommentsVisibility()">

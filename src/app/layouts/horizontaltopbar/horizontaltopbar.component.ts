@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { LanguageService } from '../../core/services/language.service';
 
 import { EventService } from '../../core/services/event.service';
 import { AuthenticationService } from '../../core/services/auth.service';
@@ -43,7 +42,6 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   // tslint:disable-next-line: max-line-length
   constructor(@Inject(DOCUMENT) private document: any, private router: Router, private eventService: EventService, private authService: AuthenticationService,
     private authFackservice: AuthfakeauthenticationService,
-    public languageService: LanguageService,
     // tslint:disable-next-line: variable-name
     public _cookiesService: CookieService) {
     router.events.subscribe(event => {
@@ -66,13 +64,6 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     } else {
       this.flagvalue = val.map(element => element.flag);
     }
-  }
-
-  setLanguage(text: string, lang: string, flag: string) {
-    this.countryName = text;
-    this.flagvalue = flag;
-    this.cookieValue = lang;
-    this.languageService.setLanguage(lang);
   }
 
   /**

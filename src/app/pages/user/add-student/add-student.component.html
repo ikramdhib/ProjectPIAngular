@@ -39,7 +39,7 @@
                  <div class="mb-3">
                      <label for="firstName">First name</label>
                         <input type="text" class="form-control" id="email" formControlName="firstName" 
-                        [ngClass]="{ 'is-invalid': submit && form.firstName.errors}" placeholder="Entre votre email">
+                        [ngClass]="{ 'is-invalid': submit && form.firstName.errors}" placeholder="Enter first name">
                         <div *ngIf="submit && form.firstName.errors" class="invalid-feedback">
                           <div *ngIf="form.firstName.errors.required">First Name requis</div>
                           <div *ngIf="form.firstName.errors.pattern">First Name must be with letters only</div>
@@ -50,7 +50,7 @@
                 <div class="mb-3">
                   <label for="lastName">Last name</label>
                      <input type="text" class="form-control" id="email" formControlName="lastName" 
-                     [ngClass]="{ 'is-invalid': submit && form.lastName.errors}" placeholder="Entre votre email">
+                     [ngClass]="{ 'is-invalid': submit && form.lastName.errors}" placeholder="Enter last name">
                      <div *ngIf="submit && form.lastName.errors" class="invalid-feedback">
                       <div *ngIf="form.lastName.errors.required">Last Name requis</div>
                       <div *ngIf="form.lastName.errors.pattern">Last Name must be with letters only</div>
@@ -61,7 +61,7 @@
                 <div class="mb-3">
                   <label for="unId">University ID</label>
                      <input type="text" class="form-control" id="email" formControlName="unId" 
-                     [ngClass]="{ 'is-invalid': submit && form.unId.errors}" placeholder="Entre votre email">
+                     [ngClass]="{ 'is-invalid': submit && form.unId.errors}" placeholder="Enter university ID">
                      <div *ngIf="submit && form.unId.errors" class="invalid-feedback">
                       <div *ngIf="form.unId.errors.required">University ID requis</div>
                       <div *ngIf="form.unId.errors.maxlength || form.unId.errors.minlength">University ID  must be between 8 and 12 letters or numbers </div>
@@ -75,7 +75,7 @@
                   <div class="mb-3">
                     <label for="phoneNumber">Phone Number</label>
                        <input type="text" class="form-control" id="email" formControlName="phoneNumber" 
-                       [ngClass]="{ 'is-invalid': submit && form.phoneNumber.errors}" placeholder="Entre votre email">
+                       [ngClass]="{ 'is-invalid': submit && form.phoneNumber.errors}" placeholder="Enter phone number">
                        <div *ngIf="submit && form.phoneNumber.errors" class="invalid-feedback">
                         <div *ngIf="form.phoneNumber.errors.required">Phone Number requis</div>
                         <div *ngIf="form.phoneNumber.errors.pattern">Phone Number must be with Numbers only</div>
@@ -88,7 +88,7 @@
                     <div class="mb-3">
                       <label for="cin">Card ID</label>
                          <input type="text" class="form-control" id="email" formControlName="cin" 
-                         [ngClass]="{ 'is-invalid': submit && form.cin.errors}" placeholder="Entre votre email">
+                         [ngClass]="{ 'is-invalid': submit && form.cin.errors}" placeholder="Enter card ID">
                          <div *ngIf="submit && form.cin.errors" class="invalid-feedback">
                           <div *ngIf="form.cin.errors.pattern">Card ID must be with Numbers only</div>
                           <div *ngIf="form.cin.errors.required">Card ID requis</div>
@@ -101,7 +101,7 @@
                       <div class="mb-3">
                         <label for="login">Login</label>
                            <input type="email" class="form-control" id="email" formControlName="login" 
-                           [ngClass]="{ 'is-invalid': submit && form.login.errors}" placeholder="Entre votre email">
+                           [ngClass]="{ 'is-invalid': submit && form.login.errors}" placeholder="Enter login">
                            <div *ngIf="submit && form.login.errors" class="invalid-feedback">
                             <div *ngIf="form.login.errors.required">Login requis</div>
                             <div *ngIf="form.login.errors.maxlength">Very long for an Login</div>
@@ -115,7 +115,7 @@
                   <div class="mb-3">
                     <label for="address">Address</label>
                        <input type="text" class="form-control" id="email" formControlName="address" 
-                       [ngClass]="{ 'is-invalid': submit && form.address.errors}" placeholder="Entre votre email">
+                       [ngClass]="{ 'is-invalid': submit && form.address.errors}" placeholder="Enter address">
                        <div *ngIf="submit && form.address.errors" class="invalid-feedback">
                         <div *ngIf="form.address.errors.required">Address requis</div>
                         <div *ngIf="form.address.errors.pattern">Address must be with letters only</div>
