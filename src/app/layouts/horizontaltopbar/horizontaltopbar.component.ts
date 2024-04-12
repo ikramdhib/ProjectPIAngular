@@ -29,6 +29,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   flagvalue:any;
   countryName:any;
   valueset:any;
+  currentUser:any;
 
   menuItems: MenuItem[] = [];
 
@@ -56,7 +57,10 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.element = document.documentElement;
 
-    this.initialize();
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.initialize(this.currentUser.role);
+    }
 
     this.cookieValue = this._cookiesService.get('lang');
     const val = this.listLang.filter(x => x.lang === this.cookieValue);
@@ -256,8 +260,8 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
   /**
    * Initialize
    */
-  initialize(): void {
-    this.menuItems = MENU;
+  initialize(userRole:any): void {
+    this.menuItems = MENU.filter(item => item.role && item.role.includes(userRole));
   }
 
   /**

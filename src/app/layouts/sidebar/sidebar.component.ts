@@ -40,13 +40,17 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
-    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    setTimeout(() => {
+      this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
   if(this.currentUser){
-    this.userRole=this.currentUser.role;
-  }
-    this.initialize();
+    this.initialize(this.currentUser.role);
     this._scrollElement();
   }
+    }, 2000); // Délai de 2000 millisecondes (2 secondes)
+  }
+
+   
+  
 
   ngAfterViewInit() {
     this.menu = new MetisMenu(this.sideMenu.nativeElement);
@@ -144,8 +148,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   /**
    * Initialize
    */
-  initialize(): void {
-    this.menuItems = MENU;
+  initialize(userRole:any): void {
+    this.menuItems = MENU.filter(item => item.role && item.role.includes(userRole));
   }
 
   /**
@@ -156,7 +160,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
     return item.subItems !== undefined ? item.subItems.length > 0 : false;
   }
 
-  isDisabled(data:any[]):boolean{
+  /*isDisabled(data:any[]):boolean{
     if(data.includes(this.userRole)){
       return true ;
     }
@@ -164,5 +168,5 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
       return false
     }
     
-  }
+  }*/
 }

@@ -25,11 +25,17 @@ export class LayoutComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // default settings
-    this.layoutType = LAYOUT_VERTICAL;
+
+    setTimeout(() => {
+      this.layoutType = LAYOUT_VERTICAL;
     this.layoutwidth = LAYOUT_WIDTH;
     this.topbar = TOPBAR;
     this.mode = LAYOUT_MODE;
     this.sidebartype = SIDEBAR_TYPE;
+    }, 2000); // Délai de 2000 millisecondes (2 secondes)
+  
+
+   
 
     // document.body.setAttribute('data-bs-theme', this.mode);
 
