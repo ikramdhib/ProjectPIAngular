@@ -35,7 +35,6 @@ import { SendingMailComponent } from './forget-password/sending-mail/sending-mai
 import { ChangePasswordComponent } from './forget-password/change-password/change-password.component';
 import { RecaptchaModule } from 'ng-recaptcha';
 
-
 if (environment.defaultauth === 'firebase') {
   initFirebaseBackend(environment.firebaseConfig);
 } else {
