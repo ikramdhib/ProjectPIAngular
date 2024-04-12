@@ -16,6 +16,11 @@ import { StageListComponent } from './stage-list/stage-list.component';
 
 
 
+import { DemandeListComponent } from './demande-list/demande-list.component';
+import { DemandeDetailsComponent } from './demande-details/demande-details.component';
+import { DemandeFormComponent } from './demande-form/demande-form.component';
+import { EventSchedulerComponent } from "./event-scheduler/event-scheduler.component";
+
 const routes: Routes = [
   { path: 'authentication', component:AuthenticationComponent},
   { path: 'forgetPassword', component:ForgetPasswordComponent},
@@ -37,12 +42,16 @@ const routes: Routes = [
     roles:['SERVICE_STAGE' ,'CHEF_DEPARTEMENT' , 'ENCADRANT','ETUDIANT']
   }  },
   { path: 'crypto-ico-landing', component: CyptolandingComponent ,canActivate: [AuthenticationGuardsService] },
-  { path: '**', component: Page404Component ,canActivate: [AuthenticationGuardsService]},
-  { path: '', component: LayoutComponent, loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
   { path: 'pages', loadChildren: () => import('./extrapages/extrapages.module').then(m => m.ExtrapagesModule) },
   {path:'stageList',component:StageListComponent},
   { path: 'crypto-ico-landing', component: CyptolandingComponent },
+  { path: 'calendrier', component: EventSchedulerComponent },
+  { path: 'list-demande', component: DemandeListComponent },
+  { path: 'create-demande', component: DemandeFormComponent },
+  { path: 'demande-details/:id', component: DemandeDetailsComponent },
   { path: '**', component: Page404Component },
+  { path: '', component: DemandeListComponent },
+  
 ];
 
 @NgModule({

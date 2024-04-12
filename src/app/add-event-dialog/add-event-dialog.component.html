@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>Ajouter un nouvel événement</h1>
+
+<div mat-dialog-content>
+  <!-- Formulaire pour ajouter un nouvel événement -->
+  <form [formGroup]="eventForm" (ngSubmit)="onSaveClick()">
+    <!-- Champ pour le titre de l'événement -->
+    <mat-form-field appearance="fill">
+      <mat-label>Titre</mat-label>
+      <input matInput formControlName="text" required>
+    </mat-form-field>
+
+    <!-- Champ pour la date de début -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date de début</mat-label>
+      <input matInput type="date" formControlName="start_date" required>
+    </mat-form-field>
+
+    <!-- Champ pour la date de fin -->
+    <mat-form-field appearance="fill">
+      <mat-label>Date de fin</mat-label>
+      <input matInput type="date" formControlName="end_date" required>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions>
+  <!-- Bouton pour annuler et fermer la boîte de dialogue -->
+  <button mat-button (click)="onCancelClick()">Annuler</button>
+  
+  <!-- Bouton pour sauvegarder l'événement et fermer la boîte de dialogue -->
+  <button mat-button color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()">Sauvegarder</button>
+</div>

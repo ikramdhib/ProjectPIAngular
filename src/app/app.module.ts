@@ -56,6 +56,19 @@ import { CommonModule } from '@angular/common';
 import { OffreComponent } from './pages/offrestage/offrestage.component';
 import { ListeoffreencadrantComponent } from './pages/listeoffreencadrant/listeoffreencadrant.component';
 import { ListeoffreetudiantComponent } from './pages/listeoffreetudiant/listeoffreetudiant.component';
+import { DemandeListComponent } from './demande-list/demande-list.component';
+import { DemandeDetailsComponent } from './demande-details/demande-details.component';
+import { DemandeFormComponent } from './demande-form/demande-form.component';
+
+
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { EventSchedulerComponent } from './event-scheduler/event-scheduler.component';
+import { CalendarModule } from 'primeng/calendar';
+import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component'; // Import MatDialogModule
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 if (environment.defaultauth === "firebase") {
@@ -79,13 +92,18 @@ export function createTranslateLoader(http: HttpClient): any {
     CyptolandingComponent,
     AppComponent, CyptolandingComponent, StageetudiantComponent, ProcessusstageetudiantComponent,
   UserListComponent,
+  AddEventDialogComponent,
     StageListComponent,
         NourComponent,
         //StageListtComponent,
        // ReasonModalComponent
     ListeoffreetudiantComponent,
     OffreComponent,
-    ListeoffreencadrantComponent
+    ListeoffreencadrantComponent,
+    DemandeListComponent,
+    DemandeDetailsComponent,
+    DemandeFormComponent,
+    EventSchedulerComponent
   ],
 
   imports: [
@@ -96,11 +114,15 @@ export function createTranslateLoader(http: HttpClient): any {
     MatDialogModule,
     RouterModule,
     FormsModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule, // Add ReactiveFormsModule here
     BrowserModule,
     CdkStepperModule,
     NgStepperModule,
     BrowserAnimationsModule,
     CommonModule,
+    CalendarModule,
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
@@ -113,6 +135,7 @@ export function createTranslateLoader(http: HttpClient): any {
       },
     }),
     LayoutsModule,
+    MatFormFieldModule,
     AppRoutingModule,
     ExtrapagesModule,
     FormsModule,
@@ -124,6 +147,7 @@ export function createTranslateLoader(http: HttpClient): any {
     ScrollToModule.forRoot(),
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    FullCalendarModule,
     JwtModule.forRoot({
       config: {
 
@@ -145,6 +169,11 @@ export function createTranslateLoader(http: HttpClient): any {
   ],
 })
 export class AppModule {
+
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin]
+  };
   
  }
 
