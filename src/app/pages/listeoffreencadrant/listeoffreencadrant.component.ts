@@ -19,11 +19,19 @@ export class ListeoffreencadrantComponent {
   updateForm: FormGroup;
   @ViewChild('updateContent') updateContent: any; // Déclaration de la propriété updateContent de type ViewChild
 
-
+  staticUserId:any;
+  currentUser:any;
 
   constructor(private http: HttpClient, private toastr: ToastrService, private modalService: BsModalService, private fb: FormBuilder) {
-    this.getAllOffres();
+     
     this.initUpdateForm();
+  }
+  ngOnInit() {
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.staticUserId=this.currentUser.id;
+      this.getAllOffresbyuser(this.staticUserId);
+    }
   }
 
   initUpdateForm() {
@@ -77,6 +85,19 @@ export class ListeoffreencadrantComponent {
         }
       );
     }
+  }
+
+  getAllOffresbyuser(userId: string): void {
+    this.http.get(`http://localhost:8081/api/offres/byuser/${userId}`)
+      .subscribe(
+        (resultData: any) => {
+          console.log(resultData);
+          this.offres = resultData;
+        },
+        (error) => {
+          console.error('Une erreur s\'est produite lors de la récupération des offres :', error);
+        }
+      );
   }
 
   getAllOffres(): void {

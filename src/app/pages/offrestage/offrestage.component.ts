@@ -24,7 +24,7 @@ export class OffreComponent {
   nouvelleOffre: any 
   uploadAdapter: any;
   hashtagsInput: string = '';
-  lienLinkedIn: string = 'https://www.linkedin.com/jobs/view/3841933311/?alternateChannel=search%26refId=doprx7B3yldvImXbgmgZLA%3D%3D%26trackingId=qw2XB2WC3nfCt9pXoQk8Hg%3D%3D';
+  lienLinkedIn: string = 'https://www.linkedin.com/jobs/view/3847561982/?alternateChannel=search&refId=W2HzrJFitESajAzciDzEMw%3D%3D&trackingId=%2FXYW%2BCHEjPbHZd0XHGwSBQ%3D%3D';
 
   constructor(private http: HttpClient, private toastr: ToastrService, private linkedInScraperService: LinkedinScraperService) {
     this.uploadAdapter = new MyUploadAdapter(http);
@@ -34,8 +34,6 @@ export class OffreComponent {
     this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
     if(this.currentUser){
       this.userId=this.currentUser.id;
-    
-
    this.nouvelleOffre= {
       nomEntreprise: this.currentUser.company,
       image: '',
@@ -43,7 +41,7 @@ export class OffreComponent {
       prenomEncadrant: this.currentUser.lastName,
       email: this.currentUser.emailPro,
       lienLinkedIn: '' ,// Initialisation du champ lienLinkedIn
-  
+      userIdF:this.userId,
       description: '',
       datedebut_stage: this.formatDate(new Date()),
       datefin_stage: this.formatDate(new Date()),
@@ -122,6 +120,8 @@ addOffre() {
     this.toastr.error('La durée du stage doit être d\'au moins 2 mois.', 'Erreur');
     return;
   }
+
+  console.log(this.nouvelleOffre.userIdF,"9999999999999000000000000");
     const formData = new FormData();
     formData.append('nomEntreprise', this.nouvelleOffre.nomEntreprise);
     formData.append('image', this.nouvelleOffre.image);
@@ -129,7 +129,7 @@ addOffre() {
     formData.append('prenomEncadrant', this.nouvelleOffre.prenomEncadrant);
     formData.append('email', this.nouvelleOffre.email);
     formData.append('description', this.nouvelleOffre.description);
-    formData.append('userId', this.userId);
+    formData.append('userId', this.nouvelleOffre.userIdF);
     formData.append('datedebut_stage', this.nouvelleOffre.datedebut_stage);
     formData.append('datefin_stage', this.nouvelleOffre.datefin_stage);
     formData.append('type', this.nouvelleOffre.type);
