@@ -102,7 +102,8 @@ export class ListStudentsComponent {
       formData.append('address', this.form.address.value);
       formData.append('unvId', this.form.unvId.value);
       formData.append('cin', this.form.cin.value);
-      formData.append('level', this.form.level.value);
+      formData.append('login', this.form.login.value);
+      formData.append('level', this.form.level.value.toUpperCase());
 
      this.userServiseStudents.updateUser(this.userId,formData).subscribe({
       error:()=>{

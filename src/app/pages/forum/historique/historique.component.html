@@ -3,7 +3,7 @@
     <div *ngIf="historiques && historiques.length; else noHistorique">
       <div class="d-flex align-items-center">
         <!-- Bouton de suppression -->
-        <button class="btn btn-danger" (click)="supprimerSelectionnes()">Supprimer</button>
+        <button class="btn btn-danger" (click)="supprimerSelectionnes()" style="margin-bottom: 20px; margin-top: 10px;">Supprimer</button>
       </div>
       <ul class="list-group">
         <!-- Ajoutez une date en-tête ici si nécessaire -->

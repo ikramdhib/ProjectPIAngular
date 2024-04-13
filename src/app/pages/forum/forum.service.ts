@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Historique } from './Historique';
+import { Page } from './Page';
+import { Question } from './Question';
 
 @Injectable({
   providedIn: 'root'
@@ -24,20 +26,19 @@ export class ForumService {
   readonly ENDPOINT_GET_TAGS = "/getAllTags"
  
   
-  
   constructor(private httpClient:HttpClient) { 
   }
-  getQuestions(){
-    return this.httpClient.get(this.API_URL+this.ENDPOINT_QUESTIONS)
+  getQuestions(page: number, size: number){
+    return this.httpClient.get<Page<Question>>(`${this.API_URL}/getQuestion?page=${page}&size=${size}`);
   }
-  createQuestion(questionData: any,id:string) {
-    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_QUESTION+`/${id}`, questionData);
+  createQuestion(questionData: any) {
+    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_QUESTION, questionData);
   }
   getQuestionById(id: string) {
     return this.httpClient.get(this.API_URL + this.ENDPOINT_QUESTION_BY_ID + `/${id}`);
   }
-  postAnswer(answerData: any,id:string) {
-    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_ANSWER+`/${id}`, answerData);
+  postAnswer(answerData: any) {
+    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_ANSWER, answerData);
   }
   getResponseForQuestion(questionId: string){
     return this.httpClient.get<any>(this.API_URL+this.ENDPOINT_GET_ANSWER+ `/${questionId}`);
@@ -57,8 +58,9 @@ export class ForumService {
     return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_NB_REPONSE}/${questionId}`)
   }
 
-  updateResponse(reponseId: string, reponse: string): Observable<any> {
-    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_NB_REPONSE}/${reponseId}`, { reponse });
+  updateResponse(reponseId: string, content: string): Observable<any> {
+    return this.httpClient.put(`${this.API_URL}${this.ENDPOINT_UPDATE_REPONSE}/${reponseId}`, { content });
+    
   }
   getHistoriqueByUser(userId : string): Observable<any>{
     return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_GET_HISTORIQUE}/${userId}`)

@@ -11,45 +11,49 @@ import { Question } from '../Question';
 })
 export class ListforumComponent implements OnInit {
   questions : any[];
+  page: number = 0;
+  size: number= 10;
+  totalPages: number = 0;
+  totalElements: number = 0;
   responseCounts: { [questionId: string]: number } = {};
   breadCrumbItems: Array<{}>;
   filteredQuestions: any[] = []; // Tableau pour les questions filtrées
   searchTerm: string = ''; 
   favoris: Question[] = [];
-  userId: string; 
-  currentUser:any;
+  userId: string = '65d5faf88ecbf72fd4d359f2'; 
 
   constructor(private forumService:ForumService,
     private sanitizer: DomSanitizer) { }
 
     ngOnInit(): void {
-
-      this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
-    if(this.currentUser){
-      this.userId=this.currentUser.id;
-    }
       
       this.breadCrumbItems = [{ label: 'Question' }, { label: 'All', active: true }];
-      this.forumService.getQuestions().subscribe((datas: Question[]) => { // Utilisez Question[] pour le typage
-        this.questions = datas.map(question => ({
+      this.loadFavorites().then(() => {
+        this.loadQuestions();
+      });
+        
+    }
+    async loadFavorites(): Promise<void> {
+      try {
+        const favoris = await this.forumService.getListFavoris(this.userId).toPromise();
+        this.favoris = favoris;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des favoris:', error);
+      }
+    }
+    loadQuestions(): void {
+      this.forumService.getQuestions(this.page, this.size).subscribe(data => {
+        this.totalPages = data.totalPages;
+        this.totalElements = data.totalElements;
+        this.questions = data.content.map(question => ({
           ...question,
           content: this.sanitizer.bypassSecurityTrustHtml(question.content)
         }));
         this.filteredQuestions = this.questions;
-        this.loadResponseCounts();
-        
+        this.loadResponseCounts(); 
       }, error => {
         console.error('Erreur lors de la récupération des questions : ', error);
       });
-      this.forumService.getListFavoris(this.userId).subscribe(
-        (favoris) => {
-          this.favoris = favoris;
-        },
-        (error) => {
-          console.error('Erreur lors de la récupération des favoris :', error);
-        }
-      );
-      
     }
     loadResponseCounts(): void {
       this.questions.forEach(question => {
@@ -64,6 +68,21 @@ export class ListforumComponent implements OnInit {
         );
       });
     }
+    nextPage(): void {
+      if (this.page < this.totalPages - 1) {
+        this.page++;
+        this.loadQuestions();
+        window.scrollTo(0, 0);
+      }
+    }
+  
+    previousPage(): void {
+      if (this.page > 0) {
+        this.page--;
+        this.loadQuestions();
+        window.scrollTo(0, 0);
+      }
+    }
     filterQuestions(): void {
       console.log("Filtering with searchTerm:", this.searchTerm);
       if (!this.searchTerm) {
@@ -77,6 +96,7 @@ export class ListforumComponent implements OnInit {
       }
     }
     isFavorite(questionId: string): boolean {
-      return this.favoris.some(favQuestion => favQuestion.id === questionId);
+      const isFav = this.favoris.some(favQuestion => favQuestion.id === questionId);
+     return isFav;
     }
   }
