@@ -1,35 +1,26 @@
-<!-- demande-form.component.html -->
-
 <div class="container mt-4">
   <div class="card border-dark">
     <div class="card-header bg-dark text-white">
       <h1 class="mb-0">Postuler</h1>
     </div>
     <div class="card-body">
-  <div *ngIf="test==true" class="alert alert-success"> Demande Created</div>
-  <div *ngIf="test==false" class="alert alert-danger"> Demande Refused</div>
-
       <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()" enctype="multipart/form-data">
 
-        <!-- Titre -->
         <div class="form-group">
           <label for="titre">Titre:</label>
           <input type="text" id="titre" formControlName="titre" class="form-control" required>
         </div>
 
-        <!-- Description -->
         <div class="form-group">
           <label for="description">Description:</label>
           <textarea id="description" formControlName="description" class="form-control" rows="4" required></textarea>
         </div>
 
-        <!-- Etat -->
         <div class="form-group">
           <label for="etat">Etat:</label>
           <input type="text" id="etat" formControlName="etat" class="form-control">
         </div>
 
-        <!-- Student Name and Email -->
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="studentName">Student Name:</label>
@@ -41,7 +32,15 @@
           </div>
         </div>
 
-        <!-- CV and Lettre Motivation File Inputs -->
+        <div class="form-group">
+          <label for="offre">Sélectionner une offre :</label>
+          <select id="offre" formControlName="offre" class="form-control" required>
+            <option value="" disabled selected>Choisissez une offre</option>
+            <option *ngFor="let offre of offres" [value]="offre.idOffre">{{ offre.type }}</option>
+          </select>
+        </div>
+        
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="cvPath">CV:</label>
@@ -53,24 +52,8 @@
           </div>
         </div>
 
-        <!-- Submit Button -->
         <button type="submit" class="btn btn-danger mt-4">Submit</button>
       </form>
-    </div>
-  </div>
-
-  <!-- Display the created demande if available -->
-  <div *ngIf="createdDemande" class="mt-4">
-    <div class="card border-danger">
-      <div class="card-body">
-        <h3 class="card-title text-danger">Created Demande</h3>
-        <p class="card-text"><strong>ID:</strong> {{ createdDemande.id }}</p>
-        <p class="card-text"><strong>Titre:</strong> {{ createdDemande.titre }}</p>
-        <p class="card-text"><strong>Description:</strong> {{ createdDemande.description }}</p>
-        <p class="card-text"><strong>Etat:</strong> {{ createdDemande.etat }}</p>
-        <p class="card-text"><strong>Student Name:</strong> {{ createdDemande.studentName }}</p>
-        <p class="card-text"><strong>Student Email:</strong> {{ createdDemande.studentEmail }}</p>
-      </div>
     </div>
   </div>
 </div>

@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DemandeService } from '../demande.service';
 import { ToastrService } from 'ngx-toastr';
-
-
-
+import { Offre } from '../models/offre';
 
 @Component({
   selector: 'app-demande-form',
@@ -12,15 +10,15 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DemandeFormComponent implements OnInit {
   demandeForm: FormGroup;
-  createdDemande: any; // Assuming you have a variable to store the created demande
+  offres: Offre[] = [];
+  createdDemande: any;
   selectedFile: File | null = null;
   selectedFile1: File | null = null;
-  
+
   constructor(
     private formBuilder: FormBuilder,
     private demandeService: DemandeService,
     private toastr: ToastrService
-
   ) {
     this.demandeForm = this.formBuilder.group({
       titre: ['', Validators.required],
@@ -33,31 +31,21 @@ export class DemandeFormComponent implements OnInit {
       offre: [''],
     });
   }
-get f(){
-  
-  return this.demandeForm.controls}
 
-  ngOnInit(): void {}
-
-  onFileSelected(event: any) {
-    if (event.target.files.length > 0) {
-     
-      this.selectedFile = event.target.files[
-        event.target.files.length - 1
-      ] as File;
-    }
+  get f() {
+    return this.demandeForm.controls;
   }
 
-  onFileSelected1(event: any) {
-    if (event.target.files.length > 0) {
-     
-      this.selectedFile1 = event.target.files[
-        event.target.files.length - 1
-      ] as File;
-    }
+  ngOnInit(): void {
+    this.loadOffres();
   }
-  idOffre="65e8e2fd98a38c5add393ebd";
-  test !:boolean
+
+  loadOffres(): void {
+    this.demandeService.getOffres().subscribe((offres: Offre[]) => {
+      this.offres = offres;
+    });
+  }
+
   submitDemande() {
     if (this.demandeForm.valid) {
       const formData = new FormData();
@@ -66,17 +54,13 @@ get f(){
       formData.append('etat', this.demandeForm.get('etat')?.value);
       formData.append('studentName', this.demandeForm.get('studentName')?.value);
       formData.append('studentEmail', this.demandeForm.get('studentEmail')?.value);
-      formData.append('idOffre', this.idOffre);
-  
-      // Append CV and Lettre Motivation files
+      formData.append('idOffre', this.demandeForm.get('offre')?.value);
+
       formData.append('cvPath', this.selectedFile!!, this.selectedFile?.name);
       formData.append('lettreMotivation', this.selectedFile1!!, this.selectedFile1?.name);
-  
-      const demandeData = this.demandeForm.value;
-  
+
       this.demandeService.createDemande(formData).subscribe({
         next: (data) => {
-          // Assuming data contains information about the created demande
           this.createdDemande = data;
         },
         error: (err: any) => {
@@ -86,5 +70,16 @@ get f(){
       });
     }
   }
-  
+
+  onFileSelected(event: any) {
+    if (event.target.files.length > 0) {
+      this.selectedFile = event.target.files[event.target.files.length - 1] as File;
+    }
+  }
+
+  onFileSelected1(event: any) {
+    if (event.target.files.length > 0) {
+      this.selectedFile1 = event.target.files[event.target.files.length - 1] as File;
+    }
+  }
 }

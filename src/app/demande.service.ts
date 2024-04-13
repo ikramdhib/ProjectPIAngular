@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Offre } from './models/offre'; 
 
 @Injectable({
   providedIn: 'root'
@@ -7,26 +9,27 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class DemandeService {
 
   private apiUrl = 'http://localhost:8081/api/demandes';
+  private fileUrl = 'http://localhost:8081/file'; // URL pour les fichiers
 
-  
   constructor(private http: HttpClient) { }
 
-  getAllDemandes() {
+  getAllDemandes(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/GetListDemande`);
   }
 
-  getDemandeById(id: string) {
+  getDemandeById(id: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/GetDemande/${id}`);
   }
 
-  createDemande(demandeData: FormData) {
-    const headers = new HttpHeaders();  // No need to set content-type explicitly for FormData
-    
-    console.log(demandeData);
-    
-    return this.http.post('http://localhost:8081/file/add', demandeData, { headers });
+  createDemande(demandeData: FormData): Observable<any> {
+    // Pas besoin de définir les HttpHeaders pour FormData
+    return this.http.post(`${this.fileUrl}/add`, demandeData);
   }
-  
+
+  getOffres(): Observable<Offre[]> {
+    return this.http.get<Offre[]>(`${this.fileUrl}/GetOffres`);
+  }
+
   
   
 }
