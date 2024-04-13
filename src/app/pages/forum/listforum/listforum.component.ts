@@ -28,8 +28,18 @@ export class ListforumComponent implements OnInit {
     ngOnInit(): void {
       
       this.breadCrumbItems = [{ label: 'Question' }, { label: 'All', active: true }];
+      this.loadFavorites().then(() => {
         this.loadQuestions();
+      });
         
+    }
+    async loadFavorites(): Promise<void> {
+      try {
+        const favoris = await this.forumService.getListFavoris(this.userId).toPromise();
+        this.favoris = favoris;
+      } catch (error) {
+        console.error('Erreur lors de la récupération des favoris:', error);
+      }
     }
     loadQuestions(): void {
       this.forumService.getQuestions(this.page, this.size).subscribe(data => {
@@ -84,6 +94,8 @@ export class ListforumComponent implements OnInit {
       }
     }
     isFavorite(questionId: string): boolean {
-      return this.favoris.some(favQuestion => favQuestion.id === questionId);
+      const isFav = this.favoris.some(favQuestion => favQuestion.id === questionId);
+     console.log(`Question ID: ${questionId}, isFavorite: ${isFav}`);
+     return isFav;
     }
   }
