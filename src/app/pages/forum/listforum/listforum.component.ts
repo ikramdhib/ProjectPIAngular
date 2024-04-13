@@ -72,6 +72,7 @@ export class ListforumComponent implements OnInit {
       if (this.page < this.totalPages - 1) {
         this.page++;
         this.loadQuestions();
+        window.scrollTo(0, 0);
       }
     }
   
@@ -79,6 +80,7 @@ export class ListforumComponent implements OnInit {
       if (this.page > 0) {
         this.page--;
         this.loadQuestions();
+        window.scrollTo(0, 0);
       }
     }
     filterQuestions(): void {
