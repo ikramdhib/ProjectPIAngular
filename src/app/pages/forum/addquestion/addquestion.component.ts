@@ -21,6 +21,8 @@ export class AddquestionComponent implements OnInit {
  breadCrumbItems: Array<{}>;
  public Editor = ClassicEditor;
  success = false;
+ currentUser:any;
+ userId:any;
  selectedTags: string[] = [];
   tagCtrl = new FormControl();
   filteredTags: Observable<string[]>;
@@ -39,6 +41,10 @@ export class AddquestionComponent implements OnInit {
         map((tag: string | null) => tag ? this._filter(tag) : this.allTags.slice())
       );
   });
+  this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    }
 }
 
 onReady(editor:ClassicEditor): void {
@@ -60,7 +66,7 @@ onReady(editor:ClassicEditor): void {
         tags: tagObjects
       };
   
-      this.forumService.createQuestion(questionData).subscribe({
+      this.forumService.createQuestion(questionData , this.userId).subscribe({
         next: (response) => {
           if (!response.toxic) { // Vérifiez si la propriété `toxic` est false, indiquant une réponse non toxique
             console.log('Question créée avec succès !', response);

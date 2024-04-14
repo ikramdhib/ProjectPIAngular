@@ -19,12 +19,17 @@ export class ReponseComponent  {
   @Output() responseAdded: EventEmitter<void> = new EventEmitter<void>();
   editingResponse: any = null;
   public editorInstance: any;
-  
+  currentUser:any;
+  userId:any;
 
  constructor(private forumService: ForumService) { }
 
  ngOnInit() {
    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
+   this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    }
  }
  onReady(editor:ClassicEditor):void{
   editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
@@ -92,7 +97,7 @@ addResponse() {
     content: this.formResponse.value.content
   };
 
-  this.forumService.postAnswer(answerData).subscribe((response) => {
+  this.forumService.postAnswer(answerData , this.userId).subscribe((response) => {
     console.log('Answer créée avec succès !', response);
     this.success = true;
     this.formResponse.reset();

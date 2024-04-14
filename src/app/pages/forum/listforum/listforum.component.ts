@@ -20,7 +20,8 @@ export class ListforumComponent implements OnInit {
   filteredQuestions: any[] = []; // Tableau pour les questions filtrées
   searchTerm: string = ''; 
   favoris: Question[] = [];
-  userId: string = '65d5faf88ecbf72fd4d359f2'; 
+  userId: any; 
+  currentUser:any;
 
   constructor(private forumService:ForumService,
     private sanitizer: DomSanitizer) { }
@@ -39,6 +40,10 @@ export class ListforumComponent implements OnInit {
         this.favoris = favoris;
       } catch (error) {
         console.error('Erreur lors de la récupération des favoris:', error);
+      }
+      this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+      if(this.currentUser){
+        this.userId=this.currentUser.id;
       }
     }
     loadQuestions(): void {

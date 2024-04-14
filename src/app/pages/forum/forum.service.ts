@@ -31,14 +31,14 @@ export class ForumService {
   getQuestions(page: number, size: number){
     return this.httpClient.get<Page<Question>>(`${this.API_URL}/getQuestion?page=${page}&size=${size}`);
   }
-  createQuestion(questionData: any) {
-    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_QUESTION, questionData);
+  createQuestion(questionData: any , id:any) {
+    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_QUESTION+`/${id}`, questionData);
   }
   getQuestionById(id: string) {
     return this.httpClient.get(this.API_URL + this.ENDPOINT_QUESTION_BY_ID + `/${id}`);
   }
-  postAnswer(answerData: any) {
-    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_ANSWER, answerData);
+  postAnswer(answerData: any , id:any) {
+    return this.httpClient.post<any>(this.API_URL+this.ENDPOINT_CREATE_ANSWER+`/${id}`, answerData);
   }
   getResponseForQuestion(questionId: string){
     return this.httpClient.get<any>(this.API_URL+this.ENDPOINT_GET_ANSWER+ `/${questionId}`);
