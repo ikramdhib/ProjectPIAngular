@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEventDialogComponent } from '../add-event-dialog/add-event-dialog.component';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { CalendarOptions, EventInput } from '@fullcalendar/core'; // Utilisez EventInput pour spécifier le type des événements
+import { CalendarOptions, EventInput } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import { SchedulerEvent } from '../models/event';
 import { EventService } from '../services/event.service';
@@ -22,25 +22,24 @@ export class EventSchedulerComponent implements OnInit {
   constructor(private dialog: MatDialog, private eventService: EventService) {}
 
   ngOnInit() {
-    this.loadEvents();
+    // Assurez-vous d'avoir l'ID de l'utilisateur à partir de quelque part
+    const userId = '65d739fc2b0fe31a0239beb9'; // Remplacez '123' par la méthode appropriée pour obtenir l'ID de l'utilisateur
+
+    this.loadEvents(userId);
   }
 
-  loadEvents() {
-    this.eventService.getEvents().subscribe(events => {
-      // Transformez chaque événement récupéré pour correspondre à la structure attendue par FullCalendar
+  loadEvents(userId: string) {
+    this.eventService.getEvents(userId).subscribe(events => {
       const formattedEvents: EventInput[] = events.map(event => ({
         title: event.text,
         start: event.start_date,
         end: event.end_date,
-        id: event.id
+        id: event.user_id
       }));
-  
-      // Mettez à jour les options de FullCalendar avec les événements chargés
+
       this.calendarOptions.events = formattedEvents;
     });
   }
-  
-  
 
   handleDateClick(arg) {
     alert('date click! ' + arg.dateStr);
@@ -50,7 +49,7 @@ export class EventSchedulerComponent implements OnInit {
     const dialogRef = this.dialog.open(AddEventDialogComponent, {
       width: '400px'
     });
-  
+
     dialogRef.afterClosed().subscribe(newEvent => {
       if (newEvent) {
         const formattedEvent: EventInput = {
@@ -59,17 +58,13 @@ export class EventSchedulerComponent implements OnInit {
           end: newEvent.end_date,
           id: newEvent.id
         };
-  
-        // Vérifiez d'abord si this.calendarOptions.events est défini et est un tableau
+
         if (Array.isArray(this.calendarOptions.events)) {
-          // Ajoutez le nouvel événement au tableau existant
           this.calendarOptions.events.push(formattedEvent);
         } else {
-          // Initialisez la liste des événements avec le nouvel événement
           this.calendarOptions.events = [formattedEvent];
         }
       }
     });
   }
-  
 }
