@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DemandeService } from '../demande.service';
 import { ToastrService } from 'ngx-toastr';
 import { Offre } from '../models/offre';
+import { User } from '../models/user'; // Assurez-vous d'importer votre modèle d'utilisateur
 
 @Component({
   selector: 'app-demande-form',
@@ -11,6 +12,7 @@ import { Offre } from '../models/offre';
 export class DemandeFormComponent implements OnInit {
   demandeForm: FormGroup;
   offres: Offre[] = [];
+  user: User = { userId: '65d5f4bfb6165c22e70320ec', lastName: 'Doe', firstName: 'John', login: 'johndoe' }; // Utilisateur statique avec ID "123"
   createdDemande: any;
   selectedFile: File | null = null;
   selectedFile1: File | null = null;
@@ -28,7 +30,8 @@ export class DemandeFormComponent implements OnInit {
       studentEmail: [''],
       cvPath: [''],
       lettreMotivation: [''],
-      offre: [''],
+      offre: ['', Validators.required], // Sélection de l'offre
+      user: ['65d5f4bfb6165c22e70320ec', Validators.required], // Utilisateur statique avec ID "123"
     });
   }
 
@@ -55,17 +58,19 @@ export class DemandeFormComponent implements OnInit {
       formData.append('studentName', this.demandeForm.get('studentName')?.value);
       formData.append('studentEmail', this.demandeForm.get('studentEmail')?.value);
       formData.append('idOffre', this.demandeForm.get('offre')?.value);
+      formData.append('userId', this.user.userId); // Utilisateur statique avec ID "123"
 
       formData.append('cvPath', this.selectedFile!!, this.selectedFile?.name);
       formData.append('lettreMotivation', this.selectedFile1!!, this.selectedFile1?.name);
 
       this.demandeService.createDemande(formData).subscribe({
         next: (data) => {
-          this.createdDemande = data;
+          // Traitez la réponse comme vous le souhaitez
+          this.toastr.success('Demande ajoutée avec succès', 'Succès');
         },
         error: (err: any) => {
           console.log(err);
-          this.toastr.success('Demande ajoutée avec succès', 'Succès');
+          this.toastr.success('Une erreur s\'est produite', 'Erreur');
         },
       });
     }

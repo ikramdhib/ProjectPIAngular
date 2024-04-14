@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Offre } from './models/offre'; 
+import { User } from './models/user'; // Assurez-vous d'importer correctement le modèle d'utilisateur
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,7 @@ export class DemandeService {
     return this.http.get<Offre[]>(`${this.fileUrl}/GetOffres`);
   }
 
-  
-  
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.fileUrl}/GetAllUsers`);
+  }
 }
