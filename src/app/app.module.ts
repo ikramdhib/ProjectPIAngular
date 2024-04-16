@@ -71,7 +71,11 @@ import { CalendarModule } from 'primeng/calendar';
 import { AddEventDialogComponent } from './add-event-dialog/add-event-dialog.component'; // Import MatDialogModule
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { RxStomp } from '@stomp/rx-stomp';
 
+
+import SockJS from "sockjs-client"
+import { Stomp } from "@stomp/stompjs";
 
 if (environment.defaultauth === "firebase") {
   initFirebaseBackend(environment.firebaseConfig);
@@ -116,6 +120,7 @@ export function createTranslateLoader(http: HttpClient): any {
     MatDialogModule,
     RouterModule,
     FormsModule,
+    
     RecaptchaModule,
     AppRoutingModule,
     FormsModule,

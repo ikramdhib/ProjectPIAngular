@@ -55,12 +55,12 @@ export class DefaultComponent implements OnInit {
      */
     this.fetchData();
   }
-
-  ngAfterViewInit() {
+//pour afficher le modal de l'email
+  /*ngAfterViewInit() {
     setTimeout(() => {
      this.center?.show()
     }, 2000);
-  }
+  }*/
 
   /**
    * Fetches the data

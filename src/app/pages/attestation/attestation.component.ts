@@ -16,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AttestationComponent implements AfterViewInit, AfterViewChecked {
   currentDate: string;
-  defaultEncadrantId = '65fb3f9b12606c2f28507ae8';
+  defaultEncadrantId = '66128f263b2bf916525d6e66';
   attestationText: string = ""; // Assurez-vous de l'initialiser avec le contenu de l'attestation
 
   signatureImageSrc: string | null = null; // Variable pour stocker la source de l'image de la signature

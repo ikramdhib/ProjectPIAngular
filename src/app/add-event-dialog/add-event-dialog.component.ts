@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core'; // Importez Output et EventEmitter
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../services/event.service';
@@ -12,7 +12,7 @@ import { SchedulerEvent } from '../models/event';
 export class AddEventDialogComponent implements OnInit {
   eventForm: FormGroup;
 
-  @Output() eventAdded: EventEmitter<SchedulerEvent> = new EventEmitter<SchedulerEvent>(); // Déclaration de la propriété eventAdded
+  @Output() eventAdded: EventEmitter<SchedulerEvent> = new EventEmitter<SchedulerEvent>();
 
   constructor(
     public dialogRef: MatDialogRef<AddEventDialogComponent>,
@@ -29,21 +29,23 @@ export class AddEventDialogComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  
-
   onSaveClick(): void {
     if (this.eventForm.valid) {
-      const event = {
+      const event: SchedulerEvent = {
         ...this.eventForm.value,
-        title: this.eventForm.value.text // Assurez-vous que 'text' est le nom du champ du titre dans votre formulaire
+        title: this.eventForm.value.text
       };
   
-      // Appel au service pour créer l'événement, puis fermeture de la boîte de dialogue avec l'événement créé
-      this.eventService.createEvent(event).subscribe(newEvent => {
-        this.dialogRef.close(newEvent);
+      // Ici, vous devez obtenir userId à partir de quelque part
+      const userId = '65d739fc2b0fe31a0239beb9'; // Remplacez '123' par la méthode appropriée pour obtenir l'ID de l'utilisateur
+  
+      this.eventService.createEvent(event, userId).subscribe(newEvent => {
+        this.eventAdded.emit(newEvent);
+        this.dialogRef.close();
       });
     }
   }
+  
 
   onCancelClick(): void {
     this.dialogRef.close();

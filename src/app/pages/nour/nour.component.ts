@@ -21,7 +21,14 @@ export class NourComponent {
   selectedJournalTasks: any[] = []; // Modifier le type de selectedJournalTasks pour accepter des objets de type Journal
   timeline: any[] = []; // Ajoutez cette ligne
   stages: any[] = [];
-  encadrantId: string = '65fb3f9b12606c2f28507ae8'; // Remplacez par l'ID de l'utilisateur
+  
+  
+  rejectionReason: string = '';
+  tacheId: string = '';
+
+  currentUser:any ;
+  userId:any;
+
   constructor(private http: HttpClient,    private toastr: ToastrService ,public dialog: MatDialog,private userList: UserServiceService, private router: Router, private journalService: JournaleServiceService,private Stage:StageService) { }
   showTaches(journalId: string) {
     if (this.showTachesMap[journalId]) {
@@ -42,7 +49,7 @@ export class NourComponent {
     }
   }
   getStagesForUser() {
-    this.Stage.getStagesByEncadrantId(this.encadrantId).subscribe(
+    this.Stage.getStagesByEncadrantId(this.userId).subscribe(
       (data: any) => {
         this.stages = data;
       },
@@ -98,19 +105,6 @@ export class NourComponent {
     );
   }
   
-  
-  
-
-  rejectionReason: string = '';
-  tacheId: string = '';
-
-  
-
-
-
-
-  
-  
   afficherAttestation(): void {
     // Récupérer le contenu HTML du composant d'attestation
     this.http.get('/attestation', { responseType: 'text' })
@@ -148,8 +142,11 @@ export class NourComponent {
     return this.currentDate >= attestationDateObject;
   }
   ngOnInit(): void {
-    const encadrantId = '65fb3f9b12606c2f28507ae8';
-    this.userList.getStudentsBySupervisor(encadrantId).subscribe(
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+    
+    this.userList.getStudentsBySupervisor(this.userId).subscribe(
       students => {
         this.students = students;
       },
@@ -158,7 +155,7 @@ export class NourComponent {
       }
     );
     this.getStagesForUser();
-
+  }
       // Supprimez ou commentez cette ligne si elle n'est pas utilisée
   }
 
@@ -228,6 +225,24 @@ redirectToAttestationStage(student: any): void {
   } else {
     console.error('Impossible de rediriger vers la page d\'attestation : Données d\'étudiant invalides');
   }
+}
+
+downloadRapprtDeStage(userId: string): void {
+  this.Stage.downloadRapportDeStage(userId).subscribe(
+    (data: Blob) => {
+      const blob = new Blob([data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'Rapport_de_stage.pdf';
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    },
+    error => {
+      console.error('Erreur lors du téléchargement du rapport de stage :', error);
+    }
+  );
 }
 
 }

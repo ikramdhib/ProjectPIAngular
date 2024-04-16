@@ -43,6 +43,8 @@
     "@ngx-translate/http-loader": "^8.0.0",
     "@nicky-lenaers/ngx-scroll-to": "^14.0.0",
     "@popperjs/core": "^2.11.8",
+    "@stomp/rx-stomp": "^2.0.0",
+    "@stomp/stompjs": "^7.0.0",
     "angular-in-memory-web-api": "^0.17.0",
     "angular-ng-stepper": "^2.0.0",
     "angularx-flatpickr": "^7.3.0",
@@ -91,6 +93,7 @@
     "sass-loader": "^13.3.2",
     "signature_pad": "^4.1.7",
     "simplebar-angular": "^3.2.4",
+    "sockjs-client": "^1.6.1",
     "sweetalert2": "^11.6.13",
     "tslib": "^2.6.0",
     "zone.js": "^0.14.4"

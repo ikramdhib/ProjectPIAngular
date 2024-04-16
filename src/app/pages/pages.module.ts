@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -47,6 +46,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { StageListtComponent } from './stage-listt/stage-listt.component';
 import { ReasonModalComponent } from './reason-modal/reason-modal.component';
 import { GerernoteComponent } from './gerernote/gerernote.component';
+
+import { CalendarModule } from 'primeng/calendar';// Import MatDialogModule
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 @NgModule({
   declarations: [CalendarComponent, ChatComponent, FilemanagerComponent , StageListtComponent,GerernoteComponent ],
   imports: [
@@ -54,12 +58,14 @@ import { GerernoteComponent } from './gerernote/gerernote.component';
     MatDialogModule,
     CommonModule,
     FormsModule,
+    MatFormFieldModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     PagesRoutingModule,
     NgApexchartsModule,
     ReactiveFormsModule,
     DashboardsModule,
+    CalendarModule,
     CryptoModule,
     EcommerceModule,
     EmailModule,

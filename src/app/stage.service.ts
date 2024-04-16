@@ -18,10 +18,10 @@ export class StageService {
     return this.http.get<any[]>(`${this.baseUrl}/userNames`);
   }
   sendEmailToEncadrant(stageId: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/sendEmailToEncadrant/65d74e47bc2c3b110cbf4905`, {});
+    return this.http.post(`${this.baseUrl}/sendEmailToEncadrant/${stageId}`, {});
   }
   sendEmailToStudent(stageId: string, reason: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/sendEmailToStudent/65d74684bc2c3b110cbf4903/${reason}`, {});
+    return this.http.post(`${this.baseUrl}/sendEmailToStudent/${stageId}/${reason}`, {});
   }
   getStagesByUserId(userId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/user/${userId}`);

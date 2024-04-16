@@ -494,9 +494,44 @@
                 </ng-template>
                 <section *ngIf="cdkStepper.selectedIndex === 2">
                   <div *ngIf="isRapportAccessible(timeline[0][2])"> <!-- Vérifiez si le rapport est accessible -->
-                    <li class="next list-inline-item" aria-disabled="false">
-                      <button class="btn btn-primary" cdkStepperNext [disabled]="!isRapportAccessible(timeline[0][2])">Afficher Rapport</button>
-                    </li>
+                    <div class="card-body">
+                      <div class="table-responsive">
+                        <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+                          <thead>
+                            <tr>
+                              <th scope="col">Nom_Etudiant</th>
+                              <th scope="col">Prenom_Etudiant</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let student of students">
+                              <th scope="row">{{ student.firstName }}</th>
+                              <td>{{ student.lastName }}</td>
+                              <td>
+                                <ul class="list-unstyled hstack gap-1 mb-0">
+                                  <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                    <a class="btn btn-sm btn-soft-primary" (click)="downloadRapprtDeStage(student.id)">
+                                      <i class="mdi mdi-eye-outline"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div class="row justify-content-between align-items-center">
+                        <div class="col-auto me-auto">
+                        </div>
+                        <div class="col-auto">
+                          <div class="text-md-right float-md-end pagination-rounded">
+                            <ul class="pagination pagination-rounded justify-content-end mb-2">
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <div *ngIf="!isRapportAccessible(timeline[0][2])">
                     <p>Le rapport n'est pas encore disponible. Veuillez patienter jusqu'à la date de dépôt.</p>

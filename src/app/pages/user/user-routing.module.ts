@@ -11,6 +11,7 @@ import { ListSupervisorComponent } from './list-supervisor/list-supervisor.compo
 import { EditProfileStudentComponent } from './profile/edit-profile-student/edit-profile-student.component';
 import { ChangePasswordComponent } from './profile/change-password/change-password.component';
 import { ListServicestageComponent } from './list-servicestage/list-servicestage.component';
+import { ReclamationComponent } from './reclamation/reclamation.component';
 
 const routes: Routes = [
 
@@ -83,6 +84,13 @@ const routes: Routes = [
       roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT','ETUDIANT']
     } 
   },
+  {
+    path:"reclamation",component:ReclamationComponent,
+    canActivate: [AuthenticationGuardsService , AuthorizationGuardsService],
+    data:{
+      roles:['SERVICE_STAGE','CHEF_DEPARTEMENT','ENCADRANT','ETUDIANT']
+    } 
+  }
   
 ];
 

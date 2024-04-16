@@ -1,0 +1,31 @@
+
+
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title mb-4">Horizontal form layout</h4>
+
+            <form [formGroup]="reclamationForm" (ngSubmit)="onSubmit()">
+                
+                <div class="row mb-4">
+                    <label for="horizontal-email-input" class="col-sm-3 col-form-label"
+                    formControlName="from">Email</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="horizontal-email-input">
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <label for="horizontal-password-input" class="col-sm-3 col-form-label"
+                    formControlName="to">Password</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="horizontal-password-input">
+                    </div>
+                </div>
+                            <div class="text-end">
+                                            <button class="btn btn-danger w-md"
+                                                type="submit">Change password</button>
+                                        </div>
+            </form>
+        </div>
+    </div>
+</div>

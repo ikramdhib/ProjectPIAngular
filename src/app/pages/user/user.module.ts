@@ -6,7 +6,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './profile/EncadrantProfile/profile.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -32,8 +32,13 @@ import { ExtrapagesRoutingModule } from 'src/app/extrapages/extrapages-routing.m
 import { NgOtpInputModule } from 'ng-otp-input';
 import { ListServicestageComponent } from './list-servicestage/list-servicestage.component';
 import { RecaptchaModule } from 'ng-recaptcha';
+import { ReclamationComponent } from './reclamation/reclamation.component';
+
+
+
+
 @NgModule({
-  declarations: [AuthenticationComponent, ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent, ListServicestageComponent  ],
+  declarations: [AuthenticationComponent, ReclamationComponent ,ProfileComponent, EditProfileComponent, AddStudentComponent, AddSupervisorComponent,  ListSupervisorComponent, ListStudentsComponent, EditProfileStudentComponent, ChangePasswordComponent, ListServicestageComponent  ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
