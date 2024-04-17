@@ -126,7 +126,7 @@ export const MENU: MenuItem[] = [
         id: 21,
         label: 'Requests',
         icon: 'bx bxs-notepad',
-        link: '/listedesoffre',
+        link: '/list-demande',
         role:['CHEF_DEPARTEMENT','SERVICE_STAGE','ENCADRANT'],
     },
     {
@@ -176,6 +176,72 @@ export const MENU: MenuItem[] = [
         link: '/calendrier',
         role:['ENCADRANT','SERVICE_STAGE','ENCADRANT','ETUDIANT'],
     },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    {
+        id: 23,
+        label: '',
+        role:['ETUDIANT'],
+    },
+    
    
 ];
 
