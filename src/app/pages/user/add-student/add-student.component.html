@@ -104,8 +104,6 @@
                            [ngClass]="{ 'is-invalid': submit && form.login.errors}" placeholder="Enter login">
                            <div *ngIf="submit && form.login.errors" class="invalid-feedback">
                             <div *ngIf="form.login.errors.required">Login requis</div>
-                            <div *ngIf="form.login.errors.maxlength">Very long for an Login</div>
-                            <div *ngIf="form.login.errors.email">Must be a valid email form</div>
                         </div>                
                       </div>
                       </div>

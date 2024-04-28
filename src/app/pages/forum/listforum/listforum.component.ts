@@ -29,9 +29,14 @@ export class ListforumComponent implements OnInit {
     ngOnInit(): void {
       
       this.breadCrumbItems = [{ label: 'Question' }, { label: 'All', active: true }];
-      this.loadFavorites().then(() => {
-        this.loadQuestions();
-      });
+      this.currentUser = JSON.parse(localStorage.getItem("currentUser"));
+      if(this.currentUser){
+        this.userId = this.currentUser.id;
+        // Chargez les favoris après avoir défini userId
+        this.loadFavorites().then(() => {
+          this.loadQuestions();
+        });
+      }
         
     }
     async loadFavorites(): Promise<void> {
@@ -67,7 +72,7 @@ export class ListforumComponent implements OnInit {
             this.responseCounts[question.id] = count; // Stockez le nombre de réponses
           },
           (error) => {
-            console.error(`Erreur lors de la récupération du nombre de réponses pour la question ${question.id}:`, error);
+            console.error(`Erreur lors de la récupération du nombre de réponses pour la question, ${question.id}:`,error);
             this.responseCounts[question.id] = 0; // En cas d'erreur, considérez 0 réponses
           }
         );

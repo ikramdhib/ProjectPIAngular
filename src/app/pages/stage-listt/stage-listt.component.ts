@@ -130,7 +130,7 @@ export class StageListtComponent {
         console.error("Une erreur s'est produite lors de l'envoi de l'e-mail à l'étudiant:", error);
         this.toastr.success("E-mail envoyé à l'étudiant avec succès.");
         // Ajoutez ici une logique pour afficher un message d'erreur à l'utilisateur si nécessaire
-      }
+      },
     );
   }
   

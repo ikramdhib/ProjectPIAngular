@@ -1,17 +1,67 @@
-.dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent pour l'overlay */
+.download-icon {
+    font-size: 24px; /* Taille de l'icône */
+    cursor: pointer; /* Curseur pointeur pour indiquer qu'il est cliquable */
+    color: rgba(0, 0, 0, 0.479); /* Couleur de l'icône */
+  }
+  
+  /* Effet de survol */
+  .download-icon:hover {
+    color: rgb(90, 90, 207); /* Changement de couleur au survol */
+  }
+  
+  /* Animation lors du clic */
+  .clicked {
+    animation: shake 0.5s;
+  }
+  
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+  }
+  .clicked {
+    color: blue; /* Changement de couleur en bleu lorsqu'il est cliqué */
+    animation: moveIcon 0.5s ease; /* Animation de mouvement */
+  }
+  
+  @keyframes moveIcon {
+    0% {
+      transform: translateX(0); /* Position initiale */
+    }
+    50% {
+      transform: translateX(10px); /* Déplacement vers la droite */
+    }
+    100% {
+      transform: translateX(0); /* Retour à la position initiale */
+    }
+    
+  }
+  /* Ajoutez ces styles CSS pour styliser le bouton de téléchargement */
+.btn-download {
+  background-color: #dc3546c2; /* Couleur rouge jolie */
+  color: white; /* Texte en blanc */
+  border: none; /* Supprime la bordure */
+  padding:  7px; /* Ajoute de l'espace autour du texte */
+  font-size: 15px; /* Taille de la police */
+  border-radius: 5px; /* Bords arrondis */
+  cursor: pointer; /* Curseur de la souris au survol */
+  transition: background-color 0.3s ease; /* Animation de transition */
 }
-.dialog-container {
-    background-color: white; /* Fond blanc pour le conteneur du dialogue */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Ombre pour ajouter de la profondeur */
+
+.btn-download:hover {
+  background-color: #c82333e1; /* Couleur rouge légèrement plus foncée au survol */
+}
+.btn-red {
+  background-color: #fcd6d6;
+  border-color: #fcd6d6;
+  color: #ff0000;
+}
+
+.btn-red:hover {
+  background-color: #cc0000; /* Couleur de survol rouge plus foncé */
+  border-color: #cc0000; /* Couleur de bordure de survol rouge plus foncé */
+  color: #ffffff; /* Texte en blanc au survol */
 }

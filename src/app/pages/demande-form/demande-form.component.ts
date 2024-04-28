@@ -17,23 +17,18 @@ export class DemandeFormComponent implements OnInit {
   createdDemande: any;
   selectedFile: File | null = null;
   selectedFile1: File | null = null;
+  currentUser:any;
+  userId:any;
+  offreId:any;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private demandeService: DemandeService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router : ActivatedRoute
   ) {
-    this.demandeForm = this.formBuilder.group({
-      titre: ['', Validators.required],
-      description: ['', Validators.required],
-      etat: [''],
-      studentName: [''],
-      studentEmail: [''],
-      cvPath: [''],
-      lettreMotivation: [''],
-      offre: ['', Validators.required], // Sélection de l'offre
-      user: ['65d5f4bfb6165c22e70320ec', Validators.required], // Utilisateur statique avec ID "123"
-    });
+    
   }
 
   get f() {
@@ -42,6 +37,23 @@ export class DemandeFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadOffres();
+    this.currentUser=JSON.parse(localStorage.getItem("currentUser"));
+    if(this.currentUser){
+      this.userId=this.currentUser.id;
+      this.offreId = this.router.snapshot.params['id'];
+      console.log("id offre " , this.offreId)
+      this.demandeForm = this.formBuilder.group({
+        titre: ['', Validators.required],
+        description: ['', Validators.required],
+        etat: [''],
+        studentName: [this.currentUser.firstName+'  '+this.currentUser.lastName],
+        studentEmail: [this.currentUser.login],
+        cvPath: [''],
+        lettreMotivation: [''],
+        offre: [''], // Sélection de l'offre
+        userId: [''], // Utilisateur statique avec ID "123"
+      });
+    }
   }
 
   loadOffres(): void {
@@ -58,20 +70,17 @@ export class DemandeFormComponent implements OnInit {
       formData.append('etat', this.demandeForm.get('etat')?.value);
       formData.append('studentName', this.demandeForm.get('studentName')?.value);
       formData.append('studentEmail', this.demandeForm.get('studentEmail')?.value);
-      formData.append('idOffre', this.demandeForm.get('offre')?.value);
-      formData.append('userId', this.user.userId); // Utilisateur statique avec ID "123"
+      formData.append('idOffre', this.offreId);
+      formData.append('userId', this.userId); // Utilisateur statique avec ID "123"
 
       formData.append('cvPath', this.selectedFile!!, this.selectedFile?.name);
       formData.append('lettreMotivation', this.selectedFile1!!, this.selectedFile1?.name);
 
       this.demandeService.createDemande(formData).subscribe({
         next: (data) => {
+          console.log(data);
           // Traitez la réponse comme vous le souhaitez
           this.toastr.success('Demande ajoutée avec succès', 'Succès');
-        },
-        error: (err: any) => {
-          console.log(err);
-          this.toastr.success('Une erreur s\'est produite', 'Erreur');
         },
       });
     }

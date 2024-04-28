@@ -46,13 +46,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { StageListtComponent } from './stage-listt/stage-listt.component';
 import { ReasonModalComponent } from './reason-modal/reason-modal.component';
 import { GerernoteComponent } from './gerernote/gerernote.component';
-
 import { CalendarModule } from 'primeng/calendar';// Import MatDialogModule
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ListeoffreencadrantComponent } from './listeoffreencadrant/listeoffreencadrant.component';
 
 
 @NgModule({
-  declarations: [CalendarComponent, ChatComponent, FilemanagerComponent , StageListtComponent,GerernoteComponent ],
+  declarations: [CalendarComponent, ChatComponent,ListeoffreencadrantComponent, FilemanagerComponent , StageListtComponent,GerernoteComponent ],
   imports: [
     ToastrModule.forRoot(), // Ajoutez ToastrModule.forRoot() dans les imports
     MatDialogModule,

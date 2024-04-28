@@ -44,7 +44,7 @@
                   <th scope="col">Duration (days)</th>
                   <th scope="col">Type</th>
                   <th scope="col">hashtags</th>
-
+                  <th scope="col">Requests</th>
   
                 </tr>
               </thead>
@@ -65,7 +65,10 @@
                       <td>{{ offre.duree }}</td>
                       <td>{{ types[offre.type] }}</td>
                       <td>{{ offre.hashtags }}</td>
-
+                      <td><ul class="list-inline font-size-20 contact-links mb-0">
+                        <li class="list-inline-item px-2">
+                          <a href="javascript:void(0);" class="btn btn-sm btn-soft-info" (click)="showRequest(exlargeModal,offre.id)">Show Requests</a>
+                        </li> </ul></td>
                       <td>
       
                     <ul class="list-unstyled hstack gap-1 mb-0">
@@ -323,3 +326,43 @@
   </form>
 </ng-template>
 <!--End Modal -->
+
+
+
+
+  <!-- Modal -->
+  <ng-template #exlargeModal let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myExtraLargeModalLabel">Requests Details</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="modalRef?.hide()"></button>
+  </div>
+  <div class="modal-body">
+          <div class="table-responsive">
+            <table class="table align-middle dt-responsive nowrap w-100 table-check" id="job-list">
+              <thead>
+                <tr>
+                
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Student Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">State</th>
+  
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let req of demandes">
+                      <td>{{ req.titre }}</td>
+                      <td>{{ req.description }}</td>
+                      <td>{{ req.studentName }}</td>
+                      <td>{{ req.studentEmail }}</td>
+                      <td>
+                        {{ req.etat }}
+                    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    <!-- end modal-dialog -->
+  </ng-template>

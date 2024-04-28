@@ -4,6 +4,7 @@ import { ForumService } from '../forum.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { MyUploadAdapter } from '../UploadAdapter';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-reponse',
@@ -22,7 +23,7 @@ export class ReponseComponent  {
   currentUser:any;
   userId:any;
 
- constructor(private forumService: ForumService) { }
+ constructor(private forumService: ForumService , private http :HttpClient) { }
 
  ngOnInit() {
    this.breadCrumbItems = [{ label: 'Forms' }, { label: 'Form Editor', active: true }];
@@ -33,7 +34,7 @@ export class ReponseComponent  {
  }
  onReady(editor:ClassicEditor):void{
   editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-    return new MyUploadAdapter( loader );
+    return new MyUploadAdapter( loader,this.http );
 };
 this.editorInstance = editor}
  

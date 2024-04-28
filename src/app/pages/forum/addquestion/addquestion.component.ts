@@ -9,6 +9,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { Observable, map, startWith } from 'rxjs';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-addquestion',
@@ -29,7 +30,7 @@ export class AddquestionComponent implements OnInit {
   allTags: string[] = [];
  @ViewChild('tagInput') tagInput: ElementRef<HTMLInputElement>;
 
- constructor(private forumService: ForumService) {}
+ constructor(private forumService: ForumService , private http :HttpClient) {}
 
  ngOnInit(): void {
   this.breadCrumbItems = [{ label: 'Forum' }, { label: 'AddForum', active: true }];
@@ -49,7 +50,7 @@ export class AddquestionComponent implements OnInit {
 
 onReady(editor:ClassicEditor): void {
   editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-      return new MyUploadAdapter( loader );
+      return new MyUploadAdapter( loader, this.http );
   };}
 
  formQuestion : FormGroup = new FormGroup({

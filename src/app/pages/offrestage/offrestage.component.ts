@@ -24,7 +24,7 @@ export class OffreComponent {
   nouvelleOffre: any 
   uploadAdapter: any;
   hashtagsInput: string = '';
-  lienLinkedIn: string = 'https://www.linkedin.com/jobs/view/3847561982/?alternateChannel=search&refId=W2HzrJFitESajAzciDzEMw%3D%3D&trackingId=%2FXYW%2BCHEjPbHZd0XHGwSBQ%3D%3D';
+  lienLinkedIn: string = 'https://www.linkedin.com/jobs/view/3846717106/?alternateChannel=search%26refId=MMsd3LyyezHn22Zxf6A2eg%3D%3D%26trackingId=PEwLSDyPUWNAA0AhbUE2bg%3D%3D';
 
   constructor(private http: HttpClient, private toastr: ToastrService, private linkedInScraperService: LinkedinScraperService) {
     this.uploadAdapter = new MyUploadAdapter(http);
@@ -63,12 +63,12 @@ export class OffreComponent {
 
           console.log('Cette description correspond à une offre de stage informatique');
           // Traitement spécifique si l'offre correspond à une offre d'ingénierie logicielle
-        } else {
+        } 
           this.toastr.error('Cette description ne correspond à une offre de stage informatique');
 
           console.log('Cette description ne correspond pas à une offre de stage informatique');
           // Traitement spécifique si l'offre ne correspond pas à une offre d'ingénierie logicielle
-        }
+        
       });
   }
 

@@ -1,0 +1,18 @@
+.calendar-container {
+    color: #333; /* Couleur de texte sombre */
+    background-color: #f5f5f5; /* Couleur de fond gris clair */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre douce */
+  }
+  
+  .add-event-button {
+    color: #fff; /* Couleur de texte blanc */
+    background-color: #007bff; /* Couleur de fond bleu vif */
+    border: none; /* Supprimer la bordure */
+    margin-top: 20px;
+  }
+  
+  .add-event-button:hover {
+    background-color: #0056b3; /* Couleur de fond bleu foncé au survol */
+  }

@@ -1,63 +1,23 @@
+import { HttpClient } from '@angular/common/http';
+
 export class MyUploadAdapter {
-    loader: any;
-    xhr: any;
-    
-    constructor( loader ) {
-        this.loader = loader;
-    }
+    constructor(private loader: any, private http: HttpClient) {}
+
     upload() {
-        const xhr = this.xhr = new XMLHttpRequest();
-        return this.loader.file
-            .then( file => new Promise( ( resolve, reject ) => {
-                this._initRequest();
-                this._initListeners(resolve, reject, file);
-                this._sendRequest(file);
-            } ) );
-    }
-    abort() {
-        if ( this.xhr ) {
-            this.xhr.abort();
-        }
-    }
-    //UploadApadter envoie une requete POST au serveur avec l'image
-    _initRequest() {
-        const xhr = this.xhr = new XMLHttpRequest();
+        return this.loader.file.then(file => {
+            const formData = new FormData();
+            formData.append('image', file);
 
-        xhr.open('POST', 'http://localhost:8081/images', true);
-        xhr.responseType = 'json';
-    }
-    
-    _initListeners( resolve, reject, file ) {
-        const xhr = this.xhr;
-        const loader = this.loader;
-        const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-        xhr.addEventListener( 'error', () => reject( genericErrorText ) );
-        xhr.addEventListener( 'abort', () => reject() );
-        xhr.addEventListener( 'load', () => {
-            const response = xhr.response;
-            if ( !response || response.error ) {
-                return reject( response && response.error ? response.error.message : genericErrorText );
-            }
-            resolve( {
-                default: response.url
-            } );
-        } );
-        if ( xhr.upload ) {
-            xhr.upload.addEventListener( 'progress', evt => {
-                if ( evt.lengthComputable ) {
-                    loader.uploadTotal = evt.total;
-                    loader.uploaded = evt.loaded;
+            return this.http.post<{url: string}>('http://localhost:8081/images', formData).toPromise().then(
+                (response) => {
+                    console.log(response); 
+                    return { default: response.url }; 
+                    
+                },
+                (error) => {
+                    throw error.message; 
                 }
-            } );
-        }
+            );
+        });
     }
-    _sendRequest(file) {
-        // Prepare the form data.
-        const data = new FormData();
-        data.append('image', file);
-
-        // Send the request.
-        this.xhr.send(data);
-    }
-    
 }

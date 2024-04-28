@@ -37,7 +37,7 @@ export class AddEventDialogComponent implements OnInit {
       };
   
       // Ici, vous devez obtenir userId à partir de quelque part
-      const userId = '65d739fc2b0fe31a0239beb9'; // Remplacez '123' par la méthode appropriée pour obtenir l'ID de l'utilisateur
+      const userId = '65cbd3246188fc097c303ae0'; // Remplacez '123' par la méthode appropriée pour obtenir l'ID de l'utilisateur
   
       this.eventService.createEvent(event, userId).subscribe(newEvent => {
         this.eventAdded.emit(newEvent);

@@ -21,13 +21,17 @@ export class DemandeService {
     return this.http.get<any>(`${this.apiUrl}/GetDemande/${id}`);
   }
 
-  createDemande(demandeData: FormData): Observable<any> {
+  createDemande(demandeData: any): Observable<any> {
     // Pas besoin de définir les HttpHeaders pour FormData
-    return this.http.post(`${this.fileUrl}/add`, demandeData);
+    return this.http.post(`http://localhost:8081/file/addFile`, demandeData);
   }
 
   getOffres(): Observable<Offre[]> {
     return this.http.get<Offre[]>(`${this.fileUrl}/GetOffres`);
+  }
+
+  getRequestWithOffreId(id:any){
+    return this.http.get(`${this.apiUrl}/demandes/getDemandesOffre/${id}`)
   }
 
   

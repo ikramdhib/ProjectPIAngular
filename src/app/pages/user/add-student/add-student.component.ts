@@ -29,7 +29,7 @@ export class AddStudentComponent {
       firstName: ['', [Validators.required ,Validators.pattern(/^[a-zA-Z]+$/)]],
       lastName: ['', [Validators.required,Validators.pattern(/^[a-zA-Z]+$/)]],
       address: ['', [Validators.required ,Validators.pattern(/^[a-zA-Z]+$/)]],
-      cin: ['', [Validators.required,Validators.pattern(/^[0-9]+$/) ,Validators.minLength(8) ,Validators.maxLength(8) ]],
+      cin: ['', [Validators.required,Validators.pattern(/^[0-9]+$/) ,Validators.minLength(8) ]],
       login: ['', [Validators.required ,Validators.maxLength(25),  Validators.email]],
       unId: ['', [Validators.required ,Validators.minLength(8) ,Validators.maxLength(12)]],
       level: ['', [Validators.required]],

@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Type } from './offremodel';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DemandeService } from 'src/app/demande.service';
 
 @Component({
   selector: 'app-listeoffreencadrant',
@@ -16,13 +17,16 @@ export class ListeoffreencadrantComponent {
   imgURL: any;
   types = Type;
   modalRef: BsModalRef;
+  demandes:any[];
   updateForm: FormGroup;
   @ViewChild('updateContent') updateContent: any; // Déclaration de la propriété updateContent de type ViewChild
-
+  @ViewChild('newContactModal', { static: false }) newContactModal?: ModalDirective;
   staticUserId:any;
   currentUser:any;
 
-  constructor(private http: HttpClient, private toastr: ToastrService, private modalService: BsModalService, private fb: FormBuilder) {
+  constructor(
+    private demandeService :DemandeService,
+    private http: HttpClient, private toastr: ToastrService, private modalService: BsModalService, private fb: FormBuilder) {
      
     this.initUpdateForm();
   }
@@ -125,6 +129,19 @@ export class ListeoffreencadrantComponent {
         this.toastr.error('Une erreur s\'est produite lors de la suppression de l\'offre', 'Erreur');
       }
     );
+  }
+
+  showRequest(exlargeModal: any ,id:any){
+
+    this.demandeService.getRequestWithOffreId(id).subscribe({
+      next:(res:any)=>{
+        this.demandes=res;
+      },
+      complete:()=>{
+        console.log("DONEEEEEEE");
+        this.modalRef = this.modalService.show(exlargeModal, { class: 'modal-xl' });
+      }
+    })
   }
 
 

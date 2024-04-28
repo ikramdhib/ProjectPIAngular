@@ -1,32 +1,35 @@
-<h1 mat-dialog-title>Ajouter un nouvel événement</h1>
+<h1 mat-dialog-title class="popup-title">Ajouter un nouvel événement</h1>
 
-<div mat-dialog-content>
+<div mat-dialog-content class="popup-content">
   <!-- Formulaire pour ajouter un nouvel événement -->
   <form [formGroup]="eventForm" (ngSubmit)="onSaveClick()">
     <!-- Champ pour le titre de l'événement -->
-    <mat-form-field appearance="fill">
-      <mat-label>Titre</mat-label>
-      <input matInput formControlName="text" required>
+    <mat-form-field appearance="fill" class="popup-field">
+      <mat-label class="popup-label">Titre</mat-label>
+      <input matInput formControlName="text" required class="popup-input">
+      <mat-error *ngIf="eventForm.get('text').hasError('required')" class="popup-error">Le titre est requis</mat-error>
     </mat-form-field>
 
     <!-- Champ pour la date de début -->
-    <mat-form-field appearance="fill">
-      <mat-label>Date de début</mat-label>
-      <input matInput type="date" formControlName="start_date" required>
+    <mat-form-field appearance="fill" class="popup-field">
+      <mat-label class="popup-label">Date de début</mat-label>
+      <input matInput type="date" formControlName="start_date" required class="popup-input">
+      <mat-error *ngIf="eventForm.get('start_date').hasError('required')" class="popup-error">La date de début est requise</mat-error>
     </mat-form-field>
 
     <!-- Champ pour la date de fin -->
-    <mat-form-field appearance="fill">
-      <mat-label>Date de fin</mat-label>
-      <input matInput type="date" formControlName="end_date" required>
+    <mat-form-field appearance="fill" class="popup-field">
+      <mat-label class="popup-label">Date de fin</mat-label>
+      <input matInput type="date" formControlName="end_date" required class="popup-input">
+      <mat-error *ngIf="eventForm.get('end_date').hasError('required')" class="popup-error">La date de fin est requise</mat-error>
     </mat-form-field>
   </form>
 </div>
 
-<div mat-dialog-actions>
+<div mat-dialog-actions class="popup-actions">
   <!-- Bouton pour annuler et fermer la boîte de dialogue -->
-  <button mat-button (click)="onCancelClick()">Annuler</button>
+  <button mat-button (click)="onCancelClick()" class="popup-button popup-cancel">Annuler</button>
   
   <!-- Bouton pour sauvegarder l'événement et fermer la boîte de dialogue -->
-  <button mat-button color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()">Sauvegarder</button>
+  <button mat-button color="primary" [disabled]="!eventForm.valid" (click)="onSaveClick()" class="popup-button popup-save">Sauvegarder</button>
 </div>

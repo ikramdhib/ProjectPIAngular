@@ -1,5 +1,9 @@
-<!-- Calendrier FullCalendar -->
-<full-calendar [options]="calendarOptions"></full-calendar>
-
-<!-- Bouton pour ouvrir la boîte de dialogue d'ajout d'événement -->
-<button mat-raised-button class="btn btn-danger mt-4" (click)="openCreateEventPopup()">Ajouter un événement</button>
+<div class="calendar-container">
+    <full-calendar
+      [options]="calendarOptions"
+      (dateClick)="handleDateClick($event)"
+    ></full-calendar>
+  </div>
+  
+  <!-- Bouton pour ouvrir la boîte de dialogue d'ajout d'événement -->
+  <button mat-raised-button color="primary" (click)="openCreateEventPopup()" class="add-event-button">Ajouter un événement</button>

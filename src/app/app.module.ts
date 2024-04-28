@@ -105,7 +105,6 @@ export function createTranslateLoader(http: HttpClient): any {
        // ReasonModalComponent
     ListeoffreetudiantComponent,
     OffreComponent,
-    ListeoffreencadrantComponent,
     DemandeListComponent,
     DemandeDetailsComponent,
     DemandeFormComponent,

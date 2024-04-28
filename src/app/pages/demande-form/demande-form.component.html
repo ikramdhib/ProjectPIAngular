@@ -1,59 +1,118 @@
-<div class="container mt-4">
-  <div class="card border-dark">
-    <div class="card-header bg-dark text-white">
-      <h1 class="mb-0">Postuler</h1>
-    </div>
-    <div class="card-body">
-      <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()" enctype="multipart/form-data">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulaire de Postulation</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
 
-        <div class="form-group">
-          <label for="titre">Titre:</label>
-          <input type="text" id="titre" formControlName="titre" class="form-control" required>
-        </div>
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+    }
 
-        <div class="form-group">
-          <label for="description">Description:</label>
-          <textarea id="description" formControlName="description" class="form-control" rows="4" required></textarea>
-        </div>
+    .card {
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-        <div class="form-group">
-          <label for="etat">Etat:</label>
-          <input type="text" id="etat" formControlName="etat" class="form-control">
-        </div>
+    .card-header {
+      border-radius: 10px 10px 0 0;
+    }
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="studentName">Student Name:</label>
-            <input type="text" id="studentName" formControlName="studentName" class="form-control">
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-primary:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="card border-primary">
+      <div class="card-header bg-primary text-white">
+        <h1 class="mb-0">Postuler</h1>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="demandeForm" (ngSubmit)="submitDemande()" enctype="multipart/form-data">
+
+          <div class="form-group">
+            <label for="titre">Titre de Demande:</label>
+            <input type="text" id="titre" formControlName="titre" class="form-control" required>
           </div>
-          <div class="form-group col-md-6">
-            <label for="studentEmail">Student Email:</label>
-            <input type="email" id="studentEmail" formControlName="studentEmail" class="form-control">
-          </div>
-        </div>
 
-        <div class="form-group">
-          <label for="offre">Sélectionner une offre :</label>
-          <select id="offre" formControlName="offre" class="form-control" required>
-            <option value="" disabled selected>Choisissez une offre</option>
-            <option *ngFor="let offre of offres" [value]="offre.idOffre">{{ offre.type }}</option>
-          </select>
-        </div>
-        
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="cvPath">CV:</label>
-            <input formControlName="cvPath" type="file" name="cvPath" class="form-control-file text-dark" (change)="onFileSelected($event)" />
+          <div class="form-group">
+            <label for="description">Description de votre Profil :</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="4" required></textarea>
           </div>
-          <div class="form-group col-md-6">
-            <label for="lettreMotivation">Lettre de Motivation:</label>
-            <input formControlName="lettreMotivation" type="file" name="lettreMotivation" class="form-control-file text-dark" (change)="onFileSelected1($event)" />
-          </div>
-        </div>
 
-        <button type="submit" class="btn btn-danger mt-4">Submit</button>
-      </form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="etat">How did you hear about us?:</label>
+              <input type="text" id="etat" formControlName="etat" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="studentName">Full Name :</label>
+              <input type="text" id="studentName" formControlName="studentName" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="studentEmail">Email de la société:</label>
+              <input type="email" id="studentEmail" formControlName="studentEmail" class="form-control">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="offre">Sélectionner le type d'offre :</label>
+              <select id="offre" formControlName="offre" class="form-control" required>
+                <option value="" disabled selected> le type d'offre</option>
+                <option *ngFor="let offre of offres" [value]="offre.idOffre">{{ offre.type }}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="cvPath">CV:</label>
+              <input formControlName="cvPath" type="file" name="cvPath" class="form-control-file text-dark" (change)="onFileSelected($event)" />
+            </div>
+            <div class="form-group col-md-6">
+              <label for="lettreMotivation">Lettre de Motivation:</label>
+              <input formControlName="lettreMotivation" type="file" name="lettreMotivation" class="form-control-file text-dark" (change)="onFileSelected1($event)" />
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-danger mt-4">POSTULER</button>
+        </form>
+      </div>
     </div>
   </div>
-</div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

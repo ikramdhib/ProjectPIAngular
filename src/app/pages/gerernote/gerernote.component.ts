@@ -63,6 +63,8 @@ export class GerernoteComponent implements OnInit {
     );
   }
 
+ 
+
   }
 
   getNoteByStudent(): void {
@@ -125,7 +127,7 @@ assignNote(): void {
 
   // Récupérer l'ID du premier étudiant associé à l'encadrant
   const premierEtudiantId = this.students[0].id;
-
+console.log(premierEtudiantId,"ooooooooooooooooooooooooooooooooooooooooooo")
   // Calculer la somme des notes
   this.updateTotalNotes();
 
@@ -163,7 +165,7 @@ assignNote(): void {
   this.resetNotes();
 
   // Remplacez 'votre_id_etudiant' et 'votre_id_encadrant' par les ID réels de l'étudiant et de l'encadrant
-  this.userService.assignNoteToStudent(premierEtudiantId, '66128f263b2bf916525d6e66', Note )
+  this.userService.assignNoteToStudent(premierEtudiantId, this.encadrantId, Note )
     .subscribe(response => {
       console.log('ID de la note ajoutée:', response.id);
       nouvelleNoteId = response.id;

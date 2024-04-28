@@ -1,0 +1,47 @@
+.popup-title {
+    color: #007bff;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .popup-content {
+    padding: 20px;
+  }
+  
+  .popup-field {
+    width: 100%;
+  }
+  
+  .popup-label {
+    color: #007bff;
+  }
+  
+  .popup-input {
+    color: #495057;
+  }
+  
+  .popup-error {
+    color: #dc3545;
+  }
+  
+  .popup-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .popup-button {
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+  
+  .popup-cancel {
+    color: #007bff;
+    border: 2px solid #007bff;
+    background-color: transparent;
+  }
+  
+  .popup-save {
+    color: #fff;
+    background-color: #007bff;
+  }

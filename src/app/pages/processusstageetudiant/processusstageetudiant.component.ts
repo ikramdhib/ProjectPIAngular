@@ -85,6 +85,8 @@ export class ProcessusstageetudiantComponent implements OnInit {
   selectedJournalId: string | null = null;
 
   addJournal(stage: any) {
+
+    console.log("stage en question : ",this.selectedStage)
     // Obtenez l'ID du stage
     const stageId = stage.id;
     // Appelez votre service backend pour vérifier si un journal est associé à ce stage

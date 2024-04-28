@@ -12,7 +12,7 @@
             <hr>
             <div class="row" >
               <div  style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-box-orient: vertical; ">
-                <div [innerHtml]="question.content" style="margin-left: 20px;"></div><br>
+                <div [innerHtml]="question.content" style="margin-left: 20px; max-width: 70%;"></div><br>
               </div>
           </div>
         </div>
@@ -34,12 +34,15 @@
                 <div class="card">
                   <div class="content-container" style="display: flex; justify-content: space-between; align-items: center;">
                   <div [innerHTML]="response.content" style="margin-left: 20px;"></div>
+                  <div>
                   <button type="button" class="btn btn-danger w-sm" style="width: 30px; margin-right: 8px;" (click)="onDeleteResponse(response.id)">
                     <i class="mdi mdi-trash-can font-size-16"></i> Delete
                   </button>
+               
                   <button (click)="reponseComponent.startEdit(response)" type="button" class="btn btn-success w-sm">
                     <i class="mdi mdi-pencil font-size-16"></i> Edit
                   </button>
+                </div>
                 </div>
                 <hr />
               </div>
