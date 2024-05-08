@@ -22,6 +22,7 @@ export class ListforumComponent implements OnInit {
   favoris: Question[] = [];
   userId: any; 
   currentUser:any;
+  tags:any[];
 
   constructor(private forumService:ForumService,
     private sanitizer: DomSanitizer) { }
@@ -33,6 +34,7 @@ export class ListforumComponent implements OnInit {
       if(this.currentUser){
         this.userId = this.currentUser.id;
         // Chargez les favoris après avoir défini userId
+        this.getAllTagsOrdred();
         this.loadFavorites().then(() => {
           this.loadQuestions();
         });
@@ -53,6 +55,20 @@ export class ListforumComponent implements OnInit {
     }
     loadQuestions(): void {
       this.forumService.getQuestions(this.page, this.size).subscribe(data => {
+        this.totalPages = data.totalPages;
+        this.totalElements = data.totalElements;
+        this.questions = data.content.map(question => ({
+          ...question,
+          content: this.sanitizer.bypassSecurityTrustHtml(question.content)
+        }));
+        this.filteredQuestions = this.questions;
+        this.loadResponseCounts(); 
+      }, error => {
+        console.error('Erreur lors de la récupération des questions : ', error);
+      });
+    }
+    loadQuestionsWithTags(name:any): void {
+      this.forumService.getQuestionsWithTags(this.page, this.size,name).subscribe(data => {
         this.totalPages = data.totalPages;
         this.totalElements = data.totalElements;
         this.questions = data.content.map(question => ({
@@ -109,4 +125,17 @@ export class ListforumComponent implements OnInit {
       const isFav = this.favoris.some(favQuestion => favQuestion.id === questionId);
      return isFav;
     }
+
+
+    getAllTagsOrdred(){
+      this.forumService.getTagsOrdered().subscribe({
+        next:(res:any)=>{
+          this.tags=res;
+        },
+        complete:()=>{
+          console.log(this.tags);
+        }
+      })
+    }
+
   }

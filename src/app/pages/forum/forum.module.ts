@@ -31,7 +31,7 @@ import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
-  declarations: [AddquestionComponent, ListforumComponent, DetailComponent, ReponseComponent, ListFavorisComponent, HistoriqueComponent],
+  declarations: [AddquestionComponent, ListforumComponent, DetailComponent, ReponseComponent, ListFavorisComponent, HistoriqueComponent , ],
   imports: [
     MatChipsModule,
     MatAutocompleteModule,

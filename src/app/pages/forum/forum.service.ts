@@ -10,7 +10,8 @@ import { Question } from './Question';
 })
 export class ForumService {
   readonly API_URL = "http://localhost:8081"
-  readonly ENDPOINT_QUESTIONS = "/getQuestion"
+  readonly ENDPOINT_QUESTIONS = "/getQuestion";
+  readonly ENDPOINT_QUESTIONS_WITH_TAGS = "/getQuestionwithTags"
   readonly ENDPOINT_CREATE_QUESTION = "/addQuestion";
   readonly ENDPOINT_QUESTION_BY_ID = "/getQuestionById";
   readonly ENDPOINT_CREATE_ANSWER = "/addReponse";
@@ -24,6 +25,8 @@ export class ForumService {
   readonly ENDPOINT_GET_HISTORIQUE = "/getHistoriqueByUser"
   readonly ENDPOINT_DELETE_HISTORIQUE = "/deleteHistorique"
   readonly ENDPOINT_GET_TAGS = "/getAllTags"
+
+  readonly ENDPOINT_GET_TAGS_OREDER="/getAllTagsordred"
  
   
   constructor(private httpClient:HttpClient) { 
@@ -71,7 +74,14 @@ export class ForumService {
   getTags(): Observable<any> {
     return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_GET_TAGS}`)
   }
+
+  getTagsOrdered(){
+    return this.httpClient.get(`${this.API_URL}${this.ENDPOINT_GET_TAGS_OREDER}`)
+  }
  
+  getQuestionsWithTags(page: number, size: number, name:any){
+    return this.httpClient.get<Page<Question>>(`${this.API_URL}/getQuestionwithTags/${name}?page=${page}&size=${size}`);
+  }
 
  
 }
