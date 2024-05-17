@@ -12,7 +12,7 @@ import { Question } from '../Question';
 export class ListforumComponent implements OnInit {
   questions : any[];
   page: number = 0;
-  size: number= 10;
+  size: number= 20;
   totalPages: number = 0;
   totalElements: number = 0;
   responseCounts: { [questionId: string]: number } = {};

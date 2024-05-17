@@ -64,7 +64,7 @@ onReady(editor:ClassicEditor): void {
       const questionData = {
         titre: this.formQuestion.get('titre').value,
         content: this.formQuestion.get('content').value,
-        tags: tagObjects
+       // tags: tagObjects
       };
   
       this.forumService.createQuestion(questionData , this.userId).subscribe({

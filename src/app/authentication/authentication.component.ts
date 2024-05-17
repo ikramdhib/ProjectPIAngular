@@ -66,7 +66,7 @@ export class AuthenticationComponent  implements OnInit {
           }
         },
         complete:()=>{
-          this.router.navigate(['/'])
+          this.router.navigate(['/user/profile'])
         }
       })
      }
