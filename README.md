@@ -1,25 +1,64 @@
-# Skote -  Angular 13 Responsive Admin Dashboard Template 
+# University Internship Management System - Frontend
 
-## Development server
+## Overview
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This is the frontend part of the University Internship Management System, developed using Angular 17. The application provides a user interface for students, teachers, and administrators to manage internships. It interacts with the backend API built with Spring Boot, providing a seamless experience for managing internship applications, approvals, and status tracking.
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **User Authentication**: Secure login and session management using JWT.
+- **Role-Based Interface**: Different views and functionalities based on user roles (Student, Teacher, Admin).
+- **Internship Management**: Forms and views for creating, updating, and tracking internships.
+- **Responsive Design**: Mobile-friendly interface for easy access on any device.
+- **Real-Time Notifications**: WebSocket integration for real-time updates on internship status and other activities.
 
-## Build
+## Technologies Used
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- **Angular 17**: Framework for building the application.
+- **TypeScript**: Primary language for development.
+- **RxJS**: For handling asynchronous data streams.
+- **Angular Material**: UI component library for a modern look and feel.
+- **SCSS**: For styling the application.
+- **WebSocket**: For real-time notifications.
+- **JWT**: For securing user sessions.
 
-## Running unit tests
+## Getting Started
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Prerequisites
 
-## Running end-to-end tests
+- **Node.js**: Ensure you have Node.js (version 18 or higher) installed.
+- **Angular CLI**: Install Angular CLI globally.
+  ```bash
+  npm install -g @angular/cli
+### Installation
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+1. **Clone the repository**:
+    ```bash
+   git clone https://github.com/ikramdhib/ProjectPIAngular.git
+2. **Install dependencies**:
+   ```bash
+   npm install
+3. **Run the application**:
+    ```bash
+   ng serve -o
 
-## Further help
+### Contributing
+Contributions are welcome! Please follow the guidelines below:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature/new-feature).
+3. Commit your changes (git commit -m 'Add new feature').
+4. Push to the branch (git push origin feature/new-feature).
+5. Open a pull request.
+
+### License
+
+    This project is licensed under the MIT License - see the LICENSE file for details.
+
+### Contact
+    For any inquiries, please contact the project maintainers at dhibikram50@gmail.com.
+    
+### Instructions:
+- Replace `yourusername` and `your-email@example.com` with your actual GitHub username and email.
+- Adjust the environment configuration (`environment.ts`) according to your backend API URL.
+- The project structure and features are generalized; you may need to adapt them according to your actual implementation.
